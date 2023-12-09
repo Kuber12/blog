@@ -29,13 +29,13 @@ const NavBar = () => {
           <ul className="hamburger-ul">
             <li className="home">
               {" "}
-              <Link to="">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/AddBlog">Add</Link>
             </li>
             <li>
-              <Link to="">Edit</Link>
+              <Link to="/EditBlog">Edit</Link>
             </li>
             <li>
               <Link to="">User</Link>
@@ -51,7 +51,7 @@ const NavBar = () => {
             <Link to="/AddBlog">Add</Link>
           </li>
           <li>
-            <Link to="">Edit</Link>
+            <Link to="/EditBlog">Edit</Link>
           </li>
           <li>
             <Link to="">User</Link>
