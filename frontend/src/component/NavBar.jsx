@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./NavBar.css";
 import "./NabBar.js";
+import { Link } from "react-router-dom";
 const NavBar = () => {
   const [isElementVisible, setElementVisible] = useState(false);
   const toggleElementVisibility = () => {
@@ -26,17 +27,35 @@ const NavBar = () => {
         </ul>
         {isElementVisible && (
           <ul className="hamburger-ul">
-            <li className="home"> Home</li>
-            <li>Add</li>
-            <li>Edit</li>
-            <li>User</li>
+            <li className="home">
+              {" "}
+              <Link to="">Home</Link>
+            </li>
+            <li>
+              <Link to="/AddBlog">Add</Link>
+            </li>
+            <li>
+              <Link to="">Edit</Link>
+            </li>
+            <li>
+              <Link to="">User</Link>
+            </li>
           </ul>
         )}
         <ul className="ul_items">
-          <li className="home"> Home</li>
-          <li>Add</li>
-          <li>Edit</li>
-          <li>User</li>
+          <li className="home">
+            {" "}
+            <Link to="">Home</Link>
+          </li>
+          <li>
+            <Link to="/AddBlog">Add</Link>
+          </li>
+          <li>
+            <Link to="">Edit</Link>
+          </li>
+          <li>
+            <Link to="">User</Link>
+          </li>
         </ul>
       </nav>
     </div>
