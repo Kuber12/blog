@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import "./NavBar.css";
 import "./NabBar.js";
 import { Link } from "react-router-dom";
-const NavBar = () => {
+const NavBar = ({ sentDataToParent }) => {
   const [isElementVisible, setElementVisible] = useState(false);
   const toggleElementVisibility = () => {
     console.log("Toggling element visibility");
     setElementVisible(!isElementVisible);
   };
-  const [isAddEdit, setAddEdit] = useState(false);
+
+  //logic to send data from child to parent
+  const [hideClick, sethideClick] = useState(false);
+  const [visibleClick, setvisibleClick] = useState(true);
+  const handleClickAdd = () => {
+    // Call the function passed from the parent and pass data to it
+    sentDataToParent(hideClick);
+  };
+  const handleClickVisible = () => {
+    // Call the function passed from the parent and pass data to it
+    sentDataToParent(visibleClick);
+  };
   return (
     <div>
       <nav className="navbar">
@@ -30,7 +41,9 @@ const NavBar = () => {
           <ul className="hamburger-ul">
             <li className="home">
               {" "}
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={handleClickVisible}>
+                Home
+              </Link>
             </li>
             <li>
               <Link to="/AddBlog">Add</Link>
@@ -46,16 +59,22 @@ const NavBar = () => {
         <ul className="ul_items">
           <li className="home">
             {" "}
-            <Link to="">Home</Link>
+            <Link to="" onClick={handleClickVisible}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/AddBlog">Add</Link>
+            <Link to="/AddBlog" onClick={handleClickAdd}>
+              Add
+            </Link>
           </li>
           <li>
             <Link to="/EditBlog">Edit</Link>
           </li>
           <li>
-            <Link to="/User">User</Link>
+            <Link to="/User" onClick={handleClickVisible}>
+              User
+            </Link>
           </li>
         </ul>
       </nav>

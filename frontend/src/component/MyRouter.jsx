@@ -8,10 +8,18 @@ import Footer from "./Footer";
 import User from "./User";
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
+
+  // getting data from nav and showing or hiding
+  const [dataFromChild, setDataFromChild] = useState(null);
+  const handeDataFromChild = (data) => {
+    console.log("Data received from child:", data);
+    setisFooterVisible(data);
+  };
+
   return (
     <div>
       <Router>
-        <NavBar />
+        <NavBar sentDataToParent={handeDataFromChild} />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/AddBlog" element={<AddBlog />}></Route>
