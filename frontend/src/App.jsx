@@ -4,11 +4,7 @@ import NavBar from "./component/NavBar";
 import MyRouter from "./component/MyRouter";
 
 function App() {
-  return (
-    <div className="App">
-      <MyRouter />
-    </div>
-  );
+  return <MyRouter />;
 }
 
 export default App;

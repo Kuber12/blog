@@ -38,7 +38,7 @@ const NavBar = () => {
               <Link to="/EditBlog">Edit</Link>
             </li>
             <li>
-              <Link to="">User</Link>
+              <Link to="/User">User</Link>
             </li>
           </ul>
         )}
@@ -54,7 +54,7 @@ const NavBar = () => {
             <Link to="/EditBlog">Edit</Link>
           </li>
           <li>
-            <Link to="">User</Link>
+            <Link to="/User">User</Link>
           </li>
         </ul>
       </nav>
