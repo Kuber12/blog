@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import AddBlog from "./AddBlog";
 import EditBlog from "./EditBlog";
@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./Footer";
 import User from "./User";
 const MyRouter = () => {
+  const [isFooterVisible, setisFooterVisible] = useState(true);
   return (
     <div>
       <Router>
@@ -17,7 +18,7 @@ const MyRouter = () => {
           <Route path="/EditBlog" element={<EditBlog />}></Route>
           <Route path="/User" element={<User />}></Route>
         </Routes>
-        <Footer />
+        {isFooterVisible && <Footer />}
       </Router>
     </div>
   );

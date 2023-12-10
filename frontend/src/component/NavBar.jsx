@@ -8,6 +8,7 @@ const NavBar = () => {
     console.log("Toggling element visibility");
     setElementVisible(!isElementVisible);
   };
+  const [isAddEdit, setAddEdit] = useState(false);
   return (
     <div>
       <nav className="navbar">
