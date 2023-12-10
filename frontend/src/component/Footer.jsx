@@ -44,7 +44,7 @@ const Footer = () => {
           display: "flex",
           flexDirection: "column",
           gap: " 20px",
-          translate: "50px",
+          transform: "translate(100px)",
         }}
       >
         {/* icons */}
