@@ -24,7 +24,7 @@ const MyRouter = () => {
     <div>
       <Router>
         {/* <NewNav sentDataToParent={handeDataFromChild} /> */}
-        <NewNav sentDataToParent={handeDataFromChild} />
+        <NewNav sentDataToParent={handeDataFromChild} selected="selected" />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/AddBlog" element={<AddBlog />}></Route>

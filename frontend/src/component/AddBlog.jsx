@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+
 import "./AddBlog.css";
-const AddBlog = () => {
+const AddBlog = (props) => {
+  const [titleArea, settitleArea] = useState("Enter The Title");
+  const [textArea, settextArea] = useState("Enter The Description");
+
+  const handleTitleArea = (event) => {
+    settitleArea(event.target.value);
+  };
+
+  const handleTextArea = (event) => {
+    settextArea(event.target.value);
+  };
+
+  const handleClearText = () => {
+    settextArea("");
+    settitleArea("");
+  };
   return (
     <div className="container-head">
       <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Add Blog</h1>
@@ -10,18 +26,25 @@ const AddBlog = () => {
             type="text"
             className="title-input"
             placeholder="Enter Title"
+            value={titleArea}
+            onChange={handleTitleArea}
           />
         </div>
         <div>
-          <div class="form-floating container  ">
+          <div className="form-floating container  ">
             <textarea
-              class="form-control p-5"
+              value={textArea}
+              onChange={handleTextArea}
+              className="form-control p-5"
               placeholder="Leave a comment here"
               id="floatingTextarea"
               style={{ width: "100%", height: "124px" }}
               // rows="5"
             ></textarea>
-            <label for="floatingTextarea" style={{ paddingLeft: "2.18rem" }}>
+            <label
+              htmlFor="floatingTextarea"
+              style={{ paddingLeft: "2.18rem" }}
+            >
               Comments
             </label>
           </div>
@@ -39,12 +62,12 @@ const AddBlog = () => {
             </div>
             {/* clear  button*/}
             <div>
-              <button>Clear</button>
+              <button onClick={handleClearText}>Clear</button>
             </div>
             {/* select tags */}
             <div>
               <select name="" id="">
-                <option selected disabled value="">
+                <option disabled selected value="">
                   Choose Your Tag
                 </option>
                 <option value="">News</option>

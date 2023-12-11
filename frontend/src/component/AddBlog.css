@@ -7,6 +7,7 @@
 .container-head {
   background-color: #bde3ff;
   padding: 5rem;
+  margin-top: 1rem;
 }
 
 .addblog-container {
@@ -33,7 +34,7 @@ input {
 button {
   background-color: black;
   color: white;
-  padding: 18px;
+  padding: 12px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -47,7 +48,7 @@ select {
   border-radius: 10px;
   background-color: black;
   color: white;
-  padding: 18px;
+  padding: 12px;
   font-size: 16px;
 }
 input[type="file"] {
@@ -57,7 +58,7 @@ input[type="file"] {
 .custom-file-input {
   background-color: black;
   color: white;
-  padding: 20px;
+  padding: 12px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
