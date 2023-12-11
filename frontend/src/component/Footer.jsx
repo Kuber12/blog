@@ -21,6 +21,7 @@ const Footer = () => {
         padding: "30px",
         justifyContent: "space-between",
         border: "1px solid black",
+        marginTop: "3rem",
       }}
     >
       {/* contact  */}
