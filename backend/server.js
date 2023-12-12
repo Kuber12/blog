@@ -9,6 +9,7 @@ connectdb();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/blog",require("./routes/blogRoutes"));
+app.use("/api/user",require("./routes/userRoutes"));
 
 app.listen(PORT,() =>{
     console.log(`Server is running on port ${PORT}`);

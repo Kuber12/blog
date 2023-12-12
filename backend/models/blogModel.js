@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const blogSchema = mongoose.Schema({
   headline: {
     type: String,
-    required: true,
+    required: [true,"Please enter a headline"],
   },
-  article: {
+  content: {
     type: String,
-    required: true,
+    required: [true,"Please enter your content"],
   },
   author: {
     type: String,
@@ -28,7 +28,11 @@ const blogSchema = mongoose.Schema({
   image_url: {
     type: String,
     required: false,
-  }
+  },
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users"
+  }]
 })
 
 module.exports = mongoose.model("Blog",blogSchema);
