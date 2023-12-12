@@ -6,26 +6,16 @@ import contactbook from "../Icons/contact-book.png";
 import contactmail from "../Icons/contact-mail.png";
 import email from "../Icons/email.png";
 import location from "../Icons/location.png";
+import "./Footer.css";
 const Footer = () => {
   const borderColor = {
     border: "3px solid #E6D579",
     padding: "10px",
   };
   return (
-    <div
-      style={{
-        backgroundColor: "white",
-        color: "black",
-        height: "auto",
-        display: "flex",
-        padding: "30px",
-        justifyContent: "space-between",
-        border: "1px solid black",
-        marginTop: "3rem",
-      }}
-    >
+    <div className="container-footer ">
       {/* contact  */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <div className="contact">
         <a href="#">
           <img src={contactbook} alt="Bookmark" style={{ width: "30px" }} />
         </a>
@@ -40,14 +30,7 @@ const Footer = () => {
         </a>
       </div>
       {/* thanks  */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: " 20px",
-          transform: "translate(100px)",
-        }}
-      >
+      <div className="thanks">
         {/* icons */}
         <div
           style={{

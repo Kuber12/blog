@@ -15,10 +15,8 @@ const NewNav = ({ sentDataToParent }) => {
     // Call the function passed from the parent and pass data to it
     sentDataToParent(visibleClick);
   };
-  const sendmeg = () => {
-    sentDataToParent("Hello");
-  };
-
+  
+  
   return (
     <div className="main">
       <nav className="navbar navbar-expand-lg navbar-light">
