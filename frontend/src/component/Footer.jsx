@@ -6,6 +6,7 @@ import contactbook from "../Icons/contact-book.png";
 import contactmail from "../Icons/contact-mail.png";
 import email from "../Icons/email.png";
 import location from "../Icons/location.png";
+import footer_ty from "../images/footer_ty.png";
 import "./Footer.css";
 const Footer = () => {
   const borderColor = {
@@ -36,6 +37,7 @@ const Footer = () => {
           style={{
             display: "flex",
             gap: "30px",
+            justifyContent: "center",
           }}
         >
           <a href="#">
@@ -48,7 +50,14 @@ const Footer = () => {
             <img src={twitter} style={{ width: "40px" }} alt="Twitter" />
           </a>
         </div>
-        <h2 style={{ textAlign: "center" }}> THANKS</h2>
+        <h2 style={{ textAlign: "center" }}>
+          {" "}
+          <img
+            src={footer_ty}
+            style={{ width: "200px", scale: "2.2" }}
+            alt=""
+          />
+        </h2>
       </div>
       {/* newsletter  */}
       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>

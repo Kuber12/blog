@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 
 import "./AddBlog.css";
 const AddBlog = (props) => {
@@ -19,6 +20,9 @@ const AddBlog = (props) => {
   };
   return (
     <div className="container-head">
+      <Helmet>
+        <title>Add Page</title>
+      </Helmet>
       <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Add Blog</h1>
       <div className="addblog-container">
         <div className="title-input-container">

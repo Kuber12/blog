@@ -31,7 +31,7 @@ const MyRouter = () => {
           <Route path="/AddBlog" element={<AddBlog />}></Route>
           <Route path="/EditBlog" element={<EditBlog />}></Route>
           <Route path="/User" element={<User />}></Route>
-        <Route path="/*" element={<NotFoundPage/>}></Route>
+          <Route path="/*" element={<NotFoundPage />}></Route>
         </Routes>
         {isFooterVisible && <Footer />}
       </Router>
