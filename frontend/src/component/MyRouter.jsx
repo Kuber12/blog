@@ -8,32 +8,23 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./Footer";
 import User from "./User";
 import NotFoundPage from "./NotFoundPage";
+import Layout from "./Layout";
 
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
 
-  // getting data from nav and showing or hiding
-  // const [dataFromChild, setDataFromChild] = useState(null);
-  const handeDataFromChild = (data) => {
-    console.log("Data received from child:", data);
-    setisFooterVisible(data);
-  };
-  const data = (h) => {
-    console.log(h);
-  };
   return (
     <div>
       <Router>
-        {/* <NewNav sentDataToParent={handeDataFromChild} /> */}
-        <NewNav sentDataToParent={handeDataFromChild} selected="selected" />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/AddBlog" element={<AddBlog />}></Route>
-          <Route path="/EditBlog" element={<EditBlog />}></Route>
-          <Route path="/User" element={<User />}></Route>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" index element={<Home />}></Route>
+            <Route path="User" element={<User />}></Route>
+          </Route>
+          <Route path="AddBlog" element={<AddBlog />}></Route>
+          <Route path="EditBlog" element={<EditBlog />}></Route>
           <Route path="/*" element={<NotFoundPage />}></Route>
         </Routes>
-        {isFooterVisible && <Footer />}
       </Router>
     </div>
   );
