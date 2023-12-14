@@ -1,0 +1,118 @@
+@font-face{
+    font-family: Hedvig;
+    src:url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: Hedvig; 
+    text-decoration: none;
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.navbar{
+    margin:0;
+    top:0;
+    position: sticky;
+    padding:10px;
+    width:100%;
+    background-color: white;
+    margin:0 auto;
+    max-width: 1500px;
+    height:60px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.navbar ul{
+    float: right;
+}
+.navbar ul li{
+    padding: 0 10px;
+	margin: 0 5px;
+    display: inline-block;
+}
+.navbar ul li a{
+    color: black;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    margin:0 5px;
+    position: relative;
+}
+.navbar ul li a:hover{
+    color:white;
+    background-color: #FFCD29;
+    border-radius: 50px;   
+}
+.navbar .logo{
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    position: relative;
+    margin-top:0;
+    height:70px;
+    cursor: pointer;
+}
+.icon{
+    font-size: 30px;
+    color:black;
+    float:right;
+    cursor: pointer;
+    line-height: 80px;
+	margin-right: 40px;
+    display: none;
+}
+.icon:hover{
+    color:lightblue;
+}
+#menuBt{
+    display:none;
+}
+
+@media(max-width:992px){
+    .logo{
+        font-size: 25px;
+    }
+    .navbar ul li a{
+        font-size: 15px;
+    
+    }
+}
+@media(max-width:760px){
+    .icon{
+        display:block;
+    }
+    #menuBt{
+        display: none;
+    }
+    .navbar ul{
+        position: fixed;
+        top:80px;
+        left:0;
+        width: 100%;
+        height: 100vh;
+        background-color: lightblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transform: translateX(-100%);
+        transition: all 0.5s;
+    }
+    .navbar ul li{
+        margin: 10px 0;
+    }
+    .navbar ul li a{
+        display: block;
+        font-size: 20px;
+        padding: 15px 25px;
+    }
+    #menuBt:checked~ul{
+        left:0;
+        transform: translateX(0);
+    }
+}
