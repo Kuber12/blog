@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import NewNav from "./NewNav";
+import NewNavi from "./NewwNav";
 import "./AddBlog.css";
 const AddBlog = (props) => {
   const [titleArea, settitleArea] = useState("Enter The Title");
@@ -20,7 +21,8 @@ const AddBlog = (props) => {
   };
   return (
     <>
-      <NewNav />
+      <NewNavi />
+      {/* <NewNav /> */}
       <div className="container-head">
         <Helmet>
           <title>Add Page</title>
