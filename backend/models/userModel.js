@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
+    },
     username: {
         type: String,
-        required: [true,"Please enter a username"]
+        required: [true,"Please enter a username"],
+        unique: [true, "Username already used"]
     },
     name: {
         type: String,   
@@ -11,7 +17,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true,"Please enter your password"]
+        required: [true,"Please enter your password"],
     },
     age: {
         type: Number,
@@ -21,7 +27,8 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: false
+        required: false,
+        unique: [true, "Email already used"]
     },
     followers: [{
         type: mongoose.Schema.Types.ObjectId,
