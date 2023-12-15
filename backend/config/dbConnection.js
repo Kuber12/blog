@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 const connectdb = async () =>{
-    mongoose.connect('mongodb://localhost:27017/db_blog', {
+    mongoose.connect('mongodb+srv://kuber:qwerty12@blogsite.1vuke1d.mongodb.net', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

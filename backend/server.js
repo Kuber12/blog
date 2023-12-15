@@ -9,6 +9,7 @@ connectdb();
 require('dotenv').config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use("/api/blog",require("./routes/blogRoutes"));
 app.use("/api/user",require("./routes/userRoutes"));
 
