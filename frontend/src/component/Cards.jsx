@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import hill from "../images/hill.jpeg";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const Cards = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -51,14 +52,20 @@ const Cards = () => {
             }}
           >
             {/* images  */}
-            <div style={{ marginBottom: "20px" }}>
+            <div
+              style={{
+                marginBottom: "20px",
+                display: "flex",
+                justifyContent: "center",
+                overflow: "hidden",
+              }}
+            >
               <img
                 src={items.image}
                 alt=""
                 style={{
                   objectFit: "content",
-                  width: "100%",
-                  height: "150px",
+                  height: "190px",
                   borderRadius: "15px",
                 }}
               />
@@ -95,7 +102,12 @@ const Cards = () => {
               </div>
               {/* button  */}
               <div style={{ marginBottom: "10px" }}>
-                <button className="btn btn-primary">Go somewhere </button>
+                <Link
+                  to={`../cardsDetails/${items.id}`}
+                  className="btn btn-primary"
+                >
+                  Read More
+                </Link>
               </div>
             </div>
           </div>

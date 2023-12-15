@@ -22,6 +22,11 @@
   /* transform: translate(100px); */
   margin: 0 auto;
 }
+.thanksIcon {
+  width: 200px;
+  scale: 2.2;
+}
+
 @media screen and (max-width: 425px) {
   .container-footer {
     background-color: white;
@@ -42,6 +47,10 @@
     /* background-color: aquamarine; */
     flex-direction: row;
     gap: 20px;
+  }
+  .thanksIcon {
+    width: 130px;
+    scale: 2.2;
   }
 }
 @media screen and (max-width: 560px) {

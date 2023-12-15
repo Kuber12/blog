@@ -51,12 +51,7 @@ const Footer = () => {
           </a>
         </div>
         <h2 style={{ textAlign: "center" }}>
-          {" "}
-          <img
-            src={footer_ty}
-            style={{ width: "200px", scale: "2.2" }}
-            alt=""
-          />
+          <img src={footer_ty} className="thanksIcon" alt="" />
         </h2>
       </div>
       {/* newsletter  */}
