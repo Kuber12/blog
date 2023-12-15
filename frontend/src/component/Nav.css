@@ -1,0 +1,33 @@
+@font-face{
+    font-family: Hedvig;
+    src:url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
+}
+main{
+    font-family: Hedvig;
+}
+.navbar-brand{
+    font-size: 30px;
+    margin-left: 15px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+.nav-item{
+    color:rgb(0, 0, 0);
+    font-size: 20px;
+    text-decoration: none;
+    padding: 0 20px;
+	margin: 0 10px;
+	line-height: 30px;
+	list-style: none;
+	display: inline-block;
+    border:none;
+    border-radius:50px ;
+}
+
+.nav-item:hover{
+    text-transform: uppercase;
+    background-color:#FFCD29;
+    transition: .5s;
+    color:white;
+    transform: scale(1.1);
+}
