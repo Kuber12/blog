@@ -38,7 +38,7 @@ const Cards = () => {
           flexWrap: "wrap",
         }}
       >
-        {data.map((items) => (
+        {data.slice(0, 6).map((items) => (
           <div
             style={{
               display: "flex",
