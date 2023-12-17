@@ -9,7 +9,7 @@ const CardsDetails = () => {
       .get(`http://localhost:5000/api/blog/${id}`)
       .then((res) => {
         setData(res.data.message);
-        console.log(res.data.message);
+        // console.log(res.data.message);
       })
       .catch((ex) => console.log(ex));
   }, []);
