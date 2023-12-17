@@ -53,7 +53,7 @@ const AddBlog = (props) => {
                 htmlFor="floatingTextarea"
                 style={{ paddingLeft: "2.18rem" }}
               >
-                Comments
+                Contents
               </label>
             </div>
           </div>

@@ -24,7 +24,7 @@ const MyRouter = () => {
           <Route path="AddBlog" element={<AddBlog />}></Route>
           <Route path="EditBlog" element={<EditBlog />}></Route>
           <Route path="/*" element={<NotFoundPage />}></Route>
-          {/* <Route path="/cards" element={<Cards />}></Route> */}
+          <Route path="/cards" element={<Cards />}></Route>
           {/* <Route path="/SearchBar" element={<SearchBar />}></Route> */}
           <Route path="/cardsHome" element={<CardsHome />}></Route>
           <Route path="/cardsDetails/:id" element={<CardsDetails />}></Route>

@@ -6,13 +6,17 @@ const Cards = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("https://fakestoreapi.com/products")
+      .get("http://localhost:5000/api/blog", { timeout: 5000 }) // 5000 milliseconds (adjust as needed)
       .then((res) => {
-        // console.log(res);
-        setData(res.data);
+        console.log(res.data.message);
+        setData(res.data.message);
       })
       .catch((err) => {
-        console.log(err);
+        if (axios.isCancel(err)) {
+          console.log("Request canceled");
+        } else {
+          console.log("ERROR IS " + err);
+        }
       });
   }, []);
 
@@ -61,7 +65,7 @@ const Cards = () => {
               }}
             >
               <img
-                src={items.image}
+                src=""
                 alt=""
                 style={{
                   objectFit: "content",
@@ -82,7 +86,7 @@ const Cards = () => {
                   gap: "10px",
                 }}
               >
-                <h3>{truncateText(items.title, 25)} </h3>{" "}
+                <h3>{truncateText(items.headline, 25)} </h3>{" "}
                 <h7
                   style={{
                     backgroundColor: "blue",
@@ -97,13 +101,13 @@ const Cards = () => {
               {/* description  */}
               <div style={{ marginBottom: "10px" }}>
                 <p style={{ textAlign: "justify" }}>
-                  {truncateText(items.description, 100)}
+                  {truncateText(items.content, 100)}
                 </p>
               </div>
               {/* button  */}
               <div style={{ marginBottom: "10px" }}>
                 <Link
-                  to={`../cardsDetails/${items.id}`}
+                  to={`../cardsDetails/${items._id}`}
                   className="btn btn-primary"
                 >
                   Read More
