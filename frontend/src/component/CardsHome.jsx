@@ -1,6 +1,7 @@
 import React from "react";
 import Cards from "./Cards";
 import SearchBar from "./SearchBar";
+
 const CardsHome = () => {
   return (
     <>
