@@ -31,9 +31,9 @@
 input {
   border-radius: 10px;
 }
-button {
-  background-color: black;
-  color: white;
+.postBlog {
+  background-color: black !important;
+  color: white !important;
   padding: 12px 20px;
   border: none;
   border-radius: 5px;

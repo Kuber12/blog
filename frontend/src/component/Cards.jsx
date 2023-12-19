@@ -6,6 +6,7 @@ import { RotatingLines } from "react-loader-spinner";
 const Cards = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [limit, setLimit] = useState(6);
 
   //truncate text
   const truncateText = (text, maxLength) => {
@@ -60,12 +61,12 @@ const Cards = () => {
             //   gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
             display: "flex",
             justifyContent: "space-evenly",
-            gap: "50px 20px",
+            gap: "50px 150px",
             flexWrap: "wrap",
             marginTop: "30px",
           }}
         >
-          {data.slice(0, 6).map((items) => (
+          {data.slice(0, limit).map((items) => (
             <div
               style={{
                 display: "flex",
@@ -141,6 +142,55 @@ const Cards = () => {
           ))}
         </div>
       )}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          flexWrap: "wrap",
+          padding: 30,
+        }}
+      >
+        {limit <= 6 ? (
+          <button
+            disabled
+            className="cursor-pointer transition-all bg-red-500 text-white px-6 py-2 rounded-lg
+        border-blue-600
+        border-b-[4px]"
+          >
+            See Less
+          </button>
+        ) : (
+          <button
+            className=" cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
+       border-blue-600
+       border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+       active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+            onClick={() => setLimit(limit - 3)}
+          >
+            See Less
+          </button>
+        )}
+        {limit > data.length ? (
+          <button
+            disabled
+            className="cursor-pointer transition-all bg-red-500 text-white px-6 py-2 rounded-lg
+border-blue-600
+border-b-[4px]"
+          >
+            Load More
+          </button>
+        ) : (
+          <button
+            className="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
+border-blue-600
+border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
+active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+            onClick={() => setLimit(limit + 3)}
+          >
+            Load More
+          </button>
+        )}
+      </div>
     </>
   );
 };

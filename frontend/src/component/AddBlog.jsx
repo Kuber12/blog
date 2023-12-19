@@ -28,13 +28,12 @@ const AddBlog = (props) => {
   });
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    const requestData = {
-      message: [values], // Wrap values in a message array
-    };
+    // const requestData = {
+    //   message: [values], // Wrap values in a message array
+    // };
 
     axios
-      .post("http://localhost:5000/api/blog", requestData)
+      .post("http://localhost:5000/api/blog", values)
       .then((res) => {
         console.log("Submitted");
         navigation("/");
@@ -99,7 +98,9 @@ const AddBlog = (props) => {
               </div> */}
                 {/* clear  button*/}
                 <div>
-                  <button onClick={handleClearText}>Clear</button>
+                  <button className="postBlog" onClick={handleClearText}>
+                    Clear
+                  </button>
                 </div>
                 {/* select tags */}
                 <div>
@@ -114,7 +115,9 @@ const AddBlog = (props) => {
               </div>
               {/* bottom */}
               <div style={{ marginTop: "20px", alignSelf: "flex-start" }}>
-                <button type="submit">Post The Blog</button>
+                <button className="postBlog" type="submit">
+                  Post The Blog
+                </button>
               </div>
             </div>
           </div>
