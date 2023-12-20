@@ -25,7 +25,7 @@ const blogSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  image_url: {
+  image: {
     type: String,
     required: false,
   },
