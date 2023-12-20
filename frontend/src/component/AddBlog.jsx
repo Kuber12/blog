@@ -5,42 +5,41 @@ import NewNavi from "./NewwNav";
 import "./AddBlog.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const AddBlog = (props) => {
+const AddBlog = () => {
   const navigation = useNavigate();  
   const [values, setValues] = useState({
     headline: "",
     content: "",
-    image :"",
+    // image :"",
     tag:""
   });
 
 
-  const handleFile = (e)=>{
-    console.log(e.target.files);
-    setValues({...values,image:e.target.files[0]})
-  }
+  // const handleFile = (e)=>{
+  //   console.log(e.target.files);
+  //   setValues({...values,image:e.target.files[0]})
+  // }
+  
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // const requestData = {
-    //   message: [values], // Wrap values in a message array
-    // };
+  
     // const formData = new FormData();
-    // formData.append("headline",values.headline);
-    // formData.append("content",values.content);
-    // formData.append("image_url",values.image_url);
-    // console.log(formData)
-    axios
-      .post("http://localhost:5000/api/blog", values)
-      .then((res) => {
-        console.log("Submitted");
-        navigation("/");
-      })
-      .catch((ex) => {
-        console.log("Error", ex);
-      });
+    // formData.append("headline", values.headline);
+    // formData.append("content", values.content);
+    // formData.append("tag", values.tag);
+    // formData.append("image", values.image); // assuming values.image is the file
+    // console.log([...formData.entries()]);
+    try {
+      const response = await axios.post("http://localhost:5000/api/blog", values);
+      console.log("Submitted", response.data);
+      navigation("/");
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
+  
 
   return (
     <>
@@ -89,12 +88,12 @@ const AddBlog = (props) => {
               {/* top */}
               <div className="button-top-container">
                 {/* file  input */}
-                <div>
+                {/* <div>
                 <label htmlFor="fileInput" className="custom-file-input">
                   Choose File
                 </label>
                 <input type="file" id="fileInput" onChange={handleFile} style={{ display: "none" }} />
-              </div>
+              </div> */}
                 
                 {/* select tags */}
                 <div>

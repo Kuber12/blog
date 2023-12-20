@@ -8,7 +8,7 @@ const getBlogs = asyncHandler(async (req, res) => {
 
 const createBlog = asyncHandler(async (req, res) => {
   try {
-    const { headline, content } = req.body;
+    const { headline, content,tag,image } = req.body;
     if (!headline || !content) {
       return res.status(400).json({ message: "Please insert all params" });
     }
@@ -16,6 +16,7 @@ const createBlog = asyncHandler(async (req, res) => {
     const blog = await Blog.create({
       headline,
       content,
+      tag,image
     });
 
     res.status(201).json(blog);

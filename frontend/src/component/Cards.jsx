@@ -119,7 +119,7 @@ const Cards = () => {
                       borderRadius: "20px",
                     }}
                   >
-                    Tags
+                    {items.tag}
                   </h7>
                 </div>
                 {/* description  */}
