@@ -6,20 +6,31 @@ import "./AddBlog.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const AddBlog = (props) => {
-  const [titleArea, settitleArea] = useState("Enter The Title");
-  const [textArea, settextArea] = useState("Enter The Description");
-
   const navigation = useNavigate();  
   const [values, setValues] = useState({
     headline: "",
     content: "",
+    image :"",
+    tag:""
   });
+
+
+  const handleFile = (e)=>{
+    console.log(e.target.files);
+    setValues({...values,image:e.target.files[0]})
+  }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // const requestData = {
     //   message: [values], // Wrap values in a message array
     // };
-
+    // const formData = new FormData();
+    // formData.append("headline",values.headline);
+    // formData.append("content",values.content);
+    // formData.append("image_url",values.image_url);
+    // console.log(formData)
     axios
       .post("http://localhost:5000/api/blog", values)
       .then((res) => {
@@ -78,22 +89,27 @@ const AddBlog = (props) => {
               {/* top */}
               <div className="button-top-container">
                 {/* file  input */}
-                {/* <div>
+                <div>
                 <label htmlFor="fileInput" className="custom-file-input">
                   Choose File
                 </label>
-                <input type="file" id="fileInput" style={{ display: "none" }} />
-              </div> */}
+                <input type="file" id="fileInput" onChange={handleFile} style={{ display: "none" }} />
+              </div>
                 
                 {/* select tags */}
                 <div>
-                  {/* <select name="" id="">
+                  <select name="" 
+                  onChange={e=>{
+                    console.log(e.target.value)
+                  setValues({...values,tag: e.target.value})}
+                  }
+                  id="">
                   <option disabled selected value="">
                     Choose Your Tag
                   </option>
-                  <option value="">News</option>
-                  <option value="">Entertainment</option>
-                </select> */}
+                  <option value="News">News</option>
+                  <option value="Entertainment">Entertainment</option>
+                </select>
                 </div>
               </div>
               {/* bottom */}

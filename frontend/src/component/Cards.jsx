@@ -153,7 +153,8 @@ const Cards = () => {
         {limit <= 6 ? (
           <button
             disabled
-            className="cursor-pointer transition-all bg-red-500 text-white px-6 py-2 rounded-lg
+            style={{cursor:"not-allowed"}}
+            className=" transition-all bg-red-500 text-white px-6 py-2 rounded-lg
         border-blue-600
         border-b-[4px]"
           >
@@ -173,6 +174,7 @@ const Cards = () => {
         {limit > data.length ? (
           <button
             disabled
+            style={{cursor:"not-allowed"}}
             className="cursor-pointer transition-all bg-red-500 text-white px-6 py-2 rounded-lg
 border-blue-600
 border-b-[4px]"
