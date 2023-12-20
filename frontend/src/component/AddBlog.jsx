@@ -9,19 +9,7 @@ const AddBlog = (props) => {
   const [titleArea, settitleArea] = useState("Enter The Title");
   const [textArea, settextArea] = useState("Enter The Description");
 
-  // const handleTitleArea = (event) => {
-  //   settitleArea(event.target.value);
-  // };
-
-  const navigation = useNavigate();
-  const handleTextArea = (event) => {
-    settextArea(event.target.value);
-  };
-
-  const handleClearText = () => {
-    settextArea("");
-    settitleArea("");
-  };
+  const navigation = useNavigate();  
   const [values, setValues] = useState({
     headline: "",
     content: "",
@@ -58,7 +46,6 @@ const AddBlog = (props) => {
                 type="text"
                 className="title-input"
                 placeholder="Enter Title"
-                // onChange={handleTitleArea}
                 onChange={(e) =>
                   setValues({ ...values, headline: e.target.value })
                 }
@@ -68,6 +55,7 @@ const AddBlog = (props) => {
               <div className="form-floating container  ">
                 <textarea
                   // onChange={handleTextArea}
+                  
                   className="form-control p-5"
                   placeholder="Leave a comment here"
                   id="floatingTextarea"
@@ -96,12 +84,7 @@ const AddBlog = (props) => {
                 </label>
                 <input type="file" id="fileInput" style={{ display: "none" }} />
               </div> */}
-                {/* clear  button*/}
-                <div>
-                  <button className="postBlog" onClick={handleClearText}>
-                    Clear
-                  </button>
-                </div>
+                
                 {/* select tags */}
                 <div>
                   {/* <select name="" id="">

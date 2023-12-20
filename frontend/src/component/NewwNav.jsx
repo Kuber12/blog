@@ -24,7 +24,7 @@ const NewNavi = () => {
           <Link to="/AddBlog">Create</Link>
         </li>
         <li>
-          <Link to="/EditBlog">Edit</Link>
+          <Link to="/DisplayEditBLog">Edit</Link>
         </li>
         <li>
           <Link to="/User">
