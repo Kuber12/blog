@@ -123,10 +123,14 @@ const Cards = () => {
                   </h7>
                 </div>
                 {/* description  */}
-                <div style={{ marginBottom: "10px" }}>
-                  <p style={{ textAlign: "justify" }}>
-                    {truncateText(items.content, 100)}
-                  </p>
+                <div
+                  style={{
+                    marginBottom: "10px",
+                    maxHeight: "100px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <p className="card-text">{truncateText(items.content, 50)}</p>
                 </div>
                 {/* button  */}
                 <div style={{ marginBottom: "10px" }}>
@@ -153,7 +157,7 @@ const Cards = () => {
         {limit <= 6 ? (
           <button
             disabled
-            style={{cursor:"not-allowed"}}
+            style={{ cursor: "not-allowed" }}
             className=" transition-all bg-red-500 text-white px-6 py-2 rounded-lg
         border-blue-600
         border-b-[4px]"
@@ -174,7 +178,7 @@ const Cards = () => {
         {limit > data.length ? (
           <button
             disabled
-            style={{cursor:"not-allowed"}}
+            style={{ cursor: "not-allowed" }}
             className="cursor-pointer transition-all bg-red-500 text-white px-6 py-2 rounded-lg
 border-blue-600
 border-b-[4px]"

@@ -52,9 +52,9 @@ const DisplayEditBLog = () => {
                 {data.map((d, i) => (
                   <tr key={i}>
                     <td>{i+1}</td>
-                    <td>{d.headline}</td>
+                    <td>{d.headline.slice(0,10)}</td>
                     <td>{d.tag}</td>
-                    <td>{d.content}</td>
+                    <td>{d.content.length > 10 ?  d.content.slice(0,15)+"..." : d.content}</td>
                     <td style={{ display: 'flex', flexWrap: 'wrap' }}>
                       <Link to={`/cardsDetails/${d._id}`} className="btn btn-sm btn-info me-2">
                         Read
