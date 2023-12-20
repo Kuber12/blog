@@ -11,7 +11,7 @@ const DisplayEditBLog = () => {
       .get('http://localhost:5000/api/blog')
       .then((res) => setData(res.data.message))
       .catch((err) => console.log(err));
-  }, []);
+  }, [data]);
 
   const handleDelete = (id) => {
     const confirm = window.confirm('Do you want to delete?');
@@ -20,7 +20,7 @@ const DisplayEditBLog = () => {
         .delete(`http://localhost:5000/api/blog/${id}`)
         .then((res) => {
           console.log('Deleted');
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((err) => console.log(err));
     }
@@ -43,6 +43,7 @@ const DisplayEditBLog = () => {
                 <tr>
                   <th>ID</th>
                   <th>Blog Name</th>
+                  <th>Tag</th>
                   <th>Content</th>
                   <th>Action</th>
                 </tr>
@@ -52,6 +53,7 @@ const DisplayEditBLog = () => {
                   <tr key={i}>
                     <td>{i+1}</td>
                     <td>{d.headline}</td>
+                    <td>{d.tag}</td>
                     <td>{d.content}</td>
                     <td style={{ display: 'flex', flexWrap: 'wrap' }}>
                       <Link to={`/cardsDetails/${d._id}`} className="btn btn-sm btn-info me-2">
