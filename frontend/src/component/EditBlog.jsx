@@ -5,6 +5,11 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const EditBlog = () => {
+  const [values, setValues] = useState({
+    headline: "",
+    content: "",
+    tag: "",
+  });
   const navigation = useNavigate();
   const { id } = useParams();
 
@@ -29,24 +34,23 @@ const EditBlog = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  const [values, setValues] = useState({
-    headline: "",
-    content: "",
-    tag:""
-  });
+
   return (
     <>
       <NewNavi />
       {/* <NewNav /> */}
       <Helmet>
-        <title>Edit Page</title>
+        <title>Update Page</title>
       </Helmet>
-      <div className="d-flex w-100 vh-100 justify-content-center align-items-center bg-light">
-        <div className="w-50 border bg-white shadow px-5  py-3 rounded">
-          <h1>Update Blog</h1>
+      <div className="d-flex flex-col gap-5 w-100 vh-100 justify-content-center align-items-center bg-light">
+        <h1 style={{ fontSize: "2rem" }}>Update Blog</h1>
+        <div className="w-50  border bg-white shadow px-5  py-5 rounded">
           <form onSubmit={handleUpdate}>
-            <div className="mb-2">
-              <label htmlFor="name">Blog Title:</label>
+            <div className="mb-4">
+              <label htmlFor="name" className="mb-3">
+                Blog Title:
+              </label>
+              <h1>{values.headline}</h1>
               <input
                 type="text"
                 name="name"
@@ -59,13 +63,15 @@ const EditBlog = () => {
                 }
               />
             </div>
-            
+
             <div className="mb-2">
-              <label htmlFor="email">BLog Content</label>
+              <label htmlFor="email" className="mb-3">
+                BLog Content
+              </label>
               <textarea
                 // onChange={handleTextArea}
 
-                className="form-control p-5"
+                className="form-control p-5 mb-4"
                 placeholder="Blog Content"
                 id="floatingTextarea"
                 style={{ width: "100%", height: "124px" }}
@@ -75,12 +81,14 @@ const EditBlog = () => {
                 // rows="5"
               ></textarea>
               <div>
-                  <select name="" 
-                  onChange={e=>{
-                    console.log(e.target.value)
-                  setValues({...values,tag: e.target.value})}
-                  }
-                  id="">
+                <select
+                  name=""
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setValues({ ...values, tag: e.target.value });
+                  }}
+                  id=""
+                >
                   <option disabled selected value="">
                     Choose Your Tag
                   </option>
@@ -89,7 +97,7 @@ const EditBlog = () => {
                   <option value="Fun">Fun</option>
                   <option value="Facts">Facts</option>
                 </select>
-                </div>
+              </div>
             </div>
 
             <button className="btn btn-success">Update</button>

@@ -53,7 +53,8 @@ select {
   font-size: 16px;
 }
 input[type="file"] {
-  display: none; /* Hide the default file input */
+  /* display: none;  */
+  /* Hide the default file input */
 }
 
 .custom-file-input {

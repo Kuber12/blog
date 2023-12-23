@@ -7,7 +7,7 @@ const Cards = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(6);
-
+  const imagePath = "../../uploads/";
   //truncate text
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
@@ -89,7 +89,7 @@ const Cards = () => {
                 }}
               >
                 <img
-                  src=""
+                  src={`${imagePath}${items.image}`}
                   alt=""
                   style={{
                     objectFit: "content",
