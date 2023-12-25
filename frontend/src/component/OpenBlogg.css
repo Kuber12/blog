@@ -1,0 +1,180 @@
+.MainP{
+    background-color: #BDE3FF;
+    width:100%;
+    height:100vh;
+}
+.Uinfo {
+    position: relative;
+    top: 2%;
+}
+
+.UserD {
+    left: 2%;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.UserD:hover + .bio {
+    display: block;
+}
+.bio {
+    height: auto;
+    width:20%;
+    background-color: #FFCD28;
+    z-index: 2;
+    display: none;
+    position: absolute;
+    left: 5%; 
+    top:0;
+    border-radius: 30px;
+    text-align: center;
+}
+.bio h2{
+    font-size: 1.5rem;
+}
+.bio p{
+    font-size: 0.8rem;
+    padding:10px;
+}
+.follow{
+    width:100px;
+    background-color: #0D6EFD;
+    color: white;
+    border-radius: 20px;
+    bottom:-10%;
+    position: relative;
+    padding: 5px;
+}
+.BlogSection{
+    top:5%;
+    left:10%;
+    position: relative;
+    width:80%;
+    height:80%;
+    background-color:#E6E6E6;
+    z-index: 1;
+    display: block;
+}
+.Title{
+    top:3%;
+    position: relative;
+    width:65%;
+    height:7%;
+    left:15%;
+    background-color: #FFCD28;
+    border-radius: 30px;
+    color:black;
+    text-align: center;
+}
+.Title h4{
+    font-size: 1.3rem;
+    line-height: 50px;
+}
+.Tags > * {
+    margin-right: 5px; 
+}
+.Tags{
+    display: flex;
+    justify-content: flex-start;
+    left:8%;
+    top:5%;
+    position: relative;
+}
+.T1, .T2, .T3{
+    width: 70px;
+    height: 30px;
+    border-radius:10px ;
+} 
+.T1{
+    background-color: red;
+}
+.T2{
+    background-color: orange;
+}
+.T3{
+    background-color: green;
+}
+.MainContent{
+    position: relative;
+    top:10%;
+    background-color: white;
+    width:90%;
+    height:70%;
+    left: 5%;
+}
+.Interact{
+    position: relative;
+    left:10%;
+    display: flex;
+    justify-content: flex-start;
+    padding:10px;
+    bottom:-5%;
+    width:50%;
+}
+.like, .comment, .share{
+    margin: 5px;
+    width:50px;
+    height:50px;
+    background-color: #0D6EFD;
+    border-radius:50px ;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    color:white;
+    transition: background-color 0.3s ease; 
+}
+.like:hover, .comment:hover, .share:hover{
+    background-color: #FFCD28;
+    color:black;
+}
+
+@media (max-width: 992px) {
+    .Title h4{
+        font-size: 1.1rem;
+        line-height: 40px;
+    }
+    .bio {
+        width:40%;
+    }
+    .bio h2{
+        font-size: 1.5rem;
+    }
+    .bio p{
+        font-size: 0.8rem;
+    }
+    .follow{
+        width:100px;
+        background-color: #0D6EFD;
+        color: white;
+        border-radius: 20px;
+        bottom:-15%;
+        position: relative;
+    }
+}
+@media (max-width: 760px) {
+    .Title h4{
+        font-size: 1rem;
+        line-height: 30px;
+    }
+    .bio {
+        width:40%;
+    }
+    .bio h2{
+        font-size: 1.5rem;
+    }
+    .bio p{
+        font-size: 0.8rem;
+    }
+    .follow{
+        width:100px;
+        background-color: #0D6EFD;
+        color: white;
+        border-radius: 20px;
+        bottom:-15%;
+        position: relative;
+    }
+}
