@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const blogSchema = mongoose.Schema({
   headline: {
     type: String,
-    required: [true,"Please enter a headline"],
+    required: [true, "Please enter a headline"],
   },
   content: {
     type: String,
-    required: [true,"Please enter your content"],
+    required: [true, "Please enter your content"],
   },
   author: {
     type: String,
@@ -15,24 +15,26 @@ const blogSchema = mongoose.Schema({
   },
   date_published: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   edited_status: {
     type: Boolean,
-    default: false
+    default: false,
   },
   tag: {
     type: String,
     required: false,
   },
   image: {
-    type: Buffer,
+    type: String,
     required: false,
   },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Users"
-  }]
-})
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Users",
+    },
+  ],
+});
 
-module.exports = mongoose.model("Blog",blogSchema);
+module.exports = mongoose.model("Blog", blogSchema);
