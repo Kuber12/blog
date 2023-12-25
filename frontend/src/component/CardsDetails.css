@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#contain {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background-color: #bde3ff;
+  display: grid;
+  place-items: center;
+  padding: 20px 20px;
+}
+#subcontain {
+  width: 90%;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px 20px;
+  border-radius: 1rem;
+}
+#left {
+  width: 70%;
+  height: auto;
+  background-color: #e6e6e6;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 30px;
+  gap: 10px;
+}
+#imgContain {
+  background: #b3b3b3;
+  width: 100%;
+  height: 30vh;
+  padding: 10px 20px;
+  border-radius: 1rem;
+}
+#headline {
+  background: #b3b3b3;
+  width: 100%;
+  height: 10vh;
+  padding: 10px 20px;
+  border-radius: 1rem;
+}
+#leftcontent {
+  width: 100%;
+  min-height: 30vh;
+  background-color: #b3b3b3;
+  padding: 10px 20px;
+  border-radius: 1rem;
+}
+#likebtn {
+  background: green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 1rem;
+}
+#right {
+  width: 30%;
+  height: auto;
+  background-color: #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 10px;
+}
+#writtenBy {
+  background-color: #b3b3b3;
+  width: 100%;
+  height: 10vh;
+  padding: 10px 10px;
+  border-radius: 1rem;
+}
+#btncontainer {
+  background-color: #b3b3b3;
+  width: 100%;
+  height: 10vh;
+  padding: 10px 10px;
+  text-align: center;
+  border-radius: 1rem;
+}
+#followbtn {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 1rem;
+}
+#otherBlogs {
+  width: 100%;
+  height: auto;
+  background-color: #b3b3b3;
+  gap: 20px;
+  padding: 20px 10px;
+  border-radius: 1rem;
+}
+#subotherBlogs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (max-width: 425px) {
+  #contain {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-color: #bde3ff;
+    display: grid;
+    place-items: center;
+    padding: 20px 0px;
+  }
+  #contain {
+    width: 100%;
+    height: auto;
+    background-color: #bde3ff;
+    display: grid;
+    place-items: center;
+  }
+
+  #subcontain {
+    width: 90%;
+    height: auto;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 5px 10px;
+    gap: 30px;
+    border-radius: 1rem;
+  }
+  #left {
+    width: 100%;
+    height: auto;
+    background-color: #e6e6e6;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px;
+    gap: 10px;
+    border-radius: 1rem;
+  }
+  #imgContain {
+    background: #b3b3b3;
+    width: 100%;
+    height: 40vh;
+    padding: 10px 20px;
+  }
+  #likebtn {
+    background: green;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 1rem;
+  }
+  #right {
+    width: 100%;
+    height: auto;
+    background-color: #e6e6e6;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 30px;
+    border-radius: 1rem;
+  }
+  #writtenBy {
+    background-color: #b3b3b3;
+    width: 100%;
+    height: 15vh;
+    padding: 10px 10px;
+    border-radius: 1rem;
+  }
+  #btncontainer {
+    background-color: #b3b3b3;
+    width: 100%;
+    height: 10vh;
+    padding: 10px 10px;
+    text-align: center;
+    border-radius: 1rem;
+  }
+  #followbtn {
+    background: black;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 1rem;
+  }
+}
