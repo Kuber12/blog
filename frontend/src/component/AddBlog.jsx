@@ -4,6 +4,9 @@ import NewNavi from "./NewwNav";
 import "./AddBlog.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const AddBlog = () => {
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
@@ -47,8 +50,11 @@ const AddBlog = () => {
         });
       })
       .then((response) => {
+        toast.success("Added Blog");
         console.log("Submitted", response.data);
-        // navigation("/");
+        setTimeout(() => {
+          navigation("/");
+        }, 3000);
       })
       .catch((error) => {
         console.error("Error", error);
@@ -62,6 +68,18 @@ const AddBlog = () => {
         <Helmet>
           <title>Add Page</title>
         </Helmet>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Add Blog</h1>
         <form onSubmit={handleSubmit}>
           <div className="addblog-container">
@@ -76,7 +94,7 @@ const AddBlog = () => {
               />
             </div>
             <div>
-              <div className="form-floating container  ">
+              <div className="form-floating ">
                 <textarea
                   // onChange={handleTextArea}
 

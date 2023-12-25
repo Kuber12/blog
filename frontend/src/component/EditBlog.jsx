@@ -4,24 +4,52 @@ import NewNavi from "./NewwNav";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const EditBlog = () => {
+  const [file, setFile] = useState(null);
   const [values, setValues] = useState({
     headline: "",
     content: "",
+    image: "",
     tag: "",
   });
   const navigation = useNavigate();
   const { id } = useParams();
+  const handleFile = (event) => {
+    setFile(event.target.files[0]);
+  };
 
   const handleUpdate = (event) => {
-    event.preventDefault();
+    event.preventDefault(``);
+    const formData = new FormData();
+    let updatedFileName = "";
+    formData.append("fileInput", file);
     axios
-      .put(`http://localhost:5000/api/blog/${id}`, values)
-      .then((res) => {
-        console.log("updated");
-        navigation("/");
+      .post(`http://localhost:5000/api/file/upload`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .catch((err) => console.log(err));
+      .then((imgResponse) => {
+        updatedFileName = imgResponse.data.fileName;
+        console.log("Image Submitted", imgResponse.data.fileName); //url
+        return axios.put(`http://localhost:5000/api/blog/${id}`, {
+          ...values,
+          image: updatedFileName,
+        });
+      })
+
+      .then((res) => {
+        toast.success("Updated");
+        setTimeout(() => {
+          navigation("/");
+        }, 2100);
+        console.log("updated");
+      })
+      .catch((err) => {
+        toast.error("Something went Wrong Upload Image");
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -42,6 +70,18 @@ const EditBlog = () => {
       <Helmet>
         <title>Update Page</title>
       </Helmet>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="d-flex flex-col gap-5 w-100 vh-100 justify-content-center align-items-center bg-light">
         <h1 style={{ fontSize: "2rem" }}>Update Blog</h1>
         <div className="w-50  border bg-white shadow px-5  py-5 rounded">
@@ -97,6 +137,18 @@ const EditBlog = () => {
                   <option value="Fun">Fun</option>
                   <option value="Facts">Facts</option>
                 </select>
+              </div>
+              {/* file  input */}
+              <div>
+                <label htmlFor="fileInput" className="custom-file-input">
+                  Choose File
+                </label>
+                <input
+                  type="file"
+                  id="fileInput"
+                  onChange={handleFile}
+                  style={{ display: "none" }}
+                />
               </div>
             </div>
 
