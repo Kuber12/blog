@@ -80,7 +80,16 @@ const AddBlog = () => {
           pauseOnHover
           theme="dark"
         />
-        <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Add Blog</h1>
+        <h1
+          style={{
+            textAlign: "center",
+            fontSize: "2rem",
+            fontWeight: "700",
+            marginBottom: "2rem",
+          }}
+        >
+          Add Blog
+        </h1>
         <form onSubmit={handleSubmit}>
           <div className="addblog-container">
             <div className="title-input-container">

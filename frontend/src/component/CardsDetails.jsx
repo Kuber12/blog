@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import "./CardsDetails.css";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
+import { BiSolidLike } from "react-icons/bi";
 const CardsDetails = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -49,29 +50,50 @@ const CardsDetails = () => {
                 style={{ width: "100%", objectFit: "contain", height: "170px" }}
               />
             </div>
-            <div id="headline">
-              <h1>{data.headline}</h1>
-            </div>
+            {/* <div id="headline"> */}
+            {/* </div> */}
             <div id="leftcontent">
+              <h1
+                style={{
+                  textAlign: "center",
+                  fontSize: "2rem",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                {data.headline}
+              </h1>
               <p>{data.content}</p>
             </div>
             <div id="btncontainer">
-              <button id="likebtn">Like</button>
+              <button id="likebtn">
+                <BiSolidLike />
+              </button>
+              <div>
+                <textarea type="text" id="commentInput" placeholder="comment" />
+              </div>
+              <div>
+                <button className="btn btn-info">Submit</button>
+              </div>
             </div>
           </div>
           {/* right  */}
           <div id="right">
             {/* user div  */}
             <div id="writtenBy">
-              <h2 style={{ textAlign: "center" }}>
-                <strong style={{ fontSize: "18px" }}>Written By</strong>
-              </h2>
-              <p style={{ textAlign: "center" }}>About User</p>
+              <div>
+                <h2 style={{ textAlign: "center" }}>
+                  <strong style={{ fontSize: "18px" }}>Written By</strong>
+                </h2>
+                <p style={{ textAlign: "center" }}>About User</p>
+              </div>
+              <div>
+                <button id="followbtn">Follow</button>
+              </div>
             </div>
             {/* button div  */}
-            <div id="btncontainer">
+            {/* <div id="btncontainer">
               <button id="followbtn">Follow</button>
-            </div>
+            </div> */}
             <div id="otherBlogs">
               <div id="subotherBlogs">
                 <h1>
@@ -80,6 +102,31 @@ const CardsDetails = () => {
                 <p>Lorem ipsum dolor sit amet.</p>
                 <p>Lorem ipsum dolor sit amet.</p>
                 <p>Lorem ipsum dolor sit amet.</p>
+              </div>
+            </div>
+            <div id="comments">
+              <h1 style={{ fontSize: "2rem", marginBottom: "5px" }}>
+                Comments
+              </h1>
+              <div id="commentSection">
+                <h3 style={{ fontSize: "1.25rem", marginBottom: "5px" }}>
+                  Name
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Ratione natus atque, quasi incidunt distinctio possimus earum
+                  nostrum reprehenderit nemo dolorem.
+                </p>
+              </div>
+              <div id="commentSection">
+                <h3 style={{ fontSize: "1.25rem", marginBottom: "5px" }}>
+                  Name
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Ratione natus atque, quasi incidunt distinctio possimus earum
+                  nostrum reprehenderit nemo dolorem.
+                </p>
               </div>
             </div>
           </div>
