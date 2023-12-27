@@ -10,7 +10,8 @@ import Cards from "./Cards";
 import CardsHome from "./CardsHome";
 import SearchBar from "./SearchBar";
 import CardsDetails from "./CardsDetails";
-import DisplayEditBLog from "./DisplayEditBLog"
+import DisplayEditBLog from "./DisplayEditBLog";
+
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
 

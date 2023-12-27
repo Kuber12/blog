@@ -4,19 +4,52 @@ import NewNavi from "./NewwNav";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const EditBlog = () => {
+  const [file, setFile] = useState(null);
+  const [values, setValues] = useState({
+    headline: "",
+    content: "",
+    image: "",
+    tag: "",
+  });
   const navigation = useNavigate();
   const { id } = useParams();
+  const handleFile = (event) => {
+    setFile(event.target.files[0]);
+  };
 
   const handleUpdate = (event) => {
-    event.preventDefault();
+    event.preventDefault(``);
+    const formData = new FormData();
+    let updatedFileName = "";
+    formData.append("fileInput", file);
     axios
-      .put(`http://localhost:5000/api/blog/${id}`, values)
-      .then((res) => {
-        console.log("updated");
-        navigation("/");
+      .post(`http://localhost:5000/api/file/upload`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .catch((err) => console.log(err));
+      .then((imgResponse) => {
+        updatedFileName = imgResponse.data.fileName;
+        console.log("Image Submitted", imgResponse.data.fileName); //url
+        return axios.put(`http://localhost:5000/api/blog/${id}`, {
+          ...values,
+          image: updatedFileName,
+        });
+      })
+
+      .then((res) => {
+        toast.success("Updated");
+        setTimeout(() => {
+          navigation("/");
+        }, 2100);
+        console.log("updated");
+      })
+      .catch((err) => {
+        toast.error("Something went Wrong Upload Image");
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -29,24 +62,35 @@ const EditBlog = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  const [values, setValues] = useState({
-    headline: "",
-    content: "",
-    tag:""
-  });
+
   return (
     <>
       <NewNavi />
       {/* <NewNav /> */}
       <Helmet>
-        <title>Edit Page</title>
+        <title>Update Page</title>
       </Helmet>
-      <div className="d-flex w-100 vh-100 justify-content-center align-items-center bg-light">
-        <div className="w-50 border bg-white shadow px-5  py-3 rounded">
-          <h1>Update Blog</h1>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      <div className="d-flex flex-col gap-5 w-100 vh-100 justify-content-center align-items-center bg-light">
+        <h1 style={{ fontSize: "2rem" }}>Update Blog</h1>
+        <div className="w-50  border bg-white shadow px-5  py-5 rounded">
           <form onSubmit={handleUpdate}>
-            <div className="mb-2">
-              <label htmlFor="name">Blog Title:</label>
+            <div className="mb-4">
+              <label htmlFor="name" className="mb-3">
+                Blog Title:
+              </label>
+              <h1>{values.headline}</h1>
               <input
                 type="text"
                 name="name"
@@ -59,13 +103,15 @@ const EditBlog = () => {
                 }
               />
             </div>
-            
+
             <div className="mb-2">
-              <label htmlFor="email">BLog Content</label>
+              <label htmlFor="email" className="mb-3">
+                BLog Content
+              </label>
               <textarea
                 // onChange={handleTextArea}
 
-                className="form-control p-5"
+                className="form-control p-5 mb-4"
                 placeholder="Blog Content"
                 id="floatingTextarea"
                 style={{ width: "100%", height: "124px" }}
@@ -75,12 +121,14 @@ const EditBlog = () => {
                 // rows="5"
               ></textarea>
               <div>
-                  <select name="" 
-                  onChange={e=>{
-                    console.log(e.target.value)
-                  setValues({...values,tag: e.target.value})}
-                  }
-                  id="">
+                <select
+                  name=""
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setValues({ ...values, tag: e.target.value });
+                  }}
+                  id=""
+                >
                   <option disabled selected value="">
                     Choose Your Tag
                   </option>
@@ -89,7 +137,19 @@ const EditBlog = () => {
                   <option value="Fun">Fun</option>
                   <option value="Facts">Facts</option>
                 </select>
-                </div>
+              </div>
+              {/* file  input */}
+              <div>
+                <label htmlFor="fileInput" className="custom-file-input">
+                  Choose File
+                </label>
+                <input
+                  type="file"
+                  id="fileInput"
+                  onChange={handleFile}
+                  style={{ display: "none" }}
+                />
+              </div>
             </div>
 
             <button className="btn btn-success">Update</button>
