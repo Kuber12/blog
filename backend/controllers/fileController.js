@@ -1,4 +1,7 @@
 const asyncHandler = require("express-async-handler");
+const fs = require('fs');
+const path = require('path');
+const staticFolder = '../frontend/public/uploads';
 
 const uploadFile = (req, res) => {
     try{
@@ -12,5 +15,26 @@ const uploadFile = (req, res) => {
         res.status(500).send('An error occurred');
     }
 };
+const deleteFile = (req,res) => {
+    const fileNameToDelete = req.body.fileName;
+    const filePathToDelete = path.join(staticFolder, fileNameToDelete);
 
-module.exports = {uploadFile};
+    // Check if the file exists before attempting to delete it
+    fs.access(filePathToDelete, fs.constants.F_OK, (err) => {
+        if (err) {
+        res.status(404).send('File not found');
+        return;
+        }
+
+        // File exists, proceed with deletion
+        fs.unlink(filePathToDelete, (err) => {
+        if (err) {
+            res.status(500).send('Error deleting the file');
+            return;
+        }
+        res.send('File deleted successfully');
+        });
+    });
+}
+
+module.exports = {uploadFile,deleteFile};

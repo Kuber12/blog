@@ -30,8 +30,8 @@ const loginUser = asyncHandler(async (req,res) =>{
 })
 
 const registerUser = asyncHandler(async (req,res) =>{
-    const {username, name, password} = req.body;
-    if(!username || !name || !password){
+    const {username, name, password, email} = req.body;
+    if(!username || !name || !password || !email){
         return res.status(400).send({ message:"Please fill all fields!" });
     }else{
         const userExist = await User.findOne({ username: username })
@@ -41,14 +41,15 @@ const registerUser = asyncHandler(async (req,res) =>{
         const newUser = await User.create({
             username : username ,
             name : name ,
+            email : email,
             password : hashedPassword
         })
     }
     res.json({message: "Register Login"});
 })
 
-const currentUser = asyncHandler(async (req,res) =>{
-    res.json(req.user);
-})
+// const currentUser = asyncHandler(async (req,res) =>{
+//     res.json(req.user);
+// })
 
-module.exports = {loginUser, registerUser, currentUser};
+module.exports = {loginUser, registerUser};
