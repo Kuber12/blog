@@ -3,7 +3,6 @@ import "./TopContrii.css";
 import Crown from "../images/crown.png";
 import Stroke from "../images/stroke.png";
 import Doodle from "../images/doodle.png";
-import Start from "../images/start.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import {
@@ -50,7 +49,7 @@ const TopContributor = () => {
           <img src={Stroke} id="strokes" />
         </div>
         <div class="container">
-          <img src={Start} alt="Start Image" id="start" />
+
           <img src={Doodle} alt="Doodle Image" id="doodle" />
           <Link to="/AddBlog">
             <button id="contri_btn">Create Your First Blog</button>
