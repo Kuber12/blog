@@ -8,17 +8,18 @@
   max-width: 100%;
   height: 100vh;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 .slider {
   display: flex;
   max-width: 100%;
   height: 100%;
-  overflow-x: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
   border-radius: 0.5rem;
   z-index: 0;
+  transition: transform 0.5s ease-in-out;
 }
 .slider img {
   flex: 1 0 100%;
@@ -31,7 +32,7 @@
   top:5%;
   position: absolute;
   width: 70%;
-  margin: 80px;
+  margin: 30px;
   left: 50px;
   padding: 10px;
 }
@@ -108,11 +109,11 @@
   transform: scale(1.3);
 }
 
-.chevron-btn.left {
+.chevron-btn.leftx {
   left: 20px;
 }
 
-.chevron-btn.right {
+.chevron-btn.rightx {
   right: 20px;
 }
 @media (max-width: 992px) {

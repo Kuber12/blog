@@ -8,9 +8,9 @@ import NotFoundPage from "./NotFoundPage";
 import Layout from "./Layout";
 import Cards from "./Cards";
 import CardsHome from "./CardsHome";
-import SearchBar from "./SearchBar";
 import CardsDetails from "./CardsDetails";
 import DisplayEditBLog from "./DisplayEditBLog";
+import Login from "./Login";
 
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
@@ -31,6 +31,7 @@ const MyRouter = () => {
           <Route path="/cardsHome" element={<CardsHome />}></Route>
           <Route path="/cardsDetails/:id" element={<CardsDetails />}></Route>
           <Route path="/DisplayEditBLog/" element={<DisplayEditBLog />}></Route>
+          <Route path="/Login" element={<Login />}></Route>
         </Routes>
       </Router>
     </div>

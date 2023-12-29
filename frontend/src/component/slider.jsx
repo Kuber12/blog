@@ -28,7 +28,7 @@ const Slider = () => {
     <>
       <div className="wrapper">
         {Slider === 1 && (
-          <div className="slider">
+          <div className={`slider ${Slider === 1 ? 'active' : ''}`}>
           <img id="slide1" src={Hill} />
           <div className="content" id="content1">
             <h1>
@@ -49,7 +49,7 @@ const Slider = () => {
           </div>
         )}
         {Slider === 2 && (
-          <div className="slider">
+          <div className={`slider ${Slider === 2 ? 'active' : ''}`}>
           <img id="slide2" src={Mountain} />
           <div className="content" id="content2">
             <h1>
@@ -70,7 +70,7 @@ const Slider = () => {
           </div>
         )}
         {Slider === 3 && (
-          <div className="slider">
+          <div className={`slider ${Slider === 3 ? 'active' : ''}`}>
           <img id="slide3" src={Sunset} />
           <div className="content" id="content3">
             <h1>
@@ -90,10 +90,10 @@ const Slider = () => {
           </div>
           </div>
         )}
-        <button className="chevron-btn left" onClick={handlePrevSlide}>
+        <button className="chevron-btn leftx" onClick={handlePrevSlide}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        <button className="chevron-btn right" onClick={handleNextSlide}>
+        <button className="chevron-btn rightx" onClick={handleNextSlide}>
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
