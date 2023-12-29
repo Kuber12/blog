@@ -12,7 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/blog", require("./routes/blogRoutes"));
-app.use("/api/user", require("./routes/userRoutes"));
+app.use("/api/user", require("./routes/userRoutes"),require("./routes/followRoutes"));
+app.use("/api/comment", require("./routes/commentRoutes"));
 app.use("/api/file", require("./routes/fileRoutes"));
 
 
