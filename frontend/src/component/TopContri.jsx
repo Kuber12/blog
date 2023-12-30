@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import {
   faChevronLeft,
   faChevronRight,
+  faArrowRight
 } from "@fortawesome/free-solid-svg-icons";
 
 const TopContributor = () => {
@@ -52,7 +53,7 @@ const TopContributor = () => {
 
           <img src={Doodle} alt="Doodle Image" id="doodle" />
           <Link to="/AddBlog">
-            <button id="contri_btn">Create Your First Blog</button>
+            <button id="contri_btn">Create Your First Blog <FontAwesomeIcon icon={faArrowRight} /></button>
           </Link>
         </div>
       </div>

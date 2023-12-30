@@ -9,7 +9,7 @@
   text-align: center;
   justify-content: center;
   position: relative;
-  top: 5px;
+  top: 15px;
 }
 .Top_Con h1{
   margin-right: 10px;
@@ -68,10 +68,13 @@
   right: 40%;
   position: absolute;
   bottom:10px;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 #contri_btn:hover{
   background-color: white;
+  color:black;
 }
 .startnow p {
   max-width: 500px; 
@@ -105,10 +108,10 @@
     height:8%;
   }
   .startnow h1 {
-    font-size: 2.5em;
+    font-size: 3rem;
   }
   .startnow span {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   .startnow p {
     font-size: 1.2rem;
@@ -117,21 +120,17 @@
     max-width: 30%; 
     height: 200px; 
   }
-   #contri_btn{
-     width:250px;
-     height:60px;
-   }
 }
 @media(max-width:1200px){
-     #contri_btn{
-     width:200px;
-     height:50px;
-   }
+  #doodle{
+    max-width: 40%;
+    height:300px;
+  }
 }
 @media (max-width: 992px) {
   .Top_Con h1{
     margin-right: 10px;
-    font-size: 2rem;
+    font-size: 2.3rem;
   }
   .Top_Con{
     height:6%;
@@ -144,21 +143,23 @@
     height: 40px;
   }
   .startnow h1 {
-    font-size: 2em;
+    font-size: 2.5em;
   }
   .startnow span {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
   #strokes {
-    position: relative;
-    max-width: 30%; 
+    max-width: 35%; 
     height: 150px; 
-    margin:20px;
-    top:0;
   }
   #doodle{
-    width: 30%;
-    height:auto;
+    max-width: 50%;
+    height:250px;
+  }
+  #contri_btn{
+    width:250px;
+    height:60px;
+    font-size: 1.1rem;
   }
 }
 @media (max-width: 760px) {
@@ -171,38 +172,36 @@
   .container{
     width:100%;
     display:block;
+    align-items: center;
   }
   .Top_Con h1{
     margin-right: 10px;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
   .Top_Con img {
     width: 40px;
     height: 30px;
   }
   .startnow p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   .Top_Con{
-    height:4%;
+    height:10%;
   }
   .startnow h1 {
-    font-size: 1.5em;
+    font-size: 1.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 5px;
   }
   .startnow span {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 300;
     color:grey;
   }
   #strokes {
-    position: relative;
     max-width: 50%; 
-    height: 150px; 
-    margin:20px;
-    top:0;
+    height: 150px;
   }
    .MainBox {
     margin: 20px;
@@ -212,15 +211,14 @@
     overflow: hidden; 
   }
   #contri_btn{
-    width:200px;
+    width:300px;
     height:50px;
-    bottom:10px;
+    bottom:-100px;
+    left:10%;
   }
   #doodle{
-    width: 30%;
-    height:auto;
-  }
-  .container{
-    bottom:0;
+    max-width: 30%;
+    height:150px;
+    left:60%;
   }
 }

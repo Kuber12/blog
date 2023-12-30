@@ -2,63 +2,55 @@ import React from "react";
 import facebook from "../Icons/facebook.png";
 import instagram from "../Icons/instagram.png";
 import twitter from "../Icons/twitter.png";
-import contactbook from "../Icons/contact-book.png";
-import contactmail from "../Icons/contact-mail.png";
-import email from "../Icons/email.png";
-import location from "../Icons/location.png";
 import footer_ty from "../images/footer_ty.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAddressBook,
+  faPhone,
+  faEnvelope,
+  faLocationDot,
+
+} from "@fortawesome/free-solid-svg-icons";
 import "./Footer.css";
 const Footer = () => {
-  const borderColor = {
-    border: "3px solid #E6D579",
-    padding: "10px",
-  };
   return (
     <div className="container-footer ">
       {/* contact  */}
-      <div className="contact">
-        <a href="#">
-          <img src={contactbook} alt="Bookmark" style={{ width: "30px" }} />
+      <div className="contact" >
+        <a href="#" >
+         <FontAwesomeIcon icon={faAddressBook} style={{ fontSize: "25px", paddingRight:"5px"}}/> Contact ID here
         </a>
         <a href="#">
-          <img src={contactmail} alt="Phone" style={{ width: "30px" }} />
+         <FontAwesomeIcon icon={faPhone} style={{ fontSize: "25px", paddingRight:"5px" }}/> Phone Number Here
         </a>
         <a href="#">
-          <img src={email} alt="Email" style={{ width: "30px" }} />
+          <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: "25px", paddingRight:"5px" }}/> Email Address Here
         </a>
         <a href="#">
-          <img src={location} alt="Location" style={{ width: "30px" }} />
+          <FontAwesomeIcon icon={faLocationDot} style={{ fontSize: "25px", paddingRight:"5px" }}/> Location Here
         </a>
       </div>
-      {/* thanks  */}
+     
+      
       <div className="thanks">
-        {/* icons */}
-        <div
-          style={{
-            display: "flex",
-            gap: "30px",
-            justifyContent: "center",
-          }}
-        >
-          <a href="#">
-            <img src={instagram} style={{ width: "40px" }} alt="Instagram" />
-          </a>
-          <a href="#">
-            <img src={facebook} style={{ width: "40px" }} alt="Facebook" />
-          </a>
-          <a href="#">
-            <img src={twitter} style={{ width: "40px" }} alt="Twitter" />
-          </a>
+      { }
+      <div className="sm">
+            <ul>
+                  <li><a href="#"><img src={instagram} alt="Instagram" /></a></li>
+                  <li><a href="#"><img src={facebook}  alt="Facebook" /></a></li>
+                  <li><a href="#"><img src={twitter} alt="Twitter" /></a></li>
+            </ul>
         </div>
+        {/* thanks  */}
         <h2 style={{ textAlign: "center" }}>
           <img src={footer_ty} className="thanksIcon" alt="" />
         </h2>
       </div>
       {/* newsletter  */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        <h5 style={borderColor}>Want A NEWSLETTER?</h5>
-        <h5 style={{ ...borderColor, padding: "20px" }}>Drop Your Email</h5>
-        <button>Submit</button>
+      <div className="newsLetter">
+        <h5>WANT A NEWSLETTER?</h5>
+        <input type="text" placeholder="Drop Your Email"/>
+        <button id="footer_submit">Submit</button>
       </div>
     </div>
   );
