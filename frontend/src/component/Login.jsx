@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 import "./Login.css";
+import axios from "axios";
 
 const Login = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-
+  const [data, setData] = useState({
+    username: "",
+    password: "",
+  });
+  const handleLogin = (event) => {
+    event.preventDefault();
+    axios
+      .post("http://localhost:5000/api/user/login", data)
+      .then((res) => {
+        console.log(res.data);
+        const token = res.data;
+        sessionStorage.setItem("authToken", token);
+      })
+      .catch((err) => console.log(err));
+  };
   const handleSlideButtonClick = () => {
     setIsOverlayVisible(!isOverlayVisible);
   };
@@ -21,9 +36,15 @@ const Login = () => {
       ></div>
       <div className="left">
         <h1>Sign In</h1>
-        <form action="" method="post">
+        <form onSubmit={handleLogin} method="post">
           <div className="email">
-            <input type="text" name="email" id="email" placeholder="Email" />
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={(e) => setData({ ...data, username: e.target.value })}
+            />
           </div>
           <div className="password">
             <input
@@ -31,6 +52,7 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="*********"
+              onChange={(e) => setData({ ...data, password: e.target.value })}
             />
           </div>
           <div className="signindiv">

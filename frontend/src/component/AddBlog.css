@@ -88,7 +88,7 @@ input[type="file"] {
   gap: 20px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 475px) {
   .container-head {
     margin-top: 20px;
     padding: 10px;
@@ -117,6 +117,7 @@ input[type="file"] {
     color: white;
     padding: 5px;
     font-size: 16px;
+    width: 100%;
   }
   .custom-file-input {
     background-color: black;
