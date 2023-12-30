@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigation = useNavigate();
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [data, setData] = useState({
     username: "",
@@ -13,12 +15,14 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/user/login", data)
       .then((res) => {
-        console.log(res.data);
-        const token = res.data;
+        console.log(res.data.message);
+        const token = res.data.message;
         sessionStorage.setItem("authToken", token);
+        navigation("/");
       })
       .catch((err) => console.log(err));
   };
+
   const handleSlideButtonClick = () => {
     setIsOverlayVisible(!isOverlayVisible);
   };

@@ -16,49 +16,65 @@ const AddBlog = () => {
     image: "",
     tag: "",
   });
+  const token = sessionStorage.getItem("authToken");
+  // console.log(token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  };
 
   const handleFile = (e) => {
     // console.log(e.target.files);
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    let updatedFilename = "";
-    formData.append("fileInput", file); // assuming values.image is the file
-    // console.log([...formData.entries()]);
+    try {
+      const formData = new FormData();
+      formData.append("fileInput", file);
 
-    axios
-      .post("http://localhost:5000/api/file/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((imgResponse) => {
-        updatedFilename = imgResponse.data.fileName; //url
-        console.log(updatedFilename);
-        console.log("Image Submitted", imgResponse.data.fileName); //url
+      const imgResponse = await axios.post(
+        "http://localhost:5000/api/file/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+        config
+      );
 
-        setValues((values) => ({
+      const updatedFilename = imgResponse.data.fileName;
+      console.log("Image Submitted", updatedFilename);
+
+      setValues((values) => ({
+        ...values,
+        image: updatedFilename,
+      }));
+
+      console.log(values.image);
+
+      const blogResponse = await axios.post(
+        "http://localhost:5000/api/blog",
+
+        {
           ...values,
           image: updatedFilename,
-        }));
+        },
+        config
+      );
 
-        console.log(values.image);
-        return axios.post("http://localhost:5000/api/blog", {
-          ...values,
-          image: updatedFilename,
-        });
-      })
-      .then((response) => {
-        toast.success("Added Blog");
-        console.log("Submitted", response.data);
-        setTimeout(() => {
-          navigation("/");
-        }, 3000);
-      })
-      .catch((error) => {
-        console.error("Error", error);
-      });
+      toast.success("Added Blog");
+      console.log("Submitted", blogResponse.data);
+
+      setTimeout(() => {
+        navigation("/");
+      }, 3000);
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
 
   return (

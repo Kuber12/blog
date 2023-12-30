@@ -11,6 +11,7 @@ import CardsHome from "./CardsHome";
 import CardsDetails from "./CardsDetails";
 import DisplayEditBLog from "./DisplayEditBLog";
 import Login from "./Login";
+import OpenBlog from "./OpenBlog";
 
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
@@ -32,6 +33,7 @@ const MyRouter = () => {
           <Route path="/cardsDetails/:id" element={<CardsDetails />}></Route>
           <Route path="/DisplayEditBLog/" element={<DisplayEditBLog />}></Route>
           <Route path="/Login" element={<Login />}></Route>
+          <Route path="/OpenBlog" element={<OpenBlog />}></Route>
         </Routes>
       </Router>
     </div>

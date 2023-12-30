@@ -15,10 +15,18 @@ const EditBlog = () => {
     image: "",
     tag: "",
   });
+
   const navigation = useNavigate();
   const { id } = useParams();
   const handleFile = (event) => {
     setFile(event.target.files[0]);
+  };
+
+  const token = sessionStorage.getItem("authToken");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
   };
 
   const handleUpdate = (event) => {
@@ -28,17 +36,23 @@ const EditBlog = () => {
     formData.append("fileInput", file);
     axios
       .post(`http://localhost:5000/api/file/upload`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((imgResponse) => {
         updatedFileName = imgResponse.data.fileName;
         console.log("Image Submitted", imgResponse.data.fileName); //url
-        return axios.put(`http://localhost:5000/api/blog/${id}`, {
-          ...values,
-          image: updatedFileName,
-        });
+        return axios.put(
+          `http://localhost:5000/api/blog/${id}`,
+          {
+            ...values,
+            image: updatedFileName,
+          },
+          config
+        );
       })
-
       .then((res) => {
         toast.success("Updated");
         setTimeout(() => {
