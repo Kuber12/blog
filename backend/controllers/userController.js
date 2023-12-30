@@ -22,7 +22,7 @@ const loginUser = asyncHandler(async (req,res) =>{
             {expiresIn: "15m"}
         );
         // sessionStorage.setItem('token', token);
-        return res.status(200).json({message: "Token Generated"});
+        return res.status(200).json({message: accessToken});
         }else{
             return res.status(401).json({message:"Invalid Credentials!"})
         }
