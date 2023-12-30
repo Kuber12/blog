@@ -19,7 +19,7 @@ const loginUser = asyncHandler(async (req,res) =>{
                 }
             }, 
             process.env.ACCESS_TOKEN,
-            {expiresIn: "15m"}
+            {expiresIn: "30d"}
         );
         // sessionStorage.setItem('token', token);
         return res.status(200).json({message: accessToken});
@@ -48,8 +48,8 @@ const registerUser = asyncHandler(async (req,res) =>{
     res.json({message: "Register Login"});
 })
 
-// const currentUser = asyncHandler(async (req,res) =>{
-//     res.json(req.user);
-// })
+const currentUser = asyncHandler(async (req,res) =>{
+    res.json(req.user);
+})
 
-module.exports = {loginUser, registerUser};
+module.exports = {loginUser, registerUser,currentUser};
