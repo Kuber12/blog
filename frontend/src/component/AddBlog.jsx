@@ -1,92 +1,191 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import NewNav from "./NewNav";
+import NewNavi from "./NewwNav";
 import "./AddBlog.css";
-const AddBlog = (props) => {
-  const [titleArea, settitleArea] = useState("Enter The Title");
-  const [textArea, settextArea] = useState("Enter The Description");
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-  const handleTitleArea = (event) => {
-    settitleArea(event.target.value);
+const AddBlog = () => {
+  const navigation = useNavigate();
+  const [file, setFile] = useState(null);
+  const [values, setValues] = useState({
+    headline: "",
+    content: "",
+    image: "",
+    tag: "",
+  });
+  const token = sessionStorage.getItem("authToken");
+  // console.log(token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
   };
 
-  const handleTextArea = (event) => {
-    settextArea(event.target.value);
+  const handleFile = (e) => {
+    // console.log(e.target.files);
+    setFile(e.target.files[0]);
   };
 
-  const handleClearText = () => {
-    settextArea("");
-    settitleArea("");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("fileInput", file);
+
+      const imgResponse = await axios.post(
+        "http://localhost:5000/api/file/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+        config
+      );
+
+      const updatedFilename = imgResponse.data.fileName;
+      console.log("Image Submitted", updatedFilename);
+
+      setValues((values) => ({
+        ...values,
+        image: updatedFilename,
+      }));
+
+      console.log(values.image);
+
+      const blogResponse = await axios.post(
+        "http://localhost:5000/api/blog",
+
+        {
+          ...values,
+          image: updatedFilename,
+        },
+        config
+      );
+
+      toast.success("Added Blog");
+      console.log("Submitted", blogResponse.data);
+
+      setTimeout(() => {
+        navigation("/");
+      }, 3000);
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
+
   return (
     <>
-      <NewNav />
+      <NewNavi />
       <div className="container-head">
         <Helmet>
           <title>Add Page</title>
         </Helmet>
-        <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Add Blog</h1>
-        <div className="addblog-container">
-          <div className="title-input-container">
-            <input
-              type="text"
-              className="title-input"
-              placeholder="Enter Title"
-              value={titleArea}
-              onChange={handleTitleArea}
-            />
-          </div>
-          <div>
-            <div className="form-floating container  ">
-              <textarea
-                value={textArea}
-                onChange={handleTextArea}
-                className="form-control p-5"
-                placeholder="Leave a comment here"
-                id="floatingTextarea"
-                style={{ width: "100%", height: "124px" }}
-                // rows="5"
-              ></textarea>
-              <label
-                htmlFor="floatingTextarea"
-                style={{ paddingLeft: "2.18rem" }}
-              >
-                Comments
-              </label>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <h1
+          style={{
+            textAlign: "center",
+            fontSize: "2rem",
+            fontWeight: "700",
+            marginBottom: "2rem",
+          }}
+        >
+          Add Blog
+        </h1>
+        <form onSubmit={handleSubmit}>
+          <div className="addblog-container">
+            <div className="title-input-container">
+              <input
+                type="text"
+                className="title-input"
+                placeholder="Enter Title"
+                onChange={(e) =>
+                  setValues({ ...values, headline: e.target.value })
+                }
+              />
             </div>
-          </div>
-          {/* buttons */}
-          <div className="buttons-container">
-            {/* top */}
-            <div className="button-top-container">
-              {/* file  input */}
-              <div>
-                <label htmlFor="fileInput" className="custom-file-input">
-                  Choose File
+            <div>
+              <div className="form-floating ">
+                <textarea
+                  // onChange={handleTextArea}
+
+                  className="form-control p-5"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea"
+                  style={{ width: "100%", height: "124px" }}
+                  onChange={(e) =>
+                    setValues({ ...values, content: e.target.value })
+                  }
+                  // rows="5"
+                ></textarea>
+                <label
+                  htmlFor="floatingTextarea"
+                  style={{ paddingLeft: "2.18rem" }}
+                >
+                  Contents
                 </label>
-                <input type="file" id="fileInput" style={{ display: "none" }} />
-              </div>
-              {/* clear  button*/}
-              <div>
-                <button onClick={handleClearText}>Clear</button>
-              </div>
-              {/* select tags */}
-              <div>
-                <select name="" id="">
-                  <option disabled selected value="">
-                    Choose Your Tag
-                  </option>
-                  <option value="">News</option>
-                  <option value="">Entertainment</option>
-                </select>
               </div>
             </div>
-            {/* bottom */}
-            <div style={{ marginTop: "20px", alignSelf: "flex-start" }}>
-              <button type="submit">Post The Blog</button>
+            {/* buttons */}
+            <div className="buttons-container">
+              {/* top */}
+              <div className="button-top-container">
+                {/* file  input */}
+                <div>
+                  <label htmlFor="fileInput" className="custom-file-input">
+                    Choose File
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    onChange={handleFile}
+                    style={{ display: "none" }}
+                  />
+                </div>
+
+                {/* select tags */}
+                <div>
+                  <select
+                    name=""
+                    onChange={(e) => {
+                      // console.log(e.target.value);
+                      setValues({ ...values, tag: e.target.value });
+                    }}
+                    id=""
+                  >
+                    <option disabled selected value="">
+                      Choose Your Tag
+                    </option>
+                    <option value="News">News</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Fun">Fun</option>
+                    <option value="Facts">Facts</option>
+                  </select>
+                </div>
+              </div>
+              {/* bottom */}
+              <div style={{ marginTop: "20px", alignSelf: "flex-start" }}>
+                <button className="postBlog" type="submit">
+                  Post The Blog
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

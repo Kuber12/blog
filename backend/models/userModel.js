@@ -14,10 +14,8 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true,"Please enter your password"],
     },
-    age: {
-        type: Number,
-        min: 0,
-        max: 150,
+    dob: {
+        type: Date,
         required: false
     },
     email: {
@@ -25,14 +23,6 @@ const userSchema = mongoose.Schema({
         required: false,
         unique: [true, "Email already used"]
     },
-    followers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }],
-    following: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }]
 })
 
 module.exports = mongoose.model("User",userSchema);

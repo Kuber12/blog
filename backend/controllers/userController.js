@@ -19,10 +19,10 @@ const loginUser = asyncHandler(async (req,res) =>{
                 }
             }, 
             process.env.ACCESS_TOKEN,
-            {expiresIn: "15m"}
+            {expiresIn: "30d"}
         );
         // sessionStorage.setItem('token', token);
-        return res.status(200).json({message: "Token Generated"});
+        return res.status(200).json({message: accessToken});
         }else{
             return res.status(401).json({message:"Invalid Credentials!"})
         }
@@ -30,8 +30,8 @@ const loginUser = asyncHandler(async (req,res) =>{
 })
 
 const registerUser = asyncHandler(async (req,res) =>{
-    const {username, name, password} = req.body;
-    if(!username || !name || !password){
+    const {username, name, password, email} = req.body;
+    if(!username || !name || !password || !email){
         return res.status(400).send({ message:"Please fill all fields!" });
     }else{
         const userExist = await User.findOne({ username: username })
@@ -41,6 +41,7 @@ const registerUser = asyncHandler(async (req,res) =>{
         const newUser = await User.create({
             username : username ,
             name : name ,
+            email : email,
             password : hashedPassword
         })
     }
@@ -51,4 +52,4 @@ const currentUser = asyncHandler(async (req,res) =>{
     res.json(req.user);
 })
 
-module.exports = {loginUser, registerUser, currentUser};
+module.exports = {loginUser, registerUser,currentUser};

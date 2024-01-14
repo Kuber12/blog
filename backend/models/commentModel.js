@@ -6,22 +6,22 @@ const commentSchema = mongoose.Schema(
             type: String, 
             required: [true,"Please enter a comment"] 
         },
-        user: {
+        userId: {
             type: mongoose.Schema.ObjectId,
             ref: "User"
         },
-        blog: {
+        blogId: {
             type: mongoose.Schema.ObjectId,
             ref: "Blog"
         },
         commentedAt: {
             date: {
-              type: Date,
-              default: Date.now,
+                type: Date,
+                default: Date.now,
             },
             time: {
-              type: String,
-              default: Time.now,
+                type: String,
+                default: new Date().toLocaleTimeString(),
             },
         },
     }

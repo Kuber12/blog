@@ -1,0 +1,154 @@
+.center {
+  width: 80vw;
+  height: 70vh;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border: 2px solid #ffcd29;
+  border-radius: 10px;
+  padding: 5px;
+}
+.left,
+.right {
+  padding: 0px 20px;
+  text-align: center;
+  flex: 2;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-duration: 2s;
+}
+.middle {
+  flex: 1;
+}
+.right {
+  flex: 3;
+}
+.email > input,
+.password > input {
+  font-size: 1rem;
+  padding: 20px;
+  margin: 10px 0px;
+  width: 70%;
+  border: 0px;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #e6e6e6;
+}
+.form-container {
+  width: 90%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 3fr;
+}
+
+label {
+  grid-column: 1;
+  text-align: right;
+}
+
+.reg-form > input {
+  grid-column: 2;
+  width: 100%;
+  padding: 5px;
+  margin: 3px 0px;
+  font-size: 1rem;
+  border: 0px;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #e6e6e6;
+}
+.submit {
+  font-size: 1rem;
+  padding: 8px 16px;
+  margin: 20px 0px;
+  grid-column: 1 / span 2; /* Spanning both columns */
+  justify-self: center; /* Centering horizontally */
+  background-color: #ffcd29;
+  border: solid brown 3px;
+  color: brown;
+  font-weight: 600;
+  border-radius: 20px;
+}
+/* Existing styles */
+/* ... */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  width: 60%;
+  height: 100%;
+  background-color: #ffcd29;
+  z-index: 1000;
+  transition: width 3s ease;
+  transition: left 2s ease;
+}
+
+.overlay.slide-left {
+  width: 50%;
+  left: 0;
+}
+
+@media screen and (max-width: 3200px) {
+  .center {
+    width: 90vw;
+    height: 90vh;
+  }
+  .signindiv {
+    padding: 2px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  .center {
+    width: 60vw;
+    height: 80vh;
+  }
+  .overlay {
+    display: none;
+  }
+  .left,
+  .right {
+    padding: 10px;
+  }
+  .right,
+  .middle {
+    display: none;
+  }
+  .email > input,
+  .password > input {
+    padding: 10px 20px;
+  }
+  .overlay.slide-left ~ .right {
+    display: block;
+  }
+  .overlay.slide-left ~ .left {
+    display: none;
+  }
+}
+@media screen and (max-width: 420px) {
+  .center {
+    width: 90vw;
+    height: 90vh;
+  }
+  .signindiv {
+    padding: 2px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  input {
+    width: 100%;
+    text-align: center;
+    height: 8vh;
+    border-radius: 25px;
+  }
+}
