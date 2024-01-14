@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken");
 const validateToken = asyncHandler(async (req, res, next) => {
   let token;
   let authHeader = req.headers.authorization || req.headers.Authorization;
+  if(authHeader == null){
+    return res.status(200).send({msg: "Not Logged in"})
+  }
   if (authHeader || authHeader.startsWith("Bearer")) {
     token = authHeader.split(" ")[1];
     jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
