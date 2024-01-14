@@ -12,30 +12,36 @@ import CardsDetails from "./CardsDetails";
 import DisplayEditBLog from "./DisplayEditBLog";
 import Login from "./Login";
 import OpenBlog from "./OpenBlog";
+import GlobalContentProvider from "./GlobalContent";
 
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
 
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" index element={<Home />}></Route>
-            <Route path="User" element={<User />}></Route>
-          </Route>
-          <Route path="AddBlog" element={<AddBlog />}></Route>
-          <Route path="EditBlog/:id" element={<EditBlog />}></Route>
-          <Route path="/*" element={<NotFoundPage />}></Route>
-          <Route path="/cards" element={<Cards />}></Route>
-          {/* <Route path="/SearchBar" element={<SearchBar />}></Route> */}
-          <Route path="/cardsHome" element={<CardsHome />}></Route>
-          <Route path="/cardsDetails/:id" element={<CardsDetails />}></Route>
-          <Route path="/DisplayEditBLog/" element={<DisplayEditBLog />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
-          <Route path="/OpenBlog" element={<OpenBlog />}></Route>
-        </Routes>
-      </Router>
+      <GlobalContentProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" index element={<Home />}></Route>
+              <Route path="User" element={<User />}></Route>
+            </Route>
+            <Route path="AddBlog" element={<AddBlog />}></Route>
+            <Route path="EditBlog/:id" element={<EditBlog />}></Route>
+            <Route path="/*" element={<NotFoundPage />}></Route>
+            <Route path="/cards" element={<Cards />}></Route>
+            {/* <Route path="/SearchBar" element={<SearchBar />}></Route> */}
+            <Route path="/cardsHome" element={<CardsHome />}></Route>
+            <Route path="/cardsDetails/:id" element={<CardsDetails />}></Route>
+            <Route
+              path="/DisplayEditBLog/"
+              element={<DisplayEditBLog />}
+            ></Route>
+            <Route path="/Login" element={<Login />}></Route>
+            <Route path="/OpenBlog" element={<OpenBlog />}></Route>
+          </Routes>
+        </Router>
+      </GlobalContentProvider>
     </div>
   );
 };

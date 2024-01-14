@@ -12,6 +12,7 @@
 .contact {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 20px;
 }
 .thanks {
@@ -113,6 +114,9 @@
   font-weight: 600;
 }
 @media screen and (max-width: 425px) {
+  .contact a {
+    font-size: 16px;
+  }
   .container-footer {
     background-color: white;
     color: black;
@@ -134,10 +138,54 @@
     gap: 20px;
   }
   .thanksIcon {
-    width: 130px;
+    width: 250px;
   }
   .newsLetter {
     width: 50%;
+    /* background-color: red; */
+  }
+  .newsLetter h5 {
+    margin: 10px;
+    height: 70px;
+  }
+  #footer_submit {
+    margin-bottom: 20px;
+  }
+
+  .sm ul li:not(:first-child) a img {
+    width: 40px;
+    position: relative;
+    left: 5px;
+    top: 5px;
+    transition: 0.6s;
+  }
+  .sm ul li:is(:first-child) a img {
+    width: 35px;
+    position: relative;
+    left: 5px;
+    top: 5px;
+    transition: 0.6s;
+  }
+
+  .sm ul li:is(:first-child) a {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: 0.6s;
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.5);
+    padding: 2px;
+  }
+
+  .sm ul li:not(:first-child) a {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: 0.6s;
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.5);
   }
 }
 @media screen and (max-width: 1200px) {
