@@ -20,7 +20,7 @@ const Cards = () => {
     axios
       .get("http://localhost:5000/api/blog", { timeout: 5000 }) // 5000 milliseconds (adjust as needed)
       .then((res) => {
-        console.log(res.data.message);
+        // console.log(res.data.message);
         setData(res.data.message);
         setLoading(false);
       })

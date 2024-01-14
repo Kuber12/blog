@@ -11,7 +11,6 @@ const Home = () => {
     <div>
       <Helmet>
         <title>Home Page </title>
-        <div>{data.username}</div>
       </Helmet>
       <Slider />
       <BestBlog />
