@@ -10,6 +10,13 @@ const Login = () => {
     username: "",
     password: "",
   });
+  const [registrationData, setRegistrationData] = useState({
+    username: "",
+    name: "",
+    password: "",
+    dob: "",
+    email: "",
+  });
   const handleLogin = (event) => {
     event.preventDefault();
     axios
@@ -19,6 +26,15 @@ const Login = () => {
         const token = res.data.message;
         sessionStorage.setItem("authToken", token);
         navigation("/");
+      })
+      .catch((err) => console.log(err));
+  };
+  const handleRegistration = (event) => {
+    event.preventDefault();
+    axios
+      .post("http://localhost:5000/api/user/register", registrationData)
+      .then((res) => {
+        console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   };
@@ -46,7 +62,7 @@ const Login = () => {
               type="text"
               name="email"
               id="email"
-              placeholder="Email"
+              placeholder="Username"
               onChange={(e) => setData({ ...data, username: e.target.value })}
             />
           </div>
@@ -76,22 +92,51 @@ const Login = () => {
       <div className="middle"></div>
       <div className="right">
         <h1>Register Now</h1>
-        <form className="reg-form form-container">
+        <form onSubmit={handleRegistration} className="reg-form form-container">
           <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={registrationData.username}
+            onChange={(e) => setRegistrationData({ ...registrationData, username: e.target.value })}
+          />
 
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={registrationData.name}
+            onChange={(e) => setRegistrationData({ ...registrationData, name: e.target.value })}
+          />
 
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={registrationData.password}
+            onChange={(e) => setRegistrationData({ ...registrationData, password: e.target.value })}
+          />
 
           <label htmlFor="dob">Date of Birth:</label>
-          <input type="date" id="dob" name="dob" />
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            value={registrationData.dob}
+            onChange={(e) => setRegistrationData({ ...registrationData, dob: e.target.value })}
+          />
 
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" />
-
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={registrationData.email}
+            onChange={(e) => setRegistrationData({ ...registrationData, email: e.target.value })}
+          />
           <button className="submit" type="submit">
             SIGN UP
           </button>
