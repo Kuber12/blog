@@ -31,10 +31,10 @@ const NewNavi = () => {
             <FontAwesomeIcon icon={faUser} />
           </Link>
           <div className="currentUserDetail">
-            <div id="userImage" className="userDetailConatainer">
-              <img src="" alt="dp" />
-              <h3>John Doe</h3>
-              <h2>View Profile</h2>
+            <div className="userDetailConatainer">
+              <img id="user-dp" src="https://i.pinimg.com/1200x/64/81/22/6481225432795d8cdf48f0f85800cf66.jpg" alt="dp" />
+              <h2>John Doe</h2>
+              <h3>View Profile</h3>
             </div>
           </div>
         </li>
