@@ -9,11 +9,13 @@ const {
   deleteBlog,
   editBlog,
   likeBlog,
-  countBlogLikes
+  countBlogLikes,
+  getBlogsByUsername
 } = require("../controllers/blogController");
 const validateToken = require("../middleware/validateTokenHandler");
 
 router.route("/").get(getBlogs)
+router.route("/:username/user").get(getBlogsByUsername);
 router.route("/:id").get(getBlog)
 router.use(validateToken);
 router.route("/").post(createBlog);
