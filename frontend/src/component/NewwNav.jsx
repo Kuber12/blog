@@ -26,10 +26,17 @@ const NewNavi = () => {
         <li>
           <Link to="/DisplayEditBLog">Edit</Link>
         </li>
-        <li>
+        <li id="userImage">
           <Link to="/User">
             <FontAwesomeIcon icon={faUser} />
           </Link>
+          <div className="currentUserDetail">
+            <div id="userImage" className="userDetailConatainer">
+              <img src="" alt="dp" />
+              <h3>John Doe</h3>
+              <h2>View Profile</h2>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
