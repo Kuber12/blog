@@ -13,6 +13,7 @@ import DisplayEditBLog from "./DisplayEditBLog";
 import Login from "./Login";
 import OpenBlog from "./OpenBlog";
 import GlobalContentProvider from "./GlobalContent";
+import NewCard from "./NewCard";
 
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
@@ -39,7 +40,9 @@ const MyRouter = () => {
             ></Route>
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/OpenBlog" element={<OpenBlog />}></Route>
+            <Route path="/NewCard" element={<NewCard />}></Route>
           </Routes>
+          
         </Router>
       </GlobalContentProvider>
     </div>
