@@ -1,6 +1,7 @@
 import React from "react";
-import Cards from "./Cards";
+// import Cards from "./Cards";
 import SearchBar from "./SearchBar";
+import NewCard from "./NewCard";
 
 const CardsHome = () => {
   return (
@@ -15,7 +16,8 @@ const CardsHome = () => {
         }}
       >
         <SearchBar />
-        <Cards />
+        {/* <Cards /> */}
+        <NewCard />
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 #card-container {
-  width: 400px;
+  width: 300px;
   height: auto;
-  background-color: #ffffff;
+  background-color: #e0e0e0;
   border-radius: 15px;
   margin-top: 10px;
 }
@@ -16,9 +16,11 @@
   border-radius: 10px;
 }
 #heading {
-  padding: 10px;
+  /* padding: 10px; */
+  padding-top: 10px;
+  padding-left: 10px;
   margin: 5px 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   word-spacing: 5px;
 }
@@ -33,14 +35,14 @@
   margin: 10px 0;
 }
 #tags div h5 {
-  font-size: 18px;
+  font-size: 16px;
   /* padding-left: 15px; */
-  word-spacing: 10px;
+  /* word-spacing: 5px; */
   margin: 10px 0;
 }
 #tags div h6 {
-  font-size: 14px;
-  padding-left: 15px;
+  font-size: 12px;
+  padding-left: 20px;
   margin: 10px 0;
   color: #4b5563;
 }
@@ -57,10 +59,17 @@
   width: 200px;
   right: 0;
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   gap: 20px;
   background-color: #f3f4f6;
-  padding: 5px 3px;
-  border-radius: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
   margin: 10px 10px;
   height: 40px;
+}
+#buttons .link-to {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
