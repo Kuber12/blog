@@ -24,7 +24,8 @@ const createBlog = asyncHandler(async (req, res) => {
       headline,
       content,
       tag,
-      image
+      image,
+      views: 0
     });
 
     res.status(201).json(blog);
@@ -38,6 +39,16 @@ const createBlog = asyncHandler(async (req, res) => {
 const getBlog = asyncHandler(async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Increment the view count
+    blog.views += 1;
+
+    // Save the updated blog
+    await blog.save();
+
     res.status(200).json({ message: blog });
   } catch (error) {
     res.status(400).json({ message: error });

@@ -29,6 +29,10 @@ const blogSchema = mongoose.Schema({
     type: String,
     required: false,
   },
+  views:{
+    type: Number,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model("Blog", blogSchema);
