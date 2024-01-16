@@ -22,7 +22,7 @@ const DisplayEditBLog = () => {
       .catch((err) => console.log(err));
   }, [data]);
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, image) => {
     const confirm = window.confirm("Do you want to delete?");
     if (confirm) {
       axios
@@ -32,6 +32,15 @@ const DisplayEditBLog = () => {
           // window.location.reload();
         })
         .catch((err) => console.log(err));
+
+      axios
+        .delete(`http://localhost:5000/api/file/${image}/delete`)
+        .then((res) => {
+          console.log("Image deleted");
+        })
+        .catch((ex) => {
+          console.log("errror" + ex);
+        });
     }
   };
 
@@ -84,7 +93,7 @@ const DisplayEditBLog = () => {
                         Edit
                       </Link>
                       <button
-                        onClick={(e) => handleDelete(d._id)}
+                        onClick={(e) => handleDelete(d._id, d.image)}
                         className="btn btn-sm btn-danger"
                       >
                         Delete

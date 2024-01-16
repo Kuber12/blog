@@ -58,7 +58,6 @@ const AddBlog = () => {
 
       const blogResponse = await axios.post(
         "http://localhost:5000/api/blog",
-
         {
           ...values,
           image: updatedFilename,
