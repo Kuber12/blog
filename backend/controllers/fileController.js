@@ -16,7 +16,7 @@ const uploadFile = (req, res) => {
     }
 };
 const deleteFile = (req,res) => {
-    const fileNameToDelete = req.body.fileName;
+    const fileNameToDelete = req.params.fileName;
     const filePathToDelete = path.join(staticFolder, fileNameToDelete);
 
     // Check if the file exists before attempting to delete it

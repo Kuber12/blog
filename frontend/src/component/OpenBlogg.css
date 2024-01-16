@@ -34,6 +34,9 @@
     display: flex;
     gap: 10px;
 }
+.blog-action-icons > svg:hover{
+    transform: scale(1.1);
+}
 .comment-box{
     display: flex;
     flex-direction: column;
@@ -103,7 +106,7 @@
 .blog-user-follow{
     background-color: blueviolet;
     text-align: center;
-    padding: 20px 10px;
+    padding: 10px 20px;
     border-radius: 20px;
 }
 .blog-follow-flex{
@@ -130,4 +133,13 @@
     background-color: #BDE3FF;
     height: 200px;
     width: 100%;
+}
+@media screen and (max-width: 600px) {
+    .blog{
+        
+        flex-direction: column;
+    }
+    .blog-user{
+        margin-top: 20px;
+    }
 }

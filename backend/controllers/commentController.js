@@ -2,11 +2,18 @@ const asyncHandler = require("express-async-handler");
 const Comment = require("../models/commentModel");
 const mongoose = require('mongoose');
 
+const getComment = asyncHandler(async (req,res) =>{
+  const c = await Comment.find();
+  res.status(200).json({
+    message: c
+  })
+})
+
 const userComment = asyncHandler(async ( req, res) => {
   try {
     const userId = new mongoose.Types.ObjectId(req.params.userid);
     const blogId = new mongoose.Types.ObjectId(req.params.id);
-    const text = "asdfasdf";
+    const {text} = req.body;
     
     if(!userId || !blogId || !text){
       return res.status(400).json({ message: "Please insert all params" });
@@ -27,4 +34,4 @@ const userComment = asyncHandler(async ( req, res) => {
   }
 })
 
-module.exports = {userComment};
+module.exports = {userComment, getComment};

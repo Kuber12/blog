@@ -4,7 +4,7 @@ const storage = multer.diskStorage({
         cb(null, '../frontend/public/uploads'); // Destination folder where the file will be stored
     },
     filename: function (req, file, cb) {
-        const newFileName = Date.now() + '-' + file.originalname;
+        const newFileName = Date.now();
         req.generatedFileName = newFileName;
         cb(null, newFileName);
     }
