@@ -90,16 +90,16 @@ const NewCard = () => {
               <div id="buttons-container">
                 <div></div>
                 <div id="buttons">
-                  <Link className="link-to" to={`../cardsDetails/${items._id}`}>
+                  <Link className="link-to" to={`../OpenBlog/${items._id}`}>
                     <FaEye />
                     1.5k
                   </Link>
 
-                  <Link className="link-to" to={`../cardsDetails/${items._id}`}>
+                  <Link className="link-to" to={`../OpenBlog/${items._id}`}>
                     <FaRegCommentAlt />
                     25
                   </Link>
-                  <Link className="link-to" to={`../cardsDetails/${items._id}`}>
+                  <Link className="link-to" to={`../OpenBlog/${items._id}`}>
                     <FaRegCommentAlt />
                     <FcLike />7
                   </Link>

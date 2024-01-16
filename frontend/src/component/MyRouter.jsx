@@ -39,10 +39,9 @@ const MyRouter = () => {
               element={<DisplayEditBLog />}
             ></Route>
             <Route path="/Login" element={<Login />}></Route>
-            <Route path="/OpenBlog" element={<OpenBlog />}></Route>
+            <Route path="/OpenBlog/:id" element={<OpenBlog />}></Route>
             <Route path="/NewCard" element={<NewCard />}></Route>
           </Routes>
-          
         </Router>
       </GlobalContentProvider>
     </div>
