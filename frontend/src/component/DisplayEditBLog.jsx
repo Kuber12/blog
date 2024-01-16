@@ -72,7 +72,7 @@ const DisplayEditBLog = () => {
                     </td>
                     <td style={{ display: "flex", flexWrap: "wrap" }}>
                       <Link
-                        to={`/cardsDetails/${d._id}`}
+                        to={`/OpenBlog/${d._id}`}
                         className="btn btn-sm btn-info me-2"
                       >
                         Read

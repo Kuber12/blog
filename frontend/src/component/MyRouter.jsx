@@ -14,7 +14,6 @@ import Login from "./Login";
 import OpenBlog from "./OpenBlog";
 import GlobalContentProvider from "./GlobalContent";
 import NewCard from "./NewCard";
-
 const MyRouter = () => {
   const [isFooterVisible, setisFooterVisible] = useState(true);
 
