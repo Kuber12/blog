@@ -11,9 +11,8 @@ const getComments = asyncHandler(async (req,res) =>{
 
 const userComment = asyncHandler(async ( req, res) => {
   try {
-    const userName = "username";
     const blogId = new mongoose.Types.ObjectId(req.params.id);
-    const {text} = req.body;
+    const {userName,text} = req.body;
     if(!userName){
       return res.status(400).json({ message: "Please login first" });
     }
