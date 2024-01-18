@@ -33,6 +33,7 @@ const AddBlog = () => {
     event.preventDefault();
     try {
       // Check if a file is selected
+      let tempFilename;
       if (file) {
         const formData = new FormData();
         formData.append("fileInput", file);
@@ -48,23 +49,21 @@ const AddBlog = () => {
           config
         );
   
-        const updatedFilename = imgResponse.data.fileName;
-        console.log("Image Submitted", updatedFilename);
+        tempFilename = imgResponse.data.fileName;
+        console.log("Image Submitted", tempFilename);
   
         setValues((values) => ({
           ...values,
-          image: updatedFilename,
+          image: tempFilename,
         }));
       }
-  
-      console.log(values.image);
   
       const blogResponse = await axios.post(
         "http://localhost:5000/api/blog",
         {
           ...values,
           // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
-          image: file ? values.image : "",
+          image: tempFilename ? tempFilename : "",
         },
         config
       );
