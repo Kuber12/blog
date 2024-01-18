@@ -36,32 +36,54 @@ const OpenBlog = () => {
       <Helmet>{/* <title>{data.headline}</title> */}</Helmet>
       <div className="blog">
         <div className="blog-content">
-          <img
-            className="blog-content-image"
-            src={data.image ? `../../uploads/${data.image}` : Hill}
-            alt="blog image"
-          />
+          {data.image && (
+            <img
+              className="blog-content-image"
+              src={`../../uploads/${data.image}`}
+              alt="blog content"
+            />
+          )}
           <div className="blog-content-text">
             <h1>{data.headline}</h1>
             <p>{data.content}</p>
           </div>
           <div className="blog-action-icons">
-            <FontAwesomeIcon
-              icon={faEye}
-              style={{ fontSize: "25px", paddingRight: "5px" }}
-            />
-            <FontAwesomeIcon
-              icon={faHeart}
-              style={{ fontSize: "25px", paddingRight: "5px" }}
-            />
-            <FontAwesomeIcon
-              icon={faComment}
-              style={{ fontSize: "25px", paddingRight: "5px" }}
-            />
-            <FontAwesomeIcon
-              icon={faEllipsis}
-              style={{ fontSize: "25px", paddingRight: "5px" }}
-            />
+            <div className="blog-action-tooltip">
+              <div className="blog-tooltip-div">
+                <FontAwesomeIcon
+                  icon={faEye}
+                  style={{ fontSize: "25px", paddingRight: "5px" }}
+                />
+                <span>{data.views}</span>
+              </div>
+            </div>
+            <div className="blog-action-tooltip">
+              <div className="blog-tooltip-div">
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  style={{ fontSize: "25px", paddingRight: "5px" }}
+                />
+                <span>456</span>
+              </div>
+            </div>
+            <div className="blog-action-tooltip">
+              <div className="blog-tooltip-div">
+                <FontAwesomeIcon
+                  icon={faComment}
+                  style={{ fontSize: "25px", paddingRight: "5px" }}
+                />
+                <span>456</span>
+              </div>
+            </div>
+            <div className="blog-action-tooltip">
+              <div className="blog-tooltip-div">
+                <FontAwesomeIcon
+                  icon={faEllipsis}
+                  style={{ fontSize: "25px", paddingRight: "5px" }}
+                />
+                <span>456</span>
+              </div>
+            </div>
           </div>
           <div className="comment-box">
             <div className="comment">
@@ -108,12 +130,12 @@ const OpenBlog = () => {
               By tags
               <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
               <div className="blog-tags-list">
-                {/* <div className="tags">Humor</div>
+                <div className="tags">Humor</div>
                 <div className="tags">Recipe</div>
                 <div className="tags">Dark</div>
                 <div className="tags">Dark</div>
                 <div className="tags">Dark</div>
-                <div className="tags">Dark</div> */}
+                <div className="tags">Dark</div>
                 <div className="tags">{data.tag}</div>
               </div>
             </div>

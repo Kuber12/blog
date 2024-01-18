@@ -32,27 +32,30 @@ const AddBlog = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("fileInput", file);
+      // Check if a file is selected
+      if (file) {
+        const formData = new FormData();
+        formData.append("fileInput", file);
 
-      const imgResponse = await axios.post(
-        "http://localhost:5000/api/file/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
+        const imgResponse = await axios.post(
+          "http://localhost:5000/api/file/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           },
-        },
-        config
-      );
+          config
+        );
 
-      const updatedFilename = imgResponse.data.fileName;
-      console.log("Image Submitted", updatedFilename);
+        const updatedFilename = imgResponse.data.fileName;
+        console.log("Image Submitted", updatedFilename);
 
-      setValues((values) => ({
-        ...values,
-        image: updatedFilename,
-      }));
+        setValues((values) => ({
+          ...values,
+          image: updatedFilename,
+        }));
+      }
 
       console.log(values.image);
 
@@ -60,7 +63,8 @@ const AddBlog = () => {
         "http://localhost:5000/api/blog",
         {
           ...values,
-          image: updatedFilename,
+          // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+          image: file ? values.image : "",
         },
         config
       );

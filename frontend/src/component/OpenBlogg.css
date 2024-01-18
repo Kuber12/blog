@@ -34,7 +34,7 @@
     display: flex;
     gap: 10px;
 }
-.blog-action-icons > svg:hover{
+.blog-tooltip-div > svg:hover{
     transform: scale(1.1);
 }
 .comment-box{
@@ -133,6 +133,18 @@
     background-color: #BDE3FF;
     height: 200px;
     width: 100%;
+}
+.blog-tooltip-div:hover > span{
+    display: block;
+}
+.blog-tooltip-div > span{
+    display: none;
+    position: absolute;
+    background-color: #e5e5e5;
+    border-radius: 100%;
+    padding: 3px 6px;
+    z-index: 1;
+    transform: translate(-4px,-60px);
 }
 @media screen and (max-width: 600px) {
     .blog{
