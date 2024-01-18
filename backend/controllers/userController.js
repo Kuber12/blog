@@ -49,7 +49,12 @@ const registerUser = asyncHandler(async (req,res) =>{
 })
 
 const currentUser = asyncHandler(async (req,res) =>{
-    res.json(req.user);
+    try{
+        res.json(req.user);
+    }catch (error) {
+        res.status(400).json({ message: "User not logged in" });
+    }
+
 })
 
 module.exports = {loginUser, registerUser,currentUser};

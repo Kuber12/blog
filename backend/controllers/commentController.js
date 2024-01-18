@@ -2,24 +2,26 @@ const asyncHandler = require("express-async-handler");
 const Comment = require("../models/commentModel");
 const mongoose = require('mongoose');
 
-const getComment = asyncHandler(async (req,res) =>{
-  const c = await Comment.find();
+const getComments = asyncHandler(async (req,res) =>{
+  const comments = await Comment.find({blogId: req.params.id});
   res.status(200).json({
-    message: c
+    message: comments
   })
 })
 
 const userComment = asyncHandler(async ( req, res) => {
   try {
-    const userId = new mongoose.Types.ObjectId(req.params.userid);
+    const userName = "username";
     const blogId = new mongoose.Types.ObjectId(req.params.id);
     const {text} = req.body;
-    
-    if(!userId || !blogId || !text){
+    if(!userName){
+      return res.status(400).json({ message: "Please login first" });
+    }
+    if(!userName || !blogId || !text){
       return res.status(400).json({ message: "Please insert all params" });
     }else{
       const comment = await Comment.create({
-        userId, blogId ,text
+        userName, blogId ,text
       });
       res.status(200).json(
         {
@@ -34,4 +36,4 @@ const userComment = asyncHandler(async ( req, res) => {
   }
 })
 
-module.exports = {userComment, getComment};
+module.exports = {userComment, getComments};

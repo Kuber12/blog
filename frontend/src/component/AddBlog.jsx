@@ -32,43 +32,46 @@ const AddBlog = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("fileInput", file);
-
-      const imgResponse = await axios.post(
-        "http://localhost:5000/api/file/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
+      // Check if a file is selected
+      if (file) {
+        const formData = new FormData();
+        formData.append("fileInput", file);
+  
+        const imgResponse = await axios.post(
+          "http://localhost:5000/api/file/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           },
-        },
-        config
-      );
-
-      const updatedFilename = imgResponse.data.fileName;
-      console.log("Image Submitted", updatedFilename);
-
-      setValues((values) => ({
-        ...values,
-        image: updatedFilename,
-      }));
-
-      console.log(values.image);
-
-      const blogResponse = await axios.post(
-        "http://localhost:5000/api/blog",
-
-        {
+          config
+        );
+  
+        const updatedFilename = imgResponse.data.fileName;
+        console.log("Image Submitted", updatedFilename);
+  
+        setValues((values) => ({
           ...values,
           image: updatedFilename,
+        }));
+      }
+  
+      console.log(values.image);
+  
+      const blogResponse = await axios.post(
+        "http://localhost:5000/api/blog",
+        {
+          ...values,
+          // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+          image: file ? values.image : "",
         },
         config
       );
-
+  
       toast.success("Added Blog");
       console.log("Submitted", blogResponse.data);
-
+  
       setTimeout(() => {
         navigation("/");
       }, 3000);
