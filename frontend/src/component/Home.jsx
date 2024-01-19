@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Slider from "./slider";
 import { Helmet } from "react-helmet";
 import CardsHome from "./CardsHome";
@@ -7,6 +7,7 @@ import TopContributor from "./TopContri";
 import { GlobalContext } from "./GlobalContent";
 const Home = () => {
   const data = useContext(GlobalContext);
+
   return (
     <div>
       <Helmet>

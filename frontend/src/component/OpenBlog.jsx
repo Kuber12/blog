@@ -22,21 +22,58 @@ import { GlobalContext } from "./GlobalContent";
 const OpenBlog = () => {
   const userdata = useContext(GlobalContext);
   const { id } = useParams();
+  // console.log(id);
+
+  const token = sessionStorage.getItem("authToken");
+  // console.log(token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  };
+
   const [data, setData] = useState({});
   const [viewcomment, setViewComment] = useState([]);
   const [comment, setComment] = useState("");
+  const [countComment, setCountComment] = useState("");
+  const [viewLike, setViewLike] = useState({
+    totalLikes: "",
+  });
+  const handleLike = (event) => {
+    let LikeToSent = {
+      username: userdata.username,
+    };
+    console.log(LikeToSent.userName);
+    // alert("helo");
+    axios
+      .post(`http://localhost:5000/api/blog/${id}/like`, LikeToSent, config)
+      .then((res) => {
+        console.log(res.data.message);
+        let result = "Like inserted successfully";
+        if (result.indexOf(res.data.message) > -1) {
+          toast.success("Liked on Blog");
+        } else {
+          toast.error("Removed on Blog");
+        }
+
+        setTimeout(() => {
+          // window.location.reload();
+        }, 3000);
+      })
+      .catch((ex) => console.log(ex));
+  };
   const handleCommentSubmit = (event) => {
     // event.preventDefault();
-    console.log(comment);
+    // console.log(comment);
     let commentToSent = {
       text: comment,
       userName: userdata.username,
     };
 
     axios
-      .post(`http://localhost:5000/api/comment/${id}`, commentToSent)
+      .post(`http://localhost:5000/api/comment/${id}`, commentToSent, config)
       .then((res) => {
-        console.log("Commented ");
+        // console.log("Commented ");
         toast.success("Commented on Blog");
 
         setTimeout(() => {
@@ -60,13 +97,23 @@ const OpenBlog = () => {
       })
       .catch((ex) => console.log(ex));
   }, []);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/blog/${id}/like`).then((res) => {
+      // setViewLike(res)
+      // console.log(res.data);
+      setViewLike(res.data);
+    });
+  }, []);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/comment/${id}`)
       .then((res) => {
         // setViewComment(res);
-        console.log(res.data.message);
+        // console.log(res.data.message);
         setViewComment(res.data.message);
+        setCountComment(res.data.message.length);
+        // console.log(res.data.message.length);
       })
       .catch((err) => {
         console.log("view error");
@@ -75,6 +122,19 @@ const OpenBlog = () => {
   return (
     <div className="MainP">
       <Helmet>{/* <title>{data.headline}</title> */}</Helmet>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+
       <div className="blog">
         <div className="blog-content">
           {data.image && (
@@ -99,12 +159,12 @@ const OpenBlog = () => {
               </div>
             </div>
             <div className="blog-action-tooltip">
-              <div className="blog-tooltip-div">
+              <div onClick={handleLike} className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faHeart}
                   style={{ fontSize: "25px", paddingRight: "5px" }}
                 />
-                <span>456</span>
+                <span>{viewLike.totalLikes}</span>
               </div>
             </div>
             <div className="blog-action-tooltip">
@@ -113,7 +173,7 @@ const OpenBlog = () => {
                   icon={faComment}
                   style={{ fontSize: "25px", paddingRight: "5px" }}
                 />
-                <span>456</span>
+                <span>{countComment}</span>
               </div>
             </div>
             <div className="blog-action-tooltip">
