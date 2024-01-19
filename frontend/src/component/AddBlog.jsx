@@ -37,7 +37,7 @@ const AddBlog = () => {
       if (file) {
         const formData = new FormData();
         formData.append("fileInput", file);
-  
+
         const imgResponse = await axios.post(
           "http://localhost:5000/api/file/upload",
           formData,
@@ -48,16 +48,16 @@ const AddBlog = () => {
           },
           config
         );
-  
+
         tempFilename = imgResponse.data.fileName;
         console.log("Image Submitted", tempFilename);
-  
+
         setValues((values) => ({
           ...values,
           image: tempFilename,
         }));
       }
-  
+
       const blogResponse = await axios.post(
         "http://localhost:5000/api/blog",
         {
@@ -67,10 +67,10 @@ const AddBlog = () => {
         },
         config
       );
-  
+
       toast.success("Added Blog");
       console.log("Submitted", blogResponse.data);
-  
+
       setTimeout(() => {
         navigation("/");
       }, 3000);

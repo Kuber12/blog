@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./OpenBlogg.css";
 import Hill from "../images/hill.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet";
+import { ToastContainer, toast } from "react-toastify";
 import {
   faThumbsUp,
   faShare,
@@ -17,11 +18,39 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { GlobalContext } from "./GlobalContent";
 const OpenBlog = () => {
+  const userdata = useContext(GlobalContext);
   const { id } = useParams();
   const [data, setData] = useState({});
+  const [viewcomment, setViewComment] = useState([]);
+  const [comment, setComment] = useState("");
+  const handleCommentSubmit = (event) => {
+    // event.preventDefault();
+    console.log(comment);
+    let commentToSent = {
+      text: comment,
+      userName: userdata.username,
+    };
+
+    axios
+      .post(`http://localhost:5000/api/comment/${id}`, commentToSent)
+      .then((res) => {
+        console.log("Commented ");
+        toast.success("Commented on Blog");
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+      .catch((err) => {
+        console.log("Error while Commenting");
+      });
+  };
+
+  //userdata.username
   // console.log(id);
-  console.log(data);
+  // console.log(data);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/blog/${id}`)
@@ -31,6 +60,18 @@ const OpenBlog = () => {
       })
       .catch((ex) => console.log(ex));
   }, []);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/comment/${id}`)
+      .then((res) => {
+        // setViewComment(res);
+        console.log(res.data.message);
+        setViewComment(res.data.message);
+      })
+      .catch((err) => {
+        console.log("view error");
+      });
+  }, [data]);
   return (
     <div className="MainP">
       <Helmet>{/* <title>{data.headline}</title> */}</Helmet>
@@ -48,7 +89,7 @@ const OpenBlog = () => {
             <p>{data.content}</p>
           </div>
           <div className="blog-action-icons">
-            <div className="blog-action-tooltip">  
+            <div className="blog-action-tooltip">
               <div className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faEye}
@@ -57,7 +98,7 @@ const OpenBlog = () => {
                 <span>{data.views}</span>
               </div>
             </div>
-            <div className="blog-action-tooltip">  
+            <div className="blog-action-tooltip">
               <div className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faHeart}
@@ -66,7 +107,7 @@ const OpenBlog = () => {
                 <span>456</span>
               </div>
             </div>
-            <div className="blog-action-tooltip">  
+            <div className="blog-action-tooltip">
               <div className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faComment}
@@ -75,7 +116,7 @@ const OpenBlog = () => {
                 <span>456</span>
               </div>
             </div>
-            <div className="blog-action-tooltip">  
+            <div className="blog-action-tooltip">
               <div className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faEllipsis}
@@ -86,19 +127,21 @@ const OpenBlog = () => {
             </div>
           </div>
           <div className="comment-box">
-            <div className="comment">
-              <div className="comment-user"></div>
-              <p className="comment-text">Comment Here</p>
-              <FontAwesomeIcon icon={faHeart} style={{ fontSize: "25px" }} />
-            </div>
-            <div className="comment">
-              <div className="comment-user"></div>
-              <p className="comment-text">Comment Here</p>
-              <FontAwesomeIcon icon={faHeart} style={{ fontSize: "25px" }} />
-            </div>
+            {viewcomment.map((comment) => (
+              <div className="comment">
+                <div className="comment-user"></div>
+                <p className="comment-text">{comment.text}</p>
+                <FontAwesomeIcon icon={faHeart} style={{ fontSize: "25px" }} />
+              </div>
+            ))}
+
             <div className="comment-write">
-              <input type="text" className="comment-input" />
-              <button className="comment-send">
+              <input
+                type="text"
+                className="comment-input"
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <button className="comment-send" onClick={handleCommentSubmit}>
                 <FontAwesomeIcon
                   icon={faPaperPlane}
                   style={{ fontSize: "25px" }}

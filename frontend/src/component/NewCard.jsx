@@ -73,7 +73,10 @@ const NewCard = () => {
           {data.slice(0, limit).map((items) => (
             <div id="card-container">
               <div id="img-container">
-                <img src={`${imagePath}${items.image}`} alt="" />
+                <img
+                  src={`${imagePath}${items.image}`}
+                  alt={`${items.image}`}
+                />
               </div>
               <div id="heading">
                 <h1>{truncateText(items.headline, 25)}</h1>
