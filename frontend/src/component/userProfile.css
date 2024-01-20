@@ -1,0 +1,104 @@
+:root{
+    --blue:#bde3ff;
+    --yellow:#ffcd29;
+    --dark:#0D6EFD;
+    --white:#FFFFFF;
+}
+*{
+    background-color: var(--blue);
+}
+#mainBody{
+    display: flex;
+    justify-content: space-evenly;
+    top:30px;
+    position: relative;
+}
+.btwnBlc{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Profile{
+    width:200px;
+    height:200px;
+    background-color: rgb(212, 212, 212);
+    top:50px;
+    position: relative;
+}
+
+.follow_me{
+    top:40px;
+    position: relative;
+    padding:30px ;
+}
+.Fbtn{
+    background-color: var(--dark);
+    color:var(--white);
+    border-radius: 20px;
+    font-size: 1.2em;
+    width:200px;
+    height:60px;
+    transition: all 200ms ease;
+   
+}
+
+.Fbtn:hover{
+    font-size: 1.4em;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px #0caed7;
+}
+.aboutMe{
+    background-color: var(--yellow);
+    width:250px;
+    height:450px;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    top:30px;
+}
+#im{
+    padding: 1px;
+    background-color: var(--yellow);
+
+}
+.User_Dtl{
+    height:60px;
+    background-color: var(--white);
+    opacity: 0.5;
+    width:95%;
+    border-radius: 2px;
+}
+.btmBlc{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width:1000px;
+    height:auto;
+    padding: 10px;
+}
+.bio{
+    width:auto;
+    height:250px;
+    background-color: var(--white);
+    opacity: 0.3;
+    position: relative;
+    top:50px;
+}
+
+.myPost{
+     width:auto;
+    height:500px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--white);
+    opacity: 0.3;
+    position: relative;
+    top: 100px;
+}
+
