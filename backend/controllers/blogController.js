@@ -86,21 +86,19 @@ const editBlog = asyncHandler(async (req, res) => {
 
 const likeBlog = asyncHandler(async ( req, res) => {
   try {
-    const userId = new mongoose.Types.ObjectId("657c599cc885d4e6ae139b20");
+    const {username} = req.body;
     const blogId = new mongoose.Types.ObjectId(req.params.id);
     
-    // Check if the combination of userId and blogId already exists
-    const existingLike = await Like.findOne({ userId, blogId });
-    
+    // Check if the combination of username and blogId already exists
+    const existingLike = await Like.findOne({ username, blogId });
     if (existingLike) {
-      await Like.deleteOne({ userId, blogId });
-      res.status(204).json({message : "Like removed successfully"});
+      await Like.deleteOne({ username, blogId });
+      res.status(200).json({message : "Like removed successfully"});
     }else{
-      const newLike = new Like({ userId, blogId });
+      const newLike = new Like({ username, blogId });
       const savedLike = await newLike.save();
       res.status(200).json({message : "Like inserted successfully"});
     }
-
   } catch (error) {
     console.error('Error inserting like:', error);
     res.status(500).json({message : "Error"});
