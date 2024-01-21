@@ -4,19 +4,19 @@ const mongoose = require('mongoose');
 
 const followUser = asyncHandler(async ( req, res) => {
   try {
-    const userId = new mongoose.Types.ObjectId(req.params.userid);
-    const followedUserId = new mongoose.Types.ObjectId(req.params.followedid);
+    const {username} = req.body;
+    const followedUser = req.params.username;
     
-    // Check if the combination of userId and blogId already exists
-    const existingFollow = await Follow.findOne({ userId, followedUserId });
+    // Check if the combination of username and blogId already exists
+    const existingFollow = await Follow.findOne({ username, followedUser });
     
     if (existingFollow) {
-      await Follow.deleteOne({ userId, followedUserId });
-      res.status(204).json({message : "Unfollowed " + followedUserId});
+      await Follow.deleteOne({ username, followedUser });
+      res.status(200).json({message : "Unfollowed " + followedUser});
     }else{
-      const newFollow = new Follow({ userId, followedUserId });
-      const savedLike = await newFollow.save();
-      res.status(200).json({message : userId + " Followed " + followedUserId});
+      const newFollow = new Follow({ username, followedUser });
+      const savedFollow = await newFollow.save();
+      res.status(200).json({message : username + " Followed " + followedUser});
     }
 
   } catch (error) {
@@ -25,4 +25,14 @@ const followUser = asyncHandler(async ( req, res) => {
   }
 })
 
-module.exports = { followUser};
+const countFollowers = asyncHandler(async (req,res) =>{
+  try {
+    const username = req.params.username;
+    const followersCount = await Follow.countDocuments({username});
+    res.status(200).json({totalFollowers: followersCount});
+  } catch (error) {
+    res.status(500).json({error: "Blog not found"})
+  }
+})
+
+module.exports = { followUser, countFollowers};
