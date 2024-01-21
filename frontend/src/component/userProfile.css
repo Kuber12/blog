@@ -4,13 +4,12 @@
     --dark:#0D6EFD;
     --white:#FFFFFF;
 }
-*{
+body{
     background-color: var(--blue);
 }
 #mainBody{
     display: flex;
     justify-content: space-evenly;
-    top:30px;
     position: relative;
 }
 .btwnBlc{
@@ -18,6 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding:15px;
 }
 .Profile{
     width:200px;
@@ -42,7 +42,6 @@
     transition: all 200ms ease;
    
 }
-
 .Fbtn:hover{
     font-size: 1.4em;
     letter-spacing: 1px;
@@ -53,52 +52,201 @@
     width:250px;
     height:450px;
     border-radius: 5px;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     position: relative;
     top:30px;
+    color:black;
 }
 #im{
     padding: 1px;
     background-color: var(--yellow);
-
 }
 .User_Dtl{
     height:60px;
-    background-color: var(--white);
-    opacity: 0.5;
-    width:95%;
+    background-color:rgb(251, 251, 251,.5);
+    width:100%;
     border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.ics{
+    font-size: 1.2em;
+    padding: 1px;
+}
+.udP{
+    font-size: 0.9em;
+    padding: 1px;
 }
 .btmBlc{
     display: flex;
     flex-direction: column;
     position: relative;
     width:1000px;
-    height:auto;
-    padding: 10px;
+    padding: 15px;
 }
 .bio{
     width:auto;
-    height:250px;
-    background-color: var(--white);
-    opacity: 0.3;
+    height:200px;
+    background-color:rgb(251, 251, 251,.5);
     position: relative;
     top:50px;
+    text-align: center;
 }
-
 .myPost{
-     width:auto;
+    width:auto;
     height:500px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: var(--white);
-    opacity: 0.3;
+    background-color:rgb(251, 251, 251,.5);
     position: relative;
     top: 100px;
 }
+#fname{
+    margin-top: 20px;
+    font-size: 2em;
+}
+#uname{
+    font-size: 1.5em;
+}
+#bioo{
+    padding: 15px;
+    font-size: 1em;
+    text-align: justify;
+}
+.Ht{
+    margin-top: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+.Post_Card{
+    width:100%;
+    height: auto;
+    color: beige;
+}
 
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    body {
+      background-color: blue;
+      color: white;
+    }
+    .Profile{
+        width:150px;
+        height:150px;
+    }
+  .Fbtn{
+    width: 150px;
+    height:50px;
+    font-size: 1em;
+  }
+  .Fbtn:hover{
+    font-size: 1.1em;
+  }
+  .aboutMe{
+    width:200px;
+    padding: 5px;
+  }
+  #im{
+    padding: 0;
+  }
+  .User_Dtl{
+   width: 100%;
+    height:50px;
+    flex-direction: column;
+  }
+  #fname{
+    margin-top: 10px;
+    font-size: 1.5em;
+  }
+  #uname{
+    font-size: 1em;
+  }
+  #bioo{
+    padding: 5px;
+    font-size: 1em;
+  }
+}
+
+  /* On screens that are 600px wide or less, the background color is olive */
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    body {
+      background-color: olive;
+      color: white;
+    }
+    .btwnBlc{
+        padding:5px;
+    }
+    .Profile{
+        width:130px;
+        height:130px;
+    }
+  .Fbtn{
+    width: 130px;
+    height:40px;
+    font-size: 0.8em;
+  }
+  .Fbtn:hover{
+    font-size: 0.9em;
+  }
+  .aboutMe{
+    width:180px;
+    padding: 5px;
+  }
+  #im{
+    padding: 0;
+  }
+  .ics,.udP{
+    font-size: 0.8em;
+  }
+  .User_Dtl{
+   width: 100%;
+    height:50px;
+    flex-direction: column;
+  }
+  #fname{
+    margin-top: 5px;
+    font-size: 1.3em;
+  }
+  #uname{
+    font-size: 0.9em;
+  }
+  #bioo{
+    padding: 5px;
+    font-size: 0.8em;
+  }
+  }
+     /* Media Query for Mobile Devices */
+     @media (max-width: 480px) {
+        body {
+            background-color: red;
+        }
+        #mainBody{
+            flex-direction: column;
+        }
+        .btmBlc{
+            width:100%;
+            height: 100vh;
+            
+        }
+        #fname{
+            margin-top: 5px;
+            font-size: 1.3em;
+          }
+          #uname{
+            font-size: 0.9em;
+          }
+          #bioo{
+            padding: 5px;
+            font-size: 0.8em;
+          }
+        .Ht{
+            font-size:1.5em ;
+        }
+    }
+     
+
+     
+ 
+    
