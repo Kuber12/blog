@@ -32,29 +32,43 @@ const OpenBlog = () => {
     },
   };
 
+  const [comment, setComment] = useState("");
   const [data, setData] = useState({});
   const [viewcomment, setViewComment] = useState([]);
-  const [comment, setComment] = useState("");
-  const [countComment, setCountComment] = useState("");
-  const [viewLike, setViewLike] = useState({
-    totalLikes: "",
+  const [countComment, setCountComment] = useState({
+    countComment: 0,
   });
+  const [viewLike, setViewLike] = useState({
+    totalLikes: 0,
+  });
+  // console.log(viewLike.totalLikes);
+  // console.log(comment);
   const handleLike = (event) => {
     let LikeToSent = {
       username: userdata.username,
     };
-    console.log(LikeToSent.userName);
-    // alert("helo");
+    // console.log(LikeToSent.userName);
     axios
       .post(`http://localhost:5000/api/blog/${id}/like`, LikeToSent, config)
       .then((res) => {
-        console.log(res.data.message);
+        // console.log(res.data.message);
         let result = "Like inserted successfully";
-        if (result.indexOf(res.data.message) > -1) {
-          toast.success("Liked on Blog");
-        } else {
-          toast.error("Removed on Blog");
-        }
+
+        setViewLike((prevViewLike) => {
+          if (result.indexOf(res.data.message) > -1) {
+            toast.success("Liked on Blog");
+            return {
+              ...prevViewLike,
+              totalLikes: prevViewLike.totalLikes + 1,
+            };
+          } else {
+            toast.error("Removed on Blog");
+            return {
+              ...prevViewLike,
+              totalLikes: prevViewLike.totalLikes - 1,
+            };
+          }
+        });
 
         setTimeout(() => {
           // window.location.reload();
@@ -62,6 +76,13 @@ const OpenBlog = () => {
       })
       .catch((ex) => console.log(ex));
   };
+  //follow handle
+  const handleFollows = () => {
+    axios.post("http://localhost:5000/api/user/user/follow");
+    alert("loli");
+  };
+
+  //comment submit
   const handleCommentSubmit = (event) => {
     // event.preventDefault();
     // console.log(comment);
@@ -70,24 +91,26 @@ const OpenBlog = () => {
       userName: userdata.username,
     };
 
+    //commenting
     axios
       .post(`http://localhost:5000/api/comment/${id}`, commentToSent, config)
       .then((res) => {
         // console.log("Commented ");
         toast.success("Commented on Blog");
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        setViewComment((prev) => [...prev, commentToSent]);
+        console.log(viewcomment);
+        setCountComment((prev) => ({
+          ...prev,
+          countComment: prev.countComment + 1,
+        }));
       })
       .catch((err) => {
         console.log("Error while Commenting");
       });
   };
-
-  //userdata.username
-  // console.log(id);
-  // console.log(data);
+  useEffect(() => {
+    // console.log(viewcomment);
+  }, [viewcomment]);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/blog/${id}`)
@@ -97,14 +120,15 @@ const OpenBlog = () => {
       })
       .catch((ex) => console.log(ex));
   }, []);
-
   useEffect(() => {
     axios.get(`http://localhost:5000/api/blog/${id}/like`).then((res) => {
-      // setViewLike(res)
-      // console.log(res.data);
-      setViewLike(res.data);
+      setViewLike((prevViewLike) => ({
+        ...prevViewLike,
+        totalLikes: res.data.totalLikes, // Assuming totalLikes is the key in res.data
+      }));
     });
   }, []);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/comment/${id}`)
@@ -112,7 +136,7 @@ const OpenBlog = () => {
         // setViewComment(res);
         // console.log(res.data.message);
         setViewComment(res.data.message);
-        setCountComment(res.data.message.length);
+        setCountComment({ countComment: res.data.message.length });
         // console.log(res.data.message.length);
       })
       .catch((err) => {
@@ -149,7 +173,7 @@ const OpenBlog = () => {
             <p>{data.content}</p>
           </div>
           <div className="blog-action-icons">
-            <div className="blog-action-tooltip">
+            <div key={1} className="blog-action-tooltip">
               <div className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faEye}
@@ -158,7 +182,7 @@ const OpenBlog = () => {
                 <span>{data.views}</span>
               </div>
             </div>
-            <div className="blog-action-tooltip">
+            <div key={2} className="blog-action-tooltip">
               <div onClick={handleLike} className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faHeart}
@@ -167,16 +191,16 @@ const OpenBlog = () => {
                 <span>{viewLike.totalLikes}</span>
               </div>
             </div>
-            <div className="blog-action-tooltip">
+            <div key={3} className="blog-action-tooltip">
               <div className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faComment}
                   style={{ fontSize: "25px", paddingRight: "5px" }}
                 />
-                <span>{countComment}</span>
+                <span>{countComment.countComment}</span>
               </div>
             </div>
-            <div className="blog-action-tooltip">
+            <div key={4} className="blog-action-tooltip">
               <div className="blog-tooltip-div">
                 <FontAwesomeIcon
                   icon={faEllipsis}
@@ -226,7 +250,9 @@ const OpenBlog = () => {
                 THIS IS MY BIO. I am a content creator. Welcome to my Space.
               </div>
               <div className="blog-follow-flex">
-                <button className="blog-user-follow">Follow Me+</button>
+                <button className="blog-user-follow" onClick={handleFollows}>
+                  Follow Me+
+                </button>
               </div>
             </div>
             <div className="blog-tags">
