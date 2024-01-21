@@ -19,6 +19,7 @@ import {
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { GlobalContext } from "./GlobalContent";
+import NewNavi from "./NewwNav";
 const OpenBlog = () => {
   const userdata = useContext(GlobalContext);
   const { id } = useParams();
@@ -103,6 +104,7 @@ const OpenBlog = () => {
           ...prev,
           countComment: prev.countComment + 1,
         }));
+        setComment("");
       })
       .catch((err) => {
         console.log("Error while Commenting");
@@ -144,135 +146,142 @@ const OpenBlog = () => {
       });
   }, [data]);
   return (
-    <div className="MainP">
-      <Helmet>{/* <title>{data.headline}</title> */}</Helmet>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+    <>
+      <NewNavi />
+      <div className="MainP">
+        <Helmet>{/* <title>{data.headline}</title> */}</Helmet>
 
-      <div className="blog">
-        <div className="blog-content">
-          {data.image && (
-            <img
-              className="blog-content-image"
-              src={`../../uploads/${data.image}`}
-              alt="blog content"
-            />
-          )}
-          <div className="blog-content-text">
-            <h1>{data.headline}</h1>
-            <p>{data.content}</p>
-          </div>
-          <div className="blog-action-icons">
-            <div key={1} className="blog-action-tooltip">
-              <div className="blog-tooltip-div">
-                <FontAwesomeIcon
-                  icon={faEye}
-                  style={{ fontSize: "25px", paddingRight: "5px" }}
-                />
-                <span>{data.views}</span>
-              </div>
-            </div>
-            <div key={2} className="blog-action-tooltip">
-              <div onClick={handleLike} className="blog-tooltip-div">
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  style={{ fontSize: "25px", paddingRight: "5px" }}
-                />
-                <span>{viewLike.totalLikes}</span>
-              </div>
-            </div>
-            <div key={3} className="blog-action-tooltip">
-              <div className="blog-tooltip-div">
-                <FontAwesomeIcon
-                  icon={faComment}
-                  style={{ fontSize: "25px", paddingRight: "5px" }}
-                />
-                <span>{countComment.countComment}</span>
-              </div>
-            </div>
-            <div key={4} className="blog-action-tooltip">
-              <div className="blog-tooltip-div">
-                <FontAwesomeIcon
-                  icon={faEllipsis}
-                  style={{ fontSize: "25px", paddingRight: "5px" }}
-                />
-                <span>456</span>
-              </div>
-            </div>
-          </div>
-          <div className="comment-box">
-            {viewcomment.map((comment) => (
-              <div className="comment">
-                <div className="comment-user"></div>
-                <p className="comment-text">{comment.text}</p>
-                <FontAwesomeIcon icon={faHeart} style={{ fontSize: "25px" }} />
-              </div>
-            ))}
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
 
-            <div className="comment-write">
-              <input
-                type="text"
-                className="comment-input"
-                onChange={(e) => setComment(e.target.value)}
+        <div className="blog">
+          <div className="blog-content">
+            {data.image && (
+              <img
+                className="blog-content-image"
+                src={`../../uploads/${data.image}`}
+                alt="blog content"
               />
-              <button className="comment-send" onClick={handleCommentSubmit}>
-                <FontAwesomeIcon
-                  icon={faPaperPlane}
-                  style={{ fontSize: "25px" }}
-                />
-              </button>
+            )}
+            <div className="blog-content-text">
+              <h1>{data.headline}</h1>
+              <p>{data.content}</p>
             </div>
-          </div>
-        </div>
-
-        <div className="blog-sidebar">
-          <div className="blog-user">
-            <div className="blog-user-details">
-              <div className="blog-user-head">
-                <div className="blog-user-pic"></div>
-                <div>
-                  <div>{data.username}</div>
-                  <div>{data.username}</div>
-                  <div>100 Followers</div>
+            <div className="blog-action-icons">
+              <div key={1} className="blog-action-tooltip">
+                <div className="blog-tooltip-div">
+                  <FontAwesomeIcon
+                    icon={faEye}
+                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                  />
+                  <span>{data.views}</span>
                 </div>
               </div>
-              <div className="blog-user-bio">
-                THIS IS MY BIO. I am a content creator. Welcome to my Space.
+              <div key={2} className="blog-action-tooltip">
+                <div onClick={handleLike} className="blog-tooltip-div">
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                  />
+                  <span>{viewLike.totalLikes}</span>
+                </div>
               </div>
-              <div className="blog-follow-flex">
-                <button className="blog-user-follow" onClick={handleFollows}>
-                  Follow Me+
+              <div key={3} className="blog-action-tooltip">
+                <div className="blog-tooltip-div">
+                  <FontAwesomeIcon
+                    icon={faComment}
+                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                  />
+                  <span>{countComment.countComment}</span>
+                </div>
+              </div>
+              <div key={4} className="blog-action-tooltip">
+                <div className="blog-tooltip-div">
+                  <FontAwesomeIcon
+                    icon={faEllipsis}
+                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="comment-box">
+              {viewcomment.map((comment) => (
+                <div className="comment">
+                  <div className="comment-user"></div>
+                  <p className="comment-text">{comment.text}</p>
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    style={{ fontSize: "25px" }}
+                  />
+                </div>
+              ))}
+
+              <div className="comment-write">
+                <input
+                  type="text"
+                  className="comment-input"
+                  onChange={(e) => setComment(e.target.value)}
+                  value={comment}
+                />
+                <button className="comment-send" onClick={handleCommentSubmit}>
+                  <FontAwesomeIcon
+                    icon={faPaperPlane}
+                    style={{ fontSize: "25px" }}
+                  />
                 </button>
               </div>
             </div>
-            <div className="blog-tags">
-              By tags
-              <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
-              <div className="blog-tags-list">
-                <div className="tags">Humor</div>
-                <div className="tags">Recipe</div>
-                <div className="tags">Dark</div>
-                <div className="tags">Dark</div>
-                <div className="tags">Dark</div>
-                <div className="tags">Dark</div>
-                <div className="tags">{data.tag}</div>
+          </div>
+
+          <div className="blog-sidebar">
+            <div className="blog-user">
+              <div className="blog-user-details">
+                <div className="blog-user-head">
+                  <div className="blog-user-pic"></div>
+                  <div>
+                    <div>{data.username}</div>
+                    <div>{data.username}</div>
+                    <div>100 Followers</div>
+                  </div>
+                </div>
+                <div className="blog-user-bio">
+                  THIS IS MY BIO. I am a content creator. Welcome to my Space.
+                </div>
+                <div className="blog-follow-flex">
+                  <button className="blog-user-follow" onClick={handleFollows}>
+                    Follow Me+
+                  </button>
+                </div>
+              </div>
+              <div className="blog-tags">
+                By tags
+                <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
+                <div className="blog-tags-list">
+                  <div className="tags">Humor</div>
+                  <div className="tags">Recipe</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">{data.tag}</div>
+                </div>
               </div>
             </div>
+            <div className="blog-recommendation"></div>
           </div>
-          <div className="blog-recommendation"></div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
