@@ -76,7 +76,7 @@ body{
 }
 .ics{
     font-size: 1.2em;
-    padding: 1px;
+    padding: 5px;
 }
 .udP{
     font-size: 0.9em;
@@ -114,7 +114,7 @@ body{
 #bioo{
     padding: 15px;
     font-size: 1em;
-    text-align: justify;
+    text-align:left;
 }
 .Ht{
     margin-top: 20px;
@@ -166,7 +166,7 @@ body{
 }
 
 
-  @media screen and (min-width: 480px) and (max-width: 767px) {
+  @media screen and (min-width: 480px) and (max-width: 768px) {
     .btwnBlc{
         padding:5px;
     }

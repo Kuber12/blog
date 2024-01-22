@@ -36,12 +36,11 @@ const Slider = () => {
           <div className={`slider ${Slider === 1 ? "active" : ""}`}>
             <img id="slide1" src={Hill} />
             <div className="content" id="content1">
-              <h1>
+              <p className="h">
                 Make Your
-                <br />
-                <span>First Post {data.username ? data.username : ""} </span>
-              </h1>
-              <p>
+              </p>
+              <p className="sp"><span >First Post {data.username ? data.username : ""} </span></p>
+              <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
@@ -58,12 +57,11 @@ const Slider = () => {
           <div className={`slider ${Slider === 2 ? "active" : ""}`}>
             <img id="slide2" src={Mountain} />
             <div className="content" id="content2">
-              <h1>
+            <p className="h">
                 Search
-                <br />
-                <span>Contents</span>
-              </h1>
-              <p>
+              </p>
+              <p className="sp"><span >Contents </span></p>
+              <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
@@ -80,12 +78,11 @@ const Slider = () => {
           <div className={`slider ${Slider === 3 ? "active" : ""}`}>
             <img id="slide3" src={Sunset} />
             <div className="content" id="content3">
-              <h1>
+            <p className="h">
                 Find New
-                <br />
-                <span>Connections</span>
-              </h1>
-              <p>
+              </p>
+              <p className="sp"><span >Connections </span></p>
+              <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
