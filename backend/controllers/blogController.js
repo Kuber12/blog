@@ -4,8 +4,26 @@ const Like = require("../models/likeModel");
 const mongoose = require('mongoose');
 
 const getBlogs = asyncHandler(async (req, res) => {
-  const blog = await Blog.find();
-  res.status(200).json({ message: blog });
+  const page = parseInt(req.params.page) || 1;
+  const limit = parseInt(req.params.limit) || 10;
+
+  try {
+    const totalBlogs = await Blog.countDocuments();
+    const totalPages = Math.ceil(totalBlogs / limit);
+
+    const blogs = await Blog.find()
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .exec();
+
+      res.json({
+        message: blogs,
+        totalPages,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
 });
 const getBlogsByUsername = asyncHandler(async (req, res) => {
   const username = req.params.username;
