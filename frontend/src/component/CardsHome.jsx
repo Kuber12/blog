@@ -9,13 +9,13 @@ import { noAuto } from "@fortawesome/fontawesome-svg-core";
 const CardsHome = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(9);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/blog/${page}`
+        `http://localhost:5000/api/blog/${page}/${limit}`
       );
       return response.data.message;
     } catch (ex) {
@@ -59,7 +59,14 @@ const CardsHome = () => {
         }}
       >
         <InfiniteScroll
-          style={{ width: "100%", overflow: "hidden" }}
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
           dataLength={data.length}
           next={fetchMoreData}
           hasMore={hasMore}
