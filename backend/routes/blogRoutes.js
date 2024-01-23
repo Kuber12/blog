@@ -14,9 +14,9 @@ const {
 } = require("../controllers/blogController");
 const validateToken = require("../middleware/validateTokenHandler");
 
-router.route("/:page?/:limit?").get(getBlogs)
+router.route("/:page(\\d+)?/:limit(\\d+)?").get(getBlogs);
+router.route("/:id").get(getBlog);
 router.route("/:username/user").get(getBlogsByUsername);
-router.route("/:id").get(getBlog)
 router.route("/:id/like").get(countBlogLikes);
 router.use(validateToken);
 router.route("/").post(createBlog);
