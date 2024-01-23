@@ -17,16 +17,16 @@
 
 .top_ img {
     max-width: 20%;
-    height: auto;
+    height: 120px;
 }
 .top_ h1 {
     flex-grow: 1;
     text-align: center;
-    font-size: 5.3rem;
-    margin-right:10%;
+    font-size: 5rem;
 }
 #frog{
-    width:10%;
+    max-width: 20%;
+    height: 120px;
     position: absolute;
     bottom:15px;
     right:5%;
@@ -38,21 +38,21 @@
     bottom: 0px;
     position: absolute;
 }
+
 .move{
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     font-size: 50px;
     cursor: pointer;
-    background: none;
+background: none;
     border: none;
     color:black;
-    outline: none;
     overflow: hidden;
-    transition: transform 0.3s ease-in-out;
+    transition: all .5s ease;
   }
   .move:hover{
     color:white;
+    font-size: 51px;
   }
   .move.left-btn{
     left: 15px;
@@ -61,19 +61,8 @@
   .move.right-btn {
     right: 15px;
   }
-@media (max-width: 992px) {
-    .top_ img {
-        max-width: 15%;
-        height: 105px;
-    }
-    .top_ h1 {
-        font-size: 4.5rem;
-    }
-    #froggy{
-        width: 8%;
-    }
-}
-@media (max-width: 760px) {
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
     .top_ img {
         max-width: 20%;
         height: 100px;
@@ -81,4 +70,53 @@
     .top_ h1 {
         font-size: 3.5rem;
     }
+    #froggy{
+        width: 10%;
+    }
+    .move{
+        font-size: 40px;
+      }
+      .move:hover{
+        font-size: 41px;
+      }
+}
+
+
+  @media screen and (min-width: 480px) and (max-width: 768px) {
+    .top_ img {
+        max-width: 21%;
+        height: 80px;
+    }
+    .top_ h1 {
+        font-size: 2.4rem;
+    }
+    #frog{
+        max-width: 20%;
+        height: 110px;
+    }
+      .move{
+        font-size: 40px;
+      }
+      .move:hover{
+        font-size: 41px;
+      }
+}
+@media (max-width: 480px) {
+        .top_ img {
+            max-width: 20%;
+            height: 70px;
+        }
+        .top_ h1 {
+            font-size: 2rem;
+        }
+        #frog{
+            max-width: 20%;
+            height: 90px;
+        }
+        .move{
+            font-size: 40px;
+          }
+          .move:hover{
+            font-size: 41px;
+          }
 }

@@ -8,23 +8,23 @@ import {faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-soli
 const BestBlogSlider=()=>{
     return(
         <div className='wrapper'>
-        <div className='top_'>
-        <img src={Bg}/>
-        <h1>Best Blogs Slider</h1>
-        </div>
-        <div className='blogss'>
+          <div className='top_'>
+            <img src={Bg}/>
+            <h1>Best Blogs Slider</h1>
+          </div>
+          <div className='blogss'>
 
-        </div>
-        <div  className='drag'>
-        <button className=" move left-btn">
-          <FontAwesomeIcon icon={faCircleChevronLeft} />
-        </button>
-        <button className="move right-btn" >
-          <FontAwesomeIcon icon={faCircleChevronRight} />
-        </button>
-        </div>  
-        <img src={Froggy} id='frog'/>
-        <div class="horizontal-line"></div>    
+          </div>
+          <div  className='drag'>
+            <button className=" move left-btn">
+              <FontAwesomeIcon icon={faCircleChevronLeft} />
+            </button>
+            <button className="move right-btn" >
+              <FontAwesomeIcon icon={faCircleChevronRight} />
+            </button>
+          </div>  
+          <img src={Froggy} id='frog'/>
+          <div class="horizontal-line"></div>    
         </div>
 
     );
