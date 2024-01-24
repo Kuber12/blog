@@ -1,7 +1,6 @@
 .bodyy {
-  max-width: 100%;
-  min-height: 100vh;
   background-color: #ffcd29;
+  height:100vh;
 }
 .Top_Con {
   display: flex;
@@ -13,237 +12,493 @@
 }
 .Top_Con h1 {
   margin-right: 10px;
-  font-size: 3.5rem;
+  font-size: 3.5em;
+}
+.crw {
+  width: 60px;
+  height: 50px;
+}
+.mainC {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.left_box{
+  position: relative;
+  left:50px;
+  width: 700px;
+}
+.MainBox {
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+  margin: 30px;
+  width:400px;
+height:600px;
+  border: 4px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  align-items:center;
+}
+.uDetail{
+  font-size: 1.2em;
+  text-align: center;
+}
+.Pp{
+  width:300px;
+  height:300px;
+  background-color: rgb(212, 212, 212);
+}
+.Fw{
+  background-color: #0D6EFD;
+    border-radius: 20px;
+    font-size: 1.4em;
+    width:200px;
+    height:60px;
+    color: white;
+    transition: all 200ms ease;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.Fw:hover{
+    font-size: 1.4em;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 16px 0 rgba(54, 50, 50, 0.2), 0 6px 20px 0 rgba(9, 8, 8, 0.19);
+}
+.right_Box{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  right:15px;
+  padding: 20px;
 }
 .startnow {
-  width: 50%;
+  padding:20px;
+  top:20px;
   display: flex;
-  margin-left: 5%;
+  position: relative;
+  right:50px;
 }
-.startnow h1 {
+.H {
   font-size: 4em;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 5px;
 }
-.startnow span {
-  font-size: 3rem;
+.NoN{
+  font-size: 3em;
   font-weight: 600;
   color: grey;
+  text-transform: uppercase;
 }
-.mainC {
-  display: flex;
-  justify-content: space-between;
+.Para {
+  font-size: 1.5em;
+  max-width: 500px;
 }
 #strokes {
   position: relative;
-  max-width: 50%;
-  height: 250px;
-  margin: 20px;
+  max-width: 300px;
+  height: 200px;
+  margin: 10px;
   top: 0;
 }
-.container {
+.btm_box {
   position: relative;
-  width: 50%;
   display: flex;
-}
-#start {
-  width: 20%;
-  position: absolute;
-  right: 10%;
-
-  height: auto;
+  justify-content: space-evenly;
+  top: 30px;
+  padding: 10px;
 }
 #doodle {
-  width: 50%;
+  width: 200px;
   position: relative;
-  left: 45%;
-  top: 70px;
+  margin-left:30px;
+  padding:5px;
 }
 #contri_btn {
   width: 300px;
   height: 60px;
   border-radius: 20px;
   background-color: #bde3ff;
-  right: 40%;
   position: absolute;
-  bottom: 10px;
-  font-size: 1.3rem;
+  bottom: 0;
+  font-size: 1.3em;
   font-weight: 600;
   letter-spacing: 1px;
+  transition: all 200ms ease;
+  margin-right:20px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 #contri_btn:hover {
   background-color: white;
   color: black;
-}
-.startnow p {
-  max-width: 500px;
-}
-.Top_Con img {
-  width: 60px;
-  height: 50px;
-}
-.MainBox {
-  margin: 20px;
-  height: 250px;
-  border: 4px solid white;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.Sub {
-  width: 25%;
-  height: 100%;
-  float: left;
-  box-sizing: border-box;
-}
-.Sub:not(:last-child) {
-  border-right: 3px solid white;
+  box-shadow: 0 0 20px;
+  font-size: 1.5em;
 }
 
-@media (max-width: 1500px) {
+@media screen and (min-width: 1024px) and (max-width: 1290px){
   .Top_Con h1 {
-    margin-right: 10px;
-    font-size: 2.5rem;
+    font-size: 3em;
   }
-  .Top_Con {
-    height: 8%;
+  .left_box{
+    position: relative;
+    left:40px;
+    width: 600px;
+   
   }
-  .startnow h1 {
-    font-size: 3rem;
+  .MainBox {
+    padding: 20px;
+    margin: 10px;
+    width:350px;
+  height:600px;
   }
-  .startnow span {
-    font-size: 2rem;
+  .Pp{
+    width:250px;
+    height:250px;
+    background-color: rgb(212, 212, 212);
   }
-  .startnow p {
-    font-size: 1.2rem;
+
+  .H {
+    font-size: 3.5em;
+    font-weight: 700;
+    letter-spacing: 4px;
+  }
+  .NoN{
+    font-size: 2.7em;
+    font-weight: 600;
+  }
+  .Para {
+    font-size: 1.2em;
+    max-width: 450px;
   }
   #strokes {
-    max-width: 30%;
-    height: 200px;
-  }
-}
-@media (max-width: 1200px) {
-  #doodle {
-    max-width: 40%;
-    height: 300px;
-  }
-}
-@media (max-width: 992px) {
-  .Top_Con h1 {
-    margin-right: 10px;
-    font-size: 2.3rem;
-  }
-  .Top_Con {
-    height: 6%;
-  }
-  .startnow p {
-    font-size: 1rem;
-  }
-  .Top_Con img {
-    width: 50px;
-    height: 40px;
-  }
-  .startnow h1 {
-    font-size: 2.5em;
-  }
-  .startnow span {
-    font-size: 1.5rem;
-  }
-  #strokes {
-    max-width: 35%;
+    position: relative;
+    max-width: 250px;
     height: 150px;
+    margin: 0;
+    top: 0;
   }
+  .btm_box {
+    position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  top: 90px;
+  padding: 5px;
+  height: 150px;
+
+}
   #doodle {
-    max-width: 50%;
-    height: 250px;
+    width: 150px;
+    position: relative;
+    margin-left:50px;
+    padding:5px;
   }
   #contri_btn {
     width: 250px;
-    height: 60px;
-    font-size: 1.1rem;
+    height: 50px;
+    position: absolute;
+    font-size: 1.1em;
+    font-weight: 400;
   }
+  #contri_btn:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 20px;
+    font-size: 1.2em;
+  }
+  
 }
-@media (max-width: 760px) {
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  .Top_Con h1 {
+    font-size: 2.7em;
+  }
   .mainC {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+  .left_box{
+    position: relative;
+    left:25px;
+    width: 600px;
+  }
+  .right_Box{
+    right:0;
+    padding: 10px;
   }
   .startnow {
-    width: auto;
+    padding:20px;
+    top:70px;
+    display: flex;
+    position: relative;
+    right:0;
   }
-  .container {
-    width: 100%;
-    display: block;
-    align-items: center;
+  .MainBox {
+    padding: 20px;
+    margin: 5px;
+    width:300px;
+  height:600px;
   }
-  .Top_Con h1 {
-    margin-right: 10px;
-    font-size: 1.8rem;
+  .Pp{
+    width:200px;
+    height:200px;
+    background-color: rgb(212, 212, 212);
   }
-  .Top_Con img {
-    width: 40px;
-    height: 30px;
-  }
-  .startnow p {
-    font-size: 0.9rem;
-  }
-  .Top_Con {
-    height: 10%;
-  }
-  .startnow h1 {
-    font-size: 1.8rem;
+  .H {
+    font-size: 3em;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
   }
-  .startnow span {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: grey;
+  .NoN{
+    font-size: 2.5em;
+    font-weight: 600;
+  }
+  .Para {
+    font-size: 1.1em;
+    max-width: 450px;
   }
   #strokes {
-    max-width: 50%;
-    height: 150px;
+    position: relative;
+    max-width: 200px;
+    height: 100px;
+    margin: 0;
+    top: 0;
   }
-  .MainBox {
-    margin: 20px;
-    height: 150px;
-    border: 4px solid white;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  #contri_btn {
-    width: 300px;
-    height: 50px;
-    /* bottom: -100px; */
-    left: 10%;
-    color: black;
-  }
-  #doodle {
-    max-width: 30%;
-    height: 150px;
-    left: 60%;
-  }
+  .btm_box {
+    position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  top: 90px;
+  padding: 5px;
+  height: 150px;
+  width:450px
+
 }
-@media (max-width: 425px) {
-  .MainBox {
-    margin: 20px;
-    height: 500px;
-    border: 4px solid white;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .MainBox {
-    margin: 20px;
-    height: 150px;
-    border: 4px solid white;
-    border-radius: 10px;
-    overflow: hidden;
+  #doodle {
+    width: 150px;
+    position: relative;
+    margin-left:60px;
+    padding:5px;
   }
   #contri_btn {
     width: 250px;
     height: 50px;
-    bottom: 50px;
-    left: 10%;
-    color: black;
+    position: absolute;
+    font-size: 1em;
+    font-weight: 400;
+  }
+  #contri_btn:hover {
+    font-size: 1.1em;
+  }
+}
+
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .Top_Con h1 {
+    font-size: 2em;
+  }
+  .mainC {
+    flex-direction: column;
+    margin-top: 10px;
+    justify-content: center;
+  }
+  .left_box{
+    position: relative;
+    width: 90%;
+    left:25px;
+  }
+  .MainBox {
+    padding: 10px;
+    margin: 5px;
+    width:100%;
+  height:250px;
+  flex-direction: row;
+  }
+  .uDetail{
+    width:200px;
+    font-size: 0.9em;
+    text-align: center;
+  }
+  .Fw{
+      font-size: 0.9em;
+      width:90px;
+      height:40px;
+  }
+  .Fw:hover{
+      font-size: 1.1em;
+  }
+  .Pp{
+    width:150px;
+    height:150px;
+    background-color: rgb(212, 212, 212);
+  }
+  .H {
+    font-size: 2.8em;
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+  .NoN{
+    font-size: 2.3em;
+    font-weight: 600;
+  }
+  .Para {
+    font-size: 1em;
+    max-width: 450px;
+  }
+  #strokes {
+    position: relative;
+    max-width: 200px;
+    height: 100px;
+    margin: 0;
+    top: 0;
+  }
+  .right_Box{
+    right:0;
+    padding: 5px;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+  .startnow {
+    padding:20px;
+    top:15px;
+    display: flex;
+    position: relative;
+    right:0;
+  }
+  .btm_box {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    top:5px;
+    padding: 5px;
+
+}
+  #doodle {
+    width: 150px;
+    position: relative;
+    margin-left:160px;
+    padding:5px;
+  }
+  #contri_btn {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    font-size: 1em;
+    font-weight: 400;
+  }
+  #contri_btn:hover {
+    font-size: 1.1em;
+  }
+}
+@media (max-width: 480px) {
+  .Top_Con h1 {
+    font-size: 1.2em;
+  }
+  .Top_Con {
+    height: 7%;
+  }
+  .crw {
+    width: 30px;
+    height: 20px;
+  }
+  .mainC {
+    flex-direction: column;
+    margin-top: 1px;
+    justify-content: center;
+  }
+  .left_box{
+    position: relative;
+    width: 95%;
+    left:5px;
+  }
+  .MainBox {
+    padding: 5px;
+    margin: 5px;
+    width:100%;
+  height:200px;
+  flex-direction: row;
+  }
+  .uDetail{
+    font-size: 0.7em;
+    text-align: center;
+    width:90px;
+  }
+  #Des{
+    text-align: left;
+  }
+  .Fw{
+    margin-top: 10px;
+      font-size: 0.7em;
+      width:70px;
+      height:30px;
+  }
+  .Fw:hover{
+      font-size: 0.8em;
+  }
+  .Pp{
+    width:100px;
+    height:100px;
+    background-color: rgb(212, 212, 212);
+  }
+  .H {
+    font-size: 2em;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .NoN{
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+  .Para {
+    font-size: 0.7em;
+    max-width: 450px;
+  }
+  #strokes {
+    position: relative;
+    max-width: 200px;
+    height: 100px;
+    margin: 0;
+    top: 0;
+  }
+  .right_Box{
+    right:0;
+    padding: 5px;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+  .startnow {
+    padding:20px;
+    top:15px;
+    display: flex;
+    position: relative;
+    right:0;
+  }
+  .btm_box {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    top: 15px;
+    padding: 5px;
+
+}
+  #doodle {
+    width: 150px;
+    position: relative;
+    margin-left:160px;
+    padding:5px;
+  }
+  #contri_btn {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    font-size: 1em;
+    font-weight: 400;
+  }
+  #contri_btn:hover {
+    font-size: 1.1em;
   }
 }

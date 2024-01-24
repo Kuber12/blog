@@ -33,6 +33,7 @@ const NewCard = ({ data }) => {
           //   gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
           display: "flex",
           justifyContent: "space-evenly",
+          alignItems: "center",
           gap: "50px 150px",
           flexWrap: "wrap",
           marginTop: "30px",
