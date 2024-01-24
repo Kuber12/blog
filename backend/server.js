@@ -15,6 +15,7 @@ app.use("/api/blog", require("./routes/blogRoutes"));
 app.use("/api/user", require("./routes/userRoutes"),require("./routes/followRoutes"));
 app.use("/api/comment", require("./routes/commentRoutes"));
 app.use("/api/file", require("./routes/fileRoutes"));
+app.use("/api/newsletter", require("./routes/emailRoutes"));
 
 
 app.listen(PORT, () => {
