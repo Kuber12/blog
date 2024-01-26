@@ -22,7 +22,6 @@ const MyRouter = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/" index element={<Home />}></Route>
-              <Route path="User" element={<User />}></Route>
             </Route>
             <Route path="AddBlog" element={<AddBlog />}></Route>
             <Route path="EditBlog/:id" element={<EditBlog />}></Route>
@@ -38,6 +37,7 @@ const MyRouter = () => {
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/OpenBlog/:id" element={<OpenBlog />}></Route>
             <Route path="/NewCard" element={<NewCard />}></Route>
+            <Route path="User" element={<User />}></Route>
           </Routes>
         </Router>
       </GlobalContentProvider>

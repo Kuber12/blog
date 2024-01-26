@@ -1,16 +1,17 @@
-:root{
+/* :root{
     --blue:#bde3ff;
     --yellow:#ffcd29;
     --dark:#0D6EFD;
     --white:#FFFFFF;
-}
-body{
-    background-color: var(--blue);
-}
+} */
+
 #mainBody{
     display: flex;
     justify-content: space-evenly;
     position: relative;
+    background-color: #bde3ff;
+    padding:30px;
+    height:auto;
 }
 .btwnBlc{
     position: relative;
@@ -33,8 +34,8 @@ body{
     padding:30px ;
 }
 .Fbtn{
-    background-color: var(--dark);
-    color:var(--white);
+    background-color: #0D6EFD;
+    color:white;
     border-radius: 20px;
     font-size: 1.2em;
     width:200px;
@@ -48,7 +49,7 @@ body{
     box-shadow: 0 0 20px #0caed7;
 }
 .aboutMe{
-    background-color: var(--yellow);
+    background-color: #ffcd29;
     width:250px;
     height:450px;
     border-radius: 5px;
@@ -63,7 +64,7 @@ body{
 }
 #im{
     padding: 1px;
-    background-color: var(--yellow);
+    background-color:#ffcd29;
 }
 .User_Dtl{
     height:60px;
@@ -97,13 +98,6 @@ body{
     top:50px;
     text-align: center;
 }
-.myPost{
-    width:auto;
-    height:500px;
-    background-color:rgb(251, 251, 251,.5);
-    position: relative;
-    top: 100px;
-}
 #fname{
     margin-top: 20px;
     font-size: 2em;
@@ -121,12 +115,42 @@ body{
     font-size: 2em;
     text-align: center;
 }
-.Post_Card{
-    width:100%;
-    height: auto;
-    color: beige;
+.myPost{
+  width:auto;
+  height:500px;
+  background-color:rgb(251, 251, 251,.5);
+  position: relative;
+  top: 100px;
 }
-
+.Blog_disp{
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 20px;
+  position: relative;
+  width: 90%;
+  left: 50px;
+  top:20px;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 50px 80px;
+  flex-wrap: wrap;
+  background-color:rgb(251, 251, 251,.5);
+}
+.cardss{
+  width: 300px;
+  height: auto;
+  background-color: #b6b6b6;
+  border-radius: 15px;
+}
+.picc{
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
+  border-radius: 5px;
+}
 @media screen and (min-width: 768px) and (max-width: 1024px){
     .Profile{
         width:150px;
