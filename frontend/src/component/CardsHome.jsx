@@ -42,7 +42,7 @@ const CardsHome = () => {
     const loadInitialData = async () => {
       const initaldata = await fetchData(page);
       setData(initaldata);
-      console.log(initaldata);
+      // console.log(initaldata);
     };
     loadInitialData();
   }, []);
