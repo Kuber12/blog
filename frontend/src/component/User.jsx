@@ -1,12 +1,15 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import UserProfile from "./UserProfile";
+import NewNavi from "./NewwNav";
 const User = () => {
   return (
     <div>
       <Helmet>
         <title>User Page</title>
       </Helmet>
-      <h1>User</h1>
+      <NewNavi/>
+      <UserProfile/>
     </div>
   );
 };
