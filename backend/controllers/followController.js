@@ -20,7 +20,7 @@ const followUser = asyncHandler(async ( req, res) => {
     }
 
   } catch (error) {
-    console.error('Error inserting like:', error);
+    console.error('Error following:', error);
     res.status(500).json({message : "Error"});
   }
 })

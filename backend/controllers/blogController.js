@@ -33,8 +33,8 @@ const getBlogsByUsername = asyncHandler(async (req, res) => {
 
 const createBlog = asyncHandler(async (req, res) => {
   try {
-    const { headline, content,tag,image } = req.body;
-    if (!headline || !content) {
+    const { headline, content, tag, image, username } = req.body; 
+    if (!headline || !content || !tag || !username) {
       return res.status(400).json({ message: "Please insert all params" });
     }
 
@@ -43,6 +43,7 @@ const createBlog = asyncHandler(async (req, res) => {
       content,
       tag,
       image,
+      username,
       views: 0
     });
 

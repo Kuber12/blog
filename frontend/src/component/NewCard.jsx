@@ -9,7 +9,7 @@ import { RotatingLines } from "react-loader-spinner";
 
 const NewCard = ({ data }) => {
   const imagePath = "../../uploads/";
-  console.log(data);
+  // console.log(data);
   //truncate text
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {

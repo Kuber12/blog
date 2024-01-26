@@ -5,6 +5,7 @@ export const GlobalContext = createContext();
 
 const GlobalContentProvider = (props) => {
   const [user, setUser] = useState({
+    id: "",
     username: "",
     fullname: "",
     email: "",
@@ -23,11 +24,14 @@ const GlobalContentProvider = (props) => {
             Authorization: `Bearer ${data}`,
           },
         });
-        const { username, name } = res.data;
-        // console.log(res.data);
+        const { username, name, email, id } = res.data;
+        console.log(res.data);
         console.log(res.data.username);
+
         setUser((prev) => ({ ...prev, username: username }));
         setUser((prev) => ({ ...prev, name: name }));
+        setUser((prev) => ({ ...prev, email: email }));
+        setUser((prev) => ({ ...prev, id: id }));
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
