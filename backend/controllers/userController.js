@@ -15,6 +15,8 @@ const loginUser = asyncHandler(async (req,res) =>{
                 user: {
                     username: user.username,
                     name: user.name,
+                    dob: user.dob,
+                    email: user.email,
                     id: user.id
                 }
             }, 

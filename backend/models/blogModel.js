@@ -9,7 +9,7 @@ const blogSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter your content"],
   },
-  author: {
+  username: {
     type: String,
     required: false,
   },
