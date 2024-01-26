@@ -32,7 +32,7 @@ const loginUser = asyncHandler(async (req,res) =>{
 })
 
 const registerUser = asyncHandler(async (req,res) =>{
-    const {username, name, password, email} = req.body;
+    const {username, name, password, email, dob} = req.body;
     if(!username || !name || !password || !email){
         return res.status(400).send({ message:"Please fill all fields!" });
     }else{
@@ -44,6 +44,7 @@ const registerUser = asyncHandler(async (req,res) =>{
             username : username ,
             name : name ,
             email : email,
+            dob: dob,
             password : hashedPassword
         })
     }
