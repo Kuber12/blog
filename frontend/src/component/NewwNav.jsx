@@ -10,7 +10,7 @@ const NewNavi = () => {
     const sessionDestroy = sessionStorage.removeItem("authToken");
   };
   return (
-    <div className="navbar">
+    <div className="navbar hedvig-font">
       <Link to="/" className="logo">
         Blog
       </Link>

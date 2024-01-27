@@ -166,11 +166,11 @@ const AddBlog = () => {
               <div>
                 <select
                   name=""
+                  className="form-button"
                   onChange={(e) => {
                     // console.log(e.target.value);
                     setValues({ ...values, tag: e.target.value });
                   }}
-                  id=""
                 >
                   <option disabled selected value="">
                     Choose Your Tag
@@ -182,20 +182,21 @@ const AddBlog = () => {
                 </select>
               </div>
               <div>
-                <label htmlFor="fileInput" className="custom-file-input">
+                <label htmlFor="fileInput" className="custom-file-input form-button">
                   Choose Image
                 </label>
                 <input
                   type="file"
                   id="fileInput"
+                  
                   onChange={handleFile}
                   style={{ display: "none" }}
                 />
               </div>
 
               
-              <button className="postBlog" type="submit">
-                Post The Blog
+              <button className="postBlog form-button" type="submit">
+                Post
               </button>
             </div>
             {/* bottom */}

@@ -27,7 +27,7 @@ const SearchBar = () => {
           <img className="searchIcon" src={search} alt="" />
           <input className="searchInput" type="text" placeholder="Search" />
         </div>
-        <select name="" id="selectCategories">
+        <select className="selectCategories" name="" id="selectCategories">
           <option selected disabled value="">
             Tags
           </option>

@@ -24,7 +24,7 @@
   border-radius: 25px;
 }
 
-select {
+.selectCategories {
   border-radius: 10px;
   background-color: black;
   color: white;
@@ -48,7 +48,7 @@ select {
     height: 6vh;
     border-radius: 25px;
   }
-  select {
+  .selectCategories {
     border-radius: 10px;
     background-color: black;
     color: white;

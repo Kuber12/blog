@@ -1,12 +1,8 @@
-@font-face {
-  font-family: Hedvig;
-  src: url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
-}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Hedvig;
   text-decoration: none;
   list-style: none;
 }
