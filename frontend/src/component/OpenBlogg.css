@@ -10,6 +10,9 @@
 .blog-content{
     flex: 3;
 }
+.heading{
+    font-size:1.5em;
+}
 .blog-content,.user-detail{
     padding: 0px 10px;
 }
@@ -155,5 +158,8 @@
     }
     .blog-user{
         margin-top: 20px;
+    }
+    .blog-content-image{
+        height: 200px;
     }
 }

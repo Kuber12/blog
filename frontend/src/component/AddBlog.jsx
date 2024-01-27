@@ -6,10 +6,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const AddBlog = () => {
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
   const [values, setValues] = useState({
     headline: "",
     content: "",
@@ -26,7 +29,21 @@ const AddBlog = () => {
 
   const handleFile = (e) => {
     // console.log(e.target.files);
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setFile(selectedFile);
+        setFilePreview(reader.result);
+      };
+
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setFile(null);
+      setFilePreview(null);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -109,8 +126,15 @@ const AddBlog = () => {
           Add Blog
         </h1>
         <form onSubmit={handleSubmit}>
-          <div className="addblog-container">
-            <div className="title-input-container">
+        <div className="blog-content">
+            {filePreview && (
+              <img
+                className="blog-content-image"
+                src={filePreview}
+                alt="blog content"
+              />
+            )}
+            <div className="blog-content-text">
               <input
                 type="text"
                 className="title-input"
@@ -119,13 +143,11 @@ const AddBlog = () => {
                   setValues({ ...values, headline: e.target.value })
                 }
               />
-            </div>
-            <div>
-              <div className="form-floating ">
+              <p>
                 <textarea
                   // onChange={handleTextArea}
 
-                  className="form-control p-5"
+                  className="content-input"
                   placeholder="Leave a comment here"
                   id="floatingTextarea"
                   style={{ width: "100%", height: "124px" }}
@@ -134,56 +156,51 @@ const AddBlog = () => {
                   }
                   // rows="5"
                 ></textarea>
-                <label
-                  htmlFor="floatingTextarea"
-                  style={{ paddingLeft: "2.18rem" }}
-                >
-                  Contents
-                </label>
-              </div>
+              </p>
             </div>
-            {/* buttons */}
             <div className="buttons-container">
-              {/* top */}
-              <div className="button-top-container">
-                {/* file  input */}
-                <div>
-                  <label htmlFor="fileInput" className="custom-file-input">
-                    Choose File
-                  </label>
-                  <input
-                    type="file"
-                    id="fileInput"
-                    onChange={handleFile}
-                    style={{ display: "none" }}
-                  />
-                </div>
-
-                {/* select tags */}
-                <div>
-                  <select
-                    name=""
-                    onChange={(e) => {
-                      // console.log(e.target.value);
-                      setValues({ ...values, tag: e.target.value });
-                    }}
-                    id=""
-                  >
-                    <option disabled selected value="">
-                      Choose Your Tag
-                    </option>
-                    <option value="News">News</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Fun">Fun</option>
-                    <option value="Facts">Facts</option>
-                  </select>
-                </div>
+            {/* top */}
+            <div className="button-top-container">
+              {/* file  input */}
+              {/* select tags */}
+              <div>
+                <select
+                  name=""
+                  onChange={(e) => {
+                    // console.log(e.target.value);
+                    setValues({ ...values, tag: e.target.value });
+                  }}
+                  id=""
+                >
+                  <option disabled selected value="">
+                    Choose Your Tag
+                  </option>
+                  <option value="News">News</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Fun">Fun</option>
+                  <option value="Facts">Facts</option>
+                </select>
               </div>
-              {/* bottom */}
-              <div style={{ marginTop: "20px", alignSelf: "flex-start" }}>
-                <button className="postBlog" type="submit">
-                  Post The Blog
-                </button>
+              <div>
+                <label htmlFor="fileInput" className="custom-file-input">
+                  Choose Image
+                </label>
+                <input
+                  type="file"
+                  id="fileInput"
+                  onChange={handleFile}
+                  style={{ display: "none" }}
+                />
+              </div>
+
+              
+              <button className="postBlog" type="submit">
+                Post The Blog
+              </button>
+            </div>
+            {/* bottom */}
+            <div style={{ marginTop: "20px", alignSelf: "flex-start" }}>
+                
               </div>
             </div>
           </div>

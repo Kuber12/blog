@@ -174,7 +174,7 @@ const OpenBlog = () => {
               />
             )}
             <div className="blog-content-text">
-              <h1>{data.headline}</h1>
+              <h1 class="heading">{data.headline}</h1>
               <p>{data.content}</p>
             </div>
             <div className="blog-action-icons">

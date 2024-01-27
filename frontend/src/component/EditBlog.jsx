@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import axios from "axios";
+import "./AddBlog.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
