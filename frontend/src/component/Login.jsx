@@ -99,7 +99,12 @@ const Login = () => {
             id="username"
             name="username"
             value={registrationData.username}
-            onChange={(e) => setRegistrationData({ ...registrationData, username: e.target.value })}
+            onChange={(e) =>
+              setRegistrationData({
+                ...registrationData,
+                username: e.target.value,
+              })
+            }
           />
 
           <label htmlFor="name">Name:</label>
@@ -108,7 +113,9 @@ const Login = () => {
             id="name"
             name="name"
             value={registrationData.name}
-            onChange={(e) => setRegistrationData({ ...registrationData, name: e.target.value })}
+            onChange={(e) =>
+              setRegistrationData({ ...registrationData, name: e.target.value })
+            }
           />
 
           <label htmlFor="password">Password:</label>
@@ -117,7 +124,12 @@ const Login = () => {
             id="password"
             name="password"
             value={registrationData.password}
-            onChange={(e) => setRegistrationData({ ...registrationData, password: e.target.value })}
+            onChange={(e) =>
+              setRegistrationData({
+                ...registrationData,
+                password: e.target.value,
+              })
+            }
           />
 
           <label htmlFor="dob">Date of Birth:</label>
@@ -126,7 +138,9 @@ const Login = () => {
             id="dob"
             name="dob"
             value={registrationData.dob}
-            onChange={(e) => setRegistrationData({ ...registrationData, dob: e.target.value })}
+            onChange={(e) =>
+              setRegistrationData({ ...registrationData, dob: e.target.value })
+            }
           />
 
           <label htmlFor="email">Email:</label>
@@ -135,7 +149,12 @@ const Login = () => {
             id="email"
             name="email"
             value={registrationData.email}
-            onChange={(e) => setRegistrationData({ ...registrationData, email: e.target.value })}
+            onChange={(e) =>
+              setRegistrationData({
+                ...registrationData,
+                email: e.target.value,
+              })
+            }
           />
           <button className="submit" type="submit">
             SIGN UP
