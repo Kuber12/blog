@@ -23,7 +23,7 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/user/login", data)
       .then((res) => {
-        console.log(res.data.message);
+        // console.log(res.data.message);
         const token = res.data.message;
         sessionStorage.setItem("authToken", token);
         setTokenData(token);
@@ -36,7 +36,7 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/user/register", registrationData)
       .then((res) => {
-        console.log(res.data.message);
+        // console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   };
