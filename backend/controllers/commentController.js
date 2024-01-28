@@ -12,15 +12,15 @@ const getComments = asyncHandler(async (req,res) =>{
 const userComment = asyncHandler(async ( req, res) => {
   try {
     const blogId = new mongoose.Types.ObjectId(req.params.id);
-    const {userName,text} = req.body;
-    if(!userName){
+    const {username,text} = req.body;
+    if(!username){
       return res.status(400).json({ message: "Please login first" });
     }
-    if(!userName || !blogId || !text){
+    if(!username || !blogId || !text){
       return res.status(400).json({ message: "Please insert all params" });
     }else{
       const comment = await Comment.create({
-        userName, blogId ,text
+        username, blogId ,text
       });
       res.status(200).json(
         {
