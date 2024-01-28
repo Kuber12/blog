@@ -1,9 +1,20 @@
 #card-container {
   width: 300px;
   height: auto;
-  background-color: #e0e0e0;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 15px;
   margin-top: 10px;
+}
+.blog-display{
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  width: 80%
 }
 #img-container {
   width: 100%;
@@ -17,7 +28,6 @@
 }
 #heading {
   /* padding: 10px; */
-  padding-top: 10px;
   padding-left: 10px;
   margin: 5px 0;
   font-size: 18px;
@@ -72,4 +82,9 @@
   display: flex;
   gap: 5px;
   align-items: center;
+}
+@media screen and (max-width: 1024px) {
+  .blog-display{
+    width: 100%;
+  }
 }

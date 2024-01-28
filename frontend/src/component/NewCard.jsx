@@ -3,9 +3,17 @@ import "./NewCard.css";
 import { FaEye } from "react-icons/fa";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link, useAsyncError } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
+
+import {
+  faEye,
+  faHeart,
+  faComment,
+} from "@fortawesome/free-solid-svg-icons";
 
 const NewCard = ({ data }) => {
   const imagePath = "../../uploads/";
@@ -25,20 +33,7 @@ const NewCard = ({ data }) => {
 
   return (
     <>
-      <div
-        style={{
-          padding: "10px",
-          //   display: "grid",
-          //   gap: "50px 100px",
-          //   gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          gap: "50px 150px",
-          flexWrap: "wrap",
-          marginTop: "30px",
-        }}
-      >
+      <div className="blog-display">
         {data &&
           data.map((items, i) => (
             <div id="card-container" key={i}>
@@ -47,6 +42,39 @@ const NewCard = ({ data }) => {
                   src={`${imagePath}${items.image}`}
                   alt={`${items.image}`}
                 />
+              </div>
+              <div id="buttons-container">
+                <div className="blog-action-icons">
+                  <div key={1} className="blog-action-tooltip">
+                    <div className="blog-tooltip-div">
+                      <Link className="link-to" to={`../OpenBlog/${items._id}`}>
+                        <FontAwesomeIcon
+                          icon={faEye}
+                          style={{ fontSize: "25px", paddingRight: "5px" }}
+                          />
+                      </Link>
+                      <span>{data.views}</span>
+                    </div>
+                  </div>
+                  <div key={2} className="blog-action-tooltip">
+                    <div className="blog-tooltip-div">
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        style={{ fontSize: "25px", paddingRight: "5px" }}
+                      />
+                      <span></span>
+                    </div>
+                  </div>
+                  <div key={3} className="blog-action-tooltip">
+                    <div className="blog-tooltip-div">
+                      <FontAwesomeIcon
+                        icon={faComment}
+                        style={{ fontSize: "25px", paddingRight: "5px" }}
+                      />
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div id="heading">
                 <h1>{truncateText(items.headline, 25)}</h1>
@@ -59,24 +87,6 @@ const NewCard = ({ data }) => {
                 <button>
                   <BsThreeDotsVertical />
                 </button>
-              </div>
-              <div id="buttons-container">
-                <div></div>
-                <div id="buttons">
-                  <Link className="link-to" to={`../OpenBlog/${items._id}`}>
-                    <FaEye />
-                    1.5k
-                  </Link>
-
-                  <Link className="link-to" to={`../OpenBlog/${items._id}`}>
-                    <FaRegCommentAlt />
-                    25
-                  </Link>
-                  <Link className="link-to" to={`../OpenBlog/${items._id}`}>
-                    <FaRegCommentAlt />
-                    <FcLike />7
-                  </Link>
-                </div>
               </div>
             </div>
           ))}
