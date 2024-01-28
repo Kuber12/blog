@@ -28,8 +28,8 @@ const GlobalContentProvider = ({ children }) => {
         });
         // console.log(tokenData);
         const { username, name, email, id } = res.data;
-        console.log(res.data);
-        console.log(res.data.username);
+        // console.log(res.data);
+        // console.log(res.data.username);
 
         setUser((prev) => ({ ...prev, username: username }));
         setUser((prev) => ({ ...prev, name: name }));

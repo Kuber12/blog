@@ -5,144 +5,145 @@
     --white:#FFFFFF;
 } */
 
-#mainBody{
-    display: flex;
-    justify-content: space-evenly;
-    position: relative;
-    background-color: #bde3ff;
-    padding:30px;
-    height:auto;
+#mainBody {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  background-color: #bde3ff;
+  padding: 30px;
+  height: auto;
 }
-.btwnBlc{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding:15px;
+.btwnBlc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
 }
-.Profile{
-    width:200px;
-    height:200px;
-    background-color: rgb(212, 212, 212);
-    top:50px;
-    position: relative;
+.Profile {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(212, 212, 212);
+  top: 50px;
+  position: relative;
 }
 
-.follow_me{
-    top:40px;
-    position: relative;
-    padding:30px ;
-}
-.Fbtn{
-    background-color: #0D6EFD;
-    color:white;
-    border-radius: 20px;
-    font-size: 1.2em;
-    width:200px;
-    height:60px;
-    transition: all 200ms ease;
-   
-}
-.Fbtn:hover{
-    font-size: 1.4em;
-    letter-spacing: 1px;
-    box-shadow: 0 0 20px #0caed7;
-}
-.aboutMe{
-    background-color: #ffcd29;
-    width:250px;
-    height:450px;
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    position: relative;
-    top:30px;
-    color:black;
-}
-#im{
-    padding: 1px;
-    background-color:#ffcd29;
-}
-.User_Dtl{
-    height:60px;
-    background-color:rgb(251, 251, 251,.5);
-    width:100%;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-.ics{
-    font-size: 1.2em;
-    padding: 5px;
-}
-.udP{
-    font-size: 0.9em;
-    padding: 1px;
-}
-.btmBlc{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width:1000px;
-    padding: 15px;
-}
-.bio{
-    width:auto;
-    height:200px;
-    background-color:rgb(251, 251, 251,.5);
-    position: relative;
-    top:50px;
-    text-align: center;
-}
-#fname{
-    margin-top: 20px;
-    font-size: 2em;
-}
-#uname{
-    font-size: 1.5em;
-}
-#bioo{
-    padding: 15px;
-    font-size: 1em;
-    text-align:left;
-}
-.Ht{
-    margin-top: 20px;
-    font-size: 2em;
-    text-align: center;
-}
-.myPost{
-  width:auto;
-  height:500px;
-  background-color:rgb(251, 251, 251,.5);
+.follow_me {
+  top: 40px;
   position: relative;
-  top: 100px;
+  padding: 30px;
 }
-.Blog_disp{
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 20px;
+.Fbtn {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 20px;
+  font-size: 1.2em;
+  width: 200px;
+  height: 60px;
+  transition: all 200ms ease;
+}
+.Fbtn:hover {
+  font-size: 1.4em;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px #0caed7;
+}
+.aboutMe {
+  background-color: #ffcd29;
+  width: 250px;
+  height: 450px;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   position: relative;
-  width: 90%;
-  left: 50px;
-  top:20px;
+  top: 30px;
+  color: black;
+}
+#im {
+  padding: 1px;
+  background-color: #ffcd29;
+}
+.User_Dtl {
+  height: 60px;
+  background-color: rgb(251, 251, 251, 0.5);
+  width: 100%;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.ics {
+  font-size: 1.2em;
+  padding: 5px;
+}
+.udP {
+  font-size: 0.9em;
+  padding: 1px;
+}
+.btmBlc {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 1000px;
+  padding: 15px;
+}
+.bio {
+  width: auto;
+  height: 200px;
+  background-color: rgb(251, 251, 251, 0.5);
+  position: relative;
+  top: 50px;
+  text-align: center;
+  margin: 0px 0 70px 0;
+}
+#fname {
+  margin-top: 20px;
+  font-size: 2em;
+}
+#uname {
+  font-size: 1.5em;
+}
+#bioo {
+  padding: 15px;
+  font-size: 1em;
+  text-align: left;
+}
+.Ht {
+  margin-top: 20px;
+  font-size: 2em;
+  text-align: center;
+}
+.myPost {
+  width: auto;
+  /* height: 500px; */
+  background-color: rgb(251, 251, 251, 0.5);
+  position: relative;
+  /* top: 100px; */
+}
+.Blog_disp {
+  /* max-height: 400px; */
+  /* overflow-y: auto; */
+  /* padding: 20px; */
+  position: relative;
+  /* width: 90%; */
+  /* left: 50px; */
+  /* top:20px; */
   display: flex;
   justify-content: space-evenly;
   gap: 50px 80px;
   flex-wrap: wrap;
-  background-color:rgb(251, 251, 251,.5);
+  /* background-color:rgb(251, 251, 251,.5); */
+  margin-bottom: 100px;
 }
-.cardss{
+.cardss {
   width: 300px;
   height: auto;
   background-color: #b6b6b6;
   border-radius: 15px;
 }
-.picc{
+.picc {
   width: 100%;
   height: 150px;
   overflow: hidden;
@@ -151,115 +152,108 @@
   object-fit: cover;
   border-radius: 5px;
 }
-@media screen and (min-width: 768px) and (max-width: 1024px){
-    .Profile{
-        width:150px;
-        height:150px;
-    }
-  .Fbtn{
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .Profile {
     width: 150px;
-    height:50px;
+    height: 150px;
+  }
+  .Fbtn {
+    width: 150px;
+    height: 50px;
     font-size: 1em;
   }
-  .Fbtn:hover{
+  .Fbtn:hover {
     font-size: 1.1em;
   }
-  .aboutMe{
-    width:200px;
+  .aboutMe {
+    width: 200px;
     padding: 5px;
   }
-  #im{
+  #im {
     padding: 0;
   }
-  .User_Dtl{
-   width: 100%;
-    height:50px;
+  .User_Dtl {
+    width: 100%;
+    height: 50px;
     flex-direction: column;
   }
-  #fname{
+  #fname {
     margin-top: 10px;
     font-size: 1.5em;
   }
-  #uname{
+  #uname {
     font-size: 1em;
   }
-  #bioo{
+  #bioo {
     padding: 5px;
     font-size: 1em;
   }
 }
 
-
-  @media screen and (min-width: 480px) and (max-width: 768px) {
-    .btwnBlc{
-        padding:5px;
-    }
-    .Profile{
-        width:130px;
-        height:130px;
-    }
-  .Fbtn{
-    width: 130px;
-    height:40px;
-    font-size: 0.8em;
-  }
-  .Fbtn:hover{
-    font-size: 0.9em;
-  }
-  .aboutMe{
-    width:180px;
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .btwnBlc {
     padding: 5px;
   }
-  #im{
-    padding: 0;
+  .Profile {
+    width: 130px;
+    height: 130px;
   }
-  .ics,.udP{
+  .Fbtn {
+    width: 130px;
+    height: 40px;
     font-size: 0.8em;
   }
-  .User_Dtl{
-   width: 100%;
-    height:50px;
+  .Fbtn:hover {
+    font-size: 0.9em;
+  }
+  .aboutMe {
+    width: 180px;
+    padding: 5px;
+  }
+  #im {
+    padding: 0;
+  }
+  .ics,
+  .udP {
+    font-size: 0.8em;
+  }
+  .User_Dtl {
+    width: 100%;
+    height: 50px;
     flex-direction: column;
   }
-  #fname{
+  #fname {
     margin-top: 5px;
     font-size: 1.3em;
   }
-  #uname{
+  #uname {
     font-size: 0.9em;
   }
-  #bioo{
+  #bioo {
     padding: 5px;
     font-size: 0.8em;
   }
+}
+@media (max-width: 480px) {
+  #mainBody {
+    flex-direction: column;
   }
-     @media (max-width: 480px) {
-       
-        #mainBody{
-            flex-direction: column;
-        }
-        .btmBlc{
-            width:100%;
-            height: 100vh;
-            
-        }
-        #fname{
-            margin-top: 5px;
-            font-size: 1.3em;
-          }
-          #uname{
-            font-size: 0.9em;
-          }
-          #bioo{
-            padding: 5px;
-            font-size: 0.8em;
-          }
-        .Ht{
-            font-size:1.5em ;
-        }
-    }
-     
-
-     
- 
-    
+  .btmBlc {
+    width: 100%;
+    height: 100vh;
+  }
+  #fname {
+    margin-top: 5px;
+    font-size: 1.3em;
+  }
+  #uname {
+    font-size: 0.9em;
+  }
+  #bioo {
+    padding: 5px;
+    font-size: 0.8em;
+  }
+  .Ht {
+    font-size: 1.5em;
+  }
+}

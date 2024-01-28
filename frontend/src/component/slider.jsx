@@ -39,7 +39,8 @@ const Slider = () => {
               <p className="h">Make Your</p>
               <p className="sp">
                 <span>
-                  First Post "{data.user.username ? data.user.username : ""}"
+                  First Post{" "}
+                  {data.user.username ? `"${data.user.username} "` : null}
                 </span>
               </p>
               <p className="Cp">

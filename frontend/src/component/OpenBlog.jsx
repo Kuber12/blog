@@ -21,7 +21,9 @@ import axios from "axios";
 import { GlobalContext } from "./GlobalContent";
 import NewNavi from "./NewwNav";
 const OpenBlog = () => {
-  const userdata = useContext(GlobalContext);
+  const userData = useContext(GlobalContext);
+  const { user } = userData;
+  const { username } = user;
   const { id } = useParams();
   // console.log(id);
 
@@ -46,7 +48,7 @@ const OpenBlog = () => {
   // console.log(comment);
   const handleLike = (event) => {
     let LikeToSent = {
-      username: userdata.username,
+      username: username,
     };
     // console.log(LikeToSent.userName);
     axios
@@ -89,7 +91,7 @@ const OpenBlog = () => {
     // console.log(comment);
     let commentToSent = {
       text: comment,
-      userName: userdata.username,
+      username: username,
     };
 
     //commenting

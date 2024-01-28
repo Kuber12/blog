@@ -18,29 +18,30 @@ const Footer = () => {
       <div className="contact">
         <a href="#">
           <FontAwesomeIcon
+            className="icc"
             icon={faAddressBook}
-            style={{ fontSize: "25px", paddingRight: "5px" }}
+           
           />{" "}
           Contact ID here
         </a>
         <a href="#">
           <FontAwesomeIcon
+            className="icc"
             icon={faPhone}
-            style={{ fontSize: "25px", paddingRight: "5px" }}
           />{" "}
           Phone Number Here
         </a>
         <a href="#">
           <FontAwesomeIcon
+            className="icc"
             icon={faEnvelope}
-            style={{ fontSize: "25px", paddingRight: "5px" }}
           />{" "}
           Email Address Here
         </a>
         <a href="#">
           <FontAwesomeIcon
+            className="icc"
             icon={faLocationDot}
-            style={{ fontSize: "25px", paddingRight: "5px" }}
           />{" "}
           Location Here
         </a>
@@ -67,7 +68,7 @@ const Footer = () => {
           </ul>
         </div>
         {/* thanks  */}
-        <h2 style={{ textAlign: "center" }}>
+        <h2>
           <img src={footer_ty} className="thanksIcon" alt="" />
         </h2>
       </div>
