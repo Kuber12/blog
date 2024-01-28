@@ -6,7 +6,7 @@ const commentSchema = mongoose.Schema(
             type: String, 
             required: [true,"Comment cant be Empty"] 
         },
-        userName: {
+        username: {
             type: String, 
             required: [true,"Please login first"] 
         },
