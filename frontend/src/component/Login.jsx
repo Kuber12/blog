@@ -3,6 +3,8 @@ import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "./GlobalContent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const { setTokenData } = useContext(GlobalContext);
   const navigation = useNavigate();
@@ -18,6 +20,7 @@ const Login = () => {
     dob: "",
     email: "",
   });
+  const selectedGender = "Male"; //overwrite later
   const handleLogin = (event) => {
     event.preventDefault();
     axios
@@ -27,7 +30,10 @@ const Login = () => {
         const token = res.data.message;
         sessionStorage.setItem("authToken", token);
         setTokenData(token);
-        navigation("/");
+        toast.success("Login Successful");
+        setTimeout(() => {
+          navigation("/");
+        }, 3000);
       })
       .catch((err) => console.log(err));
   };
@@ -37,6 +43,10 @@ const Login = () => {
       .post("http://localhost:5000/api/user/register", registrationData)
       .then((res) => {
         console.log(res.data.message);
+        toast.success("Registration Successful");
+        setTimeout(() => {
+          navigation("/");
+        }, 3000);
       })
       .catch((err) => console.log(err));
   };
@@ -46,6 +56,19 @@ const Login = () => {
   };
 
   return (
+    <>
+    <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
     <div
       className={`login-container center ${
         isOverlayVisible ? "overlay-visible" : ""
@@ -57,7 +80,7 @@ const Login = () => {
         id="overlay"
       ></div>
       <div className="left">
-        <h1>Sign In</h1>
+      <h1 className="form-heading hedvig-font">Sign In</h1>
         <form onSubmit={handleLogin} method="post">
           <div className="email">
             <input
@@ -93,7 +116,7 @@ const Login = () => {
       </div>
       <div className="middle"></div>
       <div className="right">
-        <h1>Register Now</h1>
+        <h1 className="form-heading hedvig-font">Register Now</h1>
         <form onSubmit={handleRegistration} className="reg-form form-container">
           <label htmlFor="username">Username:</label>
           <input
@@ -158,6 +181,51 @@ const Login = () => {
               })
             }
           />
+          <label htmlFor="address">Address:</label>
+          <input
+            type="address"
+            id="address"
+            name="address"
+            value={registrationData.address}
+            onChange={(e) =>
+              setRegistrationData({
+                ...registrationData,
+                address: e.target.value,
+              })
+            }
+          />
+          <label>Gender:</label>
+          <div className="form-gender">
+          <label className="gender-option">
+            <input
+              type="radio"
+              value="male"
+              checked={selectedGender === 'male'}
+              // onChange={handleGenderChange}
+            />
+            Male
+          </label>
+
+          <label className="gender-option">
+            <input
+              type="radio"
+              value="female"
+              checked={selectedGender === 'female'}
+              // onChange={handleGenderChange}
+            />
+            Female
+          </label>
+
+          <label className="gender-option">
+            <input
+              type="radio"
+              value="other"
+              checked={selectedGender === 'other'}
+              // onChange={handleGenderChange}
+            />
+            Other
+          </label>
+          </div>
           <button className="submit" type="submit">
             SIGN UP
           </button>
@@ -167,6 +235,7 @@ const Login = () => {
         </span>
       </div>
     </div>
+    </>
   );
 };
 
