@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import NewwNav from "./NewwNav";
-
+import { GlobalContext } from "./GlobalContent";
 const DisplayEditBLog = () => {
+  const userData = useContext(GlobalContext);
+  const { user } = userData;
+  const { username } = user;
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const token = sessionStorage.getItem("authToken");
@@ -17,7 +20,7 @@ const DisplayEditBLog = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/blog", config)
+      .get(`http://localhost:5000/api/blog/${username}/user`, config)
       .then((res) => setData(res.data.message))
       .catch((err) => console.log(err));
   }, [data]);

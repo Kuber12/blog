@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import "./AddBlog.css";
@@ -7,9 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-
+import { GlobalContext } from "./GlobalContent";
 const AddBlog = () => {
+  const userData = useContext(GlobalContext);
+  const { user } = userData;
+  const { username } = user;
+  // console.log(username);
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
@@ -18,6 +21,7 @@ const AddBlog = () => {
     content: "",
     image: "",
     tag: "",
+    username: username,
   });
   const token = sessionStorage.getItem("authToken");
   // console.log(token);
@@ -54,6 +58,7 @@ const AddBlog = () => {
       if (file) {
         const formData = new FormData();
         formData.append("fileInput", file);
+        formData.append("username", username);
 
         const imgResponse = await axios.post(
           "http://localhost:5000/api/file/upload",
@@ -126,7 +131,7 @@ const AddBlog = () => {
           Add Blog
         </h1>
         <form onSubmit={handleSubmit}>
-        <div className="blog-content">
+          <div className="blog-content">
             {filePreview && (
               <img
                 className="blog-content-image"
@@ -159,50 +164,49 @@ const AddBlog = () => {
               </p>
             </div>
             <div className="buttons-container">
-            {/* top */}
-            <div className="button-top-container">
-              {/* file  input */}
-              {/* select tags */}
-              <div>
-                <select
-                  name=""
-                  className="form-button"
-                  onChange={(e) => {
-                    // console.log(e.target.value);
-                    setValues({ ...values, tag: e.target.value });
-                  }}
-                >
-                  <option disabled selected value="">
-                    Choose Your Tag
-                  </option>
-                  <option value="News">News</option>
-                  <option value="Entertainment">Entertainment</option>
-                  <option value="Fun">Fun</option>
-                  <option value="Facts">Facts</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="fileInput" className="custom-file-input form-button">
-                  Choose Image
-                </label>
-                <input
-                  type="file"
-                  id="fileInput"
-                  
-                  onChange={handleFile}
-                  style={{ display: "none" }}
-                />
-              </div>
+              {/* top */}
+              <div className="button-top-container">
+                {/* file  input */}
+                {/* select tags */}
+                <div>
+                  <select
+                    name=""
+                    className="form-button"
+                    onChange={(e) => {
+                      // console.log(e.target.value);
+                      setValues({ ...values, tag: e.target.value });
+                    }}
+                  >
+                    <option disabled selected value="">
+                      Choose Your Tag
+                    </option>
+                    <option value="News">News</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Fun">Fun</option>
+                    <option value="Facts">Facts</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor="fileInput"
+                    className="custom-file-input form-button"
+                  >
+                    Choose Image
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    onChange={handleFile}
+                    style={{ display: "none" }}
+                  />
+                </div>
 
-              
-              <button className="postBlog form-button" type="submit">
-                Post
-              </button>
-            </div>
-            {/* bottom */}
-            <div style={{ marginTop: "20px", alignSelf: "flex-start" }}>
-                
+                <button className="postBlog form-button" type="submit">
+                  Post
+                </button>
               </div>
+              {/* bottom */}
+              <div style={{ marginTop: "20px", alignSelf: "flex-start" }}></div>
             </div>
           </div>
         </form>
