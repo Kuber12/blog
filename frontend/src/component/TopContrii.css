@@ -1,6 +1,6 @@
 .bodyy {
   background-color: #ffcd29;
-  height:100vh;
+  padding: 20px 0;
 }
 .Top_Con {
   display: flex;
@@ -23,9 +23,9 @@
   justify-content: space-between;
   margin-top: 30px;
 }
-.left_box{
+.left_box {
   position: relative;
-  left:50px;
+  left: 50px;
   width: 700px;
 }
 .MainBox {
@@ -35,51 +35,52 @@
   flex-direction: column;
   position: relative;
   margin: 30px;
-  width:400px;
-height:600px;
+  width: 400px;
+  height: 600px;
   border: 4px solid white;
   border-radius: 10px;
   overflow: hidden;
-  align-items:center;
+  align-items: center;
 }
-.uDetail{
+.uDetail {
   font-size: 1.2em;
   text-align: center;
 }
-.Pp{
-  width:300px;
-  height:300px;
+.Pp {
+  width: 300px;
+  height: 300px;
   background-color: rgb(212, 212, 212);
 }
-.Fw{
-  background-color: #0D6EFD;
-    border-radius: 20px;
-    font-size: 1.4em;
-    width:200px;
-    height:60px;
-    color: white;
-    transition: all 200ms ease;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+.Fw {
+  background-color: #0d6efd;
+  border-radius: 20px;
+  font-size: 1.4em;
+  width: 200px;
+  height: 60px;
+  color: white;
+  transition: all 200ms ease;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.Fw:hover{
-    font-size: 1.4em;
-    letter-spacing: 1px;
-    box-shadow: 0 8px 16px 0 rgba(54, 50, 50, 0.2), 0 6px 20px 0 rgba(9, 8, 8, 0.19);
+.Fw:hover {
+  font-size: 1.4em;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 16px 0 rgba(54, 50, 50, 0.2),
+    0 6px 20px 0 rgba(9, 8, 8, 0.19);
 }
-.right_Box{
+.right_Box {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
-  right:15px;
+  right: 15px;
   padding: 20px;
 }
 .startnow {
-  padding:20px;
-  top:20px;
+  padding: 20px;
+  top: 20px;
   display: flex;
   position: relative;
-  right:50px;
+  right: 50px;
 }
 .H {
   font-size: 4em;
@@ -87,7 +88,7 @@ height:600px;
   text-transform: uppercase;
   letter-spacing: 5px;
 }
-.NoN{
+.NoN {
   font-size: 3em;
   font-weight: 600;
   color: grey;
@@ -114,8 +115,8 @@ height:600px;
 #doodle {
   width: 200px;
   position: relative;
-  margin-left:30px;
-  padding:5px;
+  margin-left: 30px;
+  padding: 5px;
 }
 #contri_btn {
   width: 300px;
@@ -128,8 +129,8 @@ height:600px;
   font-weight: 600;
   letter-spacing: 1px;
   transition: all 200ms ease;
-  margin-right:20px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin-right: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #contri_btn:hover {
   background-color: white;
@@ -138,25 +139,24 @@ height:600px;
   font-size: 1.5em;
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1290px){
+@media screen and (min-width: 1024px) and (max-width: 1290px) {
   .Top_Con h1 {
     font-size: 3em;
   }
-  .left_box{
+  .left_box {
     position: relative;
-    left:40px;
+    left: 40px;
     width: 600px;
-   
   }
   .MainBox {
     padding: 20px;
     margin: 10px;
-    width:350px;
-  height:600px;
+    width: 350px;
+    height: 600px;
   }
-  .Pp{
-    width:250px;
-    height:250px;
+  .Pp {
+    width: 250px;
+    height: 250px;
     background-color: rgb(212, 212, 212);
   }
 
@@ -165,7 +165,7 @@ height:600px;
     font-weight: 700;
     letter-spacing: 4px;
   }
-  .NoN{
+  .NoN {
     font-size: 2.7em;
     font-weight: 600;
   }
@@ -182,18 +182,17 @@ height:600px;
   }
   .btm_box {
     position: relative;
-  display: flex;
-  justify-content: space-evenly;
-  top: 90px;
-  padding: 5px;
-  height: 150px;
-
-}
+    display: flex;
+    justify-content: space-evenly;
+    top: 90px;
+    padding: 5px;
+    height: 150px;
+  }
   #doodle {
     width: 150px;
     position: relative;
-    margin-left:50px;
-    padding:5px;
+    margin-left: 50px;
+    padding: 5px;
   }
   #contri_btn {
     width: 250px;
@@ -208,9 +207,8 @@ height:600px;
     box-shadow: 0 0 20px;
     font-size: 1.2em;
   }
-  
 }
-@media screen and (min-width: 768px) and (max-width: 1024px){
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .Top_Con h1 {
     font-size: 2.7em;
   }
@@ -219,31 +217,31 @@ height:600px;
     justify-content: space-between;
     margin-top: 50px;
   }
-  .left_box{
+  .left_box {
     position: relative;
-    left:25px;
+    left: 25px;
     width: 600px;
   }
-  .right_Box{
-    right:0;
+  .right_Box {
+    right: 0;
     padding: 10px;
   }
   .startnow {
-    padding:20px;
-    top:70px;
+    padding: 20px;
+    top: 70px;
     display: flex;
     position: relative;
-    right:0;
+    right: 0;
   }
   .MainBox {
     padding: 20px;
     margin: 5px;
-    width:300px;
-  height:600px;
+    width: 300px;
+    height: 600px;
   }
-  .Pp{
-    width:200px;
-    height:200px;
+  .Pp {
+    width: 200px;
+    height: 200px;
     background-color: rgb(212, 212, 212);
   }
   .H {
@@ -251,7 +249,7 @@ height:600px;
     font-weight: 600;
     letter-spacing: 3px;
   }
-  .NoN{
+  .NoN {
     font-size: 2.5em;
     font-weight: 600;
   }
@@ -268,19 +266,18 @@ height:600px;
   }
   .btm_box {
     position: relative;
-  display: flex;
-  justify-content: space-evenly;
-  top: 90px;
-  padding: 5px;
-  height: 150px;
-  width:450px
-
-}
+    display: flex;
+    justify-content: space-evenly;
+    top: 90px;
+    padding: 5px;
+    height: 150px;
+    width: 450px;
+  }
   #doodle {
     width: 150px;
     position: relative;
-    margin-left:60px;
-    padding:5px;
+    margin-left: 60px;
+    padding: 5px;
   }
   #contri_btn {
     width: 250px;
@@ -294,7 +291,6 @@ height:600px;
   }
 }
 
-
 @media screen and (min-width: 480px) and (max-width: 768px) {
   .Top_Con h1 {
     font-size: 2em;
@@ -304,34 +300,34 @@ height:600px;
     margin-top: 10px;
     justify-content: center;
   }
-  .left_box{
+  .left_box {
     position: relative;
     width: 90%;
-    left:25px;
+    left: 25px;
   }
   .MainBox {
     padding: 10px;
     margin: 5px;
-    width:100%;
-  height:250px;
-  flex-direction: row;
+    width: 100%;
+    height: 250px;
+    flex-direction: row;
   }
-  .uDetail{
-    width:200px;
+  .uDetail {
+    width: 200px;
     font-size: 0.9em;
     text-align: center;
   }
-  .Fw{
-      font-size: 0.9em;
-      width:90px;
-      height:40px;
+  .Fw {
+    font-size: 0.9em;
+    width: 90px;
+    height: 40px;
   }
-  .Fw:hover{
-      font-size: 1.1em;
+  .Fw:hover {
+    font-size: 1.1em;
   }
-  .Pp{
-    width:150px;
-    height:150px;
+  .Pp {
+    width: 150px;
+    height: 150px;
     background-color: rgb(212, 212, 212);
   }
   .H {
@@ -339,7 +335,7 @@ height:600px;
     font-weight: 600;
     letter-spacing: 3px;
   }
-  .NoN{
+  .NoN {
     font-size: 2.3em;
     font-weight: 600;
   }
@@ -354,33 +350,31 @@ height:600px;
     margin: 0;
     top: 0;
   }
-  .right_Box{
-    right:0;
+  .right_Box {
+    right: 0;
     padding: 5px;
     align-items: center;
     justify-content: flex-start;
-
   }
   .startnow {
-    padding:20px;
-    top:15px;
+    padding: 20px;
+    top: 15px;
     display: flex;
     position: relative;
-    right:0;
+    right: 0;
   }
   .btm_box {
     position: relative;
     display: flex;
     justify-content: space-evenly;
-    top:5px;
+    top: 5px;
     padding: 5px;
-
-}
+  }
   #doodle {
     width: 150px;
     position: relative;
-    margin-left:160px;
-    padding:5px;
+    margin-left: 160px;
+    padding: 5px;
   }
   #contri_btn {
     width: 250px;
@@ -409,38 +403,38 @@ height:600px;
     margin-top: 1px;
     justify-content: center;
   }
-  .left_box{
+  .left_box {
     position: relative;
     width: 95%;
-    left:5px;
+    left: 5px;
   }
   .MainBox {
     padding: 5px;
     margin: 5px;
-    width:100%;
-  height:200px;
-  flex-direction: row;
+    width: 100%;
+    height: 200px;
+    flex-direction: row;
   }
-  .uDetail{
+  .uDetail {
     font-size: 0.7em;
     text-align: center;
-    width:90px;
+    width: 90px;
   }
-  #Des{
+  #Des {
     text-align: left;
   }
-  .Fw{
+  .Fw {
     margin-top: 10px;
-      font-size: 0.7em;
-      width:70px;
-      height:30px;
+    font-size: 0.7em;
+    width: 70px;
+    height: 30px;
   }
-  .Fw:hover{
-      font-size: 0.8em;
+  .Fw:hover {
+    font-size: 0.8em;
   }
-  .Pp{
-    width:100px;
-    height:100px;
+  .Pp {
+    width: 100px;
+    height: 100px;
     background-color: rgb(212, 212, 212);
   }
   .H {
@@ -448,7 +442,7 @@ height:600px;
     font-weight: 600;
     letter-spacing: 1px;
   }
-  .NoN{
+  .NoN {
     font-size: 1.5em;
     font-weight: 600;
   }
@@ -463,19 +457,18 @@ height:600px;
     margin: 0;
     top: 0;
   }
-  .right_Box{
-    right:0;
+  .right_Box {
+    right: 0;
     padding: 5px;
     align-items: center;
     justify-content: flex-start;
-
   }
   .startnow {
-    padding:20px;
-    top:15px;
+    padding: 20px;
+    top: 15px;
     display: flex;
     position: relative;
-    right:0;
+    right: 0;
   }
   .btm_box {
     position: relative;
@@ -483,13 +476,12 @@ height:600px;
     justify-content: space-evenly;
     top: 15px;
     padding: 5px;
-
-}
+  }
   #doodle {
     width: 150px;
     position: relative;
-    margin-left:160px;
-    padding:5px;
+    margin-left: 160px;
+    padding: 5px;
   }
   #contri_btn {
     width: 250px;

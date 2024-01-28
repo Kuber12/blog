@@ -6,6 +6,7 @@ import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
 const NewNavi = () => {
   const data = useContext(GlobalContext);
+  // console.log(data.user.username);
   const handleLogOut = () => {
     const sessionDestroy = sessionStorage.removeItem("authToken");
   };
@@ -24,9 +25,11 @@ const NewNavi = () => {
             Home
           </Link>
         </li>
-        <li>{data.username ? <Link to="/AddBlog">Create</Link> : ""}</li>
-        <li>{data.username ? <Link to="/DisplayEditBLog">Edit</Link> : ""}</li>
-        {data.username ? (
+        <li>{data.user.username ? <Link to="/AddBlog">Create</Link> : ""}</li>
+        <li>
+          {data.user.username ? <Link to="/DisplayEditBLog">Edit</Link> : ""}
+        </li>
+        {data.user.username ? (
           <li id="userImage">
             <Link to="/User">
               <FontAwesomeIcon icon={faUser} />
@@ -39,8 +42,8 @@ const NewNavi = () => {
                   alt="dp"
                 />
                 <h3>View Profile</h3>
-                <h2>Name: {data.username}</h2>
-                <h2>Email: {data.username}</h2>
+                <h2>Name: {data.user.username}</h2>
+                <h2>Email: {data.user.email}</h2>
                 <Link to="/Login" onClick={handleLogOut}>
                   <span style={{ fontSize: "12px" }}>LogOut</span>
                 </Link>

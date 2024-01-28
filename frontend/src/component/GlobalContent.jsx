@@ -3,7 +3,8 @@ import axios from "axios";
 
 export const GlobalContext = createContext();
 
-const GlobalContentProvider = (props) => {
+const GlobalContentProvider = ({ children }) => {
+  const [tokenData, setTokenData] = useState(null);
   const [user, setUser] = useState({
     id: "",
     username: "",
@@ -11,19 +12,21 @@ const GlobalContentProvider = (props) => {
     email: "",
     imgUrl: "",
   });
+  // console.log(tokenData);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const tokenData = sessionStorage.getItem("authToken");
-        const data = tokenData;
+        // const tokenData = sessionStorage.getItem("authToken");
+        // const data = tokenData;
         // console.log(data);
 
         const res = await axios.get("http://localhost:5000/api/user/current", {
           headers: {
-            Authorization: `Bearer ${data}`,
+            Authorization: `Bearer ${tokenData}`,
           },
         });
+        // console.log(tokenData);
         const { username, name, email, id } = res.data;
         console.log(res.data);
         console.log(res.data.username);
@@ -38,12 +41,12 @@ const GlobalContentProvider = (props) => {
     };
 
     fetchData();
-  }, []);
+  }, [tokenData]);
 
   return (
     <>
-      <GlobalContext.Provider value={user}>
-        {props.children}
+      <GlobalContext.Provider value={{ user, tokenData, setTokenData }}>
+        {children}
       </GlobalContext.Provider>
     </>
   );

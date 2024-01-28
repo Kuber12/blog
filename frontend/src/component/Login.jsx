@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { GlobalContext } from "./GlobalContent";
 const Login = () => {
+  const { setTokenData } = useContext(GlobalContext);
   const navigation = useNavigate();
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [data, setData] = useState({
@@ -25,6 +26,7 @@ const Login = () => {
         console.log(res.data.message);
         const token = res.data.message;
         sessionStorage.setItem("authToken", token);
+        setTokenData(token);
         navigation("/");
       })
       .catch((err) => console.log(err));

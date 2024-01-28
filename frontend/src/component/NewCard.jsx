@@ -40,8 +40,8 @@ const NewCard = ({ data }) => {
         }}
       >
         {data &&
-          data.map((items) => (
-            <div id="card-container">
+          data.map((items, i) => (
+            <div id="card-container" key={i}>
               <div id="img-container">
                 <img
                   src={`${imagePath}${items.image}`}

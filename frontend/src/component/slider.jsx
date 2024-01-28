@@ -36,10 +36,12 @@ const Slider = () => {
           <div className={`slider ${Slider === 1 ? "active" : ""}`}>
             <img id="slide1" src={Hill} />
             <div className="content" id="content1">
-              <p className="h">
-                Make Your
+              <p className="h">Make Your</p>
+              <p className="sp">
+                <span>
+                  First Post "{data.user.username ? data.user.username : ""}"
+                </span>
               </p>
-              <p className="sp"><span >First Post {data.username ? data.username : ""} </span></p>
               <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
@@ -57,10 +59,10 @@ const Slider = () => {
           <div className={`slider ${Slider === 2 ? "active" : ""}`}>
             <img id="slide2" src={Mountain} />
             <div className="content" id="content2">
-            <p className="h">
-                Search
+              <p className="h">Search</p>
+              <p className="sp">
+                <span>Contents </span>
               </p>
-              <p className="sp"><span >Contents </span></p>
               <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
@@ -78,10 +80,10 @@ const Slider = () => {
           <div className={`slider ${Slider === 3 ? "active" : ""}`}>
             <img id="slide3" src={Sunset} />
             <div className="content" id="content3">
-            <p className="h">
-                Find New
+              <p className="h">Find New</p>
+              <p className="sp">
+                <span>Connections </span>
               </p>
-              <p className="sp"><span >Connections </span></p>
               <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
