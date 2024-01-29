@@ -9,11 +9,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link, useAsyncError } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 
-import {
-  faEye,
-  faHeart,
-  faComment,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEye, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
 const NewCard = ({ data }) => {
   const imagePath = "../../uploads/";
@@ -51,7 +47,7 @@ const NewCard = ({ data }) => {
                         <FontAwesomeIcon
                           icon={faEye}
                           style={{ fontSize: "25px", paddingRight: "5px" }}
-                          />
+                        />
                       </Link>
                       <span>{data.views}</span>
                     </div>

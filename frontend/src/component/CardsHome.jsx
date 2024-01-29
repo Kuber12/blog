@@ -46,7 +46,7 @@ const CardsHome = () => {
     };
     loadInitialData();
   }, []);
-
+  const reversedData = data.reverse();
   return (
     <>
       <div
@@ -77,7 +77,7 @@ const CardsHome = () => {
           <SearchBar />
           {/* <Cards /> */}
 
-          <NewCard data={data} />
+          <NewCard data={reversedData} />
         </InfiniteScroll>
       </div>
     </>

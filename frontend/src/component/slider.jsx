@@ -16,6 +16,7 @@ import { GlobalContext } from "./GlobalContent";
 const Slider = () => {
   const [Slider, setSlider] = useState(1);
   const data = useContext(GlobalContext);
+  const username = data.user.username;
 
   const handleSlider = (slideNum) => {
     setSlider(slideNum);
@@ -38,10 +39,7 @@ const Slider = () => {
             <div className="content" id="content1">
               <p className="h">Make Your</p>
               <p className="sp">
-                <span>
-                  First Post{" "}
-                  {data.user.username ? `"${data.user.username} "` : null}
-                </span>
+                <span>First Post {username ? `"${username} "` : null}</span>
               </p>
               <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -50,9 +48,15 @@ const Slider = () => {
                 repellendus, a quasi tenetur quae nesciunt temporibus aut
                 placeat?
               </p>
-              <Link className="btns" to="/AddBlog">
-                Post Blog <FontAwesomeIcon icon={faPenToSquare} />
-              </Link>
+              {username ? (
+                <Link className="btns" to="/AddBlog">
+                  Post Blog <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
+              ) : (
+                <Link className="btns" to="/Login">
+                  Post Blog <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
+              )}
             </div>
           </div>
         )}

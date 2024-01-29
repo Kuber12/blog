@@ -190,13 +190,23 @@ const OpenBlog = () => {
                 </div>
               </div>
               <div key={2} className="blog-action-tooltip">
-                <div onClick={handleLike} className="blog-tooltip-div">
-                  <FontAwesomeIcon
-                    icon={faHeart}
-                    style={{ fontSize: "25px", paddingRight: "5px" }}
-                  />
-                  <span>{viewLike.totalLikes}</span>
-                </div>
+                {username ? (
+                  <div onClick={handleLike} className="blog-tooltip-div">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{ fontSize: "25px", paddingRight: "5px" }}
+                    />
+                    <span>{viewLike.totalLikes}</span>
+                  </div>
+                ) : (
+                  <div className="blog-tooltip-div">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{ fontSize: "25px", paddingRight: "5px" }}
+                    />
+                    <span>{viewLike.totalLikes}</span>
+                  </div>
+                )}
               </div>
               <div key={3} className="blog-action-tooltip">
                 <div className="blog-tooltip-div">

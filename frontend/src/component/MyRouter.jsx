@@ -37,7 +37,7 @@ const MyRouter = () => {
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/OpenBlog/:id" element={<OpenBlog />}></Route>
             <Route path="/NewCard" element={<NewCard />}></Route>
-            <Route path="User" element={<User />}></Route>
+            <Route path="/User" element={<User />}></Route>
           </Routes>
         </Router>
       </GlobalContentProvider>
