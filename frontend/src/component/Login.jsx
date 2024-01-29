@@ -120,6 +120,14 @@ const Login = () => {
         </div>
         <div className="middle"></div>
         <div className="right">
+          <div className="form-close">
+            <Link to="/">
+              <FontAwesomeIcon
+              icon={faXmark}
+              size="2x"
+              />
+            </Link>
+          </div>
           <h1 className="form-heading hedvig-font">Register Now</h1>
           <form
             onSubmit={handleRegistration}
