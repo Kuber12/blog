@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
 import "./Login.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { GlobalContext } from "./GlobalContent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faXmark
+} from "@fortawesome/free-solid-svg-icons";
 const Login = () => {
   const { setTokenData } = useContext(GlobalContext);
   const navigation = useNavigate();
@@ -118,6 +122,14 @@ const Login = () => {
       <div className="right">
         <h1 className="form-heading hedvig-font">Register Now</h1>
         <form onSubmit={handleRegistration} className="reg-form form-container">
+          <div className="form-close">
+            <Link to="/">
+              <FontAwesomeIcon
+              icon={faXmark}
+              size="2x"
+              />
+            </Link>
+          </div>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -226,9 +238,10 @@ const Login = () => {
             Other
           </label>
           </div>
-          <button className="submit" type="submit">
-            SIGN UP
-          </button>
+      
+            <button className="submit" type="submit">
+              SIGN UP
+            </button>
         </form>
         <span className="slide-button" onClick={handleSlideButtonClick}>
           Log In To Your Existing Account
