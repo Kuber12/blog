@@ -229,7 +229,7 @@ const OpenBlog = () => {
             <div className="comment-box">
               {viewcomment.map((comment) => (
                 <div className="comment">
-                  <div className="comment-user"></div>
+                  <div className="comment-user">{comment.username}</div>
                   <p className="comment-text">{comment.text}</p>
                   <FontAwesomeIcon
                     icon={faHeart}

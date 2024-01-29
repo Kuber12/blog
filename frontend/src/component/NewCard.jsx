@@ -32,6 +32,7 @@ const NewCard = ({ data }) => {
       <div className="blog-display">
         {data &&
           data.map((items, i) => (
+              <Link className="link-to" to={`../OpenBlog/${items._id}`}>
             <div id="card-container" key={i}>
               <div id="img-container">
                 <img
@@ -43,7 +44,6 @@ const NewCard = ({ data }) => {
                 <div className="blog-action-icons">
                   <div key={1} className="blog-action-tooltip">
                     <div className="blog-tooltip-div">
-                      <Link className="link-to" to={`../OpenBlog/${items._id}`}>
                         <FontAwesomeIcon
                           icon={faEye}
                           style={{ fontSize: "25px", paddingRight: "5px" }}
@@ -85,6 +85,7 @@ const NewCard = ({ data }) => {
                 </button>
               </div>
             </div>
+          </Link>
           ))}
       </div>
     </>
