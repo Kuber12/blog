@@ -44,7 +44,7 @@ const NewNavi = () => {
                 <h3>View Profile</h3>
                 <h2>Name: {data.user.username}</h2>
                 <h2>Email: {data.user.email}</h2>
-                <Link to="/Login" onClick={handleLogOut}>
+                <Link to="/" onClick={handleLogOut}>
                   <span style={{ fontSize: "12px" }}>LogOut</span>
                 </Link>
               </div>

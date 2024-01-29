@@ -24,9 +24,9 @@ const UserProfile = () => {
     axios
       .get(`http://localhost:5000/api/blog/haha/user`)
       .then((res) => {
-        console.log(res.data.message);
+        // console.log(res.data.message);
         setData(res.data.message);
-        console.log(Data);
+        // console.log(Data);
       })
       .catch((err) => setError(err.message));
   }, []);
