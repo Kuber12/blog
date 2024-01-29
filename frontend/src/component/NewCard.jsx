@@ -32,60 +32,60 @@ const NewCard = ({ data }) => {
       <div className="blog-display">
         {data &&
           data.map((items, i) => (
-              <Link className="link-to" to={`../OpenBlog/${items._id}`}>
-            <div id="card-container" key={i}>
-              <div id="img-container">
-                <img
-                  src={`${imagePath}${items.image}`}
-                  alt={`${items.image}`}
-                />
-              </div>
-              <div id="buttons-container">
-                <div className="blog-action-icons">
-                  <div key={1} className="blog-action-tooltip">
-                    <div className="blog-tooltip-div">
+            <Link className="link-to" to={`../OpenBlog/${items._id}`}>
+              <div id="card-container" key={i}>
+                <div id="img-container">
+                  <img
+                    src={`${imagePath}${items.image}`}
+                    alt={`${items.image}`}
+                  />
+                </div>
+                <div id="buttons-container">
+                  <div className="blog-action-icons">
+                    <div key={1} className="blog-action-tooltip">
+                      <div className="blog-tooltip-div">
                         <FontAwesomeIcon
                           icon={faEye}
                           style={{ fontSize: "25px", paddingRight: "5px" }}
                         />
-                      </Link>
-                      <span>{data.views}</span>
+
+                        <span>{data.views}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div key={2} className="blog-action-tooltip">
-                    <div className="blog-tooltip-div">
-                      <FontAwesomeIcon
-                        icon={faHeart}
-                        style={{ fontSize: "25px", paddingRight: "5px" }}
-                      />
-                      <span></span>
+                    <div key={2} className="blog-action-tooltip">
+                      <div className="blog-tooltip-div">
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          style={{ fontSize: "25px", paddingRight: "5px" }}
+                        />
+                        <span></span>
+                      </div>
                     </div>
-                  </div>
-                  <div key={3} className="blog-action-tooltip">
-                    <div className="blog-tooltip-div">
-                      <FontAwesomeIcon
-                        icon={faComment}
-                        style={{ fontSize: "25px", paddingRight: "5px" }}
-                      />
-                      <span></span>
+                    <div key={3} className="blog-action-tooltip">
+                      <div className="blog-tooltip-div">
+                        <FontAwesomeIcon
+                          icon={faComment}
+                          style={{ fontSize: "25px", paddingRight: "5px" }}
+                        />
+                        <span></span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="heading">
-                <h1>{truncateText(items.headline, 25)}</h1>
-              </div>
-              <div id="tags">
-                <div>
-                  <h5> @{items.tag}</h5>
-                  <h6>1 Hour Ago</h6>
+                <div id="heading">
+                  <h1>{truncateText(items.headline, 25)}</h1>
                 </div>
-                <button>
-                  <BsThreeDotsVertical />
-                </button>
+                <div id="tags">
+                  <div>
+                    <h5> @{items.tag}</h5>
+                    <h6>1 Hour Ago</h6>
+                  </div>
+                  <button>
+                    <BsThreeDotsVertical />
+                  </button>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
           ))}
       </div>
     </>
