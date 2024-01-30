@@ -21,6 +21,10 @@ import axios from "axios";
 import { GlobalContext } from "./GlobalContent";
 import NewNavi from "./NewwNav";
 const OpenBlog = () => {
+  const handleImageError = (event) => {
+    // Set the source to the default image if the original image fails to load
+    event.target.src = '../../uploads/default.png';
+  };
   const userData = useContext(GlobalContext);
   const { user } = userData;
   const { username } = user;
@@ -173,6 +177,7 @@ const OpenBlog = () => {
                 className="blog-content-image"
                 src={`../../uploads/${data.image}`}
                 alt="blog content"
+                onError={handleImageError}
               />
             )}
             <div className="blog-content-text">

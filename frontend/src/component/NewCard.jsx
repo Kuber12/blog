@@ -12,6 +12,10 @@ import { RotatingLines } from "react-loader-spinner";
 import { faEye, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
 const NewCard = ({ data }) => {
+  const handleImageError = (event) => {
+    // Set the source to the default image if the original image fails to load
+    event.target.src = '../../uploads/default.png';
+  };
   const imagePath = "../../uploads/";
   // console.log(data);
   //truncate text
@@ -38,6 +42,7 @@ const NewCard = ({ data }) => {
                   <img
                     src={`${imagePath}${items.image}`}
                     alt={`${items.image}`}
+                    onError={handleImageError}
                   />
                 </div>
                 <div id="buttons-container">
