@@ -9,7 +9,7 @@ const NewNavi = () => {
 
   const { user } = data;
   const { setUser } = data;
-  console.log(user);
+  // console.log(user);
   // console.log(data.user.username);
   const handleLogOut = () => {
     const sessionDestroy = sessionStorage.removeItem("authToken");

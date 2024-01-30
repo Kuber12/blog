@@ -13,7 +13,7 @@ const EditBlog = () => {
   const userData = useContext(GlobalContext);
   const { user } = userData;
   const { username } = user;
-  // console.log(username);
+
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
@@ -25,12 +25,34 @@ const EditBlog = () => {
     username: username,
   });
   const token = sessionStorage.getItem("authToken");
-  // console.log(token);
+
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
+  useEffect(() => {
+    const fetchPrevious = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/blog/${id}`, {
+          method: "GET",
+        });
+        const datas = await res.json();
+
+        const { headline, image, tag, content } = datas.message;
+        setValues((prev) => ({
+          ...prev,
+          headline: headline,
+          tag: tag,
+          content: content,
+          image: image,
+        }));
+      } catch (ex) {
+        console.log("error while fetching" + ex);
+      }
+    };
+    fetchPrevious();
+  }, []);
 
   const handleFile = (e) => {
     // console.log(e.target.files);
@@ -86,7 +108,7 @@ const EditBlog = () => {
         {
           ...values,
           // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
-          image: tempFilename ? tempFilename : "",
+          image: tempFilename ? tempFilename : values.image,
         },
         config
       );
@@ -144,7 +166,7 @@ const EditBlog = () => {
               <input
                 type="text"
                 className="title-input"
-                placeholder="Enter Title"
+                placeholder={`${values.headline}`}
                 onChange={(e) =>
                   setValues({ ...values, headline: e.target.value })
                 }
@@ -154,7 +176,7 @@ const EditBlog = () => {
                   // onChange={handleTextArea}
 
                   className="content-input"
-                  placeholder="Leave a comment here"
+                  placeholder={`${values.content}`}
                   id="floatingTextarea"
                   style={{ width: "100%", height: "124px" }}
                   onChange={(e) =>
