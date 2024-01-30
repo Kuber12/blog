@@ -46,13 +46,20 @@ a {
   border-radius: 50px;
 }
 .navbar .logo {
-  font-size: 40px;
-  font-weight: bold;
-  color: black;
-  position: relative;
-  margin-top: 0;
-  left: 70px;
   cursor: pointer;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+.logoo {
+  width: 55px;
+  margin-right: 10px;
+}
+.logo-text {
+  color: black;
+  font-weight: bold;
+  font-size: 30px;
 }
 .icon {
   font-size: 30px;

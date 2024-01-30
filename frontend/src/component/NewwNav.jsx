@@ -4,6 +4,7 @@ import "./navi.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
+import Picz from "../images/Picture1.png";
 const NewNavi = () => {
   const data = useContext(GlobalContext);
 
@@ -17,9 +18,12 @@ const NewNavi = () => {
   };
   return (
     <div className="navbar hedvig-font">
-      <Link to="/" className="logo">
-        Blog
-      </Link>
+     <Link to="/" className="logo">
+      <div className="logo-container">
+        <img src={Picz} className="logoo" alt="Logo" />
+        <span className="logo-text">Blog Tale</span>
+      </div>
+    </Link>
       <input type="checkbox" id="menuBt" />
       <label htmlFor="menuBt" className="icon">
         <FontAwesomeIcon icon={faBars} />
