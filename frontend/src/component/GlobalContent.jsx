@@ -4,7 +4,12 @@ import axios from "axios";
 export const GlobalContext = createContext();
 
 const GlobalContentProvider = ({ children }) => {
-  const [tokenData, setTokenData] = useState(null);
+  const [tokenData, setTokenData] = useState(
+    sessionStorage.getItem("authToken") //base condition //data from login
+  );
+  const [tokencheck, setTokenCheck] = useState(
+    sessionStorage.getItem("authToken") //set and get
+  );
   const [user, setUser] = useState({
     id: "",
     username: "",
@@ -12,24 +17,20 @@ const GlobalContentProvider = ({ children }) => {
     email: "",
     imgUrl: "",
   });
-  // console.log(tokenData);
 
+  useEffect(() => {
+    setTokenCheck(sessionStorage.setItem("authToken", tokenData));
+  }, [tokenData]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const tokenData = sessionStorage.getItem("authToken");
-        // const data = tokenData;
-        // console.log(data);
-
         const res = await axios.get("http://localhost:5000/api/user/current", {
           headers: {
-            Authorization: `Bearer ${tokenData}`,
+            Authorization: `Bearer ${tokenData ? tokenData : tokencheck}`,
           },
         });
-        // console.log(tokenData);
+
         const { username, name, email, id } = res.data;
-        // console.log(res.data);
-        // console.log(res.data.username);
 
         setUser((prev) => ({ ...prev, username: username }));
         setUser((prev) => ({ ...prev, name: name }));
@@ -45,7 +46,9 @@ const GlobalContentProvider = ({ children }) => {
 
   return (
     <>
-      <GlobalContext.Provider value={{ user, tokenData, setTokenData }}>
+      <GlobalContext.Provider
+        value={{ user, setUser, tokenData, setTokenData }}
+      >
         {children}
       </GlobalContext.Provider>
     </>

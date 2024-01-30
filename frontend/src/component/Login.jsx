@@ -6,9 +6,7 @@ import { GlobalContext } from "./GlobalContent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faXmark
-} from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 const Login = () => {
   const { setTokenData } = useContext(GlobalContext);
   const navigation = useNavigate();
@@ -32,7 +30,7 @@ const Login = () => {
       .then((res) => {
         // console.log(res.data.message);
         const token = res.data.message;
-        sessionStorage.setItem("authToken", token);
+        // sessionStorage.setItem("authToken", token);
         setTokenData(token);
         toast.success("Login Successful");
         setTimeout(() => {
@@ -122,10 +120,7 @@ const Login = () => {
         <div className="right">
           <div className="form-close">
             <Link to="/">
-              <FontAwesomeIcon
-              icon={faXmark}
-              size="2x"
-              />
+              <FontAwesomeIcon icon={faXmark} size="2x" />
             </Link>
           </div>
           <h1 className="form-heading hedvig-font">Register Now</h1>

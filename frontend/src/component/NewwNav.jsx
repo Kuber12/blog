@@ -6,9 +6,14 @@ import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
 const NewNavi = () => {
   const data = useContext(GlobalContext);
+
+  const { user } = data;
+  const { setUser } = data;
+  console.log(user);
   // console.log(data.user.username);
   const handleLogOut = () => {
     const sessionDestroy = sessionStorage.removeItem("authToken");
+    setUser("");
   };
   return (
     <div className="navbar hedvig-font">
