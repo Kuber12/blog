@@ -31,6 +31,12 @@ const getBlogsByUsername = asyncHandler(async (req, res) => {
   res.status(200).json({ message: blog });
 });
 
+const getBlogsByTagname = asyncHandler(async (req, res) => {
+  const tag = req.params.tag;
+  const blog = await Blog.find(({ tag: tag }));
+  res.status(200).json({ message: blog });
+});
+
 const createBlog = asyncHandler(async (req, res) => {
   try {
     const { headline, content, tag, image, username } = req.body; 
@@ -133,4 +139,4 @@ const countBlogLikes = asyncHandler(async (req,res) =>{
   }
 })
 
-module.exports = { getBlog, getBlogs, getBlogsByUsername, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes };
+module.exports = { getBlog, getBlogs, getBlogsByUsername,getBlogsByTagname, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes };

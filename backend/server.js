@@ -16,6 +16,7 @@ app.use("/api/user", require("./routes/userRoutes"),require("./routes/followRout
 app.use("/api/comment", require("./routes/commentRoutes"));
 app.use("/api/file", require("./routes/fileRoutes"));
 app.use("/api/newsletter", require("./routes/emailRoutes"));
+app.use("/api/tag", require("./routes/tagRoutes"));
 
 
 app.listen(PORT, () => {
