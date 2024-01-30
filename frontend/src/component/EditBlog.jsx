@@ -93,6 +93,14 @@ const EditBlog = () => {
           },
           config
         );
+        axios
+          .delete(`http://localhost:5000/api/file/${values.image}/delete`)
+          .then((res) => {
+            console.log("Image deleted");
+          })
+          .catch((ex) => {
+            console.log("errror" + ex);
+          });
 
         tempFilename = imgResponse.data.fileName;
         console.log("Image Submitted", tempFilename);
