@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 
 const getTags = asyncHandler(async (req, res) => {
     const tags = await Tags.find()
-
-    res.json({
+    res.status(200).json({
         message: tags,
     });
 });

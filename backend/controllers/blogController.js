@@ -16,7 +16,7 @@ const getBlogs = asyncHandler(async (req, res) => {
         .limit(limit)
         .exec();
 
-      res.json({
+      res.status(200).json({
         message: blogs,
         totalPages,
       });
