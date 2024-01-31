@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from "react";
-// import Cards from "./Cards";
-import SearchBar from "./SearchBar";
-import NewCard from "./NewCard";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RotatingLines } from "react-loader-spinner";
-import { noAuto } from "@fortawesome/fontawesome-svg-core";
+// import SearchBar from "./SearchBar";
+import NewCard from "./NewCard";
+import "./SearchBar.css";
+import search from "../Icons/search.png";
+
 const CardsHome = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [limit, setLimit] = useState(9);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  const handleSearch = (e) => {
+    const searched = e.target.value;
+    setSearchTerm(searched);
+    const filteredResults = data.filter((item) =>
+      item.headline.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(filteredResults);
+  };
+
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -23,12 +44,14 @@ const CardsHome = () => {
       return [];
     }
   };
+
   const fetchMoreData = async () => {
     try {
       setPage((prev) => prev + 1);
       const newData = await fetchData();
       if (newData.length > 0) {
         setData((prev) => [...prev, ...newData]);
+        setFilteredData((prev) => [...prev, ...newData]);
       } else {
         setHasMore(false);
       }
@@ -40,13 +63,13 @@ const CardsHome = () => {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      const initaldata = await fetchData(page);
-      setData(initaldata);
-      // console.log(initaldata);
+      const initialData = await fetchData(page);
+      setData(initialData);
+      setFilteredData(initialData);
     };
     loadInitialData();
   }, []);
-  const reversedData = data.reverse();
+
   return (
     <>
       <div
@@ -71,13 +94,41 @@ const CardsHome = () => {
           next={fetchMoreData}
           hasMore={hasMore}
           loader={<RotatingLines />}
-
-          // height={500}
         >
-          <SearchBar />
-          {/* <Cards /> */}
+          {/* <SearchBar /> */}
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "transparent",
+              display: "flex",
+              justifyContent: "center",
+              padding: "20px",
+              gap: "10px 20px",
+              flexWrap: "wrap",
+            }}
+          >
+            <div
+              style={{
+                width: "60%",
+                textAlign: "center",
+                display: "flex",
+                position: "relative",
+                alignContent: "center",
+              }}
+            >
+              <img className="searchIcon" src={search} alt="" />
+              <input
+                className="searchInput"
+                type="text"
+                placeholder="Search"
+                onChange={handleSearch}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+              />
+            </div>
+          </div>
 
-          <NewCard data={reversedData} />
+          <NewCard data={isInputFocused ? filteredData : data} />
         </InfiniteScroll>
       </div>
     </>
