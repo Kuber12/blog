@@ -3,13 +3,23 @@ import "./SearchBar.css";
 import search from "../Icons/search.png";
 import axios from "axios";
 const SearchBar = () => {
-  const [tags,setTags] = useState([]);
-  useEffect(()=>{
+  const [tags, setTags] = useState([]);
+  useEffect(() => {
     axios
       .get("http://localhost:5000/api/tag", { timeout: 5000 })
       .then((res) => setTags(res.data.message))
       .catch((err) => console.log(err));
-  })
+  });
+  const handleByTags = (tagValue) => {
+    axios
+      .get(`http://localhost:5000/api/blog/${tagValue}/tag`)
+      .then((res) => {
+        setTags(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div
@@ -45,11 +55,17 @@ const SearchBar = () => {
         </select> */}
       </div>
       <div>
-      <div className="search-tags-container">
-        {tags && tags.map((tag, index) => (
-          <button className="search-tags">{tag.tagname}</button>
-        ))}
-      </div>
+        <div className="search-tags-container">
+          {tags &&
+            tags.map((tag, index) => (
+              <button
+                className="search-tags"
+                onClick={() => handleByTags(tag.tagname)}
+              >
+                {tag.tagname}
+              </button>
+            ))}
+        </div>
       </div>
     </>
   );
