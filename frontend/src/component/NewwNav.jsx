@@ -18,12 +18,12 @@ const NewNavi = () => {
   };
   return (
     <div className="navbar hedvig-font">
-     <Link to="/" className="logo">
-      <div className="logo-container">
-        <img src={Picz} className="logoo" alt="Logo" />
-        <span className="logo-text">Blog Tale</span>
-      </div>
-    </Link>
+      <Link to="/" className="logo">
+        <div className="logo-container">
+          <img src={Picz} className="logoo" alt="Logo" />
+          <span className="logo-text">Blog Tale</span>
+        </div>
+      </Link>
       <input type="checkbox" id="menuBt" />
       <label htmlFor="menuBt" className="icon">
         <FontAwesomeIcon icon={faBars} />
@@ -32,6 +32,11 @@ const NewNavi = () => {
         <li>
           <Link to="/" className="active">
             Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/Blogs" className="active">
+            Blog
           </Link>
         </li>
         <li>{data.user.username ? <Link to="/AddBlog">Create</Link> : ""}</li>

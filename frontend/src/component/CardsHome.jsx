@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RotatingLines } from "react-loader-spinner";
-// import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar";
 import NewCard from "./NewCard";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
@@ -95,7 +95,7 @@ const CardsHome = () => {
           hasMore={hasMore}
           loader={<RotatingLines />}
         >
-          {/* <SearchBar /> */}
+          <SearchBar />
           <div
             style={{
               width: "100%",

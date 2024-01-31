@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Slider from "./slider";
 import { Helmet } from "react-helmet";
-import CardsHome from "./CardsHome";
+// import CardsHome from "./CardsHome";
 import BestBlog from "./BestBlog";
 import TopContributor from "./TopContri";
 import { GlobalContext } from "./GlobalContent";
@@ -16,7 +16,7 @@ const Home = () => {
       <Slider />
       <BestBlog />
       <TopContributor />
-      <CardsHome />
+      {/* <CardsHome /> */}
     </div>
   );
 };

@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./NewCard.css";
-import { FaEye } from "react-icons/fa";
-import { FaRegCommentAlt } from "react-icons/fa";
-import { FcLike } from "react-icons/fc";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Link, useAsyncError } from "react-router-dom";
-import { RotatingLines } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 import { faEye, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
 const NewCard = ({ data }) => {
   const handleImageError = (event) => {
     // Set the source to the default image if the original image fails to load
-    event.target.src = '../../uploads/default.png';
+    event.target.src = "../../uploads/default.png";
   };
   const imagePath = "../../uploads/";
   // console.log(data);
@@ -36,7 +31,7 @@ const NewCard = ({ data }) => {
       <div className="blog-display">
         {data &&
           data.map((items, i) => (
-            <Link className="link-to" to={`../OpenBlog/${items._id}`}>
+            <Link className="link-to" key={i} to={`../OpenBlog/${items._id}`}>
               <div id="card-container" key={i}>
                 <div id="img-container">
                   <img
