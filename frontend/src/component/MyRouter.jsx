@@ -15,6 +15,7 @@ import OpenBlog from "./OpenBlog";
 import GlobalContentProvider from "./GlobalContent";
 import NewCard from "./NewCard";
 import BlogsPage from "../pages/BlogsPage";
+import BlogPageTag from "../pages/BlogPageTag";
 const MyRouter = () => {
   return (
     <div>
@@ -24,6 +25,7 @@ const MyRouter = () => {
             <Route path="/" element={<Layout />}>
               <Route path="/" index element={<Home />}></Route>
               <Route path="/Blogs" element={<BlogsPage />}></Route>
+              <Route path="/BlogPageTag/:tag" element={<BlogPageTag />}></Route>
             </Route>
             <Route path="AddBlog" element={<AddBlog />}></Route>
             <Route path="EditBlog/:id" element={<EditBlog />}></Route>
