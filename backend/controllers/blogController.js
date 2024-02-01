@@ -25,6 +25,41 @@ const getBlogs = asyncHandler(async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
 });
+const searchBlogs = asyncHandler(async (req, res) => {
+  const page = parseInt(req.params.page) || 1;
+  const limit = parseInt(req.params.limit) || 10;
+
+  try {
+    const aggregatePipeline = [
+      { $match: { headline: { $regex: new RegExp(req.params.query, "i") } } },
+      {
+        $facet: {
+          totalBlogs: [{ $count: 'count' }],
+          blogs: [
+            { $sort: { createdAt: 1 } },
+            { $skip: (page - 1) * limit },
+            { $limit: limit }],
+        },
+      },
+    ];
+
+    const [result] = await Blog.aggregate(aggregatePipeline);
+
+    const totalBlogs = result.totalBlogs.length > 0 ? result.totalBlogs[0].count : 0;
+    const totalPages = Math.ceil(totalBlogs / limit);
+
+    const blogs = result.blogs || [];
+
+    res.status(200).json({
+      message: blogs,
+      totalPages,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+});
 const getBlogsByUsername = asyncHandler(async (req, res) => {
   const username = req.params.username;
   const blog = await Blog.find(({ username: username }));
@@ -139,4 +174,4 @@ const countBlogLikes = asyncHandler(async (req,res) =>{
   }
 })
 
-module.exports = { getBlog, getBlogs, getBlogsByUsername,getBlogsByTagname, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes };
+module.exports = { getBlog, getBlogs, getBlogsByUsername,getBlogsByTagname,searchBlogs, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes };
