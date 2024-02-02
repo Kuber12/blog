@@ -2,28 +2,33 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RotatingLines } from "react-loader-spinner";
-// import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar";
 import NewCard from "./NewCard";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
+// import useSearch from "../SearchContext/search";
 
 const CardsHome = () => {
+  // const { tagFilter } = useSearch();
+  // console.log(tagFilter);
+
   const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+  // const [filteredData, setFilteredData] = useState([]);
+  // const [tagData, setTagData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [limit, setLimit] = useState(9);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
-  const handleSearch = (e) => {
-    const searched = e.target.value;
-    setSearchTerm(searched);
-    const filteredResults = data.filter((item) =>
-      item.headline.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredData(filteredResults);
-  };
+  // const handleSearch = (e) => {
+  //   const searched = e.target.value;
+  //   setSearchTerm(searched);
+  //   const filteredResults = data.filter((item) =>
+  //     item.headline.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  // setFilteredData(filteredResults);
+  // };
 
   const handleInputFocus = () => {
     setIsInputFocused(true);
@@ -51,7 +56,7 @@ const CardsHome = () => {
       const newData = await fetchData();
       if (newData.length > 0) {
         setData((prev) => [...prev, ...newData]);
-        setFilteredData((prev) => [...prev, ...newData]);
+        // setFilteredData((prev) => [...prev, ...newData]);
       } else {
         setHasMore(false);
       }
@@ -65,10 +70,21 @@ const CardsHome = () => {
     const loadInitialData = async () => {
       const initialData = await fetchData(page);
       setData(initialData);
-      setFilteredData(initialData);
+      // setFilteredData(initialData);
     };
     loadInitialData();
   }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:5000/api/blog/${tagFilter}/tag`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setTagData(res.data);
+  //     })
+  //     .catch((ex) => {
+  //       console.log("Error while using tags" + ex);
+  //     });
+  // }, [tagFilter]);
 
   return (
     <>
@@ -95,8 +111,8 @@ const CardsHome = () => {
           hasMore={hasMore}
           loader={<RotatingLines />}
         >
-          {/* <SearchBar /> */}
-          <div
+          <SearchBar />
+          {/* <div
             style={{
               width: "100%",
               backgroundColor: "transparent",
@@ -126,9 +142,9 @@ const CardsHome = () => {
                 onBlur={handleInputBlur}
               />
             </div>
-          </div>
-
-          <NewCard data={isInputFocused ? filteredData : data} />
+          </div> */}
+          {/* <NewCard data={isInputFocused ? filteredData : data} /> */}
+          <NewCard data={data} />
         </InfiniteScroll>
       </div>
     </>
