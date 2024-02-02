@@ -28,9 +28,21 @@ const getBlogs = asyncHandler(async (req, res) => {
 const searchBlogs = asyncHandler(async (req, res) => {
   const page = parseInt(req.params.page) || 1;
   const limit = parseInt(req.params.limit) || 10;
+  const query = req.query.query || '';
+  const tag = req.query.tag || '';
   try {
+    const matchConditions = {
+      $and: [
+        { 'headline': { $regex: new RegExp(query, 'i') } },
+      ]
+    };
+
+    if (tag !== '') {
+      matchConditions.$and = matchConditions.$and || [];
+      matchConditions.$and.push({ 'tag': tag });
+    }
     const aggregatePipeline = [
-      { $match: { 'headline': { $regex: new RegExp(req.query.q, "i") } } },
+      { $match: matchConditions },
       {
         $facet: { 
           totalBlogs: [{ $count: 'count' }],
