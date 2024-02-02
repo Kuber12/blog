@@ -28,12 +28,11 @@ const getBlogs = asyncHandler(async (req, res) => {
 const searchBlogs = asyncHandler(async (req, res) => {
   const page = parseInt(req.params.page) || 1;
   const limit = parseInt(req.params.limit) || 10;
-
   try {
     const aggregatePipeline = [
-      { $match: { headline: { $regex: new RegExp(req.params.query, "i") } } },
+      { $match: { 'headline': { $regex: new RegExp(req.query.q, "i") } } },
       {
-        $facet: {
+        $facet: { 
           totalBlogs: [{ $count: 'count' }],
           blogs: [
             { $sort: { createdAt: 1 } },
