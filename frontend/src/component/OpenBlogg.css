@@ -63,9 +63,11 @@
     flex: 1;
 }
 .comment-user{
-    height: 25px;
-    background-color: gray;
-    border-radius: 50%;
+    width: min-content;
+    padding: 0px 10px;
+    font-weight: 800;
+    background-color: #FFCD29;
+    border-radius: 10px;
 }
 .comment-write{
     display: flex;

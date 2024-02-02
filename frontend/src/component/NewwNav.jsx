@@ -55,11 +55,12 @@ const NewNavi = () => {
                   src="https://i.pinimg.com/1200x/64/81/22/6481225432795d8cdf48f0f85800cf66.jpg"
                   alt="dp"
                 />
-                <h3>View Profile</h3>
-                <h2>Name: {data.user.username}</h2>
-                <h2>Email: {data.user.email}</h2>
+                <div className="userDetailTexts">View Profile</div>
+                <div className="userDetailTexts">{data.user.username}</div>
+                <div className="userDetailTexts">{data.user.name}</div>
+                <div className="userDetailTexts">{data.user.email}</div>
                 <Link to="/" onClick={handleLogOut}>
-                  <span style={{ fontSize: "12px" }}>LogOut</span>
+                  <span className="logout userDetailTexts">LogOut</span>
                 </Link>
               </div>
             </div>
