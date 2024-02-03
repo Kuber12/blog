@@ -48,26 +48,9 @@ const SearchBar = () => {
           <img className="searchIcon" src={search} alt="" />
           <input className="searchInput" type="text" placeholder="Search" />
         </div>
-        {/* <select className="selectCategories" name="" id="selectCategories">
-          <option selected disabled value="">
-            Tags
-          </option>
-          <option value="">Entertainment</option>
-          <option value="">Funny</option>
-          <option value="">Facts</option>
-        </select> */}
       </div>
       <div>
         <div className="search-tags-container">
-          {/* {tags &&
-            tags.map((tag, index) => (
-              <button
-                className="search-tags"
-                onClick={() => handleByTags(tag.tagname)}
-              >
-                {tag.tagname}
-              </button>
-            ))} */}
           <Link className="search-tags" to={`/Blogs`}>
             All
           </Link>
