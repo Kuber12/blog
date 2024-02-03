@@ -1,34 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./SearchBar.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RotatingLines } from "react-loader-spinner";
-import SearchBar from "./SearchBar";
 import NewCard from "./NewCard";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
+import { Link } from "react-router-dom";
 // import useSearch from "../SearchContext/search";
 
 const CardsHome = () => {
-  // const { tagFilter } = useSearch();
-  // console.log(tagFilter);
-
   const [data, setData] = useState([]);
-  // const [filteredData, setFilteredData] = useState([]);
-  // const [tagData, setTagData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [limit, setLimit] = useState(9);
+  const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
-
-  // const handleSearch = (e) => {
-  //   const searched = e.target.value;
-  //   setSearchTerm(searched);
-  //   const filteredResults = data.filter((item) =>
-  //     item.headline.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-  // setFilteredData(filteredResults);
-  // };
+  const [tags, setTags] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/tag", { timeout: 5000 })
+      .then((res) => setTags(res.data.message))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleInputFocus = () => {
     setIsInputFocused(true);
@@ -43,6 +38,7 @@ const CardsHome = () => {
       const response = await axios.get(
         `http://localhost:5000/api/blog/${page}/${limit}`
       );
+      console.log(response);
       return response.data.message;
     } catch (ex) {
       console.log("error fetching");
@@ -56,7 +52,6 @@ const CardsHome = () => {
       const newData = await fetchData();
       if (newData.length > 0) {
         setData((prev) => [...prev, ...newData]);
-        // setFilteredData((prev) => [...prev, ...newData]);
       } else {
         setHasMore(false);
       }
@@ -66,10 +61,25 @@ const CardsHome = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    const searched = e.target.value;
+    console.log(searched);
+    setSearchTerm(searched);
+
+    axios
+      .get(`http://localhost:5000/api/blog/search/?query=${searched}`)
+      .then((res) => {
+        console.log(res.data);
+        setFilteredData(res.data.message);
+        console.log(res.data.totalPages);
+      });
+  };
+
   useEffect(() => {
     const loadInitialData = async () => {
-      const initialData = await fetchData(page);
+      const initialData = await fetchData();
       setData(initialData);
+      console.log(initialData);
       // setFilteredData(initialData);
     };
     loadInitialData();
@@ -111,8 +121,8 @@ const CardsHome = () => {
           hasMore={hasMore}
           loader={<RotatingLines />}
         >
-          <SearchBar />
-          {/* <div
+          {/* <SearchBar /> */}
+          <div
             style={{
               width: "100%",
               backgroundColor: "transparent",
@@ -138,13 +148,39 @@ const CardsHome = () => {
                 type="text"
                 placeholder="Search"
                 onChange={handleSearch}
-                onFocus={handleInputFocus}
+                // onKeyDown={handleInputFocus}
                 onBlur={handleInputBlur}
+                onFocus={handleInputFocus}
               />
             </div>
-          </div> */}
-          {/* <NewCard data={isInputFocused ? filteredData : data} /> */}
-          <NewCard data={data} />
+          </div>
+          <>
+            <div className="search-tags-container">
+              {/* {tags &&
+            tags.map((tag, index) => (
+              <button
+                className="search-tags"
+                onClick={() => handleByTags(tag.tagname)}
+              >
+                {tag.tagname}
+              </button>
+            ))} */}
+              <Link className="search-tags" to={`/Blogs`}>
+                All
+              </Link>
+              {tags &&
+                tags.map((tag, index) => (
+                  <Link
+                    className="search-tags"
+                    to={`/BlogPageTag/${tag.tagname}`}
+                  >
+                    {tag.tagname}
+                  </Link>
+                ))}
+            </div>
+          </>
+          <NewCard data={isInputFocused ? filteredData : data} />
+          {/* <NewCard data={data} /> */}
         </InfiniteScroll>
       </div>
     </>
