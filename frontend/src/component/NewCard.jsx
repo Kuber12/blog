@@ -26,7 +26,15 @@ const NewCard = ({ data }) => {
   // setData(res.data.message);
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        marginTop: "20px",
+      }}
+    >
       <div className="blog-display">
         {data &&
           data.map((items, i) => {
@@ -110,7 +118,7 @@ const NewCard = ({ data }) => {
           )}
           )}
       </div>
-    </>
+    </div>
   );
 };
 
