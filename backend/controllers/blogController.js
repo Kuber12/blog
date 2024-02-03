@@ -12,9 +12,10 @@ const getBlogs = asyncHandler(async (req, res) => {
     const totalPages = Math.ceil(totalBlogs / limit);
 
     const blogs = await Blog.find()
-        .skip((page - 1) * limit)
-        .limit(limit)
-        .exec();
+      .sort({ date_published: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .exec();
 
       res.status(200).json({
         message: blogs,
@@ -44,7 +45,7 @@ const searchBlogs = asyncHandler(async (req, res) => {
       {
         $facet: { 
           blogs: [
-            { $sort: { createdAt: 1 } },],
+            { $sort: { date_published: -1 } },],
         },
       },
     ];

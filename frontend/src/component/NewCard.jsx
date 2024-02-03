@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import "./NewCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -30,7 +29,29 @@ const NewCard = ({ data }) => {
     <>
       <div className="blog-display">
         {data &&
-          data.map((items, i) => (
+          data.map((items, i) => {
+            const timeDifference = new Date() - new Date(items.date_published);
+            const formatTimeDifference = (milliseconds) => {
+              const seconds = Math.floor(milliseconds / 1000);
+              const intervals = [
+                { label: 'year', divisor: 365 * 24 * 60 * 60 },
+                { label: 'month', divisor: 30 * 24 * 60 * 60 },
+                { label: 'day', divisor: 24 * 60 * 60 },
+                { label: 'hour', divisor: 60 * 60 },
+                { label: 'minute', divisor: 60 },
+              ];
+            
+              for (const interval of intervals) {
+                const value = Math.floor(seconds / interval.divisor);
+                if (value >= 1) {
+                  return `${value} ${interval.label}${value > 1 ? 's' : ''} ago`;
+                }
+              }
+            
+              return 'Just now';
+            };
+            
+          return (
             <Link className="link-to" key={i} to={`../OpenBlog/${items._id}`}>
               <div id="card-container" key={i}>
                 <div id="img-container">
@@ -78,7 +99,7 @@ const NewCard = ({ data }) => {
                 <div id="tags">
                   <div>
                     <h5> @{items.tag}</h5>
-                    <h6>1 Hour Ago</h6>
+                    <h6>{formatTimeDifference(timeDifference)}</h6>
                   </div>
                   <button>
                     <BsThreeDotsVertical />
@@ -86,7 +107,8 @@ const NewCard = ({ data }) => {
                 </div>
               </div>
             </Link>
-          ))}
+          )}
+          )}
       </div>
     </>
   );
