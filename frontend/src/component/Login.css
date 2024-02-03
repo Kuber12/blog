@@ -108,7 +108,11 @@ label {
   width: 50%;
   left: 0;
 }
-
+.err_m{
+  text-align: center;
+  color: red;
+  grid-column:2;
+}
 @media screen and (max-width: 3200px) {
   .center {
     width: 90vw;
