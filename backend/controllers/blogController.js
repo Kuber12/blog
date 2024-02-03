@@ -12,10 +12,10 @@ const getBlogs = asyncHandler(async (req, res) => {
     const totalPages = Math.ceil(totalBlogs / limit);
 
     const blogs = await Blog.find()
-      .sort({ date_published: -1 })
-      .skip((page - 1) * limit)
-      .limit(limit)
-      .exec();
+        .sort({ date_published: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .exec();
 
       res.status(200).json({
         message: blogs,
@@ -27,6 +27,8 @@ const getBlogs = asyncHandler(async (req, res) => {
     }
 });
 const searchBlogs = asyncHandler(async (req, res) => {
+  const page = parseInt(req.params.page) || 1;
+  const limit = parseInt(req.params.limit) || 10;
   const query = req.query.query || '';
   const tag = req.query.tag || '';
   try {
@@ -44,18 +46,25 @@ const searchBlogs = asyncHandler(async (req, res) => {
       { $match: matchConditions },
       {
         $facet: { 
+          totalBlogs: [{ $count: 'count' }],
           blogs: [
-            { $sort: { date_published: -1 } },],
+            { $sort: { createdAt: -1 } },
+            { $skip: (page - 1) * limit },
+            { $limit: limit }],
         },
       },
     ];
 
     const [result] = await Blog.aggregate(aggregatePipeline);
 
+    const totalBlogs = result.totalBlogs.length > 0 ? result.totalBlogs[0].count : 0;
+    const totalPages = Math.ceil(totalBlogs / limit);
+
     const blogs = result.blogs || [];
 
     res.status(200).json({
-      message: blogs
+      message: blogs,
+      totalPages,
     });
   } catch (error) {
     console.error(error);

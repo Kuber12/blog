@@ -17,7 +17,7 @@ const {
 const validateToken = require("../middleware/validateTokenHandler");
 
 router.route("/:page(\\d+)?/:limit(\\d+)?").get(getBlogs);
-router.route("/search").get(searchBlogs);
+router.route("/search/:page(\\d+)?/:limit(\\d+)?").get(searchBlogs);
 router.route("/:id").get(getBlog);
 router.route("/:username/user").get(getBlogsByUsername);
 router.route("/:tag/tag").get(getBlogsByTagname);
