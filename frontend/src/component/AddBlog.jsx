@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import "./AddBlog.css";
@@ -12,10 +12,13 @@ const AddBlog = () => {
   const userData = useContext(GlobalContext);
   const { user } = userData;
   const { username } = user;
-  // console.log(username);
+
+
+
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
+  const[tags,setTags] = useState();
   const [values, setValues] = useState({
     headline: "",
     content: "",
@@ -30,6 +33,19 @@ const AddBlog = () => {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
+
+  //for tags all fetched  
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/tag")
+      .then((res) => 
+      {
+
+        setTags(res.data.message);
+         console.log(res.data.message);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleFile = (e) => {
     // console.log(e.target.files);
@@ -180,10 +196,23 @@ const AddBlog = () => {
                     <option disabled selected value="">
                       Choose Your Tag
                     </option>
-                    <option value="News">News</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Fun">Fun</option>
-                    <option value="Facts">Facts</option>
+                    {
+                      tags && tags.map((items)=>(
+                        <>
+                          <option value={items.tagname}>{items.tagname}</option>    
+                        </>
+                      ))
+                    }
+                    {/* <option value="News">Programming</option>
+                    <option value="Entertainment">Web Development</option>
+                    <option value="Fun">Design</option>
+                    <option value="Facts">Cooking</option>
+                    <option value="Facts">Photography</option>
+                    <option value="Facts">Fitness</option>
+                    <option value="Facts">Personal</option>
+                    <option value="Facts"></option>
+                    <option value="Facts">Personal</option>
+                    <option value="Facts">Personal</option> */}
                   </select>
                 </div>
                 <div>

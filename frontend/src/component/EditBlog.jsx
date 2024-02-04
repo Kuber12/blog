@@ -17,6 +17,7 @@ const EditBlog = () => {
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
+  const [tags,setTags] = useState();
   const [values, setValues] = useState({
     headline: "",
     content: "",
@@ -31,6 +32,17 @@ const EditBlog = () => {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/tag")
+      .then((res) => 
+      {
+
+        setTags(res.data.message);
+         console.log(res.data.message);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   useEffect(() => {
     const fetchPrevious = async () => {
       try {
@@ -211,10 +223,13 @@ const EditBlog = () => {
                     <option disabled selected value="">
                       Choose Your Tag
                     </option>
-                    <option value="News">News</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Fun">Fun</option>
-                    <option value="Facts">Facts</option>
+                    {
+                      tags && tags.map((items)=>(
+                        <>
+                          <option value={items.tagname}>{items.tagname}</option>    
+                        </>
+                      ))
+                    }
                   </select>
                 </div>
                 <div>
