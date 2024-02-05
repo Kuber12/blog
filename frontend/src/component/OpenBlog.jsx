@@ -82,7 +82,10 @@ const OpenBlog = () => {
           // window.location.reload();
         }, 3000);
       })
-      .catch((ex) => console.log(ex));
+      .catch((ex) => {
+        // console.log(ex);
+        toast.error(`Something went wrong`);
+      });
   };
   //follow handle
   const handleFollows = () => {
@@ -121,10 +124,10 @@ const OpenBlog = () => {
         console.log("Error while Commenting");
       });
   };
+  // useEffect(() => {
+  // console.log(viewcomment);
+  // }, [viewcomment]);
   useEffect(() => {
-    // console.log(viewcomment);
-  }, [viewcomment]);
-  useEffect(async() => {
     axios
       .get(`http://localhost:5000/api/blog/${id}`)
       .then((res) => {
@@ -147,7 +150,6 @@ const OpenBlog = () => {
       }));
     });
   }, []);
-
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/comment/${id}`)

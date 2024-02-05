@@ -50,12 +50,13 @@ const NewNavi = () => {
             </Link>
             <div className="currentUserDetail">
               <div className="userDetailConatainer">
-                <img
-                  id="user-dp"
-                  src="https://i.pinimg.com/1200x/64/81/22/6481225432795d8cdf48f0f85800cf66.jpg"
-                  alt="dp"
-                />
-                <div className="userDetailTexts">View Profile</div>
+                <Link to="/User">
+                  <img
+                    id="user-dp"
+                    src="https://i.pinimg.com/1200x/64/81/22/6481225432795d8cdf48f0f85800cf66.jpg"
+                    alt="dp"
+                  />
+                </Link>
                 <div className="userDetailTexts">@{data.user.username}</div>
                 <div className="userDetailTexts">{data.user.name}</div>
                 <div className="userDetailTexts">{data.user.email}</div>
