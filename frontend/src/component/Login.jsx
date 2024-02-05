@@ -1,91 +1,25 @@
 import React, { useContext, useState } from "react";
-import {useForm} from "react-hook-form";
 import "./Login.css";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import { GlobalContext } from "./GlobalContent";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import Vali_value from "./Vali_value";
+import Lvali from "./Login_vali";
+import Regi_vali from "./Regi_vali";
+import R_vali from "./R_vali";
 
 const Login = () => {
-  const { setTokenData } = useContext(GlobalContext);
-  const navigation = useNavigate();
+  const { handleChange,handleSubmit, values, errors } = Vali_value(Lvali);
+  const { handleRChange,handleRSubmit,registrationData, Rerrors } =Regi_vali(R_vali);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const [data, setData] = useState({
-    username: "",
-    password: "",
-  });
-  const [registrationData, setRegistrationData] = useState({
-    username: "",
-    name: "",
-    password: "",
-    dob: "",
-    email: "",
-  });
+
    const [error, setError] =useState(null);
-    // const { register, handleSubmit, formState: { errors } } = useForm();
-    const { register: loginRegister, handleSubmit: loginHS, formState: loginFS } = useForm();
-    const { register: registerRegister, handleSubmit: registerHS, formState: registerFS } = useForm();
+    
   
     const selectedGender = "Male"; //overwrite later
-  // const handleLogin = (event) => {
-  //   event.preventDefault();
-  //   axios
-  //     .post("http://localhost:5000/api/user/login", data)
-  //     .then((res) => {
-  //       // console.log(res.data.message);
-  //       const token = res.data.message;
-  //       // sessionStorage.setItem("authToken", token);
-  //       setTokenData(token);
-  //       toast.success("Login Successful");
-  //       setTimeout(() => {
-  //         navigation("/");
-  //       }, 3000);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-  const handleLogin = (data) => {
-    axios
-      .post("http://localhost:5000/api/user/login", data)
-      .then((res) => {
-        // console.log(res.data.message);
-        const token = res.data.message;
-        // sessionStorage.setItem("authToken", token);
-        setTokenData(token);
-        toast.success("Login Successful");
-        setTimeout(() => {
-          navigation("/");
-        }, 3000);
-      })
-      .catch((err) =>{
-        if(err.response){
-          setError("Incorrect username or password!");
-        }else{
-          setError("Error during Login, Please try again!");
-        }
-      });
-  };
-  const handleRegistration = (data) => {
-    axios
-      .post("http://localhost:5000/api/user/register", registrationData)
-      .then((res) => {
-        console.log(res.data.message);
-        toast.success("Registration Successful");
-        setTimeout(() => {
-          navigation("/");
-        }, 3000);
-      })
-      .catch((err) => {
-        if(err.response){
-          setError("Enter all valid Data");
-        }else{
-          setError("Error during Registration, Please try again!");
-        }
-      });
-  };
-
+ 
   const handleSlideButtonClick = () => {
     setIsOverlayVisible(!isOverlayVisible);
   };
@@ -116,32 +50,29 @@ const Login = () => {
         ></div>
         <div className="left">
           <h1 className="form-heading hedvig-font">Sign In</h1>
-          <form onSubmit={loginHS(handleLogin)} noValidate method="post">
+          <form onSubmit={handleSubmit} method="post">
             <div className="email">
               <input
-              {...loginRegister("username",
-              {required:"Enter your username"}
-              )}
                 type="text"
                 name="username"
                 id="email"
                 placeholder="Username"
-                onChange={(e) => setData({ ...data, username: e.target.value })}
+                value={values.username}
+                onChange={handleChange}
               />
-              <div className="err_m">{loginFS.errors.username && <p>{loginFS.errors.username.message}</p>}</div>
+              <div className="err_m">{errors.username && <p>{errors.username}</p>}</div>
             </div>
             <div className="password">
               <input
-               {...loginRegister("password",
-              {required:"Enter your Password"}
-              )}
+
                 type="password"
                 name="password"
                 id="password"
                 placeholder="*********"
-                onChange={(e) => setData({ ...data, password: e.target.value })}
+                value={values.password}
+                onChange={handleChange}
               />
-               <div className="err_m">{loginFS.errors.password && <p>{loginFS.errors.password.message}</p>}</div>
+               <div className="err_m">{errors.password && <p>{errors.password}</p>}</div>
             </div>
             <div className="signindiv">
               <input
@@ -167,136 +98,71 @@ const Login = () => {
           </div>
           <h1 className="form-heading hedvig-font">Register Now</h1>
 
-          <form
-            onSubmit={registerHS(handleRegistration)} noValidate
-            className="reg-form form-container"
-          >
-            <label htmlFor="rUsername">Username:</label>
+          <form onSubmit={handleRSubmit} 
+            className="reg-form form-container">
+
+            <label htmlFor="username">Username:</label>
             <input
-            {
-              ...registerRegister("rUsername",{
-                required:"Enter Username",
-                minLength:{
-                  value:5, message:"Username must be atleast 6 characters."
-                },
-                pattern:{
-                  value:/^[a-zA-z0-9_]+$/, message:"Invalid Username",
-                },
-              })
-            }
               type="text"
               id="username"
-              name="rUsername"
+              name="username"
               value={registrationData.username}
-              onChange={(e) =>
-                setRegistrationData({
-                  ...registrationData,
-                  username: e.target.value,
-                })
-              }
+              onChange={handleRChange}
             />
-            <div className="err_m">{registerFS.errors.rUsername && (
-              <p>{registerFS.errors.rUsername.message}</p>
-            )} </div> 
+            <div className="err_m">
+            {Rerrors.username && (<p>{Rerrors.username}</p>)}
+            </div> 
+
             <label htmlFor="name">Name:</label>
             <input
-            {
-              ...registerRegister("name",{
-                required:"Enter your Full Name",
-                pattern:{
-                  value:/^[A-Za-z\s]+$/, message:"Name cannot contain number or any special symbols",
-                }
-              })
-            }
               type="text"
               id="name"
               name="name"
               value={registrationData.name}
-              onChange={(e) =>
-                setRegistrationData({
-                  ...registrationData,
-                  name: e.target.value,
-                })
-              }
+              onChange={handleRChange}
             />
-            <div className="err_m">{registerFS.errors.name && <p>{registerFS.errors.name.message}</p>}</div>
+            <div className="err_m">{Rerrors.name && <p>{Rerrors.name}</p>}</div>
             
             <label htmlFor="password">Password:</label>
             <input
-            {...registerRegister("password",{
-              required:"Enter a Password",
-              pattern: {
-              value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).{8,15}$/,
-              message: 'Must contain at least one uppercase letter, one symbol, and one digit',
-            },
-            })}
               type="password"
               id="password"
               name="password"
               value={registrationData.password}
-              onChange={(e) =>
-                setRegistrationData({
-                  ...registrationData,
-                  password: e.target.value,
-                })
-              }
+              onChange={handleRChange}
             />
-            <div className="err_m">{registerFS.errors.password && <p>{registerFS.errors.password.message}</p>}</div>
+            <div className="err_m">{Rerrors.password && <p>{Rerrors.password}</p>}</div>
+           
             <label htmlFor="dob">Date of Birth:</label>
             <input
               type="date"
               id="dob"
               name="dob"
               value={registrationData.dob}
-              onChange={(e) =>
-                setRegistrationData({
-                  ...registrationData,
-                  dob: e.target.value,
-                })
-              }
+              onChange={handleRChange}
             />
-            <div className="err_m"></div>
+        
             <label htmlFor="email">Email:</label>
             <input
-            {...registerRegister("email",{
-            required:"Enter your email",
-            pattern:{
-              value: /^[^\s@]+@[a-z\s@]+\.[a-z]{3}$/,
-              message: 'Enter a valid email address',
-            }})}
               type="email"
               id="email"
               name="email"
               value={registrationData.email}
-              onChange={(e) =>
-                setRegistrationData({
-                  ...registrationData,
-                  email: e.target.value,
-                })
-              }
+              onChange={handleRChange}
             />
-            <div className="err_m">{registerFS.errors.email && <p>{registerFS.errors.email.message}</p>}</div>
+            <div className="err_m">{Rerrors.email && <p>{Rerrors.email}</p>}</div>
             
             <label htmlFor="address">Address:</label>
             <input
-            {...registerRegister("address",{
-            required:"Enter your address",
-            pattern:{
-              value:/^[A-Za-z]+$/, message:"Address can contain letter only",
-            }})}
               type="address"
               id="address"
               name="address"
               value={registrationData.address}
-              onChange={(e) =>
-                setRegistrationData({
-                  ...registrationData,
-                  address: e.target.value,
-                })
-              }
+              onChange={handleRChange}
             />
-            <div className="err_m">{registerFS.errors.address && <p>{registerFS.errors.address.message}</p>}
-           </div>
+            {/* <div className="err_m">{Rerrors.address && <p>{Rerrors.address}</p>}
+           
+           </div> */}
             <label>Gender:</label>
             <div className="form-gender">
               <label className="gender-option">

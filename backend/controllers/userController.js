@@ -32,7 +32,7 @@ const loginUser = asyncHandler(async (req,res) =>{
 })
 
 const registerUser = asyncHandler(async (req,res) =>{
-    const {username, name, password, email, dob, gender} = req.body;
+    const {username, name, password, email, dob, gender,address, userImage} = req.body;
     if(!username || !name || !password || !email){
         return res.status(400).send({ message:"Please fill all fields!" });
     }else{
