@@ -4,11 +4,13 @@ const router = express.Router();
 
 const {
   followUser,
-  countFollowers
+  countFollowers,
+  checkFollowing
 } = require("../controllers/followController");
 // const validateToken = require("../middleware/validateTokenHandler");
 
 // router.use(validateToken);
-router.route("/:username/follow").post(followUser).get(countFollowers);
+router.route("/:follower/follow/:followed").post(followUser).get(checkFollowing);
+router.route("/:username/follow/").get(countFollowers);
 
 module.exports = router;

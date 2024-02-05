@@ -56,7 +56,7 @@ const NewNavi = () => {
                   alt="dp"
                 />
                 <div className="userDetailTexts">View Profile</div>
-                <div className="userDetailTexts">{data.user.username}</div>
+                <div className="userDetailTexts">@{data.user.username}</div>
                 <div className="userDetailTexts">{data.user.name}</div>
                 <div className="userDetailTexts">{data.user.email}</div>
                 <Link to="/" onClick={handleLogOut}>

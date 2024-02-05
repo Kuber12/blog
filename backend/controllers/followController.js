@@ -4,19 +4,19 @@ const mongoose = require('mongoose');
 
 const followUser = asyncHandler(async ( req, res) => {
   try {
-    const {username} = req.body;
-    const followedUser = req.params.username;
+    const follower = req.params.follower;
+    const followed = req.params.followed;
     
     // Check if the combination of username and blogId already exists
-    const existingFollow = await Follow.findOne({ username, followedUser });
+    const existingFollow = await Follow.findOne({ username: follower, followedUser: followed });
     
     if (existingFollow) {
-      await Follow.deleteOne({ username, followedUser });
-      res.status(200).json({message : "Unfollowed " + followedUser});
+      await Follow.deleteOne({ username: follower, followedUser: followed });
+      res.status(200).json({message : "Unfollowed"});
     }else{
-      const newFollow = new Follow({ username, followedUser });
+      const newFollow = new Follow({ username: follower, followedUser: followed });
       const savedFollow = await newFollow.save();
-      res.status(200).json({message : username + " Followed " + followedUser});
+      res.status(200).json({message :"Followed"});
     }
 
   } catch (error) {
@@ -35,4 +35,18 @@ const countFollowers = asyncHandler(async (req,res) =>{
   }
 })
 
-module.exports = { followUser, countFollowers};
+const checkFollowing = asyncHandler(async (req,res) =>{
+  const follower = req.params.follower;
+  const followed = req.params.followed;
+  try {
+    const isFollowing = await Follow.findOne({ username: follower, followedUser: followed });
+    if(isFollowing){
+      res.status(200).json({message: "Following"});
+    }else{
+      res.status(200).json({message: "Not Following"})
+    }
+  }catch(err){
+    res.status(500).json({message: "Somthing went wrong"})
+  }
+})
+module.exports = { followUser, countFollowers, checkFollowing};

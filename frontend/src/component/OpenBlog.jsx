@@ -33,15 +33,16 @@ const OpenBlog = () => {
 
   const token = sessionStorage.getItem("authToken");
   // console.log(token);
+  
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
-
   const [comment, setComment] = useState("");
   const [data, setData] = useState({});
   const [viewcomment, setViewComment] = useState([]);
+  const [followers, setFollowers] = useState(0);
   const [countComment, setCountComment] = useState({
     countComment: 0,
   });
@@ -85,10 +86,14 @@ const OpenBlog = () => {
   };
   //follow handle
   const handleFollows = () => {
-    axios.post("http://localhost:5000/api/user/user/follow");
-    alert("loli");
+    axios
+    .post(`http://localhost:5000/api/user/${username}/follow/${data.username}`)
+    .then((response)=>{
+      toast.success(`${response.data.message}`);
+    })
+    .catch((err) => {
+      toast.error(`Something went wrong`)});
   };
-
   //comment submit
   const handleCommentSubmit = (event) => {
     // event.preventDefault();
@@ -119,14 +124,20 @@ const OpenBlog = () => {
   useEffect(() => {
     // console.log(viewcomment);
   }, [viewcomment]);
-  useEffect(() => {
+  useEffect(async() => {
     axios
       .get(`http://localhost:5000/api/blog/${id}`)
       .then((res) => {
         setData(res.data.message);
-        // console.log(res.data.message);
       })
       .catch((ex) => console.log(ex));
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/user/${data.username}/follow`)
+      .then((res) => {
+        setFollowers(res.data.totalFollowers);
+      });
   }, []);
   useEffect(() => {
     axios.get(`http://localhost:5000/api/blog/${id}/like`).then((res) => {
@@ -267,18 +278,23 @@ const OpenBlog = () => {
                   <div className="blog-user-pic"></div>
                   <div>
                     <div>{data.username}</div>
-                    <div>{data.username}</div>
-                    <div>100 Followers</div>
+                    <div>{data.name}</div>
+                    <div>{followers} Followers</div>
                   </div>
                 </div>
                 <div className="blog-user-bio">
                   THIS IS MY BIO. I am a content creator. Welcome to my Space.
-                </div>
-                <div className="blog-follow-flex">
+                </div>  
+                {username !== data.username && (<div className="blog-follow-flex">
+                  {username ? 
                   <button className="blog-user-follow" onClick={handleFollows}>
                     Follow Me+
+                  </button> :
+                  <button className="blog-user-follow">
+                  Follow Me+
                   </button>
-                </div>
+                }
+                </div>)}
               </div>
               <div className="blog-tags">
                 By tags
