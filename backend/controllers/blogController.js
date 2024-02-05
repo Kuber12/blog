@@ -29,6 +29,8 @@ const getBlogs = asyncHandler(async (req, res) => {
 const searchBlogs = asyncHandler(async (req, res) => {
   const query = req.query.query || '';
   const tag = req.query.tag || '';
+  const sortby = req.query.sortby || 'date_published';
+  const order = req.query.order || 'desc';
   try {
     const matchConditions = {
       $and: [
@@ -46,7 +48,9 @@ const searchBlogs = asyncHandler(async (req, res) => {
         $facet: { 
           totalBlogs: [{ $count: 'count' }],
           blogs: [
-            { $sort: { createdAt: -1 } },],
+            { $sort: { 
+              [sortby]: order=="desc"?-1:1 } 
+            },],
         },
       },
     ];
