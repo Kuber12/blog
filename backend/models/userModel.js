@@ -23,6 +23,19 @@ const userSchema = mongoose.Schema({
         required: false,
         unique: [true, "Email already used"]
     },
+    gender: {
+        type: String,
+        enum: ['male', 'female','other'],
+        required: false
+    },
+    userImage: {
+        type: String,
+        required: false
+    },
+    address:{
+        type:String,
+        required: false
+    },
 })
 
 module.exports = mongoose.model("User",userSchema);

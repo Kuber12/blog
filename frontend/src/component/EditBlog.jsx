@@ -1,180 +1,263 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import axios from "axios";
+import "./AddBlog.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { GlobalContext } from "./GlobalContent";
 const EditBlog = () => {
+  const { id } = useParams();
+  const userData = useContext(GlobalContext);
+  const { user } = userData;
+  const { username } = user;
+
+  const navigation = useNavigate();
   const [file, setFile] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
+  const [tags,setTags] = useState();
   const [values, setValues] = useState({
     headline: "",
     content: "",
     image: "",
     tag: "",
+    username: username,
   });
-
-  const navigation = useNavigate();
-  const { id } = useParams();
-  const handleFile = (event) => {
-    setFile(event.target.files[0]);
-  };
-
   const token = sessionStorage.getItem("authToken");
+
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
-
-  const handleUpdate = (event) => {
-    event.preventDefault(``);
-    const formData = new FormData();
-    let updatedFileName = "";
-    formData.append("fileInput", file);
-    axios
-      .post(`http://localhost:5000/api/file/upload`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((imgResponse) => {
-        updatedFileName = imgResponse.data.fileName;
-        console.log("Image Submitted", imgResponse.data.fileName); //url
-        return axios.put(
-          `http://localhost:5000/api/blog/${id}`,
-          {
-            ...values,
-            image: updatedFileName,
-          },
-          config
-        );
-      })
-      .then((res) => {
-        toast.success("Updated");
-        setTimeout(() => {
-          navigation("/");
-        }, 2100);
-        console.log("updated");
-      })
-      .catch((err) => {
-        toast.error("Something went Wrong Upload Image");
-        console.log(err);
-      });
-  };
-
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/${id}`)
-      .then((res) => {
-        console.log(res.data.message);
-        console.log(res.data.message.headline);
-        setValues(res.data);
+      .get("http://localhost:5000/api/tag")
+      .then((res) => 
+      {
+
+        setTags(res.data.message);
+         console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   }, []);
+  useEffect(() => {
+    const fetchPrevious = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/blog/${id}`, {
+          method: "GET",
+        });
+        const datas = await res.json();
+
+        const { headline, image, tag, content } = datas.message;
+        setValues((prev) => ({
+          ...prev,
+          headline: headline,
+          tag: tag,
+          content: content,
+          image: image,
+        }));
+      } catch (ex) {
+        console.log("error while fetching" + ex);
+      }
+    };
+    fetchPrevious();
+  }, []);
+
+  const handleFile = (e) => {
+    // console.log(e.target.files);
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setFile(selectedFile);
+        setFilePreview(reader.result);
+      };
+
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setFile(null);
+      setFilePreview(null);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // Check if a file is selected
+      let tempFilename;
+      if (file) {
+        const formData = new FormData();
+        formData.append("fileInput", file);
+        formData.append("username", username);
+
+        const imgResponse = await axios.post(
+          "http://localhost:5000/api/file/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          },
+          config
+        );
+        axios
+          .delete(`http://localhost:5000/api/file/${values.image}/delete`)
+          .then((res) => {
+            console.log("Image deleted");
+          })
+          .catch((ex) => {
+            console.log("errror" + ex);
+          });
+
+        tempFilename = imgResponse.data.fileName;
+        console.log("Image Submitted", tempFilename);
+
+        setValues((values) => ({
+          ...values,
+          image: tempFilename,
+        }));
+      }
+
+      const blogResponse = await axios.put(
+        `http://localhost:5000/api/blog/${id}`,
+        {
+          ...values,
+          // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+          image: tempFilename ? tempFilename : values.image,
+        },
+        config
+      );
+
+      toast.success("Added Blog");
+      console.log("Submitted", blogResponse.data);
+
+      // setTimeout(() => {
+      //   navigation("/");
+      // }, 3000);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
 
   return (
     <>
       <NewNavi />
-      {/* <NewNav /> */}
-      <Helmet>
-        <title>Update Page</title>
-      </Helmet>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <div className="d-flex flex-col gap-5 w-100 vh-100 justify-content-center align-items-center bg-light">
-        <h1 style={{ fontSize: "2rem" }}>Update Blog</h1>
-        <div className="w-50  border bg-white shadow px-5  py-5 rounded">
-          <form onSubmit={handleUpdate}>
-            <div className="mb-4">
-              <label htmlFor="name" className="mb-3">
-                Blog Title:
-              </label>
-              <h1>{values.headline}</h1>
+      <div className="container-head">
+        <Helmet>
+          <title>Add Page</title>
+        </Helmet>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <h1
+          style={{
+            textAlign: "center",
+            fontSize: "2rem",
+            fontWeight: "700",
+            marginBottom: "2rem",
+          }}
+        >
+          Edit Blog
+        </h1>
+        <form onSubmit={handleSubmit}>
+          <div className="blog-content">
+            {filePreview && (
+              <img
+                className="blog-content-image"
+                src={filePreview}
+                alt="blog content"
+              />
+            )}
+            <div className="blog-content-text">
               <input
                 type="text"
-                name="name"
-                className="form-control"
-                placeholder="Enter Name"
-                id=""
-                value={values.headline}
+                className="title-input"
+                placeholder={`${values.headline}`}
                 onChange={(e) =>
                   setValues({ ...values, headline: e.target.value })
                 }
               />
+              <p>
+                <textarea
+                  // onChange={handleTextArea}
+
+                  className="content-input"
+                  placeholder={`${values.content}`}
+                  id="floatingTextarea"
+                  style={{ width: "100%", height: "124px" }}
+                  onChange={(e) =>
+                    setValues({ ...values, content: e.target.value })
+                  }
+                  // rows="5"
+                ></textarea>
+              </p>
             </div>
+            <div className="buttons-container">
+              {/* top */}
+              <div className="button-top-container">
+                {/* file  input */}
+                {/* select tags */}
+                <div>
+                  <select
+                    name=""
+                    className="form-button"
+                    onChange={(e) => {
+                      // console.log(e.target.value);
+                      setValues({ ...values, tag: e.target.value });
+                    }}
+                  >
+                    <option disabled selected value="">
+                      Choose Your Tag
+                    </option>
+                    {
+                      tags && tags.map((items)=>(
+                        <>
+                          <option value={items.tagname}>{items.tagname}</option>    
+                        </>
+                      ))
+                    }
+                  </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor="fileInput"
+                    className="custom-file-input form-button"
+                  >
+                    Choose Image
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    onChange={handleFile}
+                    style={{ display: "none" }}
+                  />
+                </div>
 
-            <div className="mb-2">
-              <label htmlFor="email" className="mb-3">
-                BLog Content
-              </label>
-              <textarea
-                // onChange={handleTextArea}
-
-                className="form-control p-5 mb-4"
-                placeholder="Blog Content"
-                id="floatingTextarea"
-                style={{ width: "100%", height: "124px" }}
-                onChange={(e) =>
-                  setValues({ ...values, content: e.target.value })
-                }
-                // rows="5"
-              ></textarea>
-              <div>
-                <select
-                  name=""
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setValues({ ...values, tag: e.target.value });
-                  }}
-                  id=""
-                >
-                  <option disabled selected value="">
-                    Choose Your Tag
-                  </option>
-                  <option value="News">News</option>
-                  <option value="Entertainment">Entertainment</option>
-                  <option value="Fun">Fun</option>
-                  <option value="Facts">Facts</option>
-                </select>
+                <button className="postBlog form-button" type="submit">
+                  Post
+                </button>
               </div>
-              {/* file  input */}
-              <div>
-                <label htmlFor="fileInput" className="custom-file-input">
-                  Choose File
-                </label>
-                <input
-                  type="file"
-                  id="fileInput"
-                  onChange={handleFile}
-                  style={{ display: "none" }}
-                />
-              </div>
+              {/* bottom */}
+              <div style={{ marginTop: "20px", alignSelf: "flex-start" }}></div>
             </div>
-
-            <button className="btn btn-success">Update</button>
-            <Link to="/" className="btn btn-primary ms-3">
-              Back
-            </Link>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </>
   );
 };
-
 export default EditBlog;

@@ -16,6 +16,7 @@ import { GlobalContext } from "./GlobalContent";
 const Slider = () => {
   const [Slider, setSlider] = useState(1);
   const data = useContext(GlobalContext);
+  const username = data.user.username;
 
   const handleSlider = (slideNum) => {
     setSlider(slideNum);
@@ -36,21 +37,26 @@ const Slider = () => {
           <div className={`slider ${Slider === 1 ? "active" : ""}`}>
             <img id="slide1" src={Hill} />
             <div className="content" id="content1">
-              <h1>
-                Make Your
-                <br />
-                <span>First Post {data.username ? data.username : ""} </span>
-              </h1>
-              <p>
+              <p className="h">Make Your</p>
+              <p className="sp">
+                <span>First Post {username ? `"${username} "` : null}</span>
+              </p>
+              <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
                 repellendus, a quasi tenetur quae nesciunt temporibus aut
                 placeat?
               </p>
-              <Link className="btns" to="/AddBlog">
-                Post Blog <FontAwesomeIcon icon={faPenToSquare} />
-              </Link>
+              {username ? (
+                <Link className="btns" to="/AddBlog">
+                  Post Blog <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
+              ) : (
+                <Link className="btns" to="/Login">
+                  Post Blog <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
+              )}
             </div>
           </div>
         )}
@@ -58,12 +64,11 @@ const Slider = () => {
           <div className={`slider ${Slider === 2 ? "active" : ""}`}>
             <img id="slide2" src={Mountain} />
             <div className="content" id="content2">
-              <h1>
-                Search
-                <br />
-                <span>Contents</span>
-              </h1>
-              <p>
+              <p className="h">Search</p>
+              <p className="sp">
+                <span>Contents </span>
+              </p>
+              <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
@@ -80,12 +85,11 @@ const Slider = () => {
           <div className={`slider ${Slider === 3 ? "active" : ""}`}>
             <img id="slide3" src={Sunset} />
             <div className="content" id="content3">
-              <h1>
-                Find New
-                <br />
-                <span>Connections</span>
-              </h1>
-              <p>
+              <p className="h">Find New</p>
+              <p className="sp">
+                <span>Connections </span>
+              </p>
+              <p className="Cp">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident

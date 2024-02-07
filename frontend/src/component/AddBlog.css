@@ -3,64 +3,49 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 .container-head {
-  background-color: #bde3ff;
-  padding: 5rem;
-  margin-top: 1rem;
-}
-
-.addblog-container {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  background-color: #ffffff;
-  margin: 0 auto;
-  padding: 3rem;
-  border-radius: 15px;
+  height: 100%;
+  padding: 20px 10vw;
 }
 
 .title-input-container {
   margin: 14px;
   margin-bottom: 1.5rem;
 }
-.title-input {
-  padding: 20px 20px;
+.title-input, .content-input{
   width: 100%;
-  border: 1px solid black;
-  border-radius: 5px;
-  border-color: 1px solid black;
+  border-radius: 5px; 
+  background-color: rgba(255, 166, 0);
+  padding: 10px;
+}
+.title-input::placeholder, .content-input::placeholder{
+  color: black 
 }
 
-.postBlog {
-  background-color: black !important;
-  color: white !important;
+.title-input{
+  font-size: 1.5em;
+}
+.content-input{
+  margin-top: 20px;
+}
+.form-button{
+  background-color: black;
+  color: white;
   padding: 12px 20px;
-  border: none;
-  border-radius: 5px;
+  border-radius: 10px;
+  min-width: 100px;
+}
+.form-button:hover{
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.postBlog {
   cursor: pointer;
   font-size: 16px;
 }
-button[type="submit"] {
-  border-radius: 20px;
-}
-
-select {
-  border-radius: 10px;
-  background-color: black;
-  color: white;
-  padding: 12px;
-  font-size: 16px;
-}
-input[type="file"] {
-  /* display: none;  */
-  /* Hide the default file input */
-}
 
 .custom-file-input {
-  background-color: black;
-  color: white;
-  padding: 12px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
@@ -69,25 +54,23 @@ input[type="file"] {
   transition: background-color 0.3s;
 }
 
-.custom-file-input:hover {
-  background-color: darkgray;
-}
-
 .buttons-container {
   display: flex;
   flex-direction: column;
-  margin: 10px;
-  padding: 20px 0px;
+  margin: 20px 0px;
 }
 
 .button-top-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px ;
 }
-
+@media screen and (max-width: 600px) {
+  .blog-content-image{
+      height: 200px;
+  }
+}
 @media (max-width: 475px) {
   .container-head {
     margin-top: 20px;

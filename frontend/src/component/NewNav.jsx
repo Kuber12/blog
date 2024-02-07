@@ -31,6 +31,15 @@ const NewNav = ({ sentDataToParent }) => {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/Blogs"
+                >
+                  Blogs
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/AddBlog">
                   Create
                 </Link>

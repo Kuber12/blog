@@ -135,7 +135,7 @@ const Cards = () => {
                 {/* button  */}
                 <div style={{ marginBottom: "10px" }}>
                   <Link
-                    to={`../cardsDetails/${items._id}`}
+                    to={`../OpenBlog/${items._id}`}
                     className="btn btn-primary"
                   >
                     Read More

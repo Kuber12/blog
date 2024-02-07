@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const followSchema = mongoose.Schema({
-  userId:{
-    type: mongoose.Schema.ObjectId,
-    ref: "User"
+  username:{
+    type:String,
+    required: [true,"Enter a username"]
   },
-  followedUserId: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User"
+  followedUser: {
+    type:String,
+    required: [true,"Enter follow username"]
   },
 });
 

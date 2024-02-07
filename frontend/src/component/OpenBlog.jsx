@@ -1,53 +1,359 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./OpenBlogg.css";
+import Hill from "../images/hill.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from "react-helmet";
+import { ToastContainer, toast } from "react-toastify";
 import {
   faThumbsUp,
-  faComment,
   faShare,
   faPlus,
+  faEye,
+  faHeart,
+  faComment,
+  faEllipsis,
+  faUser,
+  faPaperPlane,
+  faTag,
 } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { GlobalContext } from "./GlobalContent";
+import NewNavi from "./NewwNav";
 const OpenBlog = () => {
+  const handleImageError = (event) => {
+    // Set the source to the default image if the original image fails to load
+    event.target.src = "../../uploads/default.png";
+  };
+  const userData = useContext(GlobalContext);
+  const { user } = userData;
+  const { username } = user;
+  const { id } = useParams();
+
+  const token = sessionStorage.getItem("authToken");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  };
+  const [comment, setComment] = useState("");
+  const [data, setData] = useState({});
+  const [viewcomment, setViewComment] = useState([]);
+  const [followers, setFollowers] = useState(0);
+  const [followed, setFollowed] = useState();
+  const [countComment, setCountComment] = useState({
+    countComment: 0,
+  });
+  const [viewLike, setViewLike] = useState({
+    totalLikes: 0,
+  });
+
+  const handleLike = (event) => {
+    let LikeToSent = {
+      username: username,
+    };
+
+    axios
+      .post(`http://localhost:5000/api/blog/${id}/like`, LikeToSent, config)
+      .then((res) => {
+        // console.log(res.data.message);
+        let result = "Like inserted successfully";
+
+        setViewLike((prevViewLike) => {
+          if (result.indexOf(res.data.message) > -1) {
+            toast.success("Liked on Blog");
+            return {
+              ...prevViewLike,
+              totalLikes: prevViewLike.totalLikes + 1,
+            };
+          } else {
+            toast.error("Removed on Blog");
+            return {
+              ...prevViewLike,
+              totalLikes: prevViewLike.totalLikes - 1,
+            };
+          }
+        });
+
+        setTimeout(() => {
+          // window.location.reload();
+        }, 3000);
+      })
+      .catch((ex) => {
+        // console.log(ex);
+        toast.error(`Something went wrong`);
+      });
+  };
+  //follow handle
+  const handleFollows = () => {
+    axios
+      .post(
+        `http://localhost:5000/api/user/${data.username}/follow/${username}`
+      )
+      .then((response) => {
+        let result = response.data.message;
+        setFollowers((prev) => {
+          const check = /^Followed$/;
+          const checking = (result) => {
+            return check.test(result);
+          };
+
+          if (checking(result)) {
+            toast.success(`Followed`);
+            return prev + 1;
+          } else {
+            toast.error(`Unfollowed`);
+            return prev - 1;
+          }
+        });
+        setFollowed((prev) => {
+          // Not Following // following check
+          const checkFollowing = /^Following$/;
+          const switching = (result) => {
+            return checkFollowing.test(result);
+          };
+          if (switching(prev)) {
+            return "Not Following";
+          } else {
+            return "Following";
+          }
+        });
+      })
+
+      .catch((err) => {
+        toast.error(`Something went wrong`);
+      });
+  };
+  //comment submit
+  const handleCommentSubmit = (event) => {
+    // event.preventDefault();
+    // console.log(comment);
+    let commentToSent = {
+      text: comment,
+      username: username,
+    };
+
+    //commenting
+    axios
+      .post(`http://localhost:5000/api/comment/${id}`, commentToSent, config)
+      .then((res) => {
+        // console.log("Commented ");
+        toast.success("Commented on Blog");
+        setViewComment((prev) => [...prev, commentToSent]);
+        // console.log(viewcomment);
+        setCountComment((prev) => ({
+          ...prev,
+          countComment: prev.countComment + 1,
+        }));
+        setComment("");
+      })
+      .catch((err) => {
+        console.log("Error while Commenting");
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/blog/${id}`)
+      .then((res) => {
+        setData(res.data.message);
+      })
+      .catch((ex) => console.log(ex));
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/user/${data.username}/follow`)
+      .then((res) => {
+        setFollowers(res.data.totalFollowers);
+        // console.log(res.data.totalFollowers);
+      });
+  }, [data]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/blog/${id}/like`).then((res) => {
+      setViewLike((prevViewLike) => ({
+        ...prevViewLike,
+        totalLikes: res.data.totalLikes, // Assuming totalLikes is the key in res.data
+      }));
+    });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/comment/${id}`)
+      .then((res) => {
+        setViewComment(res.data.message);
+        setCountComment({ countComment: res.data.message.length });
+        // console.log(res.data.message.length);
+      })
+      .catch((err) => {
+        console.log("view error");
+      });
+  }, [data]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/user/hihi/follow/haha").then((res) => {
+      setFollowed(res.data.message);
+    });
+  }, []);
   return (
-    <div className="MainP">
-      <div className="Uinfo">
-        <div className="UserD"></div>
-        <div className="bio">
-          <h2>Anna Sherif</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-            asperiores veniam, maiores commodi eos unde quia ut perferendis
-            omnis quae quis voluptas excepturi eligendi repudiandae aut tenetur
-            voluptatum natus laboriosam.
-          </p>
-          <button className="follow">
-            Follow <FontAwesomeIcon icon={faPlus} />
-          </button>
+    <>
+      <NewNavi />
+      <div className="MainP">
+        <Helmet>{/* <title>{data.headline}</title> */}</Helmet>
+
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+
+        <div className="blog">
+          <div className="blog-content">
+            {data.image && (
+              <img
+                className="blog-content-image"
+                src={`../../uploads/${data.image}`}
+                alt="blog content"
+                onError={handleImageError}
+              />
+            )}
+            <div className="blog-content-text">
+              <h1 class="heading">{data.headline}</h1>
+              <p>{data.content}</p>
+            </div>
+            <div className="blog-action-icons">
+              <div key={1} className="blog-action-tooltip">
+                <div className="blog-tooltip-div">
+                  <FontAwesomeIcon
+                    icon={faEye}
+                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                  />
+                  <span>{data.views}</span>
+                </div>
+              </div>
+              <div key={2} className="blog-action-tooltip">
+                {username ? (
+                  <div onClick={handleLike} className="blog-tooltip-div">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{ fontSize: "25px", paddingRight: "5px" }}
+                    />
+                    <span>{viewLike.totalLikes}</span>
+                  </div>
+                ) : (
+                  <div className="blog-tooltip-div">
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      style={{ fontSize: "25px", paddingRight: "5px" }}
+                    />
+                    <span>{viewLike.totalLikes}</span>
+                  </div>
+                )}
+              </div>
+              <div key={3} className="blog-action-tooltip">
+                <div className="blog-tooltip-div">
+                  <FontAwesomeIcon
+                    icon={faComment}
+                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                  />
+                  <span>{countComment.countComment}</span>
+                </div>
+              </div>
+              <div key={4} className="blog-action-tooltip">
+                <div className="blog-tooltip-div">
+                  <FontAwesomeIcon
+                    icon={faEllipsis}
+                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="comment-box">
+              {viewcomment.map((comment) => (
+                <div className="comment">
+                  <div className="comment-user">{comment.username}</div>
+                  <p className="comment-text">{comment.text}</p>
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    style={{ fontSize: "25px" }}
+                  />
+                </div>
+              ))}
+
+              <div className="comment-write">
+                <input
+                  type="text"
+                  className="comment-input"
+                  onChange={(e) => setComment(e.target.value)}
+                  value={comment}
+                />
+                <button className="comment-send" onClick={handleCommentSubmit}>
+                  <FontAwesomeIcon
+                    icon={faPaperPlane}
+                    style={{ fontSize: "25px" }}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="blog-sidebar">
+            <div className="blog-user">
+              <div className="blog-user-details">
+                <div className="blog-user-head">
+                  <div className="blog-user-pic"></div>
+                  <div>
+                    <div>{data.username}</div>
+                    <div>{data.name}</div>
+                    <div>{followers} Followers</div>
+                  </div>
+                </div>
+                <div className="blog-user-bio">
+                  THIS IS MY BIO. I am a content creator. Welcome to my Space.
+                </div>
+                {username !== data.username && (
+                  <div className="blog-follow-flex">
+                    {username ? (
+                      <button
+                        className="blog-user-follow"
+                        onClick={(e) => handleFollows(e)}
+                      >
+                        {followed &&
+                          (followed === "Following"
+                            ? "Unfollow"
+                            : "Follow Me+")}
+                      </button>
+                    ) : (
+                      <button className="blog-user-follow">Follow Me+</button>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="blog-tags">
+                By tags
+                <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
+                <div className="blog-tags-list">
+                  <div className="tags">Humor</div>
+                  <div className="tags">Recipe</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">Dark</div>
+                  <div className="tags">{data.tag}</div>
+                </div>
+              </div>
+            </div>
+            <div className="blog-recommendation"></div>
+          </div>
         </div>
       </div>
-      <div className="BlogSection">
-        <div className="Title">
-          <h4>This is the Title of the Blog</h4>
-        </div>
-        <div className="Tags">
-          <div className="T1"></div>
-          <div className="T2"></div>
-          <div className="T3"></div>
-        </div>
-        <div className="MainContent"></div>
-      </div>
-      <div className="Interact">
-        <button className="like">
-          <FontAwesomeIcon icon={faThumbsUp} />
-        </button>
-        <button className="comment">
-          <FontAwesomeIcon icon={faComment} />
-        </button>
-        <button className="share">
-          <FontAwesomeIcon icon={faShare} />
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

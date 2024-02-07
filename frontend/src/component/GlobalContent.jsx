@@ -3,8 +3,15 @@ import axios from "axios";
 
 export const GlobalContext = createContext();
 
-const GlobalContentProvider = (props) => {
+const GlobalContentProvider = ({ children }) => {
+  const [tokenData, setTokenData] = useState(
+    sessionStorage.getItem("authToken") //base condition //data from login
+  );
+  const [tokencheck, setTokenCheck] = useState(
+    sessionStorage.getItem("authToken") //set and get
+  );
   const [user, setUser] = useState({
+    id: "",
     username: "",
     fullname: "",
     email: "",
@@ -12,34 +19,37 @@ const GlobalContentProvider = (props) => {
   });
 
   useEffect(() => {
+    setTokenCheck(sessionStorage.setItem("authToken", tokenData));
+  }, [tokenData]);
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const tokenData = sessionStorage.getItem("authToken");
-        const data = tokenData;
-        // console.log(data);
-
         const res = await axios.get("http://localhost:5000/api/user/current", {
           headers: {
-            Authorization: `Bearer ${data}`,
+            Authorization: `Bearer ${tokenData ? tokenData : tokencheck}`,
           },
         });
-        const { username, name } = res.data;
-        // console.log(res.data);
-        console.log(res.data.username);
+
+        const { username, name, email, id } = res.data;
+
         setUser((prev) => ({ ...prev, username: username }));
         setUser((prev) => ({ ...prev, name: name }));
+        setUser((prev) => ({ ...prev, email: email }));
+        setUser((prev) => ({ ...prev, id: id }));
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [tokenData]);
 
   return (
     <>
-      <GlobalContext.Provider value={user}>
-        {props.children}
+      <GlobalContext.Provider
+        value={{ user, setUser, tokenData, setTokenData }}
+      >
+        {children}
       </GlobalContext.Provider>
     </>
   );

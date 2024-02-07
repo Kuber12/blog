@@ -17,21 +17,7 @@ const CardsDetails = () => {
       })
       .catch((ex) => console.log(ex));
   }, []);
-  // {
-  //   data.image;
-  // }
-  // {
-  //   data.headline;
-  // }
-  // {
-  //   data.content;
-  // }
-  // {
-  //   data.likes;
-  // }
-  // {
-  //   data.date_published;
-  // }
+
   return (
     <>
       <NewNavi />

@@ -15,6 +15,8 @@ const loginUser = asyncHandler(async (req,res) =>{
                 user: {
                     username: user.username,
                     name: user.name,
+                    dob: user.dob,
+                    email: user.email,
                     id: user.id
                 }
             }, 
@@ -30,7 +32,7 @@ const loginUser = asyncHandler(async (req,res) =>{
 })
 
 const registerUser = asyncHandler(async (req,res) =>{
-    const {username, name, password, email} = req.body;
+    const {username, name, password, email, dob, gender,address, userImage} = req.body;
     if(!username || !name || !password || !email){
         return res.status(400).send({ message:"Please fill all fields!" });
     }else{
@@ -42,14 +44,23 @@ const registerUser = asyncHandler(async (req,res) =>{
             username : username ,
             name : name ,
             email : email,
-            password : hashedPassword
+            dob: dob,
+            password : hashedPassword,
+            gender : gender,
+            address : address,
+            userImage : userImage
         })
     }
     res.json({message: "Register Login"});
 })
 
 const currentUser = asyncHandler(async (req,res) =>{
-    res.json(req.user);
+    try{
+        res.json(req.user);
+    }catch (error) {
+        res.status(400).json({ message: "User not logged in" });
+    }
+
 })
 
 module.exports = {loginUser, registerUser,currentUser};
