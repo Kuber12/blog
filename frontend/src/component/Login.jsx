@@ -60,7 +60,7 @@ const Login = () => {
                 value={values.username}
                 onChange={handleChange}
               />
-              <div className="err_m">{errors.username && <p>{errors.username}</p>}</div>
+              <div className="err_m">{errors.username && <span className="tooltiptext">{errors.username}</span>}</div>
             </div>
             <div className="password">
               <input
@@ -72,7 +72,7 @@ const Login = () => {
                 value={values.password}
                 onChange={handleChange}
               />
-               <div className="err_m">{errors.password && <p>{errors.password}</p>}</div>
+               <div className="err_m">{errors.password && <span className="tooltiptext">{errors.password}</span>}</div>
             </div>
             <div className="signindiv">
               <input
@@ -110,7 +110,7 @@ const Login = () => {
               onChange={handleRChange}
             />
             <div className="err_m">
-            {Rerrors.username && (<p>{Rerrors.username}</p>)}
+            {Rerrors.username && (<span className="tooltiptext">{Rerrors.username}</span>)}
             </div> 
 
             <label htmlFor="name">Name:</label>
@@ -121,7 +121,7 @@ const Login = () => {
               value={registrationData.name}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.name && <p>{Rerrors.name}</p>}</div>
+            <div className="err_m">{Rerrors.name && <span className="tooltiptext">{Rerrors.name}</span>}</div>
             
             <label htmlFor="password">Password:</label>
             <input
@@ -131,7 +131,7 @@ const Login = () => {
               value={registrationData.password}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.password && <p>{Rerrors.password}</p>}</div>
+            <div className="err_m">{Rerrors.password && <span className="tooltiptext">{Rerrors.password}</span>}</div>
            
             <label htmlFor="dob">Date of Birth:</label>
             <input
@@ -150,7 +150,7 @@ const Login = () => {
               value={registrationData.email}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.email && <p>{Rerrors.email}</p>}</div>
+            <div className="err_m">{Rerrors.email && <span className="tooltiptext">{Rerrors.email}</span>}</div>
             
             <label htmlFor="address">Address:</label>
             <input
