@@ -36,24 +36,20 @@
   left: 50px;
   padding: 10px;
 }
-.h {
-  font-size: 4em;
+.slider-heading {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 5px;
 }
-.sp {
-  font-size: 3em;
+.slider-heading2 {
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: rgb(68, 66, 66);
 }
-.Cp {
+.slider-heading3{
   color: #fff;
   margin-bottom: 60px;
-  font-size: 1.8em;
-  padding-top: 20px;
 }
 .slider_nav {
   display: flex;
@@ -82,22 +78,23 @@
   font-size: 20px;
 }
 .btns{
+  border: 2px solid var(--text-color);
   background-color: #fff;
-  width: 200px;
-  height: 50px;
+  font-size:var(--font-size-lg);
+  width: max-content;
   display: block;
   border-radius: 50px;
   text-align: center;
-  padding:5px;
-  font-size: 1.5rem;
+  padding:5px 15px;
   letter-spacing: 1px;
   transition: all 200ms ease;
 }
 .btns:hover{
-  background-color:#BDE3FF;
-  color: black;
-  font-size: 1.6em;
   letter-spacing: 1px;
+  transform: scale(1.1);
+}
+.btns > svg{
+  margin-left: 5px;
 }
 .chevron-btn {
   position: absolute;

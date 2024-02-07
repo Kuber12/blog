@@ -15,21 +15,18 @@
     padding:20px;
 }
 
-.top_ img {
-    max-width: 20%;
-    height: 120px;
-}
-.top_ h1 {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 5rem;
+.best-blog-icon {
+  position: absolute;
+  max-width: 20%;
+  height: 120px;
+  left: 25px;
 }
 #frog{
-    max-width: 20%;
-    height: 120px;
-    position: absolute;
-    bottom:15px;
-    right:5%;
+  max-width: 20%;
+  height: 120px;
+  position: absolute;
+  bottom:15px;
+  right:5%;
 }
 .horizontal-line {
     width: 100%;

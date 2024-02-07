@@ -75,39 +75,40 @@ const NewCard = ({ data }) => {
                       <div className="blog-tooltip-div">
                         <FontAwesomeIcon
                           icon={faEye}
-                          style={{ fontSize: "25px", paddingRight: "5px" }}
+                          style={{ fontSize: "20px", paddingRight: "5px" }}
                         />
 
-                        <span>{data.views}</span>
+                        {/* <span>{data.views}</span> */}
                       </div>
                     </div>
                     <div key={2} className="blog-action-tooltip">
                       <div className="blog-tooltip-div">
                         <FontAwesomeIcon
                           icon={faHeart}
-                          style={{ fontSize: "25px", paddingRight: "5px" }}
+                          style={{ fontSize: "20px", paddingRight: "5px" }}
                         />
-                        <span></span>
+                        {/* <span></span> */}
                       </div>
                     </div>
                     <div key={3} className="blog-action-tooltip">
                       <div className="blog-tooltip-div">
                         <FontAwesomeIcon
                           icon={faComment}
-                          style={{ fontSize: "25px", paddingRight: "5px" }}
+                          style={{ fontSize: "20px", paddingRight: "5px" }}
                         />
-                        <span></span>
+                        {/* <span></span> */}
                       </div>
                     </div>
                   </div>
+                  <span className="post-tag"> {items.tag}</span>
                 </div>
-                <div id="heading">
-                  <h1>{truncateText(items.headline, 25)}</h1>
-                </div>
+                <h6 id="heading">
+                  {truncateText(items.headline, 25)}
+                </h6>
                 <div id="tags">
                   <div>
-                    <h5> @{items.tag}</h5>
-                    <h6>{formatTimeDifference(timeDifference)}</h6>
+                    <span > @{items.username}</span>
+                    <span>{formatTimeDifference(timeDifference)}</span>
                   </div>
                   <button>
                     <BsThreeDotsVertical />

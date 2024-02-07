@@ -37,17 +37,17 @@ const Slider = () => {
           <div className={`slider ${Slider === 1 ? "active" : ""}`}>
             <img id="slide1" src={Hill} />
             <div className="content" id="content1">
-              <p className="h">Make Your</p>
-              <p className="sp">
+              <h1 className="slider-heading">Make Your</h1>
+              <h2 className="slider-heading2">
                 <span>First Post {username ? `"${username} "` : null}</span>
-              </p>
-              <p className="Cp">
+              </h2>
+              <h4 className="slider-heading3">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
                 repellendus, a quasi tenetur quae nesciunt temporibus aut
                 placeat?
-              </p>
+              </h4>
               {username ? (
                 <Link className="btns" to="/AddBlog">
                   Post Blog <FontAwesomeIcon icon={faPenToSquare} />
@@ -64,17 +64,17 @@ const Slider = () => {
           <div className={`slider ${Slider === 2 ? "active" : ""}`}>
             <img id="slide2" src={Mountain} />
             <div className="content" id="content2">
-              <p className="h">Search</p>
-              <p className="sp">
-                <span>Contents </span>
-              </p>
-              <p className="Cp">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Aspernatur fuga explicabo consequuntur id tempora molestiae
-                laudantium similique consectetur sunt repellat provident
-                repellendus, a quasi tenetur quae nesciunt temporibus aut
-                placeat?
-              </p>
+            <h1 className="slider-heading">Search</h1>
+            <h2 className="slider-heading2">
+              <span>Contents </span>
+            </h2>
+            <h4 className="slider-heading3">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Aspernatur fuga explicabo consequuntur id tempora molestiae
+              laudantium similique consectetur sunt repellat provident
+              repellendus, a quasi tenetur quae nesciunt temporibus aut
+              placeat?
+            </h4>
               <Link className="btns">
                 Search <FontAwesomeIcon icon={faMagnifyingGlass} />
               </Link>
@@ -85,17 +85,17 @@ const Slider = () => {
           <div className={`slider ${Slider === 3 ? "active" : ""}`}>
             <img id="slide3" src={Sunset} />
             <div className="content" id="content3">
-              <p className="h">Find New</p>
-              <p className="sp">
-                <span>Connections </span>
-              </p>
-              <p className="Cp">
+              <h1 className="slider-heading">Find new</h1>
+              <h2 className="slider-heading2">
+                <span>Connections</span>
+              </h2>
+              <h4 className="slider-heading3">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
                 repellendus, a quasi tenetur quae nesciunt temporibus aut
                 placeat?
-              </p>
+              </h4>
               <Link className="btns">
                 Find People <FontAwesomeIcon icon={faUserPlus} />
               </Link>

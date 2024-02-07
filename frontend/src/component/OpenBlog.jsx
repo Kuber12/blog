@@ -113,7 +113,7 @@ const OpenBlog = () => {
         // console.log("Commented ");
         toast.success("Commented on Blog");
         setViewComment((prev) => [...prev, commentToSent]);
-        console.log(viewcomment);
+        // console.log(viewcomment);
         setCountComment((prev) => ({
           ...prev,
           countComment: prev.countComment + 1,
@@ -121,7 +121,7 @@ const OpenBlog = () => {
         setComment("");
       })
       .catch((err) => {
-        console.log("Error while Commenting");
+        toast.error("Error while Commenting");
       });
   };
   // useEffect(() => {
@@ -133,7 +133,9 @@ const OpenBlog = () => {
       .then((res) => {
         setData(res.data.message);
       })
-      .catch((ex) => console.log(ex));
+      .catch((ex) => 
+      toast.error(ex)
+      );
   }, []);
   useEffect(() => {
     axios
@@ -161,7 +163,7 @@ const OpenBlog = () => {
         // console.log(res.data.message.length);
       })
       .catch((err) => {
-        console.log("view error");
+        toast.error("view error");
       });
   }, [data]);
   return (
@@ -194,7 +196,7 @@ const OpenBlog = () => {
               />
             )}
             <div className="blog-content-text">
-              <h1 class="heading">{data.headline}</h1>
+              <h4 class="heading">{data.headline}</h4>
               <p>{data.content}</p>
             </div>
             <div className="blog-action-icons">
@@ -202,7 +204,7 @@ const OpenBlog = () => {
                 <div className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faEye}
-                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                    style={{ fontSize: "20px", paddingRight: "5px" }}
                   />
                   <span>{data.views}</span>
                 </div>
@@ -212,7 +214,7 @@ const OpenBlog = () => {
                   <div onClick={handleLike} className="blog-tooltip-div">
                     <FontAwesomeIcon
                       icon={faHeart}
-                      style={{ fontSize: "25px", paddingRight: "5px" }}
+                      style={{ fontSize: "20px", paddingRight: "5px" }}
                     />
                     <span>{viewLike.totalLikes}</span>
                   </div>
@@ -220,7 +222,7 @@ const OpenBlog = () => {
                   <div className="blog-tooltip-div">
                     <FontAwesomeIcon
                       icon={faHeart}
-                      style={{ fontSize: "25px", paddingRight: "5px" }}
+                      style={{ fontSize: "20px", paddingRight: "5px" }}
                     />
                     <span>{viewLike.totalLikes}</span>
                   </div>
@@ -230,7 +232,7 @@ const OpenBlog = () => {
                 <div className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faComment}
-                    style={{ fontSize: "25px", paddingRight: "5px" }}
+                    style={{ fontSize: "20px", paddingRight: "5px" }}
                   />
                   <span>{countComment.countComment}</span>
                 </div>
@@ -299,9 +301,9 @@ const OpenBlog = () => {
                 </div>)}
               </div>
               <div className="blog-tags">
-                By tags
+                <span style={{ fontWeight: "600", paddingRight: "10px" }}>By tags</span> 
                 <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
-                <div className="blog-tags-list">
+                <div className="tags-container">
                   <div className="tags">Humor</div>
                   <div className="tags">Recipe</div>
                   <div className="tags">Dark</div>

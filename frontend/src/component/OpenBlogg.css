@@ -10,9 +10,6 @@
 .blog-content{
     flex: 3;
 }
-.heading{
-    font-size:1.5em;
-}
 .blog-content,.user-detail{
     padding: 0px 10px;
 }
@@ -94,7 +91,9 @@
     border-radius: 14px;
     background-color: rgba(255, 255, 255, 0.388);
 }
-
+.blog-tags > .tags-container{
+    margin: 0;
+}
 .blog-user-head{
     display: flex;
     align-items: center;
@@ -127,12 +126,6 @@
     display: flex;
     flex-wrap: wrap;
 }
-.tags{
-   background-color: yellow;
-   padding: 5px 10px;
-   margin: 5px;
-   width: max-content;
-}
 .blog-recommendation{
     margin-top: 10px;
     border-radius: 20px;
@@ -144,13 +137,20 @@
     display: block;
 }
 .blog-tooltip-div > span{
+    text-align: center;
     display: none;
     position: absolute;
-    background-color: #e5e5e5;
+    background-color: var(--text-color);
+    color: var(--white);
     border-radius: 100%;
     padding: 3px 6px;
     z-index: 1;
-    transform: translate(-4px,-60px);
+    min-width: 30px;
+    transform: translate(-2px,-64px);
+    font-weight: 600;
+}
+.blog-user-details{
+    font-weight: 600;
 }
 @media screen and (max-width: 600px) {
     .blog{

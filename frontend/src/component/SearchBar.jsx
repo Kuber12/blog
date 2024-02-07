@@ -50,13 +50,13 @@ const SearchBar = () => {
         </div>
       </div>
       <div>
-        <div className="search-tags-container">
-          <Link className="search-tags" to={`/Blogs`}>
+        <div className="tags-container">
+          <Link className="tags" to={`/Blogs`}>
             All
           </Link>
           {tags &&
             tags.map((tag, index) => (
-              <Link className="search-tags" to={`/BlogPageTag/${tag.tagname}`}>
+              <Link className="tags" to={`/BlogPageTag/${tag.tagname}`}>
                 {tag.tagname}
               </Link>
             ))}

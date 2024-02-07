@@ -4,9 +4,16 @@
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 15px;
-  margin-top: 10px;
   transition: 0.5s;
   padding: 10px;
+}
+.post-tag{
+  background-color: var(--secondary-color);
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: var(--text-color);
+  font-weight: 600;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
 }
 #card-container:hover {
   transform: scale(1.05);
@@ -27,8 +34,13 @@
   display: grid;
   width: 100%;
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+  grid-template-columns: auto auto auto;
   justify-items: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: auto;
+  padding-bottom: 20px;
 }
 
 #img-container {
@@ -45,30 +57,21 @@
   /* padding: 10px; */
   padding-left: 10px;
   margin: 5px 0;
-  font-size: 18px;
   font-weight: 700;
   word-spacing: 5px;
-}
-#heading h1 {
-  line-height: 1.5rem;
 }
 #tags {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  font-size: 18px;
   margin: 10px 0;
 }
-#tags div h5 {
-  font-size: 16px;
-  /* padding-left: 15px; */
-  /* word-spacing: 5px; */
-  margin: 10px 0;
+#tags span{
+  width: 100%;
+  display: block;
 }
 #tags div h6 {
-  font-size: 12px;
   padding-left: 20px;
-  margin: 10px 0;
   color: #4b5563;
 }
 #buttons-container {
@@ -79,6 +82,7 @@
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
+  align-items: center;
 }
 #buttons {
   width: 200px;

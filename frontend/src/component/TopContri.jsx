@@ -38,10 +38,10 @@ const TopContributor = () => {
         <div className="right_Box">
           <div className="startnow">
             <div className="texts">
-              <p className="H">Start Now</p>
-              <p className="NoN">
-                <span>Or Never</span>
-              </p>
+              <h2 className="H">Start Now</h2>
+              <h2 className="NoN">
+                <h3>Or Never</h3>
+              </h2>
               <p className="Para">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Doloribus iste consequatur tempora, accusamus laudantium atque a

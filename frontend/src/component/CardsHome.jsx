@@ -155,7 +155,7 @@ const CardsHome = () => {
             </div>
           </div>
           <>
-            <div className="search-tags-container">
+            <div className="tags-container">
               {/* {tags &&
             tags.map((tag, index) => (
               <button
@@ -165,13 +165,13 @@ const CardsHome = () => {
                 {tag.tagname}
               </button>
             ))} */}
-              <Link className="search-tags" to={`/Blogs`}>
+              <Link className="tags" to={`/Blogs`}>
                 All
               </Link>
               {tags &&
                 tags.map((tag, index) => (
                   <Link
-                    className="search-tags"
+                    className="tags"
                     to={`/BlogPageTag/${tag.tagname}`}
                   >
                     {tag.tagname}

@@ -32,9 +32,9 @@ a {
   margin: 0 5px;
   display: inline-block;
 }
-.navbar ul li a {
+.navbar ul li{
   color: black;
-  font-size: 20px;
+  font-size: var(--font-size-md);
   text-transform: uppercase;
   padding: 10px 20px;
   margin: 0 5px;
@@ -54,7 +54,7 @@ a {
 .logo-text {
   color: black;
   font-weight: bold;
-  font-size: 30px;
+  font-size: var(--font-size-lg);
 }
 .icon {
   font-size: 30px;
@@ -73,11 +73,12 @@ a {
 }
 .currentUserDetail {
   display: none;
+  position: absolute;
+  right: 20px;
 }
 #userImage:hover > .currentUserDetail {
-  right: 20px;
   display: block;
-  position: absolute;
+  height: auto;
 }
 .userDetailConatainer {
   margin-top: 10px;
@@ -85,7 +86,7 @@ a {
   border: none;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 1px #000000;
-  background-color: #ffcd29;
+  background-color: #BDE3FF;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,8 +100,8 @@ a {
 }
 .userDetailTexts{
   font-weight: 600;
-  font-size: 1em;
-  gap: 5px;
+  margin-bottom: 5px;
+  font-size: var(--font-size-sm);
 }
 #user-dp {
   width: 70px;

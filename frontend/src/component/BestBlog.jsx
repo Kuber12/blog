@@ -9,13 +9,12 @@ const BestBlogSlider=()=>{
     return(
         <div className='wrapper'>
           <div className='top_'>
-            <img src={Bg}/>
+            <img className="best-blog-icon" src={Bg}/>
             <h1>Best Blogs Slider</h1>
           </div>
           <div className='blogss'>
-
           </div>
-          <div  className='drag'>
+          <div className='drag'>
             <button className=" move left-btn">
               <FontAwesomeIcon icon={faCircleChevronLeft} />
             </button>
