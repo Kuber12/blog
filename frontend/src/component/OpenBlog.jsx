@@ -23,17 +23,15 @@ import NewNavi from "./NewwNav";
 const OpenBlog = () => {
   const handleImageError = (event) => {
     // Set the source to the default image if the original image fails to load
-    event.target.src = '../../uploads/default.png';
+    event.target.src = "../../uploads/default.png";
   };
   const userData = useContext(GlobalContext);
   const { user } = userData;
   const { username } = user;
   const { id } = useParams();
-  // console.log(id);
 
   const token = sessionStorage.getItem("authToken");
-  // console.log(token);
-  
+
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
@@ -43,19 +41,19 @@ const OpenBlog = () => {
   const [data, setData] = useState({});
   const [viewcomment, setViewComment] = useState([]);
   const [followers, setFollowers] = useState(0);
+  const [followed, setFollowed] = useState();
   const [countComment, setCountComment] = useState({
     countComment: 0,
   });
   const [viewLike, setViewLike] = useState({
     totalLikes: 0,
   });
-  // console.log(viewLike.totalLikes);
-  // console.log(comment);
+
   const handleLike = (event) => {
     let LikeToSent = {
       username: username,
     };
-    // console.log(LikeToSent.userName);
+
     axios
       .post(`http://localhost:5000/api/blog/${id}/like`, LikeToSent, config)
       .then((res) => {
@@ -90,12 +88,42 @@ const OpenBlog = () => {
   //follow handle
   const handleFollows = () => {
     axios
-    .post(`http://localhost:5000/api/user/${username}/follow/${data.username}`)
-    .then((response)=>{
-      toast.success(`${response.data.message}`);
-    })
-    .catch((err) => {
-      toast.error(`Something went wrong`)});
+      .post(
+        `http://localhost:5000/api/user/${data.username}/follow/${username}`
+      )
+      .then((response) => {
+        let result = response.data.message;
+        setFollowers((prev) => {
+          const check = /^Followed$/;
+          const checking = (result) => {
+            return check.test(result);
+          };
+
+          if (checking(result)) {
+            toast.success(`Followed`);
+            return prev + 1;
+          } else {
+            toast.error(`Unfollowed`);
+            return prev - 1;
+          }
+        });
+        setFollowed((prev) => {
+          // Not Following // following check
+          const checkFollowing = /^Following$/;
+          const switching = (result) => {
+            return checkFollowing.test(result);
+          };
+          if (switching(prev)) {
+            return "Not Following";
+          } else {
+            return "Following";
+          }
+        });
+      })
+
+      .catch((err) => {
+        toast.error(`Something went wrong`);
+      });
   };
   //comment submit
   const handleCommentSubmit = (event) => {
@@ -124,9 +152,7 @@ const OpenBlog = () => {
         toast.error("Error while Commenting");
       });
   };
-  // useEffect(() => {
-  // console.log(viewcomment);
-  // }, [viewcomment]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/blog/${id}`)
@@ -142,8 +168,9 @@ const OpenBlog = () => {
       .get(`http://localhost:5000/api/user/${data.username}/follow`)
       .then((res) => {
         setFollowers(res.data.totalFollowers);
+        // console.log(res.data.totalFollowers);
       });
-  }, []);
+  }, [data]);
   useEffect(() => {
     axios.get(`http://localhost:5000/api/blog/${id}/like`).then((res) => {
       setViewLike((prevViewLike) => ({
@@ -156,8 +183,6 @@ const OpenBlog = () => {
     axios
       .get(`http://localhost:5000/api/comment/${id}`)
       .then((res) => {
-        // setViewComment(res);
-        // console.log(res.data.message);
         setViewComment(res.data.message);
         setCountComment({ countComment: res.data.message.length });
         // console.log(res.data.message.length);
@@ -166,6 +191,11 @@ const OpenBlog = () => {
         toast.error("view error");
       });
   }, [data]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/user/hihi/follow/haha").then((res) => {
+      setFollowed(res.data.message);
+    });
+  }, []);
   return (
     <>
       <NewNavi />
@@ -288,17 +318,24 @@ const OpenBlog = () => {
                 </div>
                 <div className="blog-user-bio">
                   THIS IS MY BIO. I am a content creator. Welcome to my Space.
-                </div>  
-                {username !== data.username && (<div className="blog-follow-flex">
-                  {username ? 
-                  <button className="blog-user-follow" onClick={handleFollows}>
-                    Follow Me+
-                  </button> :
-                  <button className="blog-user-follow">
-                  Follow Me+
-                  </button>
-                }
-                </div>)}
+                </div>
+                {username !== data.username && (
+                  <div className="blog-follow-flex">
+                    {username ? (
+                      <button
+                        className="blog-user-follow"
+                        onClick={(e) => handleFollows(e)}
+                      >
+                        {followed &&
+                          (followed === "Following"
+                            ? "Unfollow"
+                            : "Follow Me+")}
+                      </button>
+                    ) : (
+                      <button className="blog-user-follow">Follow Me+</button>
+                    )}
+                  </div>
+                )}
               </div>
               <div className="blog-tags">
                 <span style={{ fontWeight: "600", paddingRight: "10px" }}>By tags</span> 
