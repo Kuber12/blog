@@ -114,7 +114,7 @@ const AddBlog = () => {
       }, 3000);
     } catch (error) {
       console.error("Error", error);
-    }
+    } 
   };
 
   return (
@@ -178,8 +178,7 @@ const AddBlog = () => {
                   // rows="5"
                 ></textarea>
               </p>
-            </div>
-            <div className="buttons-container">
+              <div className="buttons-container">
               {/* top */}
               <div className="button-top-container">
                 {/* file  input */}
@@ -215,7 +214,7 @@ const AddBlog = () => {
                     <option value="Facts">Personal</option> */}
                   </select>
                 </div>
-                <div>
+                <div style={{display: "flex",justifyContent:"center"}}>
                   <label
                     htmlFor="fileInput"
                     className="custom-file-input form-button"
@@ -229,14 +228,15 @@ const AddBlog = () => {
                     style={{ display: "none" }}
                   />
                 </div>
-
-                <button className="postBlog form-button" type="submit">
-                  Post
-                </button>
+                <div style={{display: "flex",justifyContent:"right"}}>
+                  <button className="postBlog form-button" type="submit">
+                    Post
+                  </button>
+                </div>
               </div>
-              {/* bottom */}
-              <div style={{ marginTop: "20px", alignSelf: "flex-start" }}></div>
             </div>
+            </div>
+            
           </div>
         </form>
       </div>

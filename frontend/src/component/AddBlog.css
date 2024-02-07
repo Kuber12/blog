@@ -15,13 +15,12 @@
 .title-input, .content-input{
   width: 100%;
   border-radius: 5px; 
-  background-color: rgba(255, 166, 0);
+  background-color: var(--dark-orange);
   padding: 10px;
 }
 .title-input::placeholder, .content-input::placeholder{
   color: black 
 }
-
 .title-input{
   font-size: 1.5em;
 }
@@ -29,16 +28,17 @@
   margin-top: 20px;
 }
 .form-button{
-  background-color: black;
-  color: white;
+  background-color: var(--dark-orange);
+  color: black;
+  border: black 2px solid;
   padding: 12px 20px;
   border-radius: 10px;
   min-width: 100px;
+  transition: ease-in-out;
+  font-weight: 600;
 }
 .form-button:hover{
-  background-color: rgba(0, 0, 0, 0.5);
   transform: scale(1.1);
-  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .postBlog {
   cursor: pointer;
@@ -47,7 +47,6 @@
 
 .custom-file-input {
   cursor: pointer;
-  border: none;
   border-radius: 5px;
   outline: none;
   font-size: 16px;
@@ -57,14 +56,19 @@
 .buttons-container {
   display: flex;
   flex-direction: column;
-  margin: 20px 0px;
+  margin-top: 20px;
 }
-
+.button-top-container > div{
+  flex: 1;
+}
 .button-top-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px ;
+}
+.blog-content-text{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 @media screen and (max-width: 600px) {
   .blog-content-image{
@@ -84,23 +88,6 @@
     margin: 0 auto;
     padding: 10px;
     border-radius: 15px;
-  }
-  button {
-    background-color: black;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  select {
-    border-radius: 10px;
-    background-color: black;
-    color: white;
-    padding: 5px;
-    font-size: 16px;
-    width: 100%;
   }
   .custom-file-input {
     background-color: black;
