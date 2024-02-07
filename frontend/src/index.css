@@ -6,6 +6,7 @@
   --accent-color: #e74c3c;
   --text-color: #333333;
   --white: #ecf0f1;
+  --dark-orange: #ffa600;
 
   --font-size-xs: 1rem;
   --font-size-sm: 1.2rem;
@@ -14,11 +15,13 @@
   --font-size-xl: 2rem;
   --font-size-2xl: 2.2rem;
   --font-size-3xl: 2.5rem;
+
 }
 a{
   color:  var(--text-color) !important;
 }
 body {
+  background-color: var(--secondary-color);
   margin: 0;
   /* font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;

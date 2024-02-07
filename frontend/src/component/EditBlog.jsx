@@ -205,54 +205,53 @@ const EditBlog = () => {
                   // rows="5"
                 ></textarea>
               </p>
-            </div>
-            <div className="buttons-container">
-              {/* top */}
-              <div className="button-top-container">
-                {/* file  input */}
-                {/* select tags */}
-                <div>
-                  <select
-                    name=""
-                    className="form-button"
-                    onChange={(e) => {
-                      // console.log(e.target.value);
-                      setValues({ ...values, tag: e.target.value });
-                    }}
-                  >
-                    <option disabled selected value="">
-                      Choose Your Tag
-                    </option>
-                    {
-                      tags && tags.map((items)=>(
-                        <>
-                          <option value={items.tagname}>{items.tagname}</option>    
-                        </>
-                      ))
-                    }
-                  </select>
+              <div className="buttons-container">
+                {/* top */}
+                <div className="button-top-container">
+                  {/* file  input */}
+                  {/* select tags */}
+                  <div>
+                    <select
+                      name=""
+                      className="form-button"
+                      onChange={(e) => {
+                        // console.log(e.target.value);
+                        setValues({ ...values, tag: e.target.value });
+                      }}
+                    >
+                      <option disabled selected value="">
+                        Choose Your Tag
+                      </option>
+                      {
+                        tags && tags.map((items)=>(
+                          <>
+                            <option value={items.tagname}>{items.tagname}</option>    
+                          </>
+                        ))
+                      }
+                    </select>
+                  </div>
+                  <div style={{display: "flex",justifyContent:"center"}}>
+                    <label
+                      htmlFor="fileInput"
+                      className="custom-file-input form-button"
+                    >
+                      Choose Image
+                    </label>
+                    <input
+                      type="file"
+                      id="fileInput"
+                      onChange={handleFile}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                  <div style={{display: "flex",justifyContent:"right"}}>
+                    <button className="postBlog form-button" type="submit">
+                      Post
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <label
-                    htmlFor="fileInput"
-                    className="custom-file-input form-button"
-                  >
-                    Choose Image
-                  </label>
-                  <input
-                    type="file"
-                    id="fileInput"
-                    onChange={handleFile}
-                    style={{ display: "none" }}
-                  />
-                </div>
-
-                <button className="postBlog form-button" type="submit">
-                  Post
-                </button>
               </div>
-              {/* bottom */}
-              <div style={{ marginTop: "20px", alignSelf: "flex-start" }}></div>
             </div>
           </div>
         </form>
