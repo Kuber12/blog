@@ -28,7 +28,7 @@ const NewNavi = () => {
       <label htmlFor="menuBt" className="icon">
         <FontAwesomeIcon icon={faBars} />
       </label>
-      <ul>
+      <ul className="nav-links">
         <li>
           <Link to="/" className="active">
             Home
@@ -61,7 +61,7 @@ const NewNavi = () => {
                 <div className="userDetailTexts">{data.user.name}</div>
                 <div className="userDetailTexts">{data.user.email}</div>
                 <Link to="/" onClick={handleLogOut}>
-                  <span className="logout userDetailTexts">LogOut</span>
+                  <span className="logout userDetailTexts">Logout</span>
                 </Link>
               </div>
             </div>

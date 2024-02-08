@@ -17,7 +17,7 @@ const TopContributor = () => {
   return (
     <div className="bodyy">
       <div className="Top_Con">
-        <h1>Top Contributor of the Month</h1>
+        <h1 className="hedvig">Top Contributor of the Month</h1>
         <img src={Crown} className="crw" />
       </div>
       <div className="mainC">

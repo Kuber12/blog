@@ -8,7 +8,7 @@
   padding: 10px;
 }
 .post-tag{
-  background-color: var(--secondary-color);
+  background-color: var(--tertiary-color);
   padding: 5px 10px;
   border-radius: 10px;
   color: var(--text-color);
@@ -107,13 +107,21 @@
   gap: 5px;
   align-items: center;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1000px) {
   .blog-display {
-    width: 100%;
+    grid-template-columns: auto auto;
+  }
+  #card-container{
+    width: 325px;
   }
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 700px) {
   .blog-display {
-    width: 100%;
+    grid-template-columns: auto;
+  }
+}
+@media screen and (min-width: 1500px) {
+  .blog-display {
+    grid-template-columns: auto auto auto auto;
   }
 }

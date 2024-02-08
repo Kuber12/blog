@@ -10,19 +10,17 @@ a {
   text-decoration: none;
 }
 .navbar {
-  margin: 0;
   top: 0;
   position: relative;
-  padding: 0;
   width: 100%;
   background-color: white;
   margin: 0 auto;
-  max-width: 1500px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 2;
+  padding: 0px 60px;
 }
 .navbar ul {
   float: right;
@@ -35,7 +33,6 @@ a {
 .navbar ul li{
   color: black;
   font-size: var(--font-size-md);
-  text-transform: uppercase;
   padding: 10px 20px;
   margin: 0 5px;
   position: relative;
@@ -43,6 +40,10 @@ a {
 .navbar .logo {
   cursor: pointer;
 }
+.nav-links{
+  text-transform: uppercase;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -74,29 +75,34 @@ a {
 .currentUserDetail {
   display: none;
   position: absolute;
-  right: 20px;
+  right: -40px;
+}
+#userImage{
+  text-transform: none;
 }
 #userImage:hover > .currentUserDetail {
   display: block;
   height: auto;
 }
-.userDetailConatainer {
+.userDetailConatainer { 
   margin-top: 10px;
-  padding: 20px 30px;
+  padding: 20px 40px;
   border: none;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 1px #000000;
-  background-color: #BDE3FF;
+  background-color: var(--tertiary-color);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .logout{
+  display: block;
   color: white;
   background-color: #ffcd29;
   border-radius: 50px;
   padding: 5px 10px;
-  box-shadow: 0px 0px 10px 1px #ad8a19
+  box-shadow: 0px 0px 10px 1px #ad8a19;
+  margin-top: 10px;
 }
 .userDetailTexts{
   font-weight: 600;
@@ -129,11 +135,9 @@ a {
   .navbar {
     top: 0;
     position: relative;
-    padding: 0;
     width: 100%;
     background-color: transparent;
     margin: 0 auto;
-    max-width: 1500px;
     height: 60px;
 
   }

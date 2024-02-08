@@ -7,7 +7,7 @@
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border: 2px solid #ffcd29;
+  border: 2px solid black;
   border-radius: 10px;
   padding: 5px;
 }
@@ -16,7 +16,6 @@
   padding: 0px 20px;
   text-align: center;
   flex: 2;
-  background-color: var(--white);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,8 +42,9 @@
   width: 100%;
   padding-right: 10px;
   display: grid;
-  gap: 10px;
+  gap: 4px;
   grid-template-columns: 1fr 3fr;
+  align-items: center;
 }
 .form-close{
   position: absolute;
@@ -52,9 +52,11 @@
   right: 20px;
   z-index: 1000;
 }
-label {
+.form-container > label {
   grid-column: 1;
   text-align: right;
+  font-weight: 600;
+  margin-right: 10px;
 }
 .form-gender{
   display: flex;
@@ -63,6 +65,9 @@ label {
 .gender-option > input{
   margin-right: 8px;
   transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+input[type="radio"]{
+  accent-color: black;
 }
 .reg-form > input {
   grid-column: 2;
@@ -98,10 +103,13 @@ label {
   left: 40%;
   width: 60%;
   height: 100%;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
   background-color: #ffcd29;
   z-index: 1000;
   transition: width 3s ease;
   transition: left 2s ease;
+  border-radius: 10px;
 }
 
 .overlay.slide-left {
@@ -122,6 +130,8 @@ label {
   display: inline-block;
   padding: 5px;
   grid-column:2;
+  height: 0px;
+  z-index: 2;
 }
 .err_m .tooltiptext{
   background-color:rgb(223, 8, 8);
@@ -140,12 +150,15 @@ label {
   border-style: solid;
   border-color: transparent transparent red transparent;
 }
+.center {
+  width: 90vw;
+  height: 90vh;
+  background-color: var(--tertiary-color);
+}
+.slide-button{
+  font-weight: 600;
+}
 @media screen and (max-width: 3200px) {
-  .center {
-    width: 90vw;
-    height: 90vh;
-    background-color: var(--white);
-  }
   .signindiv {
     padding: 2px 100px;
     display: flex;

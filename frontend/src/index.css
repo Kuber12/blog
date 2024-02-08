@@ -1,8 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300&display=swap");
+@font-face{
+  font-family: Hedvig;
+  src:url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
+} 
 :root {
   --primary-color: #ffcd29;
   --secondary-color: #BDE3FF;
+  --tertiary-color: #e6d579;
   --accent-color: #e74c3c;
   --text-color: #333333;
   --white: #ecf0f1;
@@ -28,9 +33,9 @@ body {
   -moz-osx-font-smoothing: grayscale; */
   font-family: "Red Hat Display", sans-serif;
 }
-/* .hedvig-font {
+.hedvig {
   font-family: Hedvig;
-} */
+}
 
 code {
   /* font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

@@ -37,8 +37,8 @@ const Slider = () => {
           <div className={`slider ${Slider === 1 ? "active" : ""}`}>
             <img id="slide1" src={Hill} />
             <div className="content" id="content1">
-              <h1 className="slider-heading">Make Your</h1>
-              <h2 className="slider-heading2">
+              <h1 className="slider-heading hedvig">Make Your</h1>
+              <h2 className="slider-heading2 hedvig">
                 <span>First Post {username ? `"${username} "` : null}</span>
               </h2>
               <h4 className="slider-heading3">

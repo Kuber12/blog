@@ -1,9 +1,4 @@
-@font-face{
-  font-family: Hedvig;
-  src:url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
-} 
 .wrapper {
-  font-family: Hedvig;
   position: relative;
   max-width: 100%;
   height: 100vh;
@@ -37,7 +32,7 @@
   padding: 10px;
 }
 .slider-heading {
-  font-weight: 900;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 5px;
 }

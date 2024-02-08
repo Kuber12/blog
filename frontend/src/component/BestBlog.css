@@ -1,9 +1,4 @@
-@font-face{
-    font-family: Hedvig;
-    src:url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
-} 
 .wrapper{
-    font-family: Hedvig;
     max-width: 100%;
     height: 100vh;
     background-color: #BDE3FF;

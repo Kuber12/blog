@@ -142,7 +142,7 @@ const Login = () => {
               value={registrationData.dob}
               onChange={handleRChange}
             />
-        
+            <div className="err_m">{Rerrors.email && <span className="tooltiptext">{Rerrors.email}</span>}</div>
             <label htmlFor="email">Email:</label>
             <input
               type="email"

@@ -10,7 +10,7 @@ const BestBlogSlider=()=>{
         <div className='wrapper'>
           <div className='top_'>
             <img className="best-blog-icon" src={Bg}/>
-            <h1>Best Blogs Slider</h1>
+            <h1 className="hedvig">Best Blogs Slider</h1>
           </div>
           <div className='blogss'>
           </div>
