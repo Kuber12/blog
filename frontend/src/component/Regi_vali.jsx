@@ -40,9 +40,9 @@ const Regi_vali=(R_vali)=>{
           })
           .catch((err) => {
             if(err.response){
-              setRerrors("Enter all valid Data");
+              toast.error("Enter all valid Data");
             }else{
-                setRerrors("Error during Registration, Please try again!");
+              toast.error("Error during Registration, Please try again!");
             }
           });
          }}

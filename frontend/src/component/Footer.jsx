@@ -18,17 +18,22 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const handleDropEmail = (e) => {
     e.preventDefault();
-    if (email !== "") {
+    var ValidEmail = /^[^\s@]+@[a-z\s@]+\.[a-z]{3}$/.test(email);
+    if (email !== "" && ValidEmail) {
       axios
         .post(`http://localhost:5000/api/newsletter/${email}`)
         .then((res) => {
-          toast.success("Send to your email");
+          toast.success("Thankyou :)");
         })
         .catch((er) => {
           toast.error("Error while sending Email");
         });
       console.log("hi");
-    } else {
+    } 
+    else if(!ValidEmail){
+      toast.error("Invalid Email");
+    }
+    else{
       toast.error("kUUCH TO RAKH BADWE");
     }
   };
@@ -94,6 +99,7 @@ const Footer = () => {
         <h5>WANT A NEWSLETTER?</h5>
         <input
           type="text"
+          name="news_email"
           placeholder="Drop Your Email"
           onChange={(e) => {
             setEmail(e.target.value);

@@ -15,11 +15,13 @@ const Login = () => {
   const { handleRChange,handleRSubmit,registrationData, Rerrors } =Regi_vali(R_vali);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
-   const [error, setError] =useState(null);
-    
+   const [gender, setGender] =useState('');
   
-    const selectedGender = "Male"; //overwrite later
- 
+   const handleGenderChange=(event)=>{
+   const selectedGender = event.target.value; //overwrite later
+     setGender(selectedGender);
+   } ;
+
   const handleSlideButtonClick = () => {
     setIsOverlayVisible(!isOverlayVisible);
   };
@@ -83,7 +85,6 @@ const Login = () => {
                 value="SIGN IN"
               />
             </div>
-            <div className="err_m">{error && <p className="err_msg">{error}</p>}</div>
           </form>
           <span className="slide-button" onClick={handleSlideButtonClick}>
             Create a new account
@@ -154,23 +155,23 @@ const Login = () => {
             
             <label htmlFor="address">Address:</label>
             <input
-              type="address"
+              type="text"
               id="address"
               name="address"
               value={registrationData.address}
               onChange={handleRChange}
             />
-            {/* <div className="err_m">{Rerrors.address && <p>{Rerrors.address}</p>}
-           
-           </div> */}
+            <div className="err_m">{Rerrors.address && <span className="tooltiptext">{Rerrors.address}</span>}</div>
+          
             <label>Gender:</label>
             <div className="form-gender">
               <label className="gender-option">
                 <input
                   type="radio"
+                  name="gender"
                   value="male"
-                  checked={selectedGender === "male"}
-                  // onChange={handleGenderChange}
+                  checked={gender === "male"}
+                  onChange={handleGenderChange}
                 />
                 Male
               </label>
@@ -179,8 +180,9 @@ const Login = () => {
                 <input
                   type="radio"
                   value="female"
-                  checked={selectedGender === "female"}
-                  // onChange={handleGenderChange}
+                  name="gender"
+                  checked={gender === "female"}
+                  onChange={handleGenderChange}
                 />
                 Female
               </label>
@@ -189,17 +191,17 @@ const Login = () => {
                 <input
                   type="radio"
                   value="other"
-                  checked={selectedGender === "other"}
-                  // onChange={handleGenderChange}
+                  name="gender"
+                  checked={gender === "other"}
+                  onChange={handleGenderChange}
                 />
                 Other
               </label>
             </div>
-            <div className="err_m"></div>
+            <div className="err_m">{Rerrors.gender && <span className="tooltiptext"> {Rerrors.gender}</span>}</div>
             <button className="submit" type="submit">
               SIGN UP
             </button>
-            {/* <div className="err_m">{error && <p className="err_msg">{error}</p>}</div> */}
           </form>
           <span className="slide-button" onClick={handleSlideButtonClick}>
             Log In To Your Existing Account
