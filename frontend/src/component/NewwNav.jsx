@@ -59,7 +59,7 @@ const NewNavi = () => {
                 </Link>
                 <div className="userDetailTexts">@{data.user.username}</div>
                 <div className="userDetailTexts">{data.user.name}</div>
-                <div className="userDetailTexts">{data.user.email}</div>
+                <div className="userDetailTexts">Edit Profile</div>
                 <Link to="/" onClick={handleLogOut}>
                   <span className="logout userDetailTexts">Logout</span>
                 </Link>
