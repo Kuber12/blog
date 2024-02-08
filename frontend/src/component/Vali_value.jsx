@@ -45,9 +45,9 @@ const Vali_value=(vali)=>{
               })
               .catch((err) =>{
                 if(err.response){
-                  setErrors("Incorrect username or password!");
+                  toast.error("Incorrect username or password!");
                 }else{
-                  setErrors("Error during Login, Please try again!");
+                  toast.error("Error during Login, Please try again!");
                 }
               
                 });

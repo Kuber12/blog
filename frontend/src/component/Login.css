@@ -108,10 +108,37 @@ label {
   width: 50%;
   left: 0;
 }
-.err_m{
+/* .err_m{
   text-align: center;
   color: red;
   grid-column:2;
+  background-color:gainsboro;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: center;
+} */
+.err_m{
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+  grid-column:2;
+}
+.err_m .tooltiptext{
+  background-color:rgb(223, 8, 8);
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+}
+.err_m .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent red transparent;
 }
 @media screen and (max-width: 3200px) {
   .center {

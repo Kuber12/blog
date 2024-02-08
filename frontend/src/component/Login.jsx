@@ -15,11 +15,13 @@ const Login = () => {
   const { handleRChange,handleRSubmit,registrationData, Rerrors } =Regi_vali(R_vali);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
-   const [error, setError] =useState(null);
-    
+   const [gender, setGender] =useState('');
   
-    const selectedGender = "Male"; //overwrite later
- 
+   const handleGenderChange=(event)=>{
+   const selectedGender = event.target.value; //overwrite later
+     setGender(selectedGender);
+   } ;
+
   const handleSlideButtonClick = () => {
     setIsOverlayVisible(!isOverlayVisible);
   };
@@ -60,7 +62,7 @@ const Login = () => {
                 value={values.username}
                 onChange={handleChange}
               />
-              <div className="err_m">{errors.username && <p>{errors.username}</p>}</div>
+              <div className="err_m">{errors.username && <span className="tooltiptext">{errors.username}</span>}</div>
             </div>
             <div className="password">
               <input
@@ -72,7 +74,7 @@ const Login = () => {
                 value={values.password}
                 onChange={handleChange}
               />
-               <div className="err_m">{errors.password && <p>{errors.password}</p>}</div>
+               <div className="err_m">{errors.password && <span className="tooltiptext">{errors.password}</span>}</div>
             </div>
             <div className="signindiv">
               <input
@@ -83,7 +85,6 @@ const Login = () => {
                 value="SIGN IN"
               />
             </div>
-            <div className="err_m">{error && <p className="err_msg">{error}</p>}</div>
           </form>
           <span className="slide-button" onClick={handleSlideButtonClick}>
             Create a new account
@@ -110,7 +111,7 @@ const Login = () => {
               onChange={handleRChange}
             />
             <div className="err_m">
-            {Rerrors.username && (<p>{Rerrors.username}</p>)}
+            {Rerrors.username && (<span className="tooltiptext">{Rerrors.username}</span>)}
             </div> 
 
             <label htmlFor="name">Name:</label>
@@ -121,7 +122,7 @@ const Login = () => {
               value={registrationData.name}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.name && <p>{Rerrors.name}</p>}</div>
+            <div className="err_m">{Rerrors.name && <span className="tooltiptext">{Rerrors.name}</span>}</div>
             
             <label htmlFor="password">Password:</label>
             <input
@@ -131,7 +132,7 @@ const Login = () => {
               value={registrationData.password}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.password && <p>{Rerrors.password}</p>}</div>
+            <div className="err_m">{Rerrors.password && <span className="tooltiptext">{Rerrors.password}</span>}</div>
            
             <label htmlFor="dob">Date of Birth:</label>
             <input
@@ -150,27 +151,27 @@ const Login = () => {
               value={registrationData.email}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.email && <p>{Rerrors.email}</p>}</div>
+            <div className="err_m">{Rerrors.email && <span className="tooltiptext">{Rerrors.email}</span>}</div>
             
             <label htmlFor="address">Address:</label>
             <input
-              type="address"
+              type="text"
               id="address"
               name="address"
               value={registrationData.address}
               onChange={handleRChange}
             />
-            {/* <div className="err_m">{Rerrors.address && <p>{Rerrors.address}</p>}
-           
-           </div> */}
+            <div className="err_m">{Rerrors.address && <span className="tooltiptext">{Rerrors.address}</span>}</div>
+          
             <label>Gender:</label>
             <div className="form-gender">
               <label className="gender-option">
                 <input
                   type="radio"
+                  name="gender"
                   value="male"
-                  checked={selectedGender === "male"}
-                  // onChange={handleGenderChange}
+                  checked={gender === "male"}
+                  onChange={handleGenderChange}
                 />
                 Male
               </label>
@@ -179,8 +180,9 @@ const Login = () => {
                 <input
                   type="radio"
                   value="female"
-                  checked={selectedGender === "female"}
-                  // onChange={handleGenderChange}
+                  name="gender"
+                  checked={gender === "female"}
+                  onChange={handleGenderChange}
                 />
                 Female
               </label>
@@ -189,17 +191,17 @@ const Login = () => {
                 <input
                   type="radio"
                   value="other"
-                  checked={selectedGender === "other"}
-                  // onChange={handleGenderChange}
+                  name="gender"
+                  checked={gender === "other"}
+                  onChange={handleGenderChange}
                 />
                 Other
               </label>
             </div>
-            <div className="err_m"></div>
+            <div className="err_m">{Rerrors.gender && <span className="tooltiptext"> {Rerrors.gender}</span>}</div>
             <button className="submit" type="submit">
               SIGN UP
             </button>
-            {/* <div className="err_m">{error && <p className="err_msg">{error}</p>}</div> */}
           </form>
           <span className="slide-button" onClick={handleSlideButtonClick}>
             Log In To Your Existing Account

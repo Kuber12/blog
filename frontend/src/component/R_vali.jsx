@@ -39,12 +39,33 @@ const R_vali=(registrationData)=>{
     }
 
     //  //address
-    //  if(!registrationData.address.trim()){
-    //     Rerrors.address='Address is Required.';
+     if(!registrationData.address){
+        Rerrors.address='Address is Required.';
+    }
+    else if(!/^[A-Za-z]+$/.test(registrationData.address)) {
+        Rerrors.address = 'Address can contain letter only.';
+    }
+
+    //gender
+    // if(registrationData.gender===''){
+    //     Rerrors.gender ='Please Select Gender';
     // }
-    // else if(!/^[A-Za-z]+$/.test(registrationData.address)) {
-    //     Rerrors.address = 'Address can contain letter only.';
-    // }
+
+    const isGenderValid=()=>{
+        var radios=  document.getElementsByName("gender");
+        var isValid =false;
+        var i=0;
+        while(!isValid && i<radios.length){
+            if(radios[i].checked)
+            isValid=true;
+            i++;
+        }
+        return isValid;
+    };
+
+    if(!isGenderValid()){
+        Rerrors.gender ='Please select Gender.';
+    }
 
     return Rerrors;
 }
