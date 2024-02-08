@@ -1,5 +1,4 @@
 .container-footer {
-  background-color: white;
   color: black;
   height: auto;
   display: flex;
@@ -7,7 +6,6 @@
   padding: 30px;
   justify-content: space-between;
   border: 2px solid black;
-  margin: 2rem;
 }
 .contact {
   display: flex;
@@ -137,7 +135,6 @@
     font-size: 0.9em;
   }
   .container-footer {
-    background-color: white;
     color: black;
     height: auto;
     display: flex;
@@ -213,7 +210,6 @@
 }
 @media screen and (max-width: 1200px) {
   .container-footer {
-    background-color: white;
     color: black;
     height: auto;
     display: flex;

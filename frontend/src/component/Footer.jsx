@@ -33,6 +33,7 @@ const Footer = () => {
     }
   };
   return (
+    <div style={{background:"white", padding: "2em"}}>
     <div className="container-footer ">
       <ToastContainer
         position="top-center"
@@ -104,6 +105,7 @@ const Footer = () => {
           Submit
         </button>
       </div>
+    </div>
     </div>
   );
 };
