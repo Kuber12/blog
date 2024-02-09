@@ -4,8 +4,70 @@ const Like = require("../models/likeModel");
 const mongoose = require('mongoose');
 
 const getBlogs = asyncHandler(async (req, res) => {
-  const blog = await Blog.find();
-  res.status(200).json({ message: blog });
+  const page = parseInt(req.params.page) || 1;
+  const limit = parseInt(req.params.limit) || 10;
+
+  try {
+    const totalBlogs = await Blog.countDocuments();
+    const totalPages = Math.ceil(totalBlogs / limit);
+
+    const blogs = await Blog.find()
+        .sort({ date_published: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .exec();
+
+      res.status(200).json({
+        message: blogs,
+        totalPages,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+});
+const searchBlogs = asyncHandler(async (req, res) => {
+  const query = req.query.query || '';
+  const tag = req.query.tag || '';
+  const sortby = req.query.sortby || 'date_published';
+  const order = req.query.order || 'desc';
+  try {
+    const matchConditions = {
+      $and: [
+        { 'headline': { $regex: new RegExp(query, 'i') } },
+      ]
+    };
+
+    if (tag !== '') {
+      matchConditions.$and = matchConditions.$and || [];
+      matchConditions.$and.push({ 'tag': tag });
+    }
+    const aggregatePipeline = [
+      { $match: matchConditions },
+      {
+        $facet: { 
+          totalBlogs: [{ $count: 'count' }],
+          blogs: [
+            { $sort: { 
+              [sortby]: order=="desc"?-1:1 } 
+            },],
+        },
+      },
+    ];
+
+    const [result] = await Blog.aggregate(aggregatePipeline);
+
+
+    const blogs = result.blogs || [];
+
+    res.status(200).json({
+      message: blogs,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
 });
 const getBlogsByUsername = asyncHandler(async (req, res) => {
   const username = req.params.username;
@@ -13,10 +75,16 @@ const getBlogsByUsername = asyncHandler(async (req, res) => {
   res.status(200).json({ message: blog });
 });
 
+const getBlogsByTagname = asyncHandler(async (req, res) => {
+  const tag = req.params.tag;
+  const blog = await Blog.find(({ tag: tag }));
+  res.status(200).json({ message: blog });
+});
+
 const createBlog = asyncHandler(async (req, res) => {
   try {
-    const { headline, content,tag,image } = req.body;
-    if (!headline || !content) {
+    const { headline, content, tag, image, username } = req.body; 
+    if (!headline || !content || !tag || !username) {
       return res.status(400).json({ message: "Please insert all params" });
     }
 
@@ -24,7 +92,9 @@ const createBlog = asyncHandler(async (req, res) => {
       headline,
       content,
       tag,
-      image
+      image,
+      username,
+      views: 0
     });
 
     res.status(201).json(blog);
@@ -38,6 +108,16 @@ const createBlog = asyncHandler(async (req, res) => {
 const getBlog = asyncHandler(async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Increment the view count
+    blog.views += 1;
+
+    // Save the updated blog
+    await blog.save();
+
     res.status(200).json({ message: blog });
   } catch (error) {
     res.status(400).json({ message: error });
@@ -75,21 +155,19 @@ const editBlog = asyncHandler(async (req, res) => {
 
 const likeBlog = asyncHandler(async ( req, res) => {
   try {
-    const userId = new mongoose.Types.ObjectId("657c599cc885d4e6ae139b20");
+    const {username} = req.body;
     const blogId = new mongoose.Types.ObjectId(req.params.id);
     
-    // Check if the combination of userId and blogId already exists
-    const existingLike = await Like.findOne({ userId, blogId });
-    
+    // Check if the combination of username and blogId already exists
+    const existingLike = await Like.findOne({ username, blogId });
     if (existingLike) {
-      await Like.deleteOne({ userId, blogId });
-      res.status(204).json({message : "Like removed successfully"});
+      await Like.deleteOne({ username, blogId });
+      res.status(200).json({message : "Like removed successfully"});
     }else{
-      const newLike = new Like({ userId, blogId });
+      const newLike = new Like({ username, blogId });
       const savedLike = await newLike.save();
       res.status(200).json({message : "Like inserted successfully"});
     }
-
   } catch (error) {
     console.error('Error inserting like:', error);
     res.status(500).json({message : "Error"});
@@ -105,4 +183,4 @@ const countBlogLikes = asyncHandler(async (req,res) =>{
   }
 })
 
-module.exports = { getBlog, getBlogs, getBlogsByUsername, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes };
+module.exports = { getBlog, getBlogs, getBlogsByUsername,getBlogsByTagname,searchBlogs, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes };

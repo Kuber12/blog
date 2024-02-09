@@ -4,7 +4,10 @@ const storage = multer.diskStorage({
         cb(null, '../frontend/public/uploads'); // Destination folder where the file will be stored
     },
     filename: function (req, file, cb) {
-        const newFileName = Date.now() + '-' + file.originalname;
+        const originalname = file.originalname;
+        const extension = originalname.split('.').pop(); // Get the file extension
+        const newFileName = Date.now() + '.' + extension;
+        
         req.generatedFileName = newFileName;
         cb(null, newFileName);
     }

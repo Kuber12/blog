@@ -7,7 +7,7 @@
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border: 2px solid #ffcd29;
+  border: 2px solid black;
   border-radius: 10px;
   padding: 5px;
 }
@@ -16,7 +16,6 @@
   padding: 0px 20px;
   text-align: center;
   flex: 2;
-  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,36 +36,53 @@
   width: 70%;
   border: 0px;
   border-radius: 50px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: #e6e6e6;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 .form-container {
-  width: 90%;
+  width: 100%;
+  padding-right: 10px;
   display: grid;
-  gap: 10px;
+  gap: 4px;
   grid-template-columns: 1fr 3fr;
+  align-items: center;
 }
-
-label {
+.form-close{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+.form-container > label {
   grid-column: 1;
   text-align: right;
+  font-weight: 600;
+  margin-right: 10px;
 }
-
+.form-gender{
+  display: flex;
+  justify-content: space-around;
+}
+.gender-option > input{
+  margin-right: 8px;
+  transform: scale(1.5); /* Adjust the scale factor as needed */
+}
+input[type="radio"]{
+  accent-color: black;
+}
 .reg-form > input {
   grid-column: 2;
   width: 100%;
-  padding: 5px;
+  padding: 5px 10px;
   margin: 3px 0px;
   font-size: 1rem;
   border: 0px;
   border-radius: 50px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: #e6e6e6;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 .submit {
+  margin: 5px;
   font-size: 1rem;
   padding: 8px 16px;
-  margin: 20px 0px;
   grid-column: 1 / span 2; /* Spanning both columns */
   justify-self: center; /* Centering horizontally */
   background-color: #ffcd29;
@@ -77,29 +93,72 @@ label {
 }
 /* Existing styles */
 /* ... */
-
+.form-heading{
+  font-size: 2em;
+  margin-bottom: 10px;
+}
 .overlay {
   position: absolute;
   top: 0;
   left: 40%;
   width: 60%;
   height: 100%;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
   background-color: #ffcd29;
   z-index: 1000;
   transition: width 3s ease;
   transition: left 2s ease;
+  border-radius: 10px;
 }
 
 .overlay.slide-left {
   width: 50%;
   left: 0;
 }
-
+/* .err_m{
+  text-align: center;
+  color: red;
+  grid-column:2;
+  background-color:gainsboro;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: center;
+} */
+.err_m{
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+  grid-column:2;
+  height: 0px;
+  z-index: 2;
+}
+.err_m .tooltiptext{
+  background-color:rgb(223, 8, 8);
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+}
+.err_m .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent red transparent;
+}
+.center {
+  width: 90vw;
+  height: 90vh;
+  background-color: var(--tertiary-color);
+}
+.slide-button{
+  font-weight: 600;
+}
 @media screen and (max-width: 3200px) {
-  .center {
-    width: 90vw;
-    height: 90vh;
-  }
   .signindiv {
     padding: 2px 100px;
     display: flex;
@@ -107,10 +166,10 @@ label {
     align-items: center;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .center {
-    width: 60vw;
-    height: 80vh;
+    min-width: max-content;
+    min-height: max-content;
   }
   .overlay {
     display: none;
@@ -134,21 +193,19 @@ label {
     display: none;
   }
 }
-@media screen and (max-width: 420px) {
-  .center {
-    width: 90vw;
-    height: 90vh;
+@media screen and (max-width: 1024px) {
+  .reg-form > input{
+    font-size: 0.8rem;
   }
-  .signindiv {
-    padding: 2px 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .middle{
+    flex: 1;
   }
-  input {
-    width: 100%;
-    text-align: center;
-    height: 8vh;
-    border-radius: 25px;
+  .right{
+    flex: 2;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .middle{
+    flex: 0;
   }
 }

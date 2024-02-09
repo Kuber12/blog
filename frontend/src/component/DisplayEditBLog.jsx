@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import NewwNav from "./NewwNav";
-
+import { GlobalContext } from "./GlobalContent";
 const DisplayEditBLog = () => {
+  const userData = useContext(GlobalContext);
+  const { user } = userData;
+  const { username } = user;
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const token = sessionStorage.getItem("authToken");
@@ -17,12 +20,12 @@ const DisplayEditBLog = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/blog", config)
+      .get(`http://localhost:5000/api/blog/${username}/user`, config)
       .then((res) => setData(res.data.message))
       .catch((err) => console.log(err));
   }, [data]);
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, image) => {
     const confirm = window.confirm("Do you want to delete?");
     if (confirm) {
       axios
@@ -32,6 +35,15 @@ const DisplayEditBLog = () => {
           // window.location.reload();
         })
         .catch((err) => console.log(err));
+
+      axios
+        .delete(`http://localhost:5000/api/file/${image}/delete`)
+        .then((res) => {
+          console.log("Image deleted");
+        })
+        .catch((ex) => {
+          console.log("errror" + ex);
+        });
     }
   };
 
@@ -72,7 +84,7 @@ const DisplayEditBLog = () => {
                     </td>
                     <td style={{ display: "flex", flexWrap: "wrap" }}>
                       <Link
-                        to={`/cardsDetails/${d._id}`}
+                        to={`/OpenBlog/${d._id}`}
                         className="btn btn-sm btn-info me-2"
                       >
                         Read
@@ -84,7 +96,7 @@ const DisplayEditBLog = () => {
                         Edit
                       </Link>
                       <button
-                        onClick={(e) => handleDelete(d._id)}
+                        onClick={(e) => handleDelete(d._id, d.image)}
                         className="btn btn-sm btn-danger"
                       >
                         Delete

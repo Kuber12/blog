@@ -13,10 +13,10 @@ import DisplayEditBLog from "./DisplayEditBLog";
 import Login from "./Login";
 import OpenBlog from "./OpenBlog";
 import GlobalContentProvider from "./GlobalContent";
-
+import NewCard from "./NewCard";
+import BlogsPage from "../pages/BlogsPage";
+import BlogPageTag from "../pages/BlogPageTag";
 const MyRouter = () => {
-  const [isFooterVisible, setisFooterVisible] = useState(true);
-
   return (
     <div>
       <GlobalContentProvider>
@@ -24,7 +24,8 @@ const MyRouter = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/" index element={<Home />}></Route>
-              <Route path="User" element={<User />}></Route>
+              <Route path="/Blogs" element={<BlogsPage />}></Route>
+              <Route path="/BlogPageTag/:tag" element={<BlogPageTag />}></Route>
             </Route>
             <Route path="AddBlog" element={<AddBlog />}></Route>
             <Route path="EditBlog/:id" element={<EditBlog />}></Route>
@@ -38,7 +39,9 @@ const MyRouter = () => {
               element={<DisplayEditBLog />}
             ></Route>
             <Route path="/Login" element={<Login />}></Route>
-            <Route path="/OpenBlog" element={<OpenBlog />}></Route>
+            <Route path="/OpenBlog/:id" element={<OpenBlog />}></Route>
+            <Route path="/NewCard" element={<NewCard />}></Route>
+            <Route path="/User" element={<User />}></Route>
           </Routes>
         </Router>
       </GlobalContentProvider>

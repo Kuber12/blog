@@ -16,6 +16,7 @@ import { GlobalContext } from "./GlobalContent";
 const Slider = () => {
   const [Slider, setSlider] = useState(1);
   const data = useContext(GlobalContext);
+  const username = data.user.username;
 
   const handleSlider = (slideNum) => {
     setSlider(slideNum);
@@ -36,21 +37,26 @@ const Slider = () => {
           <div className={`slider ${Slider === 1 ? "active" : ""}`}>
             <img id="slide1" src={Hill} />
             <div className="content" id="content1">
-              <h1>
-                Make Your
-                <br />
-                <span>First Post {data.username ? data.username : ""} </span>
-              </h1>
-              <p>
+              <h1 className="slider-heading hedvig">Make Your</h1>
+              <h2 className="slider-heading2 hedvig">
+                <span>First Post {username ? `"${username} "` : null}</span>
+              </h2>
+              <h4 className="slider-heading3">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
                 repellendus, a quasi tenetur quae nesciunt temporibus aut
                 placeat?
-              </p>
-              <Link className="btns" to="/AddBlog">
-                Post Blog <FontAwesomeIcon icon={faPenToSquare} />
-              </Link>
+              </h4>
+              {username ? (
+                <Link className="btns" to="/AddBlog">
+                  Post Blog <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
+              ) : (
+                <Link className="btns" to="/Login">
+                  Post Blog <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
+              )}
             </div>
           </div>
         )}
@@ -58,18 +64,17 @@ const Slider = () => {
           <div className={`slider ${Slider === 2 ? "active" : ""}`}>
             <img id="slide2" src={Mountain} />
             <div className="content" id="content2">
-              <h1>
-                Search
-                <br />
-                <span>Contents</span>
-              </h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Aspernatur fuga explicabo consequuntur id tempora molestiae
-                laudantium similique consectetur sunt repellat provident
-                repellendus, a quasi tenetur quae nesciunt temporibus aut
-                placeat?
-              </p>
+            <h1 className="slider-heading">Search</h1>
+            <h2 className="slider-heading2">
+              <span>Contents </span>
+            </h2>
+            <h4 className="slider-heading3">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Aspernatur fuga explicabo consequuntur id tempora molestiae
+              laudantium similique consectetur sunt repellat provident
+              repellendus, a quasi tenetur quae nesciunt temporibus aut
+              placeat?
+            </h4>
               <Link className="btns">
                 Search <FontAwesomeIcon icon={faMagnifyingGlass} />
               </Link>
@@ -80,18 +85,17 @@ const Slider = () => {
           <div className={`slider ${Slider === 3 ? "active" : ""}`}>
             <img id="slide3" src={Sunset} />
             <div className="content" id="content3">
-              <h1>
-                Find New
-                <br />
+              <h1 className="slider-heading">Find new</h1>
+              <h2 className="slider-heading2">
                 <span>Connections</span>
-              </h1>
-              <p>
+              </h2>
+              <h4 className="slider-heading3">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Aspernatur fuga explicabo consequuntur id tempora molestiae
                 laudantium similique consectetur sunt repellat provident
                 repellendus, a quasi tenetur quae nesciunt temporibus aut
                 placeat?
-              </p>
+              </h4>
               <Link className="btns">
                 Find People <FontAwesomeIcon icon={faUserPlus} />
               </Link>

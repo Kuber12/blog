@@ -1,0 +1,127 @@
+#card-container {
+  width: 300px;
+  height: auto;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 15px;
+  transition: 0.5s;
+  padding: 10px;
+}
+.post-tag{
+  background-color: var(--tertiary-color);
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: var(--text-color);
+  font-weight: 600;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+}
+#card-container:hover {
+  transform: scale(1.05);
+}
+/* .blog-display {
+  /* padding: 10px; */
+/* display: flex; */
+/* justify-content: center; */
+/* align-items: center; */
+/* gap: 50px; */
+/* display: grid; */
+/* grid-template-rows: repeat(auto-fit, minmax(300px, 1fr)); */
+/* flex-wrap: wrap; */
+/* margin-bottom: 30px; */
+/* width: 80%; */
+
+.blog-display {
+  display: grid;
+  width: 100%;
+  gap: 20px;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+#img-container {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+  border-radius: 10px;
+}
+#heading {
+  /* padding: 10px; */
+  padding-left: 10px;
+  margin: 5px 0;
+  font-weight: 700;
+  word-spacing: 5px;
+}
+#tags {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin: 10px 0;
+}
+#tags span{
+  width: 100%;
+  display: block;
+}
+#tags div h6 {
+  padding-left: 20px;
+  color: #4b5563;
+}
+#buttons-container {
+  width: 100%;
+  /* background-color: beige; */
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  align-items: center;
+}
+#buttons {
+  width: 200px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+  background-color: #f3f4f6;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 10px 10px;
+  height: 40px;
+}
+/* .link-to {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+#buttons .link-to {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+@media screen and (max-width: 1000px) {
+  .blog-display {
+    grid-template-columns: auto auto;
+  }
+  #card-container{
+    width: 325px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .blog-display {
+    grid-template-columns: auto;
+  }
+}
+@media screen and (min-width: 1500px) {
+  .blog-display {
+    grid-template-columns: auto auto auto auto;
+  }
+}

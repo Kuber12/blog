@@ -1,9 +1,4 @@
-@font-face{
-  font-family: Hedvig;
-  src:url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
-} 
 .wrapper {
-  font-family: Hedvig;
   position: relative;
   max-width: 100%;
   height: 100vh;
@@ -36,21 +31,20 @@
   left: 50px;
   padding: 10px;
 }
-.content h1 {
-  font-size: 4em;
-  font-weight: 900;
+.slider-heading {
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 5px;
-  margin-bottom: 40px;
 }
-.content h1 span {
-  font-size: 1em;
+.slider-heading2 {
   font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgb(68, 66, 66);
 }
-.content p {
+.slider-heading3{
   color: #fff;
   margin-bottom: 60px;
-  font-size: 30px;
 }
 .slider_nav {
   display: flex;
@@ -79,19 +73,23 @@
   font-size: 20px;
 }
 .btns{
+  border: 2px solid var(--text-color);
   background-color: #fff;
-  width: 200px;
-  height: 50px;
+  font-size:var(--font-size-lg);
+  width: max-content;
   display: block;
   border-radius: 50px;
   text-align: center;
-  padding:5px;
-  font-size: 1.3rem;
+  padding:5px 15px;
   letter-spacing: 1px;
+  transition: all 200ms ease;
 }
 .btns:hover{
-  background-color:#BDE3FF;
-  color: black;
+  letter-spacing: 1px;
+  transform: scale(1.1);
+}
+.btns > svg{
+  margin-left: 5px;
 }
 .chevron-btn {
   position: absolute;
@@ -117,40 +115,82 @@
 .chevron-btn.rightx {
   right: 20px;
 }
-@media (max-width: 992px) {
-  content{
-    left:5%;
-  }
-  .content p {
-    font-size: 25px;
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  .content{
+    left:7%;
   }
   .content button {
-    width: auto;
     border-radius: 50px;
     font-size: 15px;
   }
-  .content h1 {
-    font-size: 3em;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin-bottom: 40px;
-  }
-  .content h1 span {
-    font-size: 1em;
+  .h {
+    font-size: 4em;
     font-weight: 600;
   }
+  .sp {
+    font-size: 3em;
+    font-weight: 600;
+  }
+  .Cp {
+    font-size: 1.5em;
+    padding-top: 15px;
+  }
+  .btns{
+    width: 200px;
+    height: 50px;
+    font-size: 1.3rem;
+  }
 }
-@media (max-width: 760px) {
-  .content {
-    left:5%;
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .content{
+    left:9%;
   }
-  .content button {
-    width: auto;
-    border-radius: 50px;
-    font-size: 15px;
+  .h {
+    font-size: 3em;
+    font-weight: 600;
   }
-  .content p {
-    font-size: 20px;
+  .sp {
+    font-size: 2em;
+    font-weight: 600;
   }
+  .Cp {
+    font-size: 1.3em;
+    padding-top: 10px;
+  }
+  .btns{
+    width: 180px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+  .btns:hover{
+    font-size: 1.4em;
+    letter-spacing: 1.1px;
+  }
+}
+ @media (max-width: 480px) {     
+    .content {
+      left:10%;
+    }
+    .h {
+      font-size: 2em;
+      font-weight: 600;
+    }
+    .sp {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    .Cp {
+      font-size: 1em;
+      padding-top: 10px;
+    }
+    .btns{
+      width: 150px;
+      height: 35px;
+      font-size: 1rem;
+    }
+    .btns:hover{
+      font-size: 1.1em;
+      letter-spacing: 1px;
+    }
 }

@@ -1,224 +1,382 @@
-.bodyy{
-    max-width: 100%;
-  height: 100vh;
-  background-color: #FFCD29;
+.bodyy {
+  background-color: #ffcd29;
+  padding: 20px 0;
 }
-.Top_Con{
+.Top_Con {
   display: flex;
-  height:10%;
+  height: 10%;
   text-align: center;
   justify-content: center;
   position: relative;
   top: 15px;
 }
-.Top_Con h1{
+.Top_Con h1 {
   margin-right: 10px;
-  font-size: 3.5rem;
 }
-.startnow{
-  width:50%;
-  display:flex;
-  margin-left:5%;
+.crw {
+  width: 60px;
+  height: 50px;
 }
-.startnow h1 {
-  font-size: 4em;
+.mainC {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.MainBox {
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+  margin: 30px;
+  width: 400px;
+  height: 600px;
+  border: 4px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  align-items: center;
+}
+.uDetail {
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+.Pp {
+  width: 300px;
+  height: 300px;
+  background-color: rgb(212, 212, 212);
+}
+.Fw {
+  background-color: #0d6efd;
+  border-radius: 20px;
+  font-size: var(--font-size-md);
+  width: 200px;
+  height: 60px;
+  color: white;
+  transition: all 200ms ease;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.Fw:hover {
+  letter-spacing: 1px;
+  box-shadow: 0 8px 16px 0 rgba(54, 50, 50, 0.2),
+    0 6px 20px 0 rgba(9, 8, 8, 0.19);
+}
+.right_Box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+}
+.startnow {
+  padding: 20px;
+  top: 20px;
+  display: flex;
+}
+.H {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 5px;
 }
-.startnow span {
-  font-size: 3rem;
+.NoN {
   font-weight: 600;
-  color:grey;
+  color: grey;
+  text-transform: uppercase;
 }
-.mainC{
-  display: flex;
-  justify-content: space-between;
+.Para {
+  font-size: var(--font-size-sm);
+  max-width: 500px;
 }
 #strokes {
   position: relative;
-  max-width: 50%; 
-  height: 250px; 
-  margin:20px;
-  top:0;
+  max-width: 300px;
+  height: 200px;
+  margin: 10px;
+  top: 0;
 }
-.container{
+.btm_box {
   position: relative;
-  width:50%;
   display: flex;
+  justify-content: space-evenly;
+  top: 30px;
+  padding: 10px;
 }
-#start{
- width: 20%; 
-  position: absolute;
-  right: 10%;
-  
-  height: auto; 
-}
-#doodle{
-  width: 50%;
+#doodle {
+  width: 200px;
   position: relative;
-  left: 45%;
-  top: 70px;
+  margin-left: 30px;
+  padding: 5px;
 }
-#contri_btn{
-  width:300px;
-  height:60px;
+#contri_btn {
+  width: 300px;
+  height: 60px;
   border-radius: 20px;
-  background-color: #BDE3FF;
-  right: 40%;
-  position: absolute;
-  bottom:10px;
-  font-size: 1.3rem;
+  background-color: #bde3ff;
+  bottom: 0;
+  font-size: 1.3em;
   font-weight: 600;
   letter-spacing: 1px;
+  transition: all 200ms ease;
+  margin-right: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-#contri_btn:hover{
+#contri_btn:hover {
   background-color: white;
-  color:black;
+  color: black;
+  box-shadow: 0 0 20px;
+  font-size: var(--font-size-md);
 }
-.startnow p {
-  max-width: 500px; 
-}
-.Top_Con img {
-  width: 60px;
-  height: 50px;
-}
-.MainBox {
-  margin: 20px;
-  height:40%;
-  border: 4px solid white; 
-  border-radius: 10px; 
-  overflow: hidden; 
-}
-.Sub {
-  width: 25%;
-  height: 100%; 
-  float: left; 
-  box-sizing: border-box; 
-}                             
-.Sub:not(:last-child) {
-  border-right: 3px solid white; 
-}
-@media (max-width: 1500px) {
-  .Top_Con h1{
-    margin-right: 10px;
-    font-size: 2.5rem;
+
+@media screen and (min-width: 1024px) and (max-width: 1290px) {
+  .MainBox {
+    padding: 20px;
+    margin: 10px;
+    width: 350px;
+    height: 600px;
   }
-  .Top_Con{
-    height:8%;
+  .Pp {
+    width: 250px;
+    height: 250px;
+    background-color: rgb(212, 212, 212);
   }
-  .startnow h1 {
-    font-size: 3rem;
+
+  .H {
+    font-weight: 700;
+    letter-spacing: 4px;
   }
-  .startnow span {
-    font-size: 2rem;
-  }
-  .startnow p {
-    font-size: 1.2rem;
-  }
-  #strokes {
-    max-width: 30%; 
-    height: 200px; 
-  }
-}
-@media(max-width:1200px){
-  #doodle{
-    max-width: 40%;
-    height:300px;
-  }
-}
-@media (max-width: 992px) {
-  .Top_Con h1{
-    margin-right: 10px;
-    font-size: 2.3rem;
-  }
-  .Top_Con{
-    height:6%;
-  }
-  .startnow p {
-    font-size: 1rem;
-  }
-  .Top_Con img {
-    width: 50px;
-    height: 40px;
-  }
-  .startnow h1 {
-    font-size: 2.5em;
-  }
-  .startnow span {
-    font-size: 1.5rem;
-  }
-  #strokes {
-    max-width: 35%; 
-    height: 150px; 
-  }
-  #doodle{
-    max-width: 50%;
-    height:250px;
-  }
-  #contri_btn{
-    width:250px;
-    height:60px;
-    font-size: 1.1rem;
-  }
-}
-@media (max-width: 760px) {
-  .mainC{
-    display: block;
-  }
-  .startnow{
-    width:auto;
-  }
-  .container{
-    width:100%;
-    display:block;
-    align-items: center;
-  }
-  .Top_Con h1{
-    margin-right: 10px;
-    font-size: 1.8rem;
-  }
-  .Top_Con img {
-    width: 40px;
-    height: 30px;
-  }
-  .startnow p {
-    font-size: 0.9rem;
-  }
-  .Top_Con{
-    height:10%;
-  }
-  .startnow h1 {
-    font-size: 1.8rem;
+  .NoN {
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 5px;
   }
-  .startnow span {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color:grey;
+  .Para {
+    max-width: 450px;
   }
   #strokes {
-    max-width: 50%; 
+    position: relative;
+    max-width: 250px;
+    height: 150px;
+    margin: 0;
+    top: 0;
+  }
+  .btm_box {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    top: 90px;
+    padding: 5px;
     height: 150px;
   }
-   .MainBox {
-    margin: 20px;
-    height:30%;
-    border: 4px solid white; 
-    border-radius: 10px; 
-    overflow: hidden; 
+  #doodle {
+    width: 150px;
+    position: relative;
+    margin-left: 50px;
+    padding: 5px;
   }
-  #contri_btn{
-    width:300px;
-    height:50px;
-    bottom:-100px;
-    left:10%;
+  #contri_btn {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    font-weight: 400;
   }
-  #doodle{
-    max-width: 30%;
-    height:150px;
-    left:60%;
+  #contri_btn:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 20px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .right_Box {
+    right: 0;
+    padding: 10px;
+  }
+  .startnow {
+    padding: 20px;
+    top: 70px;
+    display: flex;
+    position: relative;
+    right: 0;
+  }
+  .MainBox {
+    padding: 20px;
+    margin: 5px;
+  }
+  .Pp {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(212, 212, 212);
+  }
+  .H {
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+  .NoN {
+    font-weight: 600;
+  }
+  .Para {
+  }
+  #strokes {
+    display: none;
+  }
+  .btm_box {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    top: 90px;
+    padding: 5px;
+    height: 150px;
+    width: 450px;
+  }
+  #doodle {
+    width: 150px;
+    position: relative;
+    margin-left: 60px;
+    padding: 5px;
+  }
+  #contri_btn {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    font-weight: 400;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  
+  .mainC {
+    flex-direction: column;
+    margin-top: 10px;
+    justify-content: center;
+  }
+  .MainBox {
+    padding: 10px;
+    margin: 5px;
+    height: 250px;
+    flex-direction: row;
+  }
+  .uDetail {
+    text-align: center;
+  }
+  .Fw {
+    height: 40px;
+  }
+  .Pp {
+    height: 150px;
+    background-color: rgb(212, 212, 212);
+  }
+  .H {
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+  .NoN {
+    font-weight: 600;
+  }
+  #strokes {
+    display: none;
+  }
+  .right_Box {
+    right: 0;
+    padding: 5px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .startnow {
+    padding: 20px;
+    top: 15px;
+    display: flex;
+    position: relative;
+    right: 0;
+  }
+  .btm_box {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    top: 5px;
+    padding: 5px;
+  }
+  #doodle {
+    position: relative;
+    margin-left: 160px;
+    padding: 5px;
+  }
+  #contri_btn {
+    font-weight: 400;
+  }
+}
+@media (max-width: 480px) {
+  .Top_Con {
+    height: 7%;
+  }
+  .crw {
+    height: 20px;
+  }
+  .mainC {
+    flex-direction: column;
+    margin-top: 1px;
+    justify-content: center;
+  }
+  .left_box {
+    position: relative;
+    left: 5px;
+  }
+  .MainBox {
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+    flex-direction: column;
+  }
+  .uDetail {
+    text-align: center;
+    width: 90px;
+  }
+  #Des {
+    text-align: left;
+  }
+  .Fw {
+    margin-top: 10px;
+    height: 30px;
+  }
+  .Pp {
+    background-color: rgb(212, 212, 212);
+  }
+  .H {
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .NoN {
+    font-weight: 600;
+  }
+  .Para {
+  }
+  #strokes {
+    position: relative;
+    height: 100px;
+    margin: 0;
+    top: 0;
+  }
+  .right_Box {
+    right: 0;
+    padding: 5px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .startnow {
+    padding: 20px;
+    top: 15px;
+    display: flex;
+    position: relative;
+    right: 0;
+  }
+  .btm_box {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    top: 15px;
+    padding: 5px;
+  }
+  #doodle {
+    position: relative;
+    margin-left: 160px;
+    padding: 5px;
+  }
+  #contri_btn {
+    position: absolute;
+    font-weight: 400;
   }
 }

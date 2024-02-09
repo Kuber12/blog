@@ -4,25 +4,49 @@ const mongoose = require('mongoose');
 
 const followUser = asyncHandler(async ( req, res) => {
   try {
-    const userId = new mongoose.Types.ObjectId(req.params.userid);
-    const followedUserId = new mongoose.Types.ObjectId(req.params.followedid);
+    const follower = req.params.follower;
+    const followed = req.params.followed;
     
-    // Check if the combination of userId and blogId already exists
-    const existingFollow = await Follow.findOne({ userId, followedUserId });
+    // Check if the combination of username and blogId already exists
+    const existingFollow = await Follow.findOne({ username: follower, followedUser: followed });
     
     if (existingFollow) {
-      await Follow.deleteOne({ userId, followedUserId });
-      res.status(204).json({message : "Unfollowed " + followedUserId});
+      await Follow.deleteOne({ username: follower, followedUser: followed });
+      res.status(200).json({message : "Unfollowed"});
     }else{
-      const newFollow = new Follow({ userId, followedUserId });
-      const savedLike = await newFollow.save();
-      res.status(200).json({message : userId + " Followed " + followedUserId});
+      const newFollow = new Follow({ username: follower, followedUser: followed });
+      const savedFollow = await newFollow.save();
+      res.status(200).json({message :"Followed"});
     }
 
   } catch (error) {
-    console.error('Error inserting like:', error);
+    console.error('Error following:', error);
     res.status(500).json({message : "Error"});
   }
 })
 
-module.exports = { followUser};
+const countFollowers = asyncHandler(async (req,res) =>{
+  try {
+    const username = req.params.username;
+    const followersCount = await Follow.countDocuments({username});
+    res.status(200).json({totalFollowers: followersCount});
+  } catch (error) {
+    res.status(500).json({error: "Blog not found"})
+  }
+})
+
+const checkFollowing = asyncHandler(async (req,res) =>{
+  const follower = req.params.follower;
+  const followed = req.params.followed;
+  try {
+    const isFollowing = await Follow.findOne({ username: follower, followedUser: followed });
+    if(isFollowing){
+      res.status(200).json({message: "Following"});
+    }else{
+      res.status(200).json({message: "Not Following"})
+    }
+  }catch(err){
+    res.status(500).json({message: "Somthing went wrong"})
+  }
+})
+module.exports = { followUser, countFollowers, checkFollowing};

@@ -4,11 +4,11 @@ const commentSchema = mongoose.Schema(
     {
         text: { 
             type: String, 
-            required: [true,"Please enter a comment"] 
+            required: [true,"Comment cant be Empty"] 
         },
-        userId: {
-            type: mongoose.Schema.ObjectId,
-            ref: "User"
+        username: {
+            type: String, 
+            required: [true,"Please login first"] 
         },
         blogId: {
             type: mongoose.Schema.ObjectId,

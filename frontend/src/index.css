@@ -1,13 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300&display=swap");
+@font-face{
+  font-family: Hedvig;
+  src:url(/public/HedvigLettersSerif-Regular-VariableFont_opsz.ttf);
+} 
+:root {
+  --primary-color: #ffcd29;
+  --secondary-color: #BDE3FF;
+  --tertiary-color: #e6d579;
+  --accent-color: #e74c3c;
+  --text-color: #333333;
+  --white: #ecf0f1;
+  --dark-orange: #ffa600;
+
+  --font-size-xs: 1rem;
+  --font-size-sm: 1.2rem;
+  --font-size-md: 1.4rem;
+  --font-size-lg: 1.8rem;
+  --font-size-xl: 2rem;
+  --font-size-2xl: 2.2rem;
+  --font-size-3xl: 2.5rem;
+
+}
+a{
+  color:  var(--text-color) !important;
+}
 body {
+  background-color: var(--secondary-color);
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
+  font-family: "Red Hat Display", sans-serif;
+}
+.hedvig {
+  font-family: Hedvig;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace; */
+}
+html {
+  font-size: 16px; /* Set a base font size for the document */
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem; 
+}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1.25rem;
+}
+h6 {
+  font-size: 1rem;
+}
+.pad-20{
+  padding: 20px;
+}
+.pad-10{
+  padding: 10px;
+}
+.mar-20{
+  margin: 20px;
+}
+.mar-10{
+  margin: 10px;
 }
