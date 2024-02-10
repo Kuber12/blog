@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
 import axios from "axios";
 import useSearch from "../SearchContext/search";
+import SearchContext from "../pages/SearchContext";
 import { Link } from "react-router-dom";
+
 const SearchBar = () => {
+
+  const {searchTxt,SetSearchTxt,setIsInputFocused} = useContext(SearchContext)
   const [tags, setTags] = useState([]);
+ 
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/tag", { timeout: 5000 })
@@ -23,6 +28,13 @@ const SearchBar = () => {
     //   });
     // settagFilter(tagValue);
   };
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
+  };
   return (
     <>
       <div
@@ -36,6 +48,7 @@ const SearchBar = () => {
           flexWrap: "wrap",
         }}
       >
+    
         <div
           style={{
             width: "60%",
@@ -46,7 +59,7 @@ const SearchBar = () => {
           }}
         >
           <img className="searchIcon" src={search} alt="" />
-          <input className="searchInput" type="text" placeholder="Search" />
+          <input className="searchInput" onFocus={handleInputFocus} onBlur={handleInputBlur} onChange={(e)=>SetSearchTxt(e.target.value)} type="text" placeholder="Search" />
         </div>
       </div>
       <div>

@@ -16,10 +16,12 @@ import GlobalContentProvider from "./GlobalContent";
 import NewCard from "./NewCard";
 import BlogsPage from "../pages/BlogsPage";
 import BlogPageTag from "../pages/BlogPageTag";
+import SearchContentProvider from "../pages/SearchContentProvider";
 const MyRouter = () => {
   return (
     <div>
       <GlobalContentProvider>
+      <SearchContentProvider>
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -44,6 +46,7 @@ const MyRouter = () => {
             <Route path="/User" element={<User />}></Route>
           </Routes>
         </Router>
+        </SearchContentProvider>
       </GlobalContentProvider>
     </div>
   );

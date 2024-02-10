@@ -38,7 +38,7 @@ const CardsHome = () => {
       const response = await axios.get(
         `http://localhost:5000/api/blog/${page}/${limit}`
       );
-      console.log(response);
+      // console.log(response);
       return response.data.message;
     } catch (ex) {
       console.log("error fetching");
@@ -79,7 +79,7 @@ const CardsHome = () => {
     const loadInitialData = async () => {
       const initialData = await fetchData();
       setData(initialData);
-      console.log(initialData);
+      // console.log(initialData);
       // setFilteredData(initialData);
     };
     loadInitialData();
