@@ -1,3 +1,8 @@
+/**
+ * The above code is a React component that allows users to upload a single file to a server using
+ * axios.
+ * @returns The component is returning a div containing an input element of type "file" and a button.
+ */
 import React, { useState } from "react";
 import axios from "axios";
 const FileUploadSingle = () => {

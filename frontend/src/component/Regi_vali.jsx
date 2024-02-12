@@ -1,3 +1,8 @@
+/**
+ * The `Regi_vali` function is a custom hook that handles form validation and submission for user
+ * registration in a React application.
+ * @returns The code is returning an object with the following properties and values:
+ */
 import {useState} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

@@ -1,3 +1,9 @@
+/**
+ * The function `R_vali` is a JavaScript React function that validates registration data, including
+ * username, name, password, email, address, and gender.
+ * @returns The function `R_vali` returns an object `Rerrors` which contains any validation errors
+ * encountered during the registration process.
+ */
 const R_vali=(registrationData)=>{
     let Rerrors={};
 

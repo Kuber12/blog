@@ -1,3 +1,4 @@
+/* The code is defining a functional component called `NavBar` in JavaScript React. */
 import React, { useState } from "react";
 import "./NavBar.css";
 import "./NabBar.js";

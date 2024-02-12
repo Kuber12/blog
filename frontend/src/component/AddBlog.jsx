@@ -1,3 +1,4 @@
+/* The above code is a React component called "AddBlog". It is used to add a new blog post. */
 import React, { useContext, useState,useEffect } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";

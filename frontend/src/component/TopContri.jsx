@@ -1,3 +1,8 @@
+/* The code is a React component called "TopContributor". It imports various dependencies and images,
+and then renders a JSX structure. The component displays a section for the top contributor of the
+month, along with their details and a follow button. It also includes a section for starting a blog,
+with some text and an image. Finally, it includes a button to create a blog, which is conditionally
+rendered based on whether the user is logged in or not. */
 import React, { useContext } from "react";
 import "./TopContrii.css";
 import Crown from "../images/crown.png";

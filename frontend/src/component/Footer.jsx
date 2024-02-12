@@ -1,3 +1,4 @@
+/* The code is defining a functional component called `Footer` in JavaScript React. */
 import React, { useState } from "react";
 import facebook from "../Icons/facebook.png";
 import instagram from "../Icons/instagram.png";

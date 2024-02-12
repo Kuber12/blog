@@ -1,3 +1,8 @@
+/**
+ * The `BestBlogSlider` component is a React component that renders a slider of best blogs with
+ * navigation buttons.
+ * @returns The component `BestBlogSlider` is being returned.
+ */
 import React from 'react'
 import "./BestBlog.css";
 import Bg from "../images/bg.png";

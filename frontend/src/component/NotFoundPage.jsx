@@ -1,3 +1,7 @@
+/**
+ * The above code is a React component for a 404 page not found error message.
+ * @returns The NotFoundPage component is being returned.
+ */
 import React from "react";
 import { Helmet } from "react-helmet";
 const NotFoundPage = () => {

@@ -1,3 +1,4 @@
+/* The code is defining a functional component called `SearchBar` in JavaScript React. */
 import React, { useContext, useEffect, useState } from "react";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
