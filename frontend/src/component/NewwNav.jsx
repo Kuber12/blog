@@ -43,10 +43,12 @@ const NewNavi = () => {
             Blog
           </Link>
         </li>
-        <li>{data.user.username ? <Link to="/AddBlog">Create</Link> : ""}</li>
-        <li>
-          {data.user.username ? <Link to="/DisplayEditBLog">Edit</Link> : ""}
-        </li>
+        {data.user.username ? <li>
+          <Link to="/AddBlog">Create</Link>
+        </li> : ""}
+        {data.user.username ? <li>
+         <Link to="/DisplayEditBLog">Edit</Link>
+        </li> : ""}
         {data.user.username ? (
           <li id="userImage">
             <Link to="/User">

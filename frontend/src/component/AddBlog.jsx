@@ -9,17 +9,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GlobalContext } from "./GlobalContent";
+import ReactConfetti from "react-confetti";
 const AddBlog = () => {
   const userData = useContext(GlobalContext);
   const { user } = userData;
   const { username } = user;
 
-
-
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
-  const[tags,setTags] = useState();
+  const [tags, setTags] = useState();
   const [values, setValues] = useState({
     headline: "",
     content: "",
@@ -35,15 +34,13 @@ const AddBlog = () => {
     },
   };
 
-  //for tags all fetched  
+  //for tags all fetched
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/tag")
-      .then((res) => 
-      {
-
+      .then((res) => {
         setTags(res.data.message);
-         console.log(res.data.message);
+        console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -67,6 +64,29 @@ const AddBlog = () => {
     }
   };
 
+  const [btn, setBtn] = useState(false);
+  const [windowDimen, setWindowDimension] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  const detectSize = () => {
+    setWindowDimension({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+  useEffect(() => {
+    window.addEventListener("resize", detectSize);
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [windowDimen]);
+  // const handleStop = () => {
+  //   setBtn(true);
+  //   setTimeout(() => {
+  //     setBtn(false);
+  //   }, 3000);
+  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -106,7 +126,10 @@ const AddBlog = () => {
         },
         config
       );
-
+      setBtn(true);
+      setTimeout(() => {
+        setBtn(false);
+      }, 3000);
       toast.success("Added Blog");
       console.log("Submitted", blogResponse.data);
 
@@ -115,11 +138,17 @@ const AddBlog = () => {
       }, 3000);
     } catch (error) {
       console.error("Error", error);
-    } 
+    }
   };
-
   return (
     <>
+      {btn && (
+        <ReactConfetti
+          width={windowDimen.width}
+          height={windowDimen.height}
+          tweenDuration={3000}
+        />
+      )}
       <NewNavi />
       <div className="container-head">
         <Helmet>
@@ -180,30 +209,31 @@ const AddBlog = () => {
                 ></textarea>
               </p>
               <div className="buttons-container">
-              {/* top */}
-              <div className="button-top-container">
-                {/* file  input */}
-                {/* select tags */}
-                <div>
-                  <select
-                    name=""
-                    className="form-button"
-                    onChange={(e) => {
-                      // console.log(e.target.value);
-                      setValues({ ...values, tag: e.target.value });
-                    }}
-                  >
-                    <option disabled selected value="">
-                      Choose Your Tag
-                    </option>
-                    {
-                      tags && tags.map((items)=>(
-                        <>
-                          <option value={items.tagname}>{items.tagname}</option>    
-                        </>
-                      ))
-                    }
-                    {/* <option value="News">Programming</option>
+                {/* top */}
+                <div className="button-top-container">
+                  {/* file  input */}
+                  {/* select tags */}
+                  <div>
+                    <select
+                      name=""
+                      className="form-button"
+                      onChange={(e) => {
+                        // console.log(e.target.value);
+                        setValues({ ...values, tag: e.target.value });
+                      }}
+                    >
+                      <option disabled selected value="">
+                        Choose Your Tag
+                      </option>
+                      {tags &&
+                        tags.map((items) => (
+                          <>
+                            <option value={items.tagname}>
+                              {items.tagname}
+                            </option>
+                          </>
+                        ))}
+                      {/* <option value="News">Programming</option>
                     <option value="Entertainment">Web Development</option>
                     <option value="Fun">Design</option>
                     <option value="Facts">Cooking</option>
@@ -213,31 +243,30 @@ const AddBlog = () => {
                     <option value="Facts"></option>
                     <option value="Facts">Personal</option>
                     <option value="Facts">Personal</option> */}
-                  </select>
-                </div>
-                <div style={{display: "flex",justifyContent:"center"}}>
-                  <label
-                    htmlFor="fileInput"
-                    className="custom-file-input form-button"
-                  >
-                    Choose Image
-                  </label>
-                  <input
-                    type="file"
-                    id="fileInput"
-                    onChange={handleFile}
-                    style={{ display: "none" }}
-                  />
-                </div>
-                <div style={{display: "flex",justifyContent:"right"}}>
-                  <button className="postBlog form-button" type="submit">
-                    Post
-                  </button>
+                    </select>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <label
+                      htmlFor="fileInput"
+                      className="custom-file-input form-button"
+                    >
+                      Choose Image
+                    </label>
+                    <input
+                      type="file"
+                      id="fileInput"
+                      onChange={handleFile}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "right" }}>
+                    <button className="postBlog form-button" type="submit">
+                      Post
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
-            
           </div>
         </form>
       </div>

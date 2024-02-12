@@ -15,7 +15,6 @@ a {
   width: 100%;
   background-color: white;
   margin: 0 auto;
-  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,8 +138,7 @@ a {
     width: 100%;
     background-color: transparent;
     margin: 0 auto;
-    height: 60px;
-
+    padding: 0;
   }
   .navbar .logo {
     font-size: 30px;
