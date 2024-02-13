@@ -1,3 +1,5 @@
+/* This code is a React component called `DisplayEditBLog`. It is responsible for displaying a list of
+blogs and providing options to edit or delete each blog. */
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";

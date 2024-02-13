@@ -1,3 +1,7 @@
+/* This code is a React component called `Slider`. It is a slideshow component that displays different
+images and content based on the current slide number. The component uses the `useState` and
+`useContext` hooks from React to manage the state of the current slide and access data from a global
+context. */
 import React, { useState, useContext } from "react";
 import Hill from "../images/hill.jpeg";
 import Mountain from "../images/mountain.png";

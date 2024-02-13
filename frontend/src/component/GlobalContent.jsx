@@ -1,3 +1,8 @@
+/**
+ * The above code is a React component that provides global context for user data and authentication
+ * token.
+ * @returns The GlobalContentProvider component is being returned.
+ */
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 

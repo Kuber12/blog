@@ -1,3 +1,5 @@
+/* The code you provided is a React component called `MyRouter`. It is responsible for defining the
+routes and rendering the corresponding components based on the URL path. */
 import React, { useState } from "react";
 import AddBlog from "./AddBlog";
 import EditBlog from "./EditBlog";

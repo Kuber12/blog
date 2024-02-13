@@ -1,3 +1,7 @@
+/**
+ * The OpenBlog component is a React component that displays a blog post, allows users to like and
+ * comment on the post, and provides information about the blog author.
+ */
 import React, { useEffect, useState, useContext } from "react";
 import "./OpenBlogg.css";
 import Hill from "../images/hill.jpeg";

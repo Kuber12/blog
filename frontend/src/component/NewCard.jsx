@@ -1,3 +1,8 @@
+/**
+ * The NewCard component is a React component that displays a card with blog post information,
+ * including an image, buttons for actions like viewing and liking, and tags for the post's category
+ * and author.
+ */
 import "./NewCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BsThreeDotsVertical } from "react-icons/bs";

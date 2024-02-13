@@ -1,3 +1,7 @@
+/**
+ * The Login component is a form that allows users to sign in or register for an account.
+ * @returns The Login component is returning a JSX element that represents the login form.
+ */
 import React, { useContext, useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";

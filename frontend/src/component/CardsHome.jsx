@@ -1,3 +1,5 @@
+/* This code is a React component called `CardsHome`. It is responsible for rendering a search bar, a
+list of cards, and implementing infinite scrolling functionality. */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./SearchBar.css";

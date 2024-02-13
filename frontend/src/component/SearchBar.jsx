@@ -1,8 +1,8 @@
+/* The code is defining a functional component called `SearchBar` in JavaScript React. */
 import React, { useContext, useEffect, useState } from "react";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
 import axios from "axios";
-import useSearch from "../SearchContext/search";
 import SearchContext from "../pages/SearchContext";
 import { Link } from "react-router-dom";
 

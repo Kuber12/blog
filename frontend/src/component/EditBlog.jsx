@@ -1,3 +1,4 @@
+/* The above code is a React component called "EditBlog". It is used to edit a blog post. */
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";

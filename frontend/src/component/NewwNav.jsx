@@ -1,3 +1,7 @@
+/* The code you provided is a React component called `NewNavi`. It is a navigation bar component that
+displays a list of links for navigating between different pages in a web application. */
+/* The code you provided is a React component called `NewNav`. It is a navigation bar component that
+displays a list of links for navigating between different pages in a web application. */
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navi.css";

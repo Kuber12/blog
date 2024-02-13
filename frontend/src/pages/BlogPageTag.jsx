@@ -1,3 +1,6 @@
+/* This code is a React component called `BlogPageTag`. It imports necessary dependencies such as
+`React`, `useContext`, `useEffect`, `useState`, `axios`, `useParams`, and `SearchContext`. It also
+imports two components `SearchBar` and `NewCard` from their respective files. */
 import React, { useContext, useEffect, useState } from "react";
 import SearchBar from "../component/SearchBar";
 import NewCard from "../component/NewCard";
