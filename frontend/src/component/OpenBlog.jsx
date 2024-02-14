@@ -101,6 +101,8 @@ const OpenBlog = () => {
       )
       .then((response) => {
         let result = response.data.message;
+
+        console.log(result);
         setFollowers((prev) => {
           const check = /^Followed$/;
           const checking = (result) => {
@@ -207,7 +209,9 @@ const OpenBlog = () => {
   }, [data]);
   useEffect(() => {
     axios
-      .get("https://blog-backend-3dcg.onrender.com/api/user/hihi/follow/haha")
+      .get(
+        `https://blog-backend-3dcg.onrender.com/api/user/${username}/follow/${data.username}`
+      )
       .then((res) => {
         setFollowed(res.data.message);
       });
