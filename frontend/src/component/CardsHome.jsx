@@ -24,7 +24,7 @@ const CardsHome = () => {
   const [tags, setTags] = useState([]);
   useEffect(() => {
     axios
-      .get("https://blog-backend-3dcg.onrender.com/api/tag", { timeout: 5000 })
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => setTags(res.data.message))
       .catch((err) => console.log(err));
   }, []);
@@ -49,7 +49,7 @@ const CardsHome = () => {
 
   const fetchMoreData = async () => {
     setPage((prev) => prev + 1);
-    console.log(page);
+
     try {
       const newData = await fetchData();
       if (newData.length > 0) {
@@ -65,10 +65,10 @@ const CardsHome = () => {
 
   const handleSearch = async (e) => {
     const searched = e.target.value;
-    console.log(searched);
+
     setSearchTerm(searched);
     const data = await searchApiData(`/api/blog/search/?query=${searched}`);
-    console.log("cardhome" + data);
+
     setFilteredData(data);
   };
 
@@ -77,8 +77,6 @@ const CardsHome = () => {
       const initialData = await fetchData();
       setData(initialData);
       setPage((prev) => prev + 1);
-      // console.log(initialData);
-      // setFilteredData(initialData);
     };
     loadInitialData();
   }, []);
@@ -155,7 +153,8 @@ const CardsHome = () => {
             <Link className="tags" to={`/Blogs`}>
               All
             </Link>
-            {tags &&
+            {Array.isArray(tags) &&
+              tags.length > 0 &&
               tags.map((tag, index) => (
                 <Link className="tags" to={`/BlogPageTag/${tag.tagname}`}>
                   {tag.tagname}

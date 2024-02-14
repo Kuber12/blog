@@ -15,7 +15,7 @@ const CardsDetails = () => {
   const [data, setData] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/${id}`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
         setData(res.data.message);
         // console.log(res.data.message);

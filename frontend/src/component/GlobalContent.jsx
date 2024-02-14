@@ -29,11 +29,14 @@ const GlobalContentProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/user/current", {
-          headers: {
-            Authorization: `Bearer ${tokenData ? tokenData : tokencheck}`,
-          },
-        });
+        const res = await axios.get(
+          "https://blog-backend-3dcg.onrender.com/api/user/current",
+          {
+            headers: {
+              Authorization: `Bearer ${tokenData ? tokenData : tokencheck}`,
+            },
+          }
+        );
 
         const { username, name, email, id } = res.data;
 

@@ -23,7 +23,7 @@ const UserProfile = () => {
   const { email, fullname, id, imgUrl, name, username } = user;
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/haha/user`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/haha/user`)
       .then((res) => {
         // console.log(res.data.message);
         setData(res.data.message);

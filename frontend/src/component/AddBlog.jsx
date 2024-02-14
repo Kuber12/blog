@@ -1,5 +1,5 @@
 /* The above code is a React component called "AddBlog". It is used to add a new blog post. */
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import "./AddBlog.css";
@@ -37,7 +37,7 @@ const AddBlog = () => {
   //for tags all fetched
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tag")
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => {
         setTags(res.data.message);
         console.log(res.data.message);
@@ -98,7 +98,7 @@ const AddBlog = () => {
         formData.append("username", username);
 
         const imgResponse = await axios.post(
-          "http://localhost:5000/api/file/upload",
+          "https://blog-backend-3dcg.onrender.com/api/file/upload",
           formData,
           {
             headers: {
@@ -118,7 +118,7 @@ const AddBlog = () => {
       }
 
       const blogResponse = await axios.post(
-        "http://localhost:5000/api/blog",
+        "https://blog-backend-3dcg.onrender.com/api/blog",
         {
           ...values,
           // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed

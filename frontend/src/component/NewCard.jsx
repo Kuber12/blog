@@ -33,7 +33,7 @@ const NewCard = ({ data }) => {
         {Array.isArray(data) &&
           data.length > 0 &&
           data.map((items, i) => {
-            console.log(data);
+            // console.log(data);
             const timeDifference = new Date() - new Date(items.date_published);
             const formatTimeDifference = (milliseconds) => {
               const seconds = Math.floor(milliseconds / 1000);

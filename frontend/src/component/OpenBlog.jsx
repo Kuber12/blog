@@ -59,7 +59,11 @@ const OpenBlog = () => {
     };
 
     axios
-      .post(`http://localhost:5000/api/blog/${id}/like`, LikeToSent, config)
+      .post(
+        `https://blog-backend-3dcg.onrender.com/api/blog/${id}/like`,
+        LikeToSent,
+        config
+      )
       .then((res) => {
         // console.log(res.data.message);
         let result = "Like inserted successfully";
@@ -93,7 +97,7 @@ const OpenBlog = () => {
   const handleFollows = () => {
     axios
       .post(
-        `http://localhost:5000/api/user/${data.username}/follow/${username}`
+        `https://blog-backend-3dcg.onrender.com/api/user/${data.username}/follow/${username}`
       )
       .then((response) => {
         let result = response.data.message;
@@ -140,7 +144,11 @@ const OpenBlog = () => {
 
     //commenting
     axios
-      .post(`http://localhost:5000/api/comment/${id}`, commentToSent, config)
+      .post(
+        `https://blog-backend-3dcg.onrender.com/api/comment/${id}`,
+        commentToSent,
+        config
+      )
       .then((res) => {
         // console.log("Commented ");
         toast.success("Commented on Blog");
@@ -159,33 +167,35 @@ const OpenBlog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/${id}`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
         setData(res.data.message);
       })
-      .catch((ex) => 
-      toast.error(ex)
-      );
+      .catch((ex) => toast.error(ex));
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/user/${data.username}/follow`)
+      .get(
+        `https://blog-backend-3dcg.onrender.com/api/user/${data.username}/follow`
+      )
       .then((res) => {
         setFollowers(res.data.totalFollowers);
         // console.log(res.data.totalFollowers);
       });
   }, [data]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/blog/${id}/like`).then((res) => {
-      setViewLike((prevViewLike) => ({
-        ...prevViewLike,
-        totalLikes: res.data.totalLikes, // Assuming totalLikes is the key in res.data
-      }));
-    });
+    axios
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}/like`)
+      .then((res) => {
+        setViewLike((prevViewLike) => ({
+          ...prevViewLike,
+          totalLikes: res.data.totalLikes, // Assuming totalLikes is the key in res.data
+        }));
+      });
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/comment/${id}`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/comment/${id}`)
       .then((res) => {
         setViewComment(res.data.message);
         setCountComment({ countComment: res.data.message.length });
@@ -196,9 +206,11 @@ const OpenBlog = () => {
       });
   }, [data]);
   useEffect(() => {
-    axios.get("http://localhost:5000/api/user/hihi/follow/haha").then((res) => {
-      setFollowed(res.data.message);
-    });
+    axios
+      .get("https://blog-backend-3dcg.onrender.com/api/user/hihi/follow/haha")
+      .then((res) => {
+        setFollowed(res.data.message);
+      });
   }, []);
   return (
     <>
@@ -342,7 +354,9 @@ const OpenBlog = () => {
                 )}
               </div>
               <div className="blog-tags">
-                <span style={{ fontWeight: "600", paddingRight: "10px" }}>By tags</span> 
+                <span style={{ fontWeight: "600", paddingRight: "10px" }}>
+                  By tags
+                </span>
                 <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
                 <div className="tags-container">
                   <div className="tags">Humor</div>

@@ -7,16 +7,16 @@ import SearchContext from "../pages/SearchContext";
 import { Link } from "react-router-dom";
 
 const SearchBar = () => {
-
-  const {searchTxt,SetSearchTxt,setIsInputFocused} = useContext(SearchContext)
+  const { searchTxt, SetSearchTxt, setIsInputFocused } =
+    useContext(SearchContext);
   const [tags, setTags] = useState([]);
- 
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tag", { timeout: 5000 })
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => setTags(res.data.message))
       .catch((err) => console.log(err));
-  });
+  }, []);
   const handleByTags = (tagValue) => {
     // axios
     //   .get(`http://localhost:5000/api/blog/${tagValue}/tag`)
@@ -48,7 +48,6 @@ const SearchBar = () => {
           flexWrap: "wrap",
         }}
       >
-    
         <div
           style={{
             width: "60%",
@@ -59,7 +58,14 @@ const SearchBar = () => {
           }}
         >
           <img className="searchIcon" src={search} alt="" />
-          <input className="searchInput" onFocus={handleInputFocus} onBlur={handleInputBlur} onChange={(e)=>SetSearchTxt(e.target.value)} type="text" placeholder="Search" />
+          <input
+            className="searchInput"
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            onChange={(e) => SetSearchTxt(e.target.value)}
+            type="text"
+            placeholder="Search"
+          />
         </div>
       </div>
       <div>
@@ -67,9 +73,14 @@ const SearchBar = () => {
           <Link className="tags" to={`/Blogs`}>
             All
           </Link>
-          {tags &&
+          {Array.isArray(tags) &&
+            tags.length > 0 &&
             tags.map((tag, index) => (
-              <Link className="tags" to={`/BlogPageTag/${tag.tagname}`}>
+              <Link
+                className="tags"
+                key={index}
+                to={`/BlogPageTag/${tag.tagname}`}
+              >
                 {tag.tagname}
               </Link>
             ))}

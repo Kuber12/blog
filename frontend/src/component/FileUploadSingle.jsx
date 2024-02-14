@@ -21,11 +21,15 @@ const FileUploadSingle = () => {
       formData.append("fileInput", selectedFile.fileInput);
       console.log("formdata" + formData);
       axios
-        .post("http://localhost:5000/api/file/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post(
+          "https://blog-backend-3dcg.onrender.com/api/file/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
         .then((response) => {
           alert("Submited");
           console.log("File uploaded successfully:", response.data.fileName);

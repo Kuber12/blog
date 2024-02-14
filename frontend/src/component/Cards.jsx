@@ -18,7 +18,7 @@ const Cards = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/blog", { timeout: 5000 }) // 5000 milliseconds (adjust as needed)
+      .get("https://blog-backend-3dcg.onrender.com/api/blog", { timeout: 5000 }) // 5000 milliseconds (adjust as needed)
       .then((res) => {
         // console.log(res.data.message);
         setData(res.data.message);
