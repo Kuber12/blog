@@ -8,36 +8,32 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import SearchContext from "./SearchContext";
 const BlogPageTag = () => {
-  const {searchTxt,inputFocued} = useContext(SearchContext)
+  const { searchTxt, inputFocued } = useContext(SearchContext);
   const [data, setData] = useState([]);
-  const [filteredData,setFilteredData] = useState([])
+  const [filteredData, setFilteredData] = useState([]);
   const { tag } = useParams();
-  // console.log(tag);
+
   useEffect(() => {
     // alert(tag);
     axios
-      .get(`http://localhost:5000/api/blog/${tag}/tag`)
-      //   .get(`http://localhost:5000/api/blog/Entertainment/tag`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${tag}/tag`)
       .then((res) => {
-        // console.log(res.data.message);
         setData(res.data.message);
       })
       .catch((ex) => {
         console.log(ex);
       });
   }, [tag]);
-  useEffect(()=>{
+  useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/search/?query=${searchTxt}&tag=${tag}`)
+      .get(
+        `https://blog-backend-3dcg.onrender.com/api/blog/search/?query=${searchTxt}&tag=${tag}`
+      )
       .then((res) => {
-        // console.log(res.data);
         setFilteredData(res.data.message);
-        // console.log(res.data.totalPages);
-        // console.log(filteredData)
       });
-  },[searchTxt])
+  }, [searchTxt]);
   return (
-    
     <div
       style={{
         backgroundColor: "#BDE3FF",
@@ -48,8 +44,8 @@ const BlogPageTag = () => {
       }}
     >
       <SearchBar />
-      {data.length  > 0 ? (
-        <NewCard data={inputFocued? filteredData : data} />
+      {data.length > 0 ? (
+        <NewCard data={inputFocued ? filteredData : data} />
       ) : (
         <h1
           style={{
@@ -63,7 +59,6 @@ const BlogPageTag = () => {
         </h1>
       )}
     </div>
-
   );
 };
 

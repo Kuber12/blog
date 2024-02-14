@@ -18,7 +18,7 @@ const EditBlog = () => {
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
-  const [tags,setTags] = useState();
+  const [tags, setTags] = useState();
   const [values, setValues] = useState({
     headline: "",
     content: "",
@@ -36,11 +36,9 @@ const EditBlog = () => {
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/tag")
-      .then((res) => 
-      {
-
+      .then((res) => {
         setTags(res.data.message);
-         console.log(res.data.message);
+        console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -97,7 +95,7 @@ const EditBlog = () => {
         formData.append("username", username);
 
         const imgResponse = await axios.post(
-          "http://localhost:5000/api/file/upload",
+          "https://blog-backend-3dcg.onrender.com/api/file/upload",
           formData,
           {
             headers: {
@@ -107,7 +105,9 @@ const EditBlog = () => {
           config
         );
         axios
-          .delete(`http://localhost:5000/api/file/${values.image}/delete`)
+          .delete(
+            `https://blog-backend-3dcg.onrender.com/api/file/${values.image}/delete`
+          )
           .then((res) => {
             console.log("Image deleted");
           })
@@ -125,7 +125,7 @@ const EditBlog = () => {
       }
 
       const blogResponse = await axios.put(
-        `http://localhost:5000/api/blog/${id}`,
+        `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
         {
           ...values,
           // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
@@ -223,16 +223,17 @@ const EditBlog = () => {
                       <option disabled selected value="">
                         Choose Your Tag
                       </option>
-                      {
-                        tags && tags.map((items)=>(
+                      {tags &&
+                        tags.map((items) => (
                           <>
-                            <option value={items.tagname}>{items.tagname}</option>    
+                            <option value={items.tagname}>
+                              {items.tagname}
+                            </option>
                           </>
-                        ))
-                      }
+                        ))}
                     </select>
                   </div>
-                  <div style={{display: "flex",justifyContent:"center"}}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <label
                       htmlFor="fileInput"
                       className="custom-file-input form-button"
@@ -246,7 +247,7 @@ const EditBlog = () => {
                       style={{ display: "none" }}
                     />
                   </div>
-                  <div style={{display: "flex",justifyContent:"right"}}>
+                  <div style={{ display: "flex", justifyContent: "right" }}>
                     <button className="postBlog form-button" type="submit">
                       Post
                     </button>

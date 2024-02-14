@@ -22,7 +22,10 @@ const DisplayEditBLog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/${username}/user`, config)
+      .get(
+        `https://blog-backend-3dcg.onrender.com/api/blog/${username}/user`,
+        config
+      )
       .then((res) => setData(res.data.message))
       .catch((err) => console.log(err));
   }, [data]);
@@ -31,7 +34,7 @@ const DisplayEditBLog = () => {
     const confirm = window.confirm("Do you want to delete?");
     if (confirm) {
       axios
-        .delete(`http://localhost:5000/api/blog/${id}`, config)
+        .delete(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`, config)
         .then((res) => {
           console.log("Deleted");
           // window.location.reload();
@@ -39,7 +42,9 @@ const DisplayEditBLog = () => {
         .catch((err) => console.log(err));
 
       axios
-        .delete(`http://localhost:5000/api/file/${image}/delete`)
+        .delete(
+          `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
+        )
         .then((res) => {
           console.log("Image deleted");
         })
