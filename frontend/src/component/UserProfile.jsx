@@ -69,7 +69,7 @@ const UserProfile = () => {
                 <img src={imgUrl} alt="userprofile" />
               </div>
               <div className="follow_me">
-                <button className="Fbtn">Follow Me +</button>
+                <button className="blog-user-follow">Follow Me +</button>
               </div>
             </div>
             <div className="bio">
