@@ -21,6 +21,7 @@ const GlobalContentProvider = ({ children }) => {
     fullname: "",
     email: "",
     imgUrl: "",
+    dob: "",
   });
 
   useEffect(() => {
@@ -37,13 +38,16 @@ const GlobalContentProvider = ({ children }) => {
             },
           }
         );
-
-        const { username, name, email, id } = res.data;
-
+        console.log(res.data);
+        const { username, name, email, id, dob } = res.data;
+        const timestamp = dob;
+        const dateObject = new Date(timestamp);
+        const extractedDate = dateObject.toISOString().slice(0, 10);
         setUser((prev) => ({ ...prev, username: username }));
         setUser((prev) => ({ ...prev, name: name }));
         setUser((prev) => ({ ...prev, email: email }));
         setUser((prev) => ({ ...prev, id: id }));
+        setUser((prev) => ({ ...prev, dob: extractedDate }));
       } catch (error) {
         console.error("Error fetching user data:", error);
       }

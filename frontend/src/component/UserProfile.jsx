@@ -15,15 +15,18 @@ import {
 import { GlobalContext } from "./GlobalContent";
 import NewCard from "./NewCard";
 const UserProfile = () => {
-  const [Data, setData] = useState([]);
-  const [Error, setError] = useState("");
   const data_ = useContext(GlobalContext);
   const imagePath = "../../uploads/";
   const { user } = data_;
-  const { email, fullname, id, imgUrl, name, username } = user;
+  // console.log(user);
+  const { email, fullname, id, imgUrl, name, username, dob } = user;
+
+  const [Data, setData] = useState([]);
+  const [Error, setError] = useState("");
+  //fetching the blogs of the current user
   useEffect(() => {
     axios
-      .get(`https://blog-backend-3dcg.onrender.com/api/blog/haha/user`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${username}/user`)
       .then((res) => {
         // console.log(res.data.message);
         setData(res.data.message);
@@ -88,7 +91,7 @@ const UserProfile = () => {
               <img src={abm} id="im" />
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-                <p className="udP">2000.04.10</p>
+                <p className="udP">{dob}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faVenus} className="ics" />
