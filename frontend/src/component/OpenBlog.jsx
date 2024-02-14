@@ -4,7 +4,6 @@
  */
 import React, { useEffect, useState, useContext } from "react";
 import "./OpenBlogg.css";
-import Hill from "../images/hill.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet";
 import { ToastContainer, toast } from "react-toastify";
