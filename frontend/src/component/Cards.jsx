@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import hill from "../images/hill.jpeg";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
