@@ -8,6 +8,7 @@ import Hill from "../images/hill.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import {
   faThumbsUp,
   faShare,
@@ -52,7 +53,7 @@ const OpenBlog = () => {
   const [viewLike, setViewLike] = useState({
     totalLikes: 0,
   });
-
+  // like handle
   const handleLike = (event) => {
     let LikeToSent = {
       username: username,
@@ -134,7 +135,7 @@ const OpenBlog = () => {
         toast.error(`Something went wrong`);
       });
   };
-  //comment submit
+  //comment handle
   const handleCommentSubmit = (event) => {
     // event.preventDefault();
     // console.log(comment);
@@ -175,7 +176,7 @@ const OpenBlog = () => {
       })
       .catch((ex) => toast.error(ex));
   }, [data]);
-
+  //fetched followers
   useEffect(() => {
     axios
       .get(
@@ -351,8 +352,9 @@ const OpenBlog = () => {
                 <div className="blog-user-head">
                   <div className="blog-user-pic"></div>
                   <div>
-                    <div>{data?.username}</div>
-                    <div>{data?.name}</div>
+                    <div>
+                      <Link to="/UserInfo:1">{data?.username}</Link>
+                    </div>
                     <div>{followers} Followers</div>
                   </div>
                 </div>

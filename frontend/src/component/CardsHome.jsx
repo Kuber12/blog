@@ -82,66 +82,65 @@ const CardsHome = () => {
   }, []);
 
   return (
-    <>
-      <div
+    <div
+      style={{
+        backgroundColor: "#BDE3FF",
+        margin: "0 auto",
+        width: "100%",
+        height: "auto",
+        minHeight: "100vh",
+      }}
+    >
+      <InfiniteScroll
         style={{
-          backgroundColor: "#BDE3FF",
-          margin: "0 auto",
           width: "100%",
-          height: "auto",
-          minHeight: "100vh",
+          overflow: "hidden",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
         }}
+        dataLength={data?.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={<RotatingLines />}
       >
-        <InfiniteScroll
+        {/* <SearchBar /> */}
+        <div
           style={{
             width: "100%",
-            overflow: "hidden",
+            backgroundColor: "transparent",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
+            padding: "20px",
+            gap: "10px 20px",
+            flexWrap: "wrap",
           }}
-          dataLength={data?.length}
-          next={fetchMoreData}
-          hasMore={hasMore}
-          loader={<RotatingLines />}
         >
-          {/* <SearchBar /> */}
           <div
             style={{
-              width: "100%",
-              backgroundColor: "transparent",
+              width: "60%",
+              textAlign: "center",
               display: "flex",
-              justifyContent: "center",
-              padding: "20px",
-              gap: "10px 20px",
-              flexWrap: "wrap",
+              position: "relative",
+              alignContent: "center",
             }}
           >
-            <div
-              style={{
-                width: "60%",
-                textAlign: "center",
-                display: "flex",
-                position: "relative",
-                alignContent: "center",
-              }}
-            >
-              <img className="searchIcon" src={search} alt="" />
-              <input
-                className="searchInput"
-                type="text"
-                placeholder="Search"
-                onChange={handleSearch}
-                // onKeyDown={handleInputFocus}
-                onBlur={handleInputBlur}
-                onFocus={handleInputFocus}
-              />
-            </div>
+            <img className="searchIcon" src={search} alt="" />
+            <input
+              className="searchInput"
+              type="text"
+              placeholder="Search"
+              onChange={handleSearch}
+              // onKeyDown={handleInputFocus}
+              onBlur={handleInputBlur}
+              onFocus={handleInputFocus}
+            />
           </div>
+        </div>
 
-          <div className="tags-container">
-            {/* {tags &&
+        <div className="tags-container">
+          {/* {tags &&
             tags.map((tag, index) => (
               <button
                 className="search-tags"
@@ -150,23 +149,22 @@ const CardsHome = () => {
                 {tag.tagname}
               </button>
             ))} */}
-            <Link className="tags" to={`/Blogs`}>
-              All
-            </Link>
-            {Array.isArray(tags) &&
-              tags.length > 0 &&
-              tags.map((tag, index) => (
-                <Link className="tags" to={`/BlogPageTag/${tag.tagname}`}>
-                  {tag.tagname}
-                </Link>
-              ))}
-          </div>
+          <Link className="tags" to={`/Blogs`}>
+            All
+          </Link>
+          {Array.isArray(tags) &&
+            tags.length > 0 &&
+            tags.map((tag, index) => (
+              <Link className="tags" to={`/BlogPageTag/${tag.tagname}`}>
+                {tag.tagname}
+              </Link>
+            ))}
+        </div>
 
-          <NewCard data={isInputFocused ? filteredData : data} />
-          {/* <NewCard data={data} /> */}
-        </InfiniteScroll>
-      </div>
-    </>
+        <NewCard data={isInputFocused ? filteredData : data} />
+        {/* <NewCard data={data} /> */}
+      </InfiniteScroll>
+    </div>
   );
 };
 
