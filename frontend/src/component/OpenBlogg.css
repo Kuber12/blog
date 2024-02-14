@@ -64,6 +64,7 @@
 }
 .comment-user{
     width: min-content;
+    height: fit-content;
     padding: 0px 10px;
     font-weight: 800;
     background-color: #FFCD29;
