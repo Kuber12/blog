@@ -37,7 +37,7 @@ const TopContributor = () => {
                 contribute to the society.
               </p>
             </div>
-            <button className="Fw">Follow +</button>
+            <button className="blog-user-follow">Follow +</button>
           </div>
         </div>
         <div className="right_Box">
