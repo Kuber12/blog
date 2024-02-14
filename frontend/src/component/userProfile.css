@@ -260,4 +260,10 @@
   .Ht {
     font-size: 1.5em;
   }
+  .aboutMe{
+    flex-direction: column;
+  }
+  .udP{
+    margin: 0;
+  }
 }
