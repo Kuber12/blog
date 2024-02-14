@@ -105,7 +105,7 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="myPost">
-            <p className="Ht">My Post</p>
+            <p className="Ht hedvig">My Post</p>
             <div className="Blog_disp">
               <NewCard data={Data} />
             </div>

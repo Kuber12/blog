@@ -1,10 +1,3 @@
-/* :root{
-    --blue:#bde3ff;
-    --yellow:#ffcd29;
-    --dark:#0D6EFD;
-    --white:#FFFFFF;
-} */
-
 #mainBody {
   display: flex;
   justify-content: space-evenly;
@@ -30,8 +23,11 @@
   margin: 20px 0px;
 }
 .Fbtn {
-  background-color: #0d6efd;
-  color: white;
+  background-color: var(--tertiary-color);
+  border: 2px black solid;
+
+  color: black;
+  font-weight: 600;
   border-radius: 20px;
   font-size: 1.2em;
   width: 200px;
@@ -65,6 +61,7 @@
 #im {
   padding: 1px;
   background-color: #ffcd29;
+  width:100%;
 }
 .User_Dtl {
   background-color: rgb(251, 251, 251, 0.5);
@@ -243,7 +240,7 @@
     flex: 1 0 100%;
   }
   #mainBody {
-    flex-direction: column;
+    flex-direction: row;
   }
   .btmBlc {
     width: 100%;

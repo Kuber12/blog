@@ -192,6 +192,9 @@ input[type="radio"]{
   .overlay.slide-left ~ .left {
     display: none;
   }
+  .submit{
+    padding: 0;
+  }
 }
 @media screen and (max-width: 1024px) {
   .reg-form > input{

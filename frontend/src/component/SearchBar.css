@@ -70,10 +70,9 @@
     transform: translate(-50%, -50%);
     scale: 1.8;
   }
-  input {
+  .searchInput {
     width: 100%;
     text-align: center;
-    height: 6vh;
     border-radius: 25px;
   }
   .selectCategories {
