@@ -64,6 +64,7 @@
 }
 .comment-user{
     width: min-content;
+    height: fit-content;
     padding: 0px 10px;
     font-weight: 800;
     background-color: #FFCD29;
@@ -79,6 +80,8 @@
     padding: 5px;
 }
 .comment-send{
+    border: 0;
+    background-color: transparent;
     margin-right: 10px;
 }
 /* sidebar */
@@ -118,6 +121,7 @@
     text-align: center;
     padding: 10px 20px;
     border-radius: 20px;
+    font-weight: 600;
 }
 .blog-follow-flex{
     display: flex;

@@ -64,11 +64,11 @@ const OpenBlog = () => {
         config
       )
       .then((res) => {
-        // console.log(res.data.message);
+        // console.log(res.data?.message);
         let result = "Like inserted successfully";
 
         setViewLike((prevViewLike) => {
-          if (result.indexOf(res.data.message) > -1) {
+          if (result.indexOf(res.data?.message) > -1) {
             toast.success("Liked on Blog");
             return {
               ...prevViewLike,
@@ -96,10 +96,12 @@ const OpenBlog = () => {
   const handleFollows = () => {
     axios
       .post(
-        `https://blog-backend-3dcg.onrender.com/api/user/${data.username}/follow/${username}`
+        `https://blog-backend-3dcg.onrender.com/api/user/${data?.username}/follow/${username}`
       )
       .then((response) => {
-        let result = response.data.message;
+        let result = response.data?.message;
+
+        // console.log(result);
         setFollowers((prev) => {
           const check = /^Followed$/;
           const checking = (result) => {
@@ -127,7 +129,6 @@ const OpenBlog = () => {
           }
         });
       })
-
       .catch((err) => {
         toast.error(`Something went wrong`);
       });
@@ -163,59 +164,71 @@ const OpenBlog = () => {
         toast.error("Error while Commenting");
       });
   };
-
+  // Single blog fetching
   useEffect(() => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
-        setData(res.data.message);
+        setData(res.data?.message);
+        // console.log(res.data.message);
       })
       .catch((ex) => toast.error(ex));
-  }, []);
+  }, [data]);
+
   useEffect(() => {
     axios
       .get(
-        `https://blog-backend-3dcg.onrender.com/api/user/${data.username}/follow`
+        `https://blog-backend-3dcg.onrender.com/api/user/${data?.username}/follow`
       )
       .then((res) => {
-        setFollowers(res.data.totalFollowers);
-        // console.log(res.data.totalFollowers);
+        setFollowers(res.data?.totalFollowers);
+        // console.log(res.data?.totalFollowers);
       });
   }, [data]);
+  //fetching likes count
   useEffect(() => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}/like`)
       .then((res) => {
         setViewLike((prevViewLike) => ({
           ...prevViewLike,
-          totalLikes: res.data.totalLikes, // Assuming totalLikes is the key in res.data
+          totalLikes: res.data?.totalLikes, // Assuming totalLikes is the key in res.data
         }));
       });
-  }, []);
+  }, [data]);
+  //fetching comments counts
   useEffect(() => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/comment/${id}`)
       .then((res) => {
-        setViewComment(res.data.message);
-        setCountComment({ countComment: res.data.message.length });
-        // console.log(res.data.message.length);
+        setViewComment(res.data?.message);
+        setCountComment({ countComment: res.data?.message.length });
+        // console.log(res.data?.message.length);
       })
       .catch((err) => {
         toast.error("view error");
       });
   }, [data]);
+
+  //followed or not following
   useEffect(() => {
     axios
-      .get("https://blog-backend-3dcg.onrender.com/api/user/hihi/follow/haha")
+      .get(
+        `https://blog-backend-3dcg.onrender.com/api/user/${data?.username}/follow/${username}`
+      )
       .then((res) => {
-        setFollowed(res.data.message);
+        // console.log(res.data?.message);
+        setFollowed(res.data?.message);
+      })
+      .catch((ex) => {
+        console.log("error on followed or not " + ex);
       });
-  }, []);
+  }, [data]);
   return (
     <>
       <NewNavi />
       <div className="MainP">
-        <Helmet>{/* <title>{data.headline}</title> */}</Helmet>
+        <Helmet>{/* <title>{data?.headline}</title> */}</Helmet>
 
         <ToastContainer
           position="top-center"
@@ -232,31 +245,35 @@ const OpenBlog = () => {
 
         <div className="blog">
           <div className="blog-content">
-            {data.image && (
+            {data?.image && (
               <img
                 className="blog-content-image"
-                src={`../../uploads/${data.image}`}
+                src={`../../uploads/${data?.image}`}
                 alt="blog content"
                 onError={handleImageError}
               />
             )}
             <div className="blog-content-text">
-              <h4 class="heading">{data.headline}</h4>
-              <p>{data.content}</p>
+              <h4 class="heading">{data?.headline}</h4>
+              <p>{data?.content}</p>
             </div>
             <div className="blog-action-icons">
               <div key={1} className="blog-action-tooltip">
-                <div className="blog-tooltip-div">
+                <div key={1} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faEye}
                     style={{ fontSize: "20px", paddingRight: "5px" }}
                   />
-                  <span>{data.views}</span>
+                  <span>{data?.views}</span>
                 </div>
               </div>
               <div key={2} className="blog-action-tooltip">
                 {username ? (
-                  <div onClick={handleLike} className="blog-tooltip-div">
+                  <div
+                    key={2}
+                    onClick={handleLike}
+                    className="blog-tooltip-div"
+                  >
                     <FontAwesomeIcon
                       icon={faHeart}
                       style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -264,7 +281,7 @@ const OpenBlog = () => {
                     <span>{viewLike.totalLikes}</span>
                   </div>
                 ) : (
-                  <div className="blog-tooltip-div">
+                  <div key={22} className="blog-tooltip-div">
                     <FontAwesomeIcon
                       icon={faHeart}
                       style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -274,7 +291,7 @@ const OpenBlog = () => {
                 )}
               </div>
               <div key={3} className="blog-action-tooltip">
-                <div className="blog-tooltip-div">
+                <div key={3} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faComment}
                     style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -283,7 +300,7 @@ const OpenBlog = () => {
                 </div>
               </div>
               <div key={4} className="blog-action-tooltip">
-                <div className="blog-tooltip-div">
+                <div key={4} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faEllipsis}
                     style={{ fontSize: "25px", paddingRight: "5px" }}
@@ -294,8 +311,8 @@ const OpenBlog = () => {
             <div className="comment-box">
               {viewcomment.map((comment) => (
                 <div className="comment">
-                  <div className="comment-user">{comment.username}</div>
-                  <p className="comment-text">{comment.text}</p>
+                  <div className="comment-user">{comment?.username}</div>
+                  <p className="comment-text">{comment?.text}</p>
                   <FontAwesomeIcon
                     icon={faHeart}
                     style={{ fontSize: "25px" }}
@@ -304,18 +321,25 @@ const OpenBlog = () => {
               ))}
 
               <div className="comment-write">
-                <input
-                  type="text"
-                  className="comment-input"
-                  onChange={(e) => setComment(e.target.value)}
-                  value={comment}
-                />
-                <button className="comment-send" onClick={handleCommentSubmit}>
-                  <FontAwesomeIcon
-                    icon={faPaperPlane}
-                    style={{ fontSize: "25px" }}
-                  />
-                </button>
+                {username && (
+                  <>
+                    <input
+                      type="text"
+                      className="comment-input"
+                      onChange={(e) => setComment(e.target.value)}
+                      value={comment}
+                    />
+                    <button
+                      className="comment-send"
+                      onClick={handleCommentSubmit}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPaperPlane}
+                        style={{ fontSize: "25px" }}
+                      />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -326,15 +350,15 @@ const OpenBlog = () => {
                 <div className="blog-user-head">
                   <div className="blog-user-pic"></div>
                   <div>
-                    <div>{data.username}</div>
-                    <div>{data.name}</div>
+                    <div>{data?.username}</div>
+                    <div>{data?.name}</div>
                     <div>{followers} Followers</div>
                   </div>
                 </div>
                 <div className="blog-user-bio">
                   THIS IS MY BIO. I am a content creator. Welcome to my Space.
                 </div>
-                {username !== data.username && (
+                {username !== data?.username && (
                   <div className="blog-follow-flex">
                     {username ? (
                       <button
@@ -358,13 +382,7 @@ const OpenBlog = () => {
                 </span>
                 <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
                 <div className="tags-container">
-                  <div className="tags">Humor</div>
-                  <div className="tags">Recipe</div>
-                  <div className="tags">Dark</div>
-                  <div className="tags">Dark</div>
-                  <div className="tags">Dark</div>
-                  <div className="tags">Dark</div>
-                  <div className="tags">{data.tag}</div>
+                  <div className="tags">{data?.tag}</div>
                 </div>
               </div>
             </div>

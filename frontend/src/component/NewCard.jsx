@@ -102,9 +102,9 @@ const NewCard = ({ data }) => {
                       <span> @{items.username}</span>
                       <span>{formatTimeDifference(timeDifference)}</span>
                     </div>
-                    <button>
+                    {/* <button>
                       <BsThreeDotsVertical />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </Link>

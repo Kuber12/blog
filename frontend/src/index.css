@@ -46,6 +46,10 @@ html {
 }
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem; 
+  word-break: break-all;
+}
+p{
+  word-break: break-all;
 }
 h1 {
   font-size: 2.5rem;
