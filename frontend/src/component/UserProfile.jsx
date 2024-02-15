@@ -38,33 +38,6 @@ const UserProfile = () => {
   return (
     <>
       <div id="mainBody">
-        {/* <div className="btwnBlc">
-          <div className="Profile">
-            <img src={imgUrl} alt="userprofile" />
-          </div>
-          <div className="follow_me">
-            <button className="Fbtn">Follow Me +</button>
-          </div>
-          <div className="aboutMe">
-            <img src={abm} id="im" />
-            <div className="User_Dtl">
-              <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-              <p className="udP">2000.04.10</p>
-            </div>
-            <div className="User_Dtl">
-              <FontAwesomeIcon icon={faVenus} className="ics" />
-              <p className="udP">Female</p>
-            </div>
-            <div className="User_Dtl">
-              <FontAwesomeIcon icon={faHome} className="ics" />
-              <p className="udP">Kentucky, U.S.A</p>
-            </div>
-            <div className="User_Dtl">
-              <FontAwesomeIcon icon={faEnvelope} className="ics" />
-              <p className="udP">{email}</p>
-            </div>
-          </div>
-        </div> */}
         <div className="btmBlc">
           <div className="userprofile-top-container">
             <div className="profile-follow">

@@ -20,15 +20,24 @@ import fetchUserData from "../Utils/userApi";
 const UserFromBlog = () => {
   const { FromBlogUser } = fetchUserData();
   const { UserName } = useParams();
-  console.log(UserName);
+  // console.log(UserName);
   const imagePath = "../../uploads/";
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    address: "",
+    dob: "",
+    email: "",
+    name: "",
+    username: "",
+    imgUrl: "",
+  });
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
   //fetching the blogs of the current user
+  // console.log(user);
   const fetchUser = async () => {
     const data = await FromBlogUser(`/api/user/${UserName}`);
-    console.log(data);
+    setUser(data);
+    // console.log(data);
   };
   useEffect(() => {
     fetchUser();
@@ -49,7 +58,7 @@ const UserFromBlog = () => {
           <div className="userprofile-top-container">
             <div className="profile-follow">
               <div className="Profile">
-                <img alt="userprofile" />
+                <img src={user?.imgUrl} alt="userprofile" />
               </div>
               <div className="follow_me">
                 <button className="blog-user-follow">Follow Me +</button>
@@ -57,8 +66,8 @@ const UserFromBlog = () => {
             </div>
             <div className="bio">
               {Error != "" && <h6>{Error}</h6>}
-              <p id="fname"> </p>
-              <p id="uname"></p>
+              <p id="fname">{user.name ? user?.name : ""} </p>
+              <p id="uname">@{user.username ? user?.username : ""} </p>
               {/* bio form ma add vako xaina */}
               <p id="bioo">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic
@@ -71,7 +80,7 @@ const UserFromBlog = () => {
               <img src={abm} id="im" />
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-                <p className="udP"></p>
+                <p className="udP">{user.dob.slice(0, 10)}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faVenus} className="ics" />
@@ -83,7 +92,7 @@ const UserFromBlog = () => {
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faEnvelope} className="ics" />
-                <p className="udP"></p>
+                <p className="udP">{user.email}</p>
               </div>
             </div>
           </div>
