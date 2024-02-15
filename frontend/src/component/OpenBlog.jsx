@@ -4,10 +4,10 @@
  */
 import React, { useEffect, useState, useContext } from "react";
 import "./OpenBlogg.css";
-import Hill from "../images/hill.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import {
   faThumbsUp,
   faShare,
@@ -52,7 +52,7 @@ const OpenBlog = () => {
   const [viewLike, setViewLike] = useState({
     totalLikes: 0,
   });
-
+  // like handle
   const handleLike = (event) => {
     let LikeToSent = {
       username: username,
@@ -102,7 +102,7 @@ const OpenBlog = () => {
       .then((response) => {
         let result = response.data?.message;
 
-        console.log(result);
+        // console.log(result);
         setFollowers((prev) => {
           const check = /^Followed$/;
           const checking = (result) => {
@@ -134,7 +134,7 @@ const OpenBlog = () => {
         toast.error(`Something went wrong`);
       });
   };
-  //comment submit
+  //comment handle
   const handleCommentSubmit = (event) => {
     // event.preventDefault();
     // console.log(comment);
@@ -175,7 +175,7 @@ const OpenBlog = () => {
       })
       .catch((ex) => toast.error(ex));
   }, [data]);
-
+  //fetched followers
   useEffect(() => {
     axios
       .get(
@@ -260,7 +260,7 @@ const OpenBlog = () => {
             </div>
             <div className="blog-action-icons">
               <div key={1} className="blog-action-tooltip">
-                <div className="blog-tooltip-div">
+                <div key={1} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faEye}
                     style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -270,7 +270,11 @@ const OpenBlog = () => {
               </div>
               <div key={2} className="blog-action-tooltip">
                 {username ? (
-                  <div onClick={handleLike} className="blog-tooltip-div">
+                  <div
+                    key={2}
+                    onClick={handleLike}
+                    className="blog-tooltip-div"
+                  >
                     <FontAwesomeIcon
                       icon={faHeart}
                       style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -278,7 +282,7 @@ const OpenBlog = () => {
                     <span>{viewLike.totalLikes}</span>
                   </div>
                 ) : (
-                  <div className="blog-tooltip-div">
+                  <div key={22} className="blog-tooltip-div">
                     <FontAwesomeIcon
                       icon={faHeart}
                       style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -288,7 +292,7 @@ const OpenBlog = () => {
                 )}
               </div>
               <div key={3} className="blog-action-tooltip">
-                <div className="blog-tooltip-div">
+                <div key={3} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faComment}
                     style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -297,7 +301,7 @@ const OpenBlog = () => {
                 </div>
               </div>
               <div key={4} className="blog-action-tooltip">
-                <div className="blog-tooltip-div">
+                <div key={4} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faEllipsis}
                     style={{ fontSize: "25px", paddingRight: "5px" }}
@@ -318,18 +322,25 @@ const OpenBlog = () => {
               ))}
 
               <div className="comment-write">
-                <input
-                  type="text"
-                  className="comment-input"
-                  onChange={(e) => setComment(e.target.value)}
-                  value={comment}
-                />
-                <button className="comment-send" onClick={handleCommentSubmit}>
-                  <FontAwesomeIcon
-                    icon={faPaperPlane}
-                    style={{ fontSize: "25px" }}
-                  />
-                </button>
+                {username && (
+                  <>
+                    <input
+                      type="text"
+                      className="comment-input"
+                      onChange={(e) => setComment(e.target.value)}
+                      value={comment}
+                    />
+                    <button
+                      className="comment-send"
+                      onClick={handleCommentSubmit}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPaperPlane}
+                        style={{ fontSize: "25px" }}
+                      />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -340,8 +351,9 @@ const OpenBlog = () => {
                 <div className="blog-user-head">
                   <div className="blog-user-pic"></div>
                   <div>
-                    <div>{data?.username}</div>
-                    <div>{data?.name}</div>
+                    <div>
+                      <Link to="/UserInfo:1">{data?.username}</Link>
+                    </div>
                     <div>{followers} Followers</div>
                   </div>
                 </div>

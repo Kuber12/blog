@@ -19,35 +19,61 @@ import NewCard from "./NewCard";
 import BlogsPage from "../pages/BlogsPage";
 import BlogPageTag from "../pages/BlogPageTag";
 import SearchContentProvider from "../pages/SearchContentProvider";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UserFromBlog from "./UserFromBlog";
 const MyRouter = () => {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { path: "/", element: <Home /> },
+        { path: "/Blogs", element: <BlogsPage /> },
+        { path: "/BlogPageTag/:tag", element: <BlogsPage /> },
+        { path: "/UserInfo:id", element: <UserFromBlog /> },
+      ],
+    },
+    {
+      path: "AddBlog",
+      element: <AddBlog />,
+    },
+    {
+      path: "EditBlog/:id",
+      element: <EditBlog />,
+    },
+    {
+      path: "/*",
+      element: <NotFoundPage />,
+    },
+    {
+      path: "/cards",
+      element: <Cards />,
+    },
+    {
+      path: "/cardsHome",
+      element: <CardsHome />,
+    },
+    {
+      path: "/cardsDetails/:id",
+      element: <CardsDetails />,
+    },
+    {
+      path: "/DisplayEditBLog/",
+      element: <DisplayEditBLog />,
+    },
+    {
+      path: "/Login",
+      element: <Login />,
+    },
+    { path: "/OpenBlog/:id", element: <OpenBlog /> },
+    { path: "/NewCard", element: <NewCard /> },
+    { path: "/User", element: <User /> },
+  ]);
   return (
     <div>
       <GlobalContentProvider>
-      <SearchContentProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/" index element={<Home />}></Route>
-              <Route path="/Blogs" element={<BlogsPage />}></Route>
-              <Route path="/BlogPageTag/:tag" element={<BlogPageTag />}></Route>
-            </Route>
-            <Route path="AddBlog" element={<AddBlog />}></Route>
-            <Route path="EditBlog/:id" element={<EditBlog />}></Route>
-            <Route path="/*" element={<NotFoundPage />}></Route>
-            <Route path="/cards" element={<Cards />}></Route>
-            {/* <Route path="/SearchBar" element={<SearchBar />}></Route> */}
-            <Route path="/cardsHome" element={<CardsHome />}></Route>
-            <Route path="/cardsDetails/:id" element={<CardsDetails />}></Route>
-            <Route
-              path="/DisplayEditBLog/"
-              element={<DisplayEditBLog />}
-            ></Route>
-            <Route path="/Login" element={<Login />}></Route>
-            <Route path="/OpenBlog/:id" element={<OpenBlog />}></Route>
-            <Route path="/NewCard" element={<NewCard />}></Route>
-            <Route path="/User" element={<User />}></Route>
-          </Routes>
-        </Router>
+        <SearchContentProvider>
+          <RouterProvider router={router} />
         </SearchContentProvider>
       </GlobalContentProvider>
     </div>

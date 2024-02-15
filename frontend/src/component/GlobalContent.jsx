@@ -40,7 +40,7 @@ const GlobalContentProvider = ({ children }) => {
         );
         console.log(res.data);
         const { username, name, email, id, dob } = res.data;
-        const timestamp = dob;
+        const timestamp = dob || null;
         const dateObject = new Date(timestamp);
         const extractedDate = dateObject.toISOString().slice(0, 10);
         setUser((prev) => ({ ...prev, username: username }));

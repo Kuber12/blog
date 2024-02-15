@@ -4,7 +4,7 @@ function useFetch() {
   const baseUrl = "https://blog-backend-3dcg.onrender.com";
   async function fetchData(endpoint) {
     const url = `${baseUrl}${endpoint}`;
-    console.log(url);
+    // console.log(url);
     try {
       const response = await axios.get(url);
       const data = await response.data.message;
@@ -16,11 +16,11 @@ function useFetch() {
   }
   async function searchFetch(endpoint) {
     const url = `${baseUrl}${endpoint}`;
-    console.log(url);
+    // console.log(url);
     try {
       const response = await axios.get(url);
       const data = await response.data.message;
-      console.log("BlogApi" + response);
+      // console.log("BlogApi" + response);
       return data;
     } catch (execption) {
       console.log("Error while fetching searched blog data" + execption);
