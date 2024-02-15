@@ -80,7 +80,7 @@ const UserFromBlog = () => {
               <img src={abm} id="im" />
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-                <p className="udP">{user.dob.slice(0, 10)}</p>
+                <p className="udP">{user?.dob?.slice(0, 10)}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faVenus} className="ics" />
