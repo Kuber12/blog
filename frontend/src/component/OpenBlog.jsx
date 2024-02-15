@@ -46,6 +46,8 @@ const OpenBlog = () => {
   const [viewcomment, setViewComment] = useState([]);
   const [followers, setFollowers] = useState(0);
   const [followed, setFollowed] = useState();
+  // const [Apiusername, setApiUsername] = useState("");
+
   const [countComment, setCountComment] = useState({
     countComment: 0,
   });
@@ -171,21 +173,32 @@ const OpenBlog = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
         setData(res.data?.message);
+        // setApiUsername(res.data?.username);
+        return axios.get(
+          `https://blog-backend-3dcg.onrender.com/api/user/${res.data?.message?.username}/follow`
+        );
+
         // console.log(res.data.message);
       })
-      .catch((ex) => toast.error(ex));
-  }, [data]);
-  //fetched followers
-  useEffect(() => {
-    axios
-      .get(
-        `https://blog-backend-3dcg.onrender.com/api/user/${data?.username}/follow`
-      )
       .then((res) => {
         setFollowers(res.data?.totalFollowers);
+
         // console.log(res.data?.totalFollowers);
-      });
-  }, [data]);
+      })
+      .catch((ex) => toast.error(ex));
+  }, []);
+  //fetched followers
+  useEffect(() => {
+    // axios
+    //   .get(
+    //     `https://blog-backend-3dcg.onrender.com/api/user/${data?.username}/follow`
+    //   )
+    //   .then((res) => {
+    //     setFollowers(res.data?.totalFollowers);
+    //     // console.log(res.data?.totalFollowers);
+    //   })
+    //   .catch((err) => toast.error(err));
+  }, []);
   //fetching likes count
   useEffect(() => {
     axios
@@ -196,7 +209,7 @@ const OpenBlog = () => {
           totalLikes: res.data?.totalLikes, // Assuming totalLikes is the key in res.data
         }));
       });
-  }, [data]);
+  }, []);
   //fetching comments counts
   useEffect(() => {
     axios
@@ -209,7 +222,7 @@ const OpenBlog = () => {
       .catch((err) => {
         toast.error("view error");
       });
-  }, [data]);
+  }, []);
 
   //followed or not following
   useEffect(() => {
@@ -224,7 +237,7 @@ const OpenBlog = () => {
       .catch((ex) => {
         console.log("error on followed or not " + ex);
       });
-  }, [data]);
+  }, []);
   return (
     <>
       <NewNavi />
@@ -352,7 +365,9 @@ const OpenBlog = () => {
                   <div className="blog-user-pic"></div>
                   <div>
                     <div>
-                      <Link to="/UserInfo:1">{data?.username}</Link>
+                      <Link to={`/UserInfo/${data?.username}`}>
+                        {data?.username}
+                      </Link>
                     </div>
                     <div>{followers} Followers</div>
                   </div>

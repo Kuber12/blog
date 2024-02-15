@@ -14,23 +14,39 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
 import NewCard from "./NewCard";
-const UserFromBlog = () => {
-  const data_ = useContext(GlobalContext);
-  const imagePath = "../../uploads/";
-  const { user } = data_;
-  // console.log(user);
-  const { email, fullname, id, imgUrl, name, username, dob } = user;
+import { useParams } from "react-router-dom";
+import fetchUserData from "../Utils/userApi";
 
+const UserFromBlog = () => {
+  const { FromBlogUser } = fetchUserData();
+  const { UserName } = useParams();
+  // console.log(UserName);
+  const imagePath = "../../uploads/";
+  const [user, setUser] = useState({
+    address: "",
+    dob: "",
+    email: "",
+    name: "",
+    username: "",
+    imgUrl: "",
+  });
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
   //fetching the blogs of the current user
+  // console.log(user);
+  const fetchUser = async () => {
+    const data = await FromBlogUser(`/api/user/${UserName}/user`);
+    setUser(data);
+    // console.log(data);
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
   useEffect(() => {
     axios
-      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${username}/user`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${UserName}/user`)
       .then((res) => {
-        // console.log(res.data.message);
         setData(res.data.message);
-        // console.log(Data);
       })
       .catch((err) => setError(err.message));
   }, []);
@@ -42,7 +58,7 @@ const UserFromBlog = () => {
           <div className="userprofile-top-container">
             <div className="profile-follow">
               <div className="Profile">
-                <img src={imgUrl} alt="userprofile" />
+                <img src={user?.imgUrl} alt="userprofile" />
               </div>
               <div className="follow_me">
                 <button className="blog-user-follow">Follow Me +</button>
@@ -50,8 +66,8 @@ const UserFromBlog = () => {
             </div>
             <div className="bio">
               {Error != "" && <h6>{Error}</h6>}
-              <p id="fname"> {name ? name : ""} </p>
-              <p id="uname">@{username ? username : ""}</p>
+              <p id="fname">{user.name ? user?.name : ""} </p>
+              <p id="uname">@{user.username ? user?.username : ""} </p>
               {/* bio form ma add vako xaina */}
               <p id="bioo">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic
@@ -64,7 +80,7 @@ const UserFromBlog = () => {
               <img src={abm} id="im" />
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-                <p className="udP">{dob}</p>
+                <p className="udP">{user?.dob?.slice(0, 10)}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faVenus} className="ics" />
@@ -76,7 +92,7 @@ const UserFromBlog = () => {
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faEnvelope} className="ics" />
-                <p className="udP">{email}</p>
+                <p className="udP">{user.email}</p>
               </div>
             </div>
           </div>
