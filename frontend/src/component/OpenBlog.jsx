@@ -352,7 +352,9 @@ const OpenBlog = () => {
                   <div className="blog-user-pic"></div>
                   <div>
                     <div>
-                      <Link to="/UserInfo:1">{data?.username}</Link>
+                      <Link to={`/UserInfo/${data?.username}`}>
+                        {data?.username}
+                      </Link>
                     </div>
                     <div>{followers} Followers</div>
                   </div>

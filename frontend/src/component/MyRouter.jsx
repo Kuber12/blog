@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import AddBlog from "./AddBlog";
 import EditBlog from "./EditBlog";
 import Home from "./Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import User from "./User";
 import NotFoundPage from "./NotFoundPage";
 import Layout from "./Layout";
@@ -30,7 +29,7 @@ const MyRouter = () => {
         { path: "/", element: <Home /> },
         { path: "/Blogs", element: <BlogsPage /> },
         { path: "/BlogPageTag/:tag", element: <BlogsPage /> },
-        { path: "/UserInfo:id", element: <UserFromBlog /> },
+        { path: "/UserInfo/:UserName", element: <UserFromBlog /> },
       ],
     },
     {

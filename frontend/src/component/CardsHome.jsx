@@ -22,16 +22,21 @@ const CardsHome = () => {
   const [hasMore, setHasMore] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [tags, setTags] = useState([]);
+
   useEffect(() => {
     axios
       .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => setTags(res.data.message))
       .catch((err) => console.log(err));
   }, []);
-
-  const handleInputFocus = () => {
-    setIsInputFocused(true);
-  };
+  //focus or not in input field
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      return setIsInputFocused(true);
+    } else {
+      return setIsInputFocused(false);
+    }
+  }, [searchTerm]);
 
   const handleInputBlur = () => {
     setIsInputFocused(false);
@@ -133,22 +138,14 @@ const CardsHome = () => {
               placeholder="Search"
               onChange={handleSearch}
               // onKeyDown={handleInputFocus}
-              onBlur={handleInputBlur}
-              onFocus={handleInputFocus}
+              // onBlur={handleInputBlur}
+              // onFocus={handleInputFocus}
+              // onClick={handleInputFocus}
             />
           </div>
         </div>
 
         <div className="tags-container">
-          {/* {tags &&
-            tags.map((tag, index) => (
-              <button
-                className="search-tags"
-                onClick={() => handleByTags(tag.tagname)}
-              >
-                {tag.tagname}
-              </button>
-            ))} */}
           <Link className="tags" to={`/Blogs`}>
             All
           </Link>
@@ -162,7 +159,6 @@ const CardsHome = () => {
         </div>
 
         <NewCard data={isInputFocused ? filteredData : data} />
-        {/* <NewCard data={data} /> */}
       </InfiniteScroll>
     </div>
   );
