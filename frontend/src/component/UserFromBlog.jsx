@@ -35,7 +35,7 @@ const UserFromBlog = () => {
   //fetching the blogs of the current user
   // console.log(user);
   const fetchUser = async () => {
-    const data = await FromBlogUser(`/api/user/${UserName}`);
+    const data = await FromBlogUser(`/api/user/${UserName}/user`);
     setUser(data);
     // console.log(data);
   };
