@@ -9,6 +9,10 @@ const NavBar = ({ sentDataToParent }) => {
     console.log("Toggling element visibility");
     setElementVisible(!isElementVisible);
   };
+  const hideHamburger = () =>{
+    alert("sad");
+    setElementVisible(false);
+  }
 
   //logic to send data from child to parent
   const [hideClick, sethideClick] = useState(false);
@@ -40,7 +44,7 @@ const NavBar = ({ sentDataToParent }) => {
         </ul>
         {isElementVisible && (
           <ul className="hamburger-ul">
-            <li className="home">
+            <li className="home" onClick={hideHamburger}>
               {" "}
               <Link to="/" onClick={handleClickVisible}>
                 Home
