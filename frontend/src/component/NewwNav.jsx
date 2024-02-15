@@ -79,6 +79,11 @@ const NewNavi = () => {
             </Link>
           </li>
         )}
+        {data.user.username ?<li className="phone-logout">
+          <Link to="/" onClick={handleLogOut}>
+            Logout
+          </Link>
+        </li>: ""}
       </ul>
     </div>
   );

@@ -122,6 +122,9 @@ a {
   border-radius: 50%;
   margin: 10px 0px;
 }
+.phone-logout{
+  display: none;
+}
 @media (max-width: 992px) {
   .logo {
     font-size: 20px;
@@ -136,6 +139,9 @@ a {
   }
 }
 @media (max-width: 760px) {
+  .phone-logout{
+    display: block;
+  }
   .icon {
     display: block;
   }
