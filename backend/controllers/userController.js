@@ -60,7 +60,16 @@ const currentUser = asyncHandler(async (req,res) =>{
     }catch (error) {
         res.status(400).json({ message: "User not logged in" });
     }
-
 })
 
-module.exports = {loginUser, registerUser,currentUser};
+const getUserDetails = asyncHandler(async (req,res) =>{
+    try{
+        const username = req.params.username;
+        const user = await User.findOne({ username: username }).select('-password');
+        res.status(200).json({ message: user });
+        res.json(req.user);
+    }catch (error) {
+        res.status(400).json({ message: "User not found" });
+    }
+})
+module.exports = {loginUser, registerUser,currentUser, getUserDetails};
