@@ -28,7 +28,7 @@ const MyRouter = () => {
       children: [
         { path: "/", element: <Home /> },
         { path: "/Blogs", element: <BlogsPage /> },
-        { path: "/BlogPageTag/:tag", element: <BlogsPage /> },
+        { path: "/BlogPageTag/:tag", element: <BlogPageTag /> },
         { path: "/UserInfo/:UserName", element: <UserFromBlog /> },
       ],
     },
