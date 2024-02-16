@@ -61,7 +61,7 @@ const TopContributor = () => {
                 {" "}
                 <BlogCounter n={user.blogCount} />
               </h1>
-              <h2 className="h">Views</h2>
+              <h2 className="h">Blogs</h2>
             </div>
             <div className="uDetail">
               <p>{user?.username ? user.username : "Be our top contributer"}</p>
