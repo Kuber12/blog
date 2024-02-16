@@ -38,7 +38,7 @@ const TopContributor = () => {
   const data = useContext(GlobalContext);
   const fetchTopContributors = async () => {
     const response = await axios.get(
-      "http://localhost:5000/api/blog/topcontributor"
+      "https://blog-backend-3dcg.onrender.com/api/blog/topcontributor"
     );
     console.log(response.data);
     setUser(response.data);
