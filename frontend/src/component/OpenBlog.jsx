@@ -325,7 +325,12 @@ const OpenBlog = () => {
             <div className="comment-box">
               {viewcomment.map((comment) => (
                 <div className="comment">
-                  <div className="comment-user">{comment?.username}</div>
+                  <div className="comment-user">
+                    {" "}
+                    <Link to={`/UserInfo/${comment?.username}`}>
+                      {comment?.username}
+                    </Link>
+                  </div>
                   <p className="comment-text">{comment?.text}</p>
                   <FontAwesomeIcon
                     icon={faHeart}
@@ -390,6 +395,13 @@ const OpenBlog = () => {
                     ) : (
                       <button className="blog-user-follow">Follow Me+</button>
                     )}
+
+                    <Link
+                      className="blog-user-follow"
+                      to={`/UserInfo/${data?.username}`}
+                    >
+                      View Profile
+                    </Link>
                   </div>
                 )}
               </div>
