@@ -123,7 +123,7 @@ a {
   margin: 10px 0px;
 }
 .phone-logout{
-  display: none;
+  display: none !important;
 }
 @media (max-width: 992px) {
   .logo {
@@ -139,8 +139,11 @@ a {
   }
 }
 @media (max-width: 760px) {
+  #userImage:hover > .currentUserDetail {
+    display: none;
+  }
   .phone-logout{
-    display: block;
+    display: block !important;
   }
   .icon {
     display: block;
