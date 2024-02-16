@@ -6,15 +6,14 @@
 }
 .slider {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   max-width: 100%;
   height: 100%;
   scroll-behavior: smooth;
   transition: transform 0.5s ease-in-out;
   background-color: white;
   font-family: Hedvig;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
 }
 /* .slider img {
   scroll-snap-align: start;
@@ -44,6 +43,7 @@
   text-align: left;
   font-weight:600;
   letter-spacing: 1px;
+  width:600px;
 }
 .slider_nav {
   display: flex;
@@ -55,8 +55,8 @@
   z-index: 1;
 }
 .Slider_img{
-  width:450px;
-  height: 450px;
+  width:400px;
+  height: 400px;
   position: relative;
   padding: 10px;
   left: 10px;
@@ -64,9 +64,12 @@
 }
 .Slider_img_div{
   position: relative;
-  left: 200px;
-  height: 400px;
-  top: 90px;
+  left: 150px;
+  height: 300px;
+  top: 400px;
+  /* width: 300px; */
+  padding: 20px;
+  margin-bottom: 5px;
 }
 .slider_nav a {
   width: 0.5rem;
@@ -148,17 +151,22 @@
   .btns{
     width: 200px;
     height: 50px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   .Slider_img{
-    width:300px;
-    height: 300px;
+    width:250px;
+    height: 250px;
     padding: 10px;
-    left:unset;
+
   }
   .Slider_img_div{
-    right: 10px;
-    height: 400px;
+    left: 150px;
+    height: 300px;
+    /* top: 400px; */
+    /* width: 300px; */
+    padding: 20px;
+    margin-bottom: 5px;
+    bottom: 500px;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 768px) {
@@ -167,10 +175,11 @@
   }  
   .content{
     left:9%;
-    width: unset;
   }
   .slider-heading3{
     letter-spacing:unset;
+    width: unset;
+    font-weight: unset;
   }
   .h {
     font-size: 3em;
@@ -187,7 +196,7 @@
   .btns{
     width: 180px;
     height: 45px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
   .btns:hover{
     font-size: 1.4em;
@@ -200,11 +209,12 @@
   }  
   .content{
     left:9%;
-    width: unset;
   }
   .slider-heading3{
     letter-spacing:unset;
     font-size: 1.2em;
+    font-weight: unset;
+    width: unset;
   }
     .h {
       font-size: 2em;
@@ -219,9 +229,9 @@
       padding-top: 10px;
     }
     .btns{
-      width: 150px;
-      height: 35px;
-      font-size: 1rem;
+      width: 200px;
+      height: 50px;
+      font-size: 1.3rem;
     }
     .btns:hover{
       font-size: 1.1em;
