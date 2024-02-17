@@ -20,6 +20,12 @@ const UserProfile = () => {
   const { user } = data_;
 
   const { email, fullname, id, imgUrl, name, username, dob } = user;
+  const [hitApi, setHitApi] = useState(1);
+
+  // const handleApiHit = (value) => {
+  //   setHitApi(value);
+  // };
+
   const [editStatus, setEditStatus] = useState(true);
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
@@ -29,9 +35,10 @@ const UserProfile = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${username}/user`)
       .then((res) => {
         setData(res.data.message.reverse());
+        console.log("Use effect is rendering");
       })
       .catch((err) => setError(err.message));
-  }, []);
+  }, [hitApi]);
 
   return (
     <>
@@ -81,7 +88,12 @@ const UserProfile = () => {
           <div className="myPost">
             <p className="Ht hedvig">My Post</p>
             <div className="Blog_disp">
-              <NewCard data={Data} editStatus={editStatus} />
+              <NewCard
+                data={Data}
+                editStatus={editStatus}
+                // handleApiHit={handleApiHit}
+                setHitApi={setHitApi}
+              />
             </div>
           </div>
         </div>
