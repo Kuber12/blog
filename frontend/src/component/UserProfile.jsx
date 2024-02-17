@@ -40,6 +40,17 @@ const UserProfile = () => {
     event.target.src = "../../uploads/default.png";
   };
 
+  //Change this data with the backend gender data
+  const gender="female";
+
+  const icon =
+  gender === 'female' ? faVenus : gender === 'male' ? faMars : faNeuter;
+  
+
+  const genderText =
+    gender === 'female' ? 'Female' : gender === 'male' ? 'Male' : 'Other';
+
+ 
   return (
     <>
       <div id="mainBody">
@@ -73,18 +84,25 @@ const UserProfile = () => {
             </div>
             <div className="aboutMe">
               <img src={abm} id="im" />
+              {/* birthday */}
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faCakeCandles} className="ics" />
                 <p className="udP">{dob}</p>
               </div>
+
+              {/* gender */}
               <div className="User_Dtl">
-                <FontAwesomeIcon icon={faVenus} className="ics" />
-                <p className="udP">Female</p>
+                {icon && <FontAwesomeIcon icon={icon} className="ics" />}
+                <p className="udP">{genderText}</p>
               </div>
+
+              {/* address */}
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faHome} className="ics" />
                 <p className="udP">Kentucky, U.S.A</p>
               </div>
+              
+              {/* email */}
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faEnvelope} className="ics" />
                 <p className="udP">{email}</p>
