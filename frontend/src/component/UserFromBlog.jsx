@@ -20,7 +20,7 @@ import { ToastContainer, toast } from "react-toastify";
 const UserFromBlog = () => {
   const userData = useContext(GlobalContext);
   const globalUsername = userData?.user?.username;
-  console.log(globalUsername);
+
   const { id } = useParams();
   const { FromBlogUser } = fetchUserData();
   const { UserName } = useParams();
@@ -35,7 +35,7 @@ const UserFromBlog = () => {
     username: "",
     imgUrl: "",
   });
-  console.log(user.username);
+
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
   const [hitApi, setHitApi] = useState(true);
@@ -83,6 +83,8 @@ const UserFromBlog = () => {
       )
       .then((response) => {
         let result = response.data?.message;
+        console.log(result);
+        toast.success(result);
         setHitApi((hitApi) => !hitApi);
       })
       .catch((err) => {

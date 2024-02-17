@@ -302,14 +302,6 @@ const OpenBlog = () => {
                   <span>{countComment.countComment}</span>
                 </div>
               </div>
-              {/* <div key={4} className="blog-action-tooltip">
-                <div key={4} className="blog-tooltip-div">
-                  <FontAwesomeIcon
-                    icon={faEllipsis}
-                    style={{ fontSize: "25px", paddingRight: "5px" }}
-                  />
-                </div>
-              </div> */}
             </div>
             <div className="comment-box">
               {viewcomment.map((comment) => (
@@ -370,20 +362,6 @@ const OpenBlog = () => {
                 </div>
                 {username !== data?.username && (
                   <div className="blog-follow-flex">
-                    {username ? (
-                      <button
-                        className="blog-user-follow"
-                        onClick={(e) => handleFollows(e)}
-                      >
-                        {followed &&
-                          (followed === "Following"
-                            ? "Unfollow"
-                            : "Follow Me+")}
-                      </button>
-                    ) : (
-                      <button className="blog-user-follow">Follow Me+</button>
-                    )}
-
                     <Link
                       className="blog-user-follow"
                       to={`/UserInfo/${data?.username}`}
