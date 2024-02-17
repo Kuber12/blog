@@ -1,4 +1,4 @@
-.wrapper {
+.B_wrapper {
   max-width: 100%;
   /* height: 100vh; */
   background-color: #bde3ff;
@@ -31,6 +31,8 @@
   object-fit: contain;
   height: 200px;
   padding: 5px;
+  background-color: rgba(124, 179, 228, 0.726);
+  border-radius: 2rem;
 }
 .BestCards_User h5 {
   font-weight: 600;
