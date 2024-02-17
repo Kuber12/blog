@@ -1,0 +1,38 @@
+.Edit_container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.Edit_container h3{
+    font-weight: 600;
+}
+.Edit_form {
+    background-color:#ffcd29;
+}
+  
+.editform {
+    width: 350px; 
+    padding: 20px; 
+    border: 1px solid black; 
+    border-radius: 5px; 
+}
+  
+.editform label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+  
+.editform input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+.gender-option {
+    display: flex;
+    align-items: center;
+  }
