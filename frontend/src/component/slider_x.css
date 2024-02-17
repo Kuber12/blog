@@ -201,7 +201,7 @@
   }  
   .content{
     left:9%;
-    width: fit-content;
+    width: unset;
   }
   .slider-heading3{
     letter-spacing:unset;
@@ -233,6 +233,10 @@
  @media (max-width: 480px) {   
   #content1,#content2,#content3{
     background-image: none;
+  }
+  .content{
+    left:9%;
+    width: unset;
   }
   .Slider_img_div{
     display: none;
