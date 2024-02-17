@@ -1,3 +1,17 @@
+#content1{
+  background-image: url("../images/ele1.png");
+}
+#content2{
+  background-image: url("../images/ele2.png");
+}
+#content3{
+  background-image: url("../images/ele3.png");
+}
+#content1,#content2,#content3{
+  background-repeat: no-repeat;
+  background-position: center right 50px;
+}
+
 .wrapper {
   position: relative;
   max-width: 100%;
@@ -25,6 +39,7 @@
   margin: 30px;
   left: 50px;
   padding: 10px;
+  width:450px;
 }
 .slider-heading {
   font-weight: 600;
@@ -43,7 +58,6 @@
   text-align: left;
   font-weight:600;
   letter-spacing: 1px;
-  width:600px;
 }
 .slider_nav {
   display: flex;
@@ -131,7 +145,16 @@
 .chevron-btn.rightx {
   right: 20px;
 }
-@media screen and (min-width: 768px) and (max-width: 1024px){
+@media screen and (min-width: 1100px) {
+  #content1,#content2,#content3{
+    background-position: right 200px top 100px;
+    background-size: 30%;
+  }
+  .content{
+    width:800px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1100px){
   .content button {
     border-radius: 50px;
     font-size: 15px;
@@ -170,6 +193,9 @@
   }
 }
 @media screen and (min-width: 480px) and (max-width: 768px) {
+  #content1,#content2,#content3{
+    background-image: none;
+  }
   .Slider_img_div{
     display: none;
   }  

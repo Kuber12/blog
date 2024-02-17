@@ -3,9 +3,9 @@ images and content based on the current slide number. The component uses the `us
 `useContext` hooks from React to manage the state of the current slide and access data from a global
 context. */
 import React, { useState, useContext } from "react";
-import Post_img from "../images/ele1.png";
-import Seach_Con from "../images/elee2.png";
-import Find_ppl from "../images/ele3.png";
+// import Post_img from "../images/ele1.png";
+// import Seach_Con from "../images/elee2.png";
+// import Find_ppl from "../images/ele3.png";
 import "./slider_x.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,8 +38,8 @@ const Slider = () => {
     <>
       <div className="wrapper">
         {Slider === 1 && (
-          <div className={`slider ${Slider === 1 ? "active" : ""}`}>
-            <div className="content" id="content1">
+          <div className={`slider ${Slider === 1 ? "active" : ""}`}  id="content1">
+            <div className="content">
               <h1 className="slider-heading hedvig">Make Your</h1>
               <h2 className="slider-heading2 hedvig">
                 <span>First Post {username ? `"${username} "` : null}</span>
@@ -58,15 +58,15 @@ const Slider = () => {
                 </Link>
               )}
             </div>
-            <div className="Slider_img_div">
+            {/* <div className="Slider_img_div">
               <img className="Slider_img" src={Post_img}/>
-              {/* <img className="Slider_img" src={Flw}/> */}
-            </div>
+              <img className="Slider_img" src={Flw}/>
+            </div> */}
           </div>
         )}
         {Slider === 2 && (
-          <div className={`slider ${Slider === 2 ? "active" : ""}`}>
-            <div className="content" id="content2">
+          <div className={`slider ${Slider === 2 ? "active" : ""}` } id="content2">
+            <div className="content">
             <h1 className="slider-heading">Search</h1>
             <h2 className="slider-heading2">
               <span>Contents </span>
@@ -82,14 +82,14 @@ const Slider = () => {
                 Search <FontAwesomeIcon icon={faMagnifyingGlass} />
               </Link>
             </div>
-            <div className="Slider_img_div">
+            {/* <div className="Slider_img_div">
               <img className="Slider_img" src={Seach_Con}/>
-            </div>
+            </div> */}
           </div>
         )}
         {Slider === 3 && (
-          <div className={`slider ${Slider === 3 ? "active" : ""}`}>
-            <div className="content" id="content3">
+          <div className={`slider ${Slider === 3 ? "active" : ""}`}  id="content3">
+            <div className="content">
               <h1 className="slider-heading">Find new</h1>
               <h2 className="slider-heading2">
                 <span>Connections</span>
@@ -105,9 +105,9 @@ const Slider = () => {
                 Find People <FontAwesomeIcon icon={faUserPlus} />
               </Link>
             </div>
-            <div className="Slider_img_div">
+            {/* <div className="Slider_img_div">
               <img className="Slider_img" src={Find_ppl}/>
-            </div>
+            </div> */}
           </div>
         )}
         <button className="chevron-btn leftx" onClick={handlePrevSlide}>
