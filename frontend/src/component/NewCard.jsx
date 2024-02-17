@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./NewCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { faEye, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
+import { GlobalContext } from "./GlobalContent";
+import axios from "axios";
+const NewCard = ({ data, editStatus }) => {
+  //user details from global context
+  const userData = useContext(GlobalContext);
+  const username = userData.user.username;
+  const token = sessionStorage.getItem("authToken");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  };
 
-const NewCard = ({ data }) => {
+  console.log(username);
   const handleImageError = (event) => {
     event.target.src = "../../uploads/default.png";
   };
@@ -17,6 +29,31 @@ const NewCard = ({ data }) => {
       return text.substring(0, maxLength) + ".....";
     }
     return text;
+  };
+  //delete blog logic
+  const handleDelete = (id, image) => {
+    const confirm = window.confirm("Do you want to delete?");
+    if (confirm) {
+      axios
+        .delete(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`, config)
+        .then((res) => {
+          console.log("Deleted");
+          // window.location.reload();
+        })
+        .catch((err) => console.log(err));
+
+      axios
+        .delete(
+          `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
+        )
+        .then((res) => {
+          console.log("Image deleted");
+        })
+        .catch((ex) => {
+          console.log("errror" + ex);
+        });
+      // setHitApi((prev) => !prev);
+    }
   };
 
   return (
@@ -58,8 +95,12 @@ const NewCard = ({ data }) => {
             };
 
             return (
-              <Link className="link-to" key={i} to={`../OpenBlog/${items._id}`}>
-                <div id="card-container" key={i}>
+              <div id="card-container" key={i}>
+                <Link
+                  className="link-to"
+                  key={i}
+                  to={`../OpenBlog/${items._id}`}
+                >
                   <div id="img-container">
                     <img
                       src={`${imagePath}${items.image}`}
@@ -96,18 +137,35 @@ const NewCard = ({ data }) => {
                     </div>
                     <span className="post-tag"> {items.tag}</span>
                   </div>
-                  <h6 id="heading">{truncateText(items.headline, 25)}</h6>
-                  <div id="tags">
-                    <div>
-                      <span> @{items.username}</span>
-                      <span>{formatTimeDifference(timeDifference)}</span>
-                    </div>
-                    {/* <button>
-                      <BsThreeDotsVertical />
-                    </button> */}
+                </Link>
+                <h6 id="heading">{truncateText(items.headline, 25)}</h6>
+                <div id="tags">
+                  <div>
+                    <span> @{items.username}</span>
+                    <span>{formatTimeDifference(timeDifference)}</span>
                   </div>
+
+                  {/* <BsThreeDotsVertical /> */}
+                  {username && editStatus && (
+                    <>
+                      <Link
+                        to={`/EditBlog/${items._id}`}
+                        className="btn btn-sm btn-primary me-2"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={(e) =>
+                          handleDelete(`${items._id}`, `${items.image}`)
+                        }
+                        className="btn btn-sm btn-danger"
+                      >
+                        Delete
+                      </button>
+                    </>
+                  )}
                 </div>
-              </Link>
+              </div>
             );
           })}
       </div>

@@ -43,12 +43,16 @@ const NewNavi = () => {
             Blog
           </Link>
         </li>
-        {data.user.username ? <li>
-          <Link to="/AddBlog">Create</Link>
-        </li> : ""}
-        {data.user.username ? <li>
+        {data.user.username ? (
+          <li>
+            <Link to="/AddBlog">Create</Link>
+          </li>
+        ) : (
+          ""
+        )}
+        {/* {data.user.username ? <li>
          <Link to="/DisplayEditBLog">Edit</Link>
-        </li> : ""}
+        </li> : ""} */}
         {data.user.username ? (
           <li id="userImage">
             <Link to="/User">
@@ -79,11 +83,15 @@ const NewNavi = () => {
             </Link>
           </li>
         )}
-        {data.user.username ?<li className="phone-logout">
-          <Link to="/" onClick={handleLogOut}>
-            Logout
-          </Link>
-        </li>: ""}
+        {data.user.username ? (
+          <li className="phone-logout">
+            <Link to="/" onClick={handleLogOut}>
+              Logout
+            </Link>
+          </li>
+        ) : (
+          ""
+        )}
       </ul>
     </div>
   );
