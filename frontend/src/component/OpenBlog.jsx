@@ -53,6 +53,15 @@ const OpenBlog = () => {
   const [viewLike, setViewLike] = useState({
     totalLikes: 0,
   });
+
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
+      .then((res) => setTags(res.data.message))
+      .catch((err) => console.log(err));
+  }, []);
   // like handle
   const handleLike = (event) => {
     let LikeToSent = {
@@ -257,7 +266,10 @@ const OpenBlog = () => {
               />
             )}
             <div className="blog-content-text">
-              <h4 className="heading">{data?.headline}</h4>
+              <div style={{display: "flex"}} >
+                <h4 className="heading" style={{flex: 1}}>{data?.headline}</h4>
+                <span className="tags">{data?.tag}</span>
+              </div>
               <p>{data?.content}</p>
             </div>
             <div className="blog-action-icons">
@@ -377,7 +389,17 @@ const OpenBlog = () => {
                 </span>
                 <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
                 <div className="tags-container">
-                  <div className="tags">{data?.tag}</div>
+                  {Array.isArray(tags) &&
+                  tags.length > 0 &&
+                  tags.map((tag, index) => (
+                    <Link
+                      className="tags"
+                      key={index}
+                      to={`/BlogPageTag/${tag.tagname}`}
+                    >
+                      {tag.tagname}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
