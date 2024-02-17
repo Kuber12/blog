@@ -22,7 +22,9 @@ const BestBlogSlider = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/blog/search?sortby=views&limit=10")
+      .get(
+        "https://blog-backend-3dcg.onrender.com/api/blog/search?sortby=views&limit=10"
+      )
       .then((res) => {
         setSlide(res?.data.message);
       })
@@ -75,7 +77,8 @@ const BestBlogSlider = () => {
                   <h1>#{`${index + 1}`}</h1>
                   <div className="BestCards_img">
                     <img
-                      src={"../../uploads/default.png"}
+                      src={item.image}
+                      // src={`${data?.image}`}
                       onError={handleImageError}
                       alt="userprofile"
                     />
