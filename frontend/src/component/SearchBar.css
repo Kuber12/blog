@@ -16,6 +16,7 @@
   justify-content: center;
 }
 .tags{
+  height: min-content;
   border: 2px white  solid;
   font-weight: 800;
   background-color: #ffcd29;

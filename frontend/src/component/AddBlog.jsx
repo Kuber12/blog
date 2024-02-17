@@ -83,8 +83,10 @@ const AddBlog = () => {
       window.removeEventListener("resize", detectSize);
     };
   }, [windowDimen]);
+  const stopClick = useRef();
   const handleSubmit = async (event) => {
     event.preventDefault();
+    stopClick.current.disabled = true;
     try {
       // Check if a file is selected
       if (values.headline.length > 250) {
@@ -147,6 +149,7 @@ const AddBlog = () => {
       console.error("Error", error);
     }
   };
+
   return (
     <>
       {btn && (
@@ -246,7 +249,6 @@ const AddBlog = () => {
                 ></textarea>
               </p>
               <div className="buttons-container">
-                {/* top */}
                 <div className="button-top-container">
                   <div>
                     <select
@@ -285,7 +287,11 @@ const AddBlog = () => {
                     />
                   </div>
                   <div style={{ display: "flex", justifyContent: "right" }}>
-                    <button className="postBlog form-button" type="submit">
+                    <button
+                      className="postBlog form-button"
+                      type="submit"
+                      ref={stopClick}
+                    >
                       Post
                     </button>
                   </div>

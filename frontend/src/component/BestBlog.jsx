@@ -75,7 +75,8 @@ const BestBlogSlider = () => {
                   <h1>#{`${index + 1}`}</h1>
                   <div className="BestCards_img">
                     <img
-                      src={"../../uploads/default.png"}
+                      src={item.image}
+                      // src={`${data?.image}`}
                       onError={handleImageError}
                       alt="userprofile"
                     />

@@ -25,7 +25,7 @@ const BlogPageTag = () => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${tag}/tag`)
       .then((res) => {
-        setData(res.data.message);
+        setData(res.data.message.reverse());
       })
       .catch((ex) => {
         console.log(ex);
@@ -37,7 +37,8 @@ const BlogPageTag = () => {
         `https://blog-backend-3dcg.onrender.com/api/blog/search/?query=${searchTxt}&tag=${tag}`
       )
       .then((res) => {
-        setFilteredData(res.data.message);
+        setFilteredData(res.data.message.reverse());
+        console.log(res.data.message.reverse());
       });
   }, [searchTxt]);
   return (
