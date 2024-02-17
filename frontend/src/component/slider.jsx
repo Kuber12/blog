@@ -72,11 +72,8 @@ const Slider = () => {
               <span>Contents </span>
             </h2>
             <h4 className="slider-heading3">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Aspernatur fuga explicabo consequuntur id tempora molestiae
-              laudantium similique consectetur sunt repellat provident
-              repellendus, a quasi tenetur quae nesciunt temporibus aut
-              placeat?
+            🎉 Embrace the magic of curiosity, Dive into the sea of knowledge, and let the waves of inspiration carry you to new shores. 
+            Discover the endless possibilities that unfold when you seek to learn and explore. Happy searching! 💕
             </h4>
               <Link className="btns">
                 Search <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -95,11 +92,8 @@ const Slider = () => {
                 <span>Connections</span>
               </h2>
               <h4 className="slider-heading3">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Aspernatur fuga explicabo consequuntur id tempora molestiae
-                laudantium similique consectetur sunt repellat provident
-                repellendus, a quasi tenetur quae nesciunt temporibus aut
-                placeat?
+              🌻 Step into the your realm, where every click unveils opportunities to forge new connections and create meaningful bonds.
+              Discover the joy of connecting with like-minded souls, like a sweet melody in the symphony of your digital journey.🤗
               </h4>
               <Link className="btns">
                 Find People <FontAwesomeIcon icon={faUserPlus} />
