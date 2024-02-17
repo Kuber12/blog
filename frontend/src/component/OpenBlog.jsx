@@ -313,14 +313,14 @@ const OpenBlog = () => {
                   <span>{countComment.countComment}</span>
                 </div>
               </div>
-              <div key={4} className="blog-action-tooltip">
+              {/* <div key={4} className="blog-action-tooltip">
                 <div key={4} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faEllipsis}
                     style={{ fontSize: "25px", paddingRight: "5px" }}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="comment-box">
               {viewcomment.map((comment) => (
@@ -332,10 +332,10 @@ const OpenBlog = () => {
                     </Link>
                   </div>
                   <p className="comment-text">{comment?.text}</p>
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={faHeart}
                     style={{ fontSize: "25px" }}
-                  />
+                  /> */}
                 </div>
               ))}
 

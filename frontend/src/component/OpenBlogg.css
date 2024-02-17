@@ -167,6 +167,8 @@
 }
 @media screen and (max-width: 600px) {
   .blog {
+    display: flex;
+    padding: 0px 0px;
     flex-direction: column;
   }
   .blog-user {

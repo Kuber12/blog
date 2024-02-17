@@ -40,7 +40,7 @@ const TopContributor = () => {
     const response = await axios.get(
       "https://blog-backend-3dcg.onrender.com/api/blog/topcontributor"
     );
-    console.log(response.data);
+
     setUser(response.data);
   };
   useEffect(() => {

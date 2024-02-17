@@ -38,7 +38,7 @@ const GlobalContentProvider = ({ children }) => {
             },
           }
         );
-        console.log(res.data);
+
         const { username, name, email, id, dob } = res.data;
         const timestamp = dob || null;
         const dateObject = new Date(timestamp);

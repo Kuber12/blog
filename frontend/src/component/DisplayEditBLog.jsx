@@ -12,6 +12,7 @@ const DisplayEditBLog = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const token = sessionStorage.getItem("authToken");
+  const [hitApi, setHitApi] = useState(true);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
@@ -28,7 +29,7 @@ const DisplayEditBLog = () => {
       )
       .then((res) => setData(res.data.message))
       .catch((err) => console.log(err));
-  }, [data]);
+  }, [hitApi]);
 
   const handleDelete = (id, image) => {
     const confirm = window.confirm("Do you want to delete?");
@@ -51,6 +52,7 @@ const DisplayEditBLog = () => {
         .catch((ex) => {
           console.log("errror" + ex);
         });
+      setHitApi((prev) => !prev);
     }
   };
 
