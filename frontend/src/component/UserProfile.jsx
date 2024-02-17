@@ -20,7 +20,7 @@ const UserProfile = () => {
   const { user } = data_;
 
   const { email, fullname, id, imgUrl, name, username, dob } = user;
-
+  const [editStatus, setEditStatus] = useState(true);
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
   //fetching the blogs of the current user
@@ -81,7 +81,7 @@ const UserProfile = () => {
           <div className="myPost">
             <p className="Ht hedvig">My Post</p>
             <div className="Blog_disp">
-              <NewCard data={Data} />
+              <NewCard data={Data} editStatus={editStatus} />
             </div>
           </div>
         </div>
