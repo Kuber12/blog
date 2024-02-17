@@ -13,14 +13,14 @@ a {
   top: 0;
   position: relative;
   width: 100%;
-  height: 100px;
+  height: 70px;
   background-color: white;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 2;
-  padding: 20px;
+  padding: 0px 20px;
 }
 .navbar ul {
   float: right;
@@ -170,7 +170,7 @@ a {
   }
   .navbar ul {
     position: absolute;
-    top: 100px;
+    top: 70px;
     width: 100%;
     background-color: lightblue;
     display: flex;
