@@ -12,18 +12,18 @@ import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import Hills from "../images/hill.jpeg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
+import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 // npm install react-slick slick-carousel
 import NewCard from "./NewCard";
 const BestBlogSlider = () => {
   const [slide, setSlide] = useState([]);
-  console.log(slide);
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/blog/search?sortby=views&limit=3")
+      .get("http://localhost:5000/api/blog/search?sortby=views&limit=10")
       .then((res) => {
-        console.log(res.data.message);
         setSlide(res?.data.message);
       })
       .catch((ex) => {
@@ -53,6 +53,9 @@ const BestBlogSlider = () => {
     sliderSettings.slidesToShow = 1;
   }
 
+  const handleImageError = (event) => {
+    event.target.src = "../../uploads/default.png";
+  };
   return (
     <div className="wrapper">
       <div className="top_">
@@ -63,35 +66,45 @@ const BestBlogSlider = () => {
         <Slider {...sliderSettings}>
           {slide &&
             slide.map((item, index) => (
-              <div className="BestCards_cont">
-                <h1>#{`${index + 1}`}</h1>
-                <div className="BestCards_img">
-                  <img src={Hills} />
-                </div>
-                <div className="BestCards_icon">
-                  <div key={1} className="blog-action-tooltip">
-                    <div className="blog-tooltip-div">
-                      <FontAwesomeIcon
-                        icon={faEye}
-                        style={{ fontSize: "20px", marginLeft: "50px" }}
-                      />
+              <div className="BestCards_cont" key={index}>
+                <Link
+                  className="link-to"
+                  key={index}
+                  to={`../OpenBlog/${item._id}`}
+                >
+                  <h1>#{`${index + 1}`}</h1>
+                  <div className="BestCards_img">
+                    <img
+                      src={"../../uploads/default.png"}
+                      onError={handleImageError}
+                      alt="userprofile"
+                    />
+                  </div>
+                  <div className="BestCards_icon">
+                    <div key={1} className="blog-action-tooltip">
+                      <div className="blog-tooltip-div">
+                        <FontAwesomeIcon
+                          icon={faEye}
+                          style={{ fontSize: "20px", marginLeft: "50px" }}
+                        />
+                      </div>
+                    </div>
+                    <div key={2} className="blog-action-tooltip">
+                      <div className="blog-tooltip-div">
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          style={{ fontSize: "20px", paddingRight: "5px" }}
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div key={2} className="blog-action-tooltip">
-                    <div className="blog-tooltip-div">
-                      <FontAwesomeIcon
-                        icon={faHeart}
-                        style={{ fontSize: "20px", paddingRight: "5px" }}
-                      />
-                    </div>
+                  <div className="BestCards_title">
+                    <h3>{item.headline}</h3>
                   </div>
-                </div>
-                <div className="BestCards_title">
-                  <h3>{item.headline}</h3>
-                </div>
-                <div className="BestCards_User">
-                  <h5>{item.username}</h5>
-                </div>
+                  <div className="BestCards_User">
+                    <h5>{item.username}</h5>
+                  </div>
+                </Link>
               </div>
             ))}
 

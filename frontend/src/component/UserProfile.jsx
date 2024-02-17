@@ -22,10 +22,6 @@ const UserProfile = () => {
   const { email, fullname, id, imgUrl, name, username, dob } = user;
   const [hitApi, setHitApi] = useState(1);
 
-  // const handleApiHit = (value) => {
-  //   setHitApi(value);
-  // };
-
   const [editStatus, setEditStatus] = useState(true);
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
@@ -35,10 +31,14 @@ const UserProfile = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${username}/user`)
       .then((res) => {
         setData(res.data.message.reverse());
-        console.log("Use effect is rendering");
       })
       .catch((err) => setError(err.message));
   }, [hitApi]);
+
+  //handle instead of no image
+  const handleImageError = (event) => {
+    event.target.src = "../../uploads/default.png";
+  };
 
   return (
     <>
@@ -47,7 +47,13 @@ const UserProfile = () => {
           <div className="userprofile-top-container">
             <div className="profile-follow">
               <div className="Profile">
-                <img src={imgUrl} alt="userprofile" />
+                <img
+                  src={"../../uploads/Profile.png"}
+                  onError={handleImageError}
+                  alt="userprofile"
+                  width="100%"
+                  height="100%"
+                />
               </div>
               <div className="follow_me">
                 {/* <button className="blog-user-follow">Follow Me +</button> */}
