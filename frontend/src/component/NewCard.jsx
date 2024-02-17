@@ -102,7 +102,7 @@ const NewCard = ({ data, editStatus, setHitApi }) => {
                 >
                   <div id="img-container">
                     <img
-                      src={`${imagePath}${items.image}`}
+                      src={`${items.image}`}
                       alt={`${items.image}`}
                       onError={handleImageError}
                     />

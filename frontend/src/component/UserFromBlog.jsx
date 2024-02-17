@@ -40,8 +40,6 @@ const UserFromBlog = () => {
   const [Error, setError] = useState("");
   const [hitApi, setHitApi] = useState(true);
 
-  //fetching the blogs of the current user
-  // console.log(user);
   const fetchUser = async () => {
     const data = await FromBlogUser(`/api/user/${UserName}/user`);
     setUser(data);
