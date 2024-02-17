@@ -35,7 +35,7 @@ const EditBlog = () => {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tag")
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => {
         setTags(res.data.message);
         console.log(res.data.message);
@@ -45,9 +45,12 @@ const EditBlog = () => {
   useEffect(() => {
     const fetchPrevious = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/blog/${id}`, {
-          method: "GET",
-        });
+        const res = await fetch(
+          `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
+          {
+            method: "GET",
+          }
+        );
         const datas = await res.json();
 
         const { headline, image, tag, content } = datas.message;
