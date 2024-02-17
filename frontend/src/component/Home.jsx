@@ -21,7 +21,6 @@ const Home = () => {
       <Slider />
       <BestBlog />
       <TopContributor />
-      {/* <CardsHome /> */}
     </div>
   );
 };

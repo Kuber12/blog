@@ -5,8 +5,10 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { faEye, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
+import { MdOutlineDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 import axios from "axios";
-const NewCard = ({ data, editStatus }) => {
+const NewCard = ({ data, editStatus, setHitApi }) => {
   //user details from global context
   const userData = useContext(GlobalContext);
   const username = userData.user.username;
@@ -17,7 +19,6 @@ const NewCard = ({ data, editStatus }) => {
     },
   };
 
-  console.log(username);
   const handleImageError = (event) => {
     event.target.src = "../../uploads/default.png";
   };
@@ -31,28 +32,26 @@ const NewCard = ({ data, editStatus }) => {
     return text;
   };
   //delete blog logic
-  const handleDelete = (id, image) => {
+  const handleDelete = async (id, image) => {
     const confirm = window.confirm("Do you want to delete?");
     if (confirm) {
-      axios
-        .delete(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`, config)
-        .then((res) => {
-          console.log("Deleted");
-          // window.location.reload();
-        })
-        .catch((err) => console.log(err));
-
-      axios
-        .delete(
-          `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
-        )
-        .then((res) => {
+      try {
+        await axios.delete(
+          `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
+          config
+        );
+        console.log("Deleted");
+        if (image) {
+          await axios.delete(
+            `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
+          );
           console.log("Image deleted");
-        })
-        .catch((ex) => {
-          console.log("errror" + ex);
-        });
-      // setHitApi((prev) => !prev);
+        }
+        setHitApi((prev) => prev + 1);
+        // handleApiHit(false);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -103,7 +102,7 @@ const NewCard = ({ data, editStatus }) => {
                 >
                   <div id="img-container">
                     <img
-                      src={`${imagePath}${items.image}`}
+                      src={`${items.image}`}
                       alt={`${items.image}`}
                       onError={handleImageError}
                     />
@@ -147,22 +146,30 @@ const NewCard = ({ data, editStatus }) => {
 
                   {/* <BsThreeDotsVertical /> */}
                   {username && editStatus && (
-                    <>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "20px",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                      }}
+                    >
                       <Link
+                        style={{ fontSize: "25px" }}
                         to={`/EditBlog/${items._id}`}
-                        className="btn btn-sm btn-primary me-2"
                       >
-                        Edit
+                        <FaRegEdit />
                       </Link>
-                      <button
+                      <div
+                        style={{ fontSize: "30px" }}
                         onClick={(e) =>
                           handleDelete(`${items._id}`, `${items.image}`)
                         }
-                        className="btn btn-sm btn-danger"
+                        // className="btn btn-sm btn-danger"
                       >
-                        Delete
-                      </button>
-                    </>
+                        <MdOutlineDelete />
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>

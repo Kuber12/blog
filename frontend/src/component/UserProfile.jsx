@@ -20,6 +20,8 @@ const UserProfile = () => {
   const { user } = data_;
 
   const { email, fullname, id, imgUrl, name, username, dob } = user;
+  const [hitApi, setHitApi] = useState(1);
+
   const [editStatus, setEditStatus] = useState(true);
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
@@ -31,7 +33,12 @@ const UserProfile = () => {
         setData(res.data.message.reverse());
       })
       .catch((err) => setError(err.message));
-  }, []);
+  }, [hitApi]);
+
+  //handle instead of no image
+  const handleImageError = (event) => {
+    event.target.src = "../../uploads/default.png";
+  };
 
   return (
     <>
@@ -40,10 +47,16 @@ const UserProfile = () => {
           <div className="userprofile-top-container">
             <div className="profile-follow">
               <div className="Profile">
-                <img src={imgUrl} alt="userprofile" />
+                <img
+                  src={"../../uploads/Profile.png"}
+                  onError={handleImageError}
+                  alt="userprofile"
+                  width="100%"
+                  height="100%"
+                />
               </div>
               <div className="follow_me">
-                <button className="blog-user-follow">Follow Me +</button>
+                {/* <button className="blog-user-follow">Follow Me +</button> */}
               </div>
             </div>
             <div className="bio">
@@ -81,7 +94,12 @@ const UserProfile = () => {
           <div className="myPost">
             <p className="Ht hedvig">My Post</p>
             <div className="Blog_disp">
-              <NewCard data={Data} editStatus={editStatus} />
+              <NewCard
+                data={Data}
+                editStatus={editStatus}
+                // handleApiHit={handleApiHit}
+                setHitApi={setHitApi}
+              />
             </div>
           </div>
         </div>

@@ -10,13 +10,16 @@ const uploadFile = (req, res) => {
         }
         const fileName = req.generatedFileName;
         // File was uploaded successfully
-        res.status(200).json({fileName})
+        res.status(200).json({url : `https://blog-backend-3dcg.onrender.com/api/file/profile/${req.file.filename}`})
     }catch(error){
         res.status(500).send('An error occurred');
     }
 };
 const deleteFile = (req,res) => {
     const fileNameToDelete = req.params.fileName;
+    if(!fileNameToDelete){
+        res.status(500).send('File doesnt exist.');
+    }
     const filePathToDelete = path.join(staticFolder, fileNameToDelete);
 
     // Check if the file exists before attempting to delete it

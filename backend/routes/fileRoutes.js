@@ -6,6 +6,7 @@ const {
   deleteFile
 } = require("../controllers/fileController");
 
+router.use("/profile", express.static("uploads"));
 router.post("/upload", upload.single('fileInput'), uploadFile);
 router.delete("/:fileName/delete", deleteFile);
 

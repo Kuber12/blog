@@ -14,12 +14,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
 import NewCard from "./NewCard";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import fetchUserData from "../Utils/userApi";
-
+import { ToastContainer, toast } from "react-toastify";
 const UserFromBlog = () => {
+  const userData = useContext(GlobalContext);
+  const globalUsername = userData?.user?.username;
+
+  const { id } = useParams();
   const { FromBlogUser } = fetchUserData();
   const { UserName } = useParams();
+  const [followed, setFollowed] = useState();
   // console.log(UserName);
   const imagePath = "../../uploads/";
   const [user, setUser] = useState({
@@ -30,17 +35,20 @@ const UserFromBlog = () => {
     username: "",
     imgUrl: "",
   });
+
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
-  //fetching the blogs of the current user
-  // console.log(user);
+  const [hitApi, setHitApi] = useState(true);
+
   const fetchUser = async () => {
     const data = await FromBlogUser(`/api/user/${UserName}/user`);
     setUser(data);
   };
+  //fetching user data
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [hitApi]);
+  //fetching user blog
   useEffect(() => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${UserName}/user`)
@@ -48,10 +56,54 @@ const UserFromBlog = () => {
         setData(res.data.message.reverse());
       })
       .catch((err) => setError(err.message));
-  }, []);
+  }, [hitApi]);
+  //following or not
+  useEffect(() => {
+    axios
+      .get(
+        `https://blog-backend-3dcg.onrender.com/api/user/${UserName}/follow/${globalUsername}`
+      )
+      .then((res) => {
+        console.log(globalUsername);
+        console.log(res.data?.message);
+        setFollowed(res.data?.message);
+      })
+      .catch((ex) => {
+        console.log("error on followed or not " + ex);
+      });
+  }, [hitApi]);
 
+  //follow handle
+  const handleFollows = () => {
+    axios
+      .post(
+        `https://blog-backend-3dcg.onrender.com/api/user/${UserName}/follow/${globalUsername}`
+      )
+      .then((response) => {
+        let result = response.data?.message;
+        console.log(result);
+        toast.success(result);
+        setHitApi((hitApi) => !hitApi);
+      })
+      .catch((err) => {
+        toast.error(`Something went wrong`);
+      });
+  };
+  console.log(followed);
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div id="mainBody">
         <div className="btmBlc">
           <div className="userprofile-top-container">
@@ -60,7 +112,19 @@ const UserFromBlog = () => {
                 <img src={user?.imgUrl} alt="userprofile" />
               </div>
               <div className="follow_me">
-                <button className="blog-user-follow">Follow Me +</button>
+                {globalUsername ? (
+                  <button
+                    className="blog-user-follow"
+                    onClick={(e) => handleFollows(e)}
+                  >
+                    {followed}
+                  </button>
+                ) : (
+                  <Link to="/Login">
+                    {" "}
+                    <button className="blog-user-follow">Follow me +</button>
+                  </Link>
+                )}
               </div>
             </div>
             <div className="bio">
@@ -98,7 +162,7 @@ const UserFromBlog = () => {
           <div className="myPost">
             <p className="Ht hedvig">My Post</p>
             <div className="Blog_disp">
-              <NewCard data={Data} />
+              <NewCard data={Data} setHitApi={setHitApi} />
             </div>
           </div>
         </div>
