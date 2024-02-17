@@ -22,7 +22,9 @@ const BestBlogSlider = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/blog/search?sortby=views&limit=10")
+      .get(
+        "https://blog-backend-3dcg.onrender.com/api/blog/search?sortby=views&limit=10"
+      )
       .then((res) => {
         setSlide(res?.data.message);
       })
@@ -92,15 +94,16 @@ const BestBlogSlider = () => {
                     </div>
                     <div key={2} className="blog-action-tooltip">
                       <div className="blog-tooltip-div">
-                        <FontAwesomeIcon
+                        {/* <FontAwesomeIcon
                           icon={faHeart}
                           style={{ fontSize: "20px", paddingRight: "5px" }}
-                        />
+                        /> */}
+                        {item.views}
                       </div>
                     </div>
                   </div>
                   <div className="BestCards_title">
-                    <h3>{item.headline}</h3>
+                    <h3>{item.headline.slice(0, 8)}...</h3>
                   </div>
                   <div className="BestCards_User">
                     <h5>{item.username}</h5>
