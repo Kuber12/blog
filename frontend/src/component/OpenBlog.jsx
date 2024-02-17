@@ -251,7 +251,7 @@ const OpenBlog = () => {
             {data?.image && (
               <img
                 className="blog-content-image"
-                src={`../../uploads/${data?.image}`}
+                src={`${data?.image}`}
                 alt="blog content"
                 onError={handleImageError}
               />

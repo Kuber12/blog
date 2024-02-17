@@ -136,7 +136,7 @@ const EditBlog = () => {
             console.log("errror" + ex);
           });
 
-        tempFilename = imgResponse.data.fileName;
+        tempFilename = imgResponse.data.url;
         console.log("Image Submitted", tempFilename);
 
         setValues((values) => ({
