@@ -5,11 +5,11 @@ function fetchUserData(endpoint) {
   //   const baseUrl = "http://localhost:5000";
   async function FromBlogUser(endpoint) {
     const url = `${baseUrl}${endpoint}`;
-    console.log(url);
+    // console.log(url);
     try {
       const response = await axios.get(url);
       const data = response.data.message;
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
       console.log("Error while fetching user data from parameter" + error);

@@ -46,7 +46,6 @@ const OpenBlog = () => {
   const [viewcomment, setViewComment] = useState([]);
   const [followers, setFollowers] = useState(0);
   const [followed, setFollowed] = useState();
-  // const [Apiusername, setApiUsername] = useState("");
 
   const [countComment, setCountComment] = useState({
     countComment: 0,
@@ -173,7 +172,8 @@ const OpenBlog = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
         setData(res.data?.message);
-        // setApiUsername(res.data?.username);
+
+        //fetched followers
         return axios.get(
           `https://blog-backend-3dcg.onrender.com/api/user/${res.data?.message?.username}/follow`
         );
@@ -187,18 +187,7 @@ const OpenBlog = () => {
       })
       .catch((ex) => toast.error(ex));
   }, []);
-  //fetched followers
-  useEffect(() => {
-    // axios
-    //   .get(
-    //     `https://blog-backend-3dcg.onrender.com/api/user/${data?.username}/follow`
-    //   )
-    //   .then((res) => {
-    //     setFollowers(res.data?.totalFollowers);
-    //     // console.log(res.data?.totalFollowers);
-    //   })
-    //   .catch((err) => toast.error(err));
-  }, []);
+
   //fetching likes count
   useEffect(() => {
     axios
@@ -268,7 +257,7 @@ const OpenBlog = () => {
               />
             )}
             <div className="blog-content-text">
-              <h4 class="heading">{data?.headline}</h4>
+              <h4 className="heading">{data?.headline}</h4>
               <p>{data?.content}</p>
             </div>
             <div className="blog-action-icons">
@@ -324,7 +313,7 @@ const OpenBlog = () => {
             </div>
             <div className="comment-box">
               {viewcomment.map((comment) => (
-                <div className="comment">
+                <div className="comment" key={comment.id}>
                   <div className="comment-user">
                     {" "}
                     <Link to={`/UserInfo/${comment?.username}`}>
@@ -338,7 +327,6 @@ const OpenBlog = () => {
                   /> */}
                 </div>
               ))}
-
               <div className="comment-write">
                 {username && (
                   <>

@@ -37,7 +37,6 @@ const UserFromBlog = () => {
   const fetchUser = async () => {
     const data = await FromBlogUser(`/api/user/${UserName}/user`);
     setUser(data);
-    // console.log(data);
   };
   useEffect(() => {
     fetchUser();
@@ -46,7 +45,7 @@ const UserFromBlog = () => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${UserName}/user`)
       .then((res) => {
-        setData(res.data.message);
+        setData(res.data.message.reverse());
       })
       .catch((err) => setError(err.message));
   }, []);
