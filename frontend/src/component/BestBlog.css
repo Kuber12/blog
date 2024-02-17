@@ -9,7 +9,33 @@
     padding:10px;
     padding:20px;
 }
-
+.BestCards_div{
+  width: 90%;
+  padding: 50px;
+  margin: 0 auto;
+  text-align:center;
+}
+.BestCards_cont{ 
+  height: 500px;
+  background-color:#BDE3FF;
+  transition: 0.5s;
+  padding: 20px;
+}
+.BestCards_cont h1{
+  padding:10px;
+  text-align: center;
+  font-weight: 600;
+}
+.BestCards_cont .BestCards_img img{
+  width:100%;
+  object-fit: contain;
+  height:200px;
+  padding:5px;
+}
+.BestCards_User h5{
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 .best-blog-icon {
   position: absolute;
   max-width: 20%;
@@ -30,29 +56,19 @@
     bottom: 0px;
     position: absolute;
 }
-
-.move{
-    position: absolute;
-    top: 50%;
-    font-size: 50px;
-    cursor: pointer;
-background: none;
-    border: none;
-    color:black;
-    overflow: hidden;
-    transition: all .5s ease;
-  }
-  .move:hover{
-    color:white;
-    font-size: 51px;
-  }
-  .move.left-btn{
-    left: 15px;
-  }
-  
-  .move.right-btn {
-    right: 15px;
-  }
+.BestCards_icon {
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.slick-prev{
+  font-size: 50px;
+  color: #000;
+}
+.slick-next{
+  font-size: 50px;
+}
 
 @media screen and (min-width: 768px) and (max-width: 1024px){
     .top_ img {
@@ -65,12 +81,32 @@ background: none;
     #froggy{
         width: 10%;
     }
-    .move{
-        font-size: 40px;
-      }
-      .move:hover{
-        font-size: 41px;
-      }
+    /* .move{
+      display: block;
+      position: absolute;
+      top: 50%;
+      font-size: 50px;
+      cursor: pointer;
+  background: none;
+      border: none;
+      color:black;
+      overflow: hidden;
+      transition: all .5s ease;
+    }
+    .move:hover{
+      color:white;
+      font-size: 51px;
+    }
+    .move.left-btn{
+      left: 15px;
+    }
+    
+    .move.right-btn {
+      right: 15px;
+    } */
+    .BestCards_cont {
+      width: 80%; 
+    }
 }
 
 
@@ -86,11 +122,14 @@ background: none;
         max-width: 20%;
         height: 110px;
     }
-      .move{
+      /* .move{
         font-size: 40px;
       }
       .move:hover{
         font-size: 41px;
+      } */
+      .BestCards_cont {
+        width: 70%; 
       }
 }
 @media (max-width: 480px) {
@@ -105,10 +144,13 @@ background: none;
             max-width: 20%;
             height: 90px;
         }
-        .move{
+        /* .move{
             font-size: 40px;
           }
           .move:hover{
             font-size: 41px;
+          } */
+          .BestCards_cont {
+            width: 60%; 
           }
 }
