@@ -42,7 +42,7 @@ const AddBlog = () => {
       .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => {
         setTags(res.data.message);
-        console.log(res.data.message);
+        // console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -206,7 +206,7 @@ const AddBlog = () => {
                     : (headlineRef.current.style.backgroundColor = "green");
                 }}
                 onFocus={(e) => {
-                  console.log(values.headline);
+                  // console.log(values.headline);
                   e.target.value.length > 250
                     ? (headlineRef.current.style.backgroundColor = "red") &&
                       toast.error("Keep your headline short")
@@ -232,6 +232,13 @@ const AddBlog = () => {
                         toast.error("Keep your content short")
                       : (contentRef.current.style.backgroundColor = "green");
                   }}
+                  onFocus={(e) => {
+                    // console.log(values.headline);
+                    e.target.value.length > 250
+                      ? (contentRef.current.style.backgroundColor = "red") &&
+                        toast.error("Keep your content short")
+                      : (contentRef.current.style.backgroundColor = "green");
+                  }}
                   onBlur={(e) =>
                     (contentRef.current.style.backgroundColor = "#e6d579")
                   }
@@ -241,8 +248,6 @@ const AddBlog = () => {
               <div className="buttons-container">
                 {/* top */}
                 <div className="button-top-container">
-                  {/* file  input */}
-                  {/* select tags */}
                   <div>
                     <select
                       name=""
@@ -256,23 +261,13 @@ const AddBlog = () => {
                         Choose Your Tag
                       </option>
                       {tags &&
-                        tags.map((items) => (
+                        tags.map((items, index) => (
                           <>
-                            <option value={items.tagname}>
+                            <option key={index} value={items.tagname}>
                               {items.tagname}
                             </option>
                           </>
                         ))}
-                      {/* <option value="News">Programming</option>
-                    <option value="Entertainment">Web Development</option>
-                    <option value="Fun">Design</option>
-                    <option value="Facts">Cooking</option>
-                    <option value="Facts">Photography</option>
-                    <option value="Facts">Fitness</option>
-                    <option value="Facts">Personal</option>
-                    <option value="Facts"></option>
-                    <option value="Facts">Personal</option>
-                    <option value="Facts">Personal</option> */}
                     </select>
                   </div>
                   <div style={{ display: "flex", justifyContent: "center" }}>

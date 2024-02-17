@@ -18,7 +18,7 @@ const UserProfile = () => {
   const data_ = useContext(GlobalContext);
   const imagePath = "../../uploads/";
   const { user } = data_;
-  // console.log(user);
+
   const { email, fullname, id, imgUrl, name, username, dob } = user;
 
   const [Data, setData] = useState([]);
@@ -28,9 +28,7 @@ const UserProfile = () => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${username}/user`)
       .then((res) => {
-        // console.log(res.data.message);
-        setData(res.data.message);
-        // console.log(Data);
+        setData(res.data.message.reverse());
       })
       .catch((err) => setError(err.message));
   }, []);
