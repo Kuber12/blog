@@ -22,7 +22,9 @@ const BestBlogSlider = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/blog/search?sortby=views&limit=10")
+      .get(
+        "https://blog-backend-3dcg.onrender.com/api/blog/search?sortby=views&limit=10"
+      )
       .then((res) => {
         setSlide(res?.data.message);
       })
