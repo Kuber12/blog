@@ -23,7 +23,7 @@
 
 }
 a{
-  color:  var(--text-color) !important;
+  color:  var(--text-color);
 }
 body {
   background-color: var(--secondary-color);
