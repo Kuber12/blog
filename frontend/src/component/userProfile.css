@@ -16,7 +16,8 @@
 .Profile {
   width: 200px;
   height: 200px;
-  background-color: rgb(212, 212, 212);
+  background-color: rgb(255, 255, 255);
+  border-radius: 3rem;
 }
 
 .follow_me {
@@ -54,15 +55,15 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   gap: 5px;
 }
-.userprofile-top-container{
-  display:flex;
+.userprofile-top-container {
+  display: flex;
   justify-content: center;
-  gap:20px;
+  gap: 20px;
 }
 #im {
   padding: 1px;
   background-color: #ffcd29;
-  width:100%;
+  width: 100%;
 }
 .User_Dtl {
   background-color: rgb(251, 251, 251, 0.5);
@@ -185,10 +186,10 @@
 }
 
 @media screen and (max-width: 768px) {
-  .bio{
+  .bio {
     flex: 1;
   }
-  .userprofile-top-container{
+  .userprofile-top-container {
     flex-wrap: wrap;
   }
   .btwnBlc {
@@ -217,7 +218,7 @@
   .udP {
     font-size: 0.8em;
   }
-  .udP{
+  .udP {
     height: fit-content;
   }
   .User_Dtl {
@@ -237,7 +238,7 @@
   }
 }
 @media (max-width: 480px) {
-  .bio{
+  .bio {
     flex: 1 0 100%;
   }
   #mainBody {
@@ -261,10 +262,10 @@
   .Ht {
     font-size: 1.5em;
   }
-  .aboutMe{
+  .aboutMe {
     flex-direction: column;
   }
-  .udP{
+  .udP {
     margin: 0;
   }
 }

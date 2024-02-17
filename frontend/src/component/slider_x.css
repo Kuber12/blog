@@ -201,6 +201,7 @@
   }  
   .content{
     left:9%;
+    width: fit-content;
   }
   .slider-heading3{
     letter-spacing:unset;
@@ -230,6 +231,9 @@
   }
 }
  @media (max-width: 480px) {   
+  #content1,#content2,#content3{
+    background-image: none;
+  }
   .Slider_img_div{
     display: none;
   }  
