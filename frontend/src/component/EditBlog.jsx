@@ -5,7 +5,7 @@ import NewNavi from "./NewwNav";
 import axios from "axios";
 import "./AddBlog.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+import ReactConfetti from "react-confetti";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalContext } from "./GlobalContent";
@@ -27,27 +27,48 @@ const EditBlog = () => {
     username: username,
   });
   const token = sessionStorage.getItem("authToken");
-
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
+  const detectSize = () => {
+    setWindowDimension({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+  const [windowDimen, setWindowDimension] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  const [btn, setBtn] = useState(false);
+  useEffect(() => {
+    window.addEventListener("resize", detectSize);
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [windowDimen]);
+
+  //fetching tags
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tag")
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => {
         setTags(res.data.message);
-        console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   }, []);
+  //blog fetch
   useEffect(() => {
     const fetchPrevious = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/blog/${id}`, {
-          method: "GET",
-        });
+        const res = await fetch(
+          `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
+          {
+            method: "GET",
+          }
+        );
         const datas = await res.json();
 
         const { headline, image, tag, content } = datas.message;
@@ -136,10 +157,13 @@ const EditBlog = () => {
 
       toast.success("Added Blog");
       console.log("Submitted", blogResponse.data);
-
-      // setTimeout(() => {
-      //   navigation("/");
-      // }, 3000);
+      setBtn(true);
+      setTimeout(() => {
+        setBtn(false);
+      }, 3000);
+      setTimeout(() => {
+        navigation("/");
+      }, 3000);
     } catch (error) {
       console.error("Error", error);
     }
@@ -147,6 +171,13 @@ const EditBlog = () => {
 
   return (
     <>
+      {btn && (
+        <ReactConfetti
+          width={windowDimen.width}
+          height={windowDimen.height}
+          tweenDuration={1000}
+        />
+      )}
       <NewNavi />
       <div className="container-head">
         <Helmet>
@@ -187,7 +218,7 @@ const EditBlog = () => {
               <input
                 type="text"
                 className="title-input"
-                placeholder={`${values.headline}`}
+                value={`${values.headline}`}
                 onChange={(e) =>
                   setValues({ ...values, headline: e.target.value })
                 }
@@ -197,7 +228,7 @@ const EditBlog = () => {
                   // onChange={handleTextArea}
 
                   className="content-input"
-                  placeholder={`${values.content}`}
+                  value={`${values.content}`}
                   id="floatingTextarea"
                   style={{ width: "100%", height: "124px" }}
                   onChange={(e) =>

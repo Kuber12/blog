@@ -1,5 +1,5 @@
 /* The above code is a React component called "AddBlog". It is used to add a new blog post. */
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import "./AddBlog.css";
@@ -33,6 +33,8 @@ const AddBlog = () => {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
+  const headlineRef = useRef();
+  const contentRef = useRef();
 
   //for tags all fetched
   useEffect(() => {
@@ -81,61 +83,66 @@ const AddBlog = () => {
       window.removeEventListener("resize", detectSize);
     };
   }, [windowDimen]);
-  // const handleStop = () => {
-  //   setBtn(true);
-  //   setTimeout(() => {
-  //     setBtn(false);
-  //   }, 3000);
-  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       // Check if a file is selected
-      let tempFilename;
-      if (file) {
-        const formData = new FormData();
-        formData.append("fileInput", file);
-        formData.append("username", username);
+      if (values.headline.length > 250) {
+        toast.error(
+          "Please make your headline shorter less than 250 characters"
+        );
+      } else if (values.content.length > 25000) {
+        toast.error(
+          "Please make your content shorter less than 25000 characters"
+        );
+        console.log(values.content.length);
+      } else {
+        let tempFilename;
+        if (file) {
+          const formData = new FormData();
+          formData.append("fileInput", file);
+          formData.append("username", username);
 
-        const imgResponse = await axios.post(
-          "https://blog-backend-3dcg.onrender.com/api/file/upload",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
+          const imgResponse = await axios.post(
+            "https://blog-backend-3dcg.onrender.com/api/file/upload",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
             },
+            config
+          );
+
+          tempFilename = imgResponse.data.fileName;
+          console.log("Image Submitted", tempFilename);
+
+          setValues((values) => ({
+            ...values,
+            image: tempFilename,
+          }));
+        }
+
+        const blogResponse = await axios.post(
+          "https://blog-backend-3dcg.onrender.com/api/blog",
+          {
+            ...values,
+            // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+            image: tempFilename ? tempFilename : "",
           },
           config
         );
+        setBtn(true);
+        setTimeout(() => {
+          setBtn(false);
+        }, 3000);
+        toast.success("Added Blog");
+        console.log("Submitted", blogResponse.data);
 
-        tempFilename = imgResponse.data.fileName;
-        console.log("Image Submitted", tempFilename);
-
-        setValues((values) => ({
-          ...values,
-          image: tempFilename,
-        }));
+        setTimeout(() => {
+          navigation("/");
+        }, 3000);
       }
-
-      const blogResponse = await axios.post(
-        "https://blog-backend-3dcg.onrender.com/api/blog",
-        {
-          ...values,
-          // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
-          image: tempFilename ? tempFilename : "",
-        },
-        config
-      );
-      setBtn(true);
-      setTimeout(() => {
-        setBtn(false);
-      }, 3000);
-      toast.success("Added Blog");
-      console.log("Submitted", blogResponse.data);
-
-      setTimeout(() => {
-        navigation("/");
-      }, 3000);
     } catch (error) {
       console.error("Error", error);
     }
@@ -190,8 +197,23 @@ const AddBlog = () => {
                 type="text"
                 className="title-input"
                 placeholder="Enter Title"
-                onChange={(e) =>
-                  setValues({ ...values, headline: e.target.value })
+                ref={headlineRef}
+                onChange={(e) => {
+                  setValues({ ...values, headline: e.target.value });
+                  e.target.value.length > 250
+                    ? (headlineRef.current.style.backgroundColor = "red") &&
+                      toast.error("Keep your headline short")
+                    : (headlineRef.current.style.backgroundColor = "green");
+                }}
+                onFocus={(e) => {
+                  console.log(values.headline);
+                  e.target.value.length > 250
+                    ? (headlineRef.current.style.backgroundColor = "red") &&
+                      toast.error("Keep your headline short")
+                    : (headlineRef.current.style.backgroundColor = "green");
+                }}
+                onBlur={(e) =>
+                  (headlineRef.current.style.backgroundColor = "#e6d579")
                 }
               />
               <p>
@@ -199,11 +221,19 @@ const AddBlog = () => {
                   // onChange={handleTextArea}
 
                   className="content-input"
+                  ref={contentRef}
                   placeholder="Leave a comment here"
                   id="floatingTextarea"
                   style={{ width: "100%", height: "124px" }}
-                  onChange={(e) =>
-                    setValues({ ...values, content: e.target.value })
+                  onChange={(e) => {
+                    setValues({ ...values, content: e.target.value });
+                    e.target.value.length > 25000
+                      ? (contentRef.current.style.backgroundColor = "red") &&
+                        toast.error("Keep your content short")
+                      : (contentRef.current.style.backgroundColor = "green");
+                  }}
+                  onBlur={(e) =>
+                    (contentRef.current.style.backgroundColor = "#e6d579")
                   }
                   // rows="5"
                 ></textarea>

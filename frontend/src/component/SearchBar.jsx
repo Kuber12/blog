@@ -7,8 +7,7 @@ import SearchContext from "../pages/SearchContext";
 import { Link } from "react-router-dom";
 
 const SearchBar = () => {
-  const { searchTxt, SetSearchTxt, setIsInputFocused } =
-    useContext(SearchContext);
+  const { searchTxt, SetSearchTxt } = useContext(SearchContext);
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
@@ -27,13 +26,6 @@ const SearchBar = () => {
     //     console.log(err);
     //   });
     // settagFilter(tagValue);
-  };
-  const handleInputFocus = () => {
-    setIsInputFocused(true);
-  };
-
-  const handleInputBlur = () => {
-    setIsInputFocused(false);
   };
   return (
     <>
@@ -60,8 +52,6 @@ const SearchBar = () => {
           <img className="searchIcon" src={search} alt="" />
           <input
             className="searchInput"
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
             onChange={(e) => SetSearchTxt(e.target.value)}
             type="text"
             placeholder="Search"

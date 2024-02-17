@@ -11,10 +11,17 @@ const BlogPageTag = () => {
   const { searchTxt, inputFocued } = useContext(SearchContext);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const { tag } = useParams();
 
   useEffect(() => {
-    // alert(tag);
+    if (searchTxt.length > 0) {
+      return setIsInputFocused(true);
+    } else {
+      return setIsInputFocused(false);
+    }
+  }, [searchTxt]);
+  useEffect(() => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${tag}/tag`)
       .then((res) => {
@@ -44,9 +51,10 @@ const BlogPageTag = () => {
       }}
     >
       <SearchBar />
-      {data.length > 0 ? (
-        <NewCard data={inputFocued ? filteredData : data} />
+      {data.length || filteredData.length > 0 ? (
+        <NewCard data={isInputFocused ? filteredData : data} />
       ) : (
+        // <NewCard data={} />
         <h1
           style={{
             textAlign: "center",

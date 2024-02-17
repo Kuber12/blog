@@ -313,24 +313,29 @@ const OpenBlog = () => {
                   <span>{countComment.countComment}</span>
                 </div>
               </div>
-              <div key={4} className="blog-action-tooltip">
+              {/* <div key={4} className="blog-action-tooltip">
                 <div key={4} className="blog-tooltip-div">
                   <FontAwesomeIcon
                     icon={faEllipsis}
                     style={{ fontSize: "25px", paddingRight: "5px" }}
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="comment-box">
               {viewcomment.map((comment) => (
                 <div className="comment">
-                  <div className="comment-user">{comment?.username}</div>
+                  <div className="comment-user">
+                    {" "}
+                    <Link to={`/UserInfo/${comment?.username}`}>
+                      {comment?.username}
+                    </Link>
+                  </div>
                   <p className="comment-text">{comment?.text}</p>
-                  <FontAwesomeIcon
+                  {/* <FontAwesomeIcon
                     icon={faHeart}
                     style={{ fontSize: "25px" }}
-                  />
+                  /> */}
                 </div>
               ))}
 
@@ -390,6 +395,13 @@ const OpenBlog = () => {
                     ) : (
                       <button className="blog-user-follow">Follow Me+</button>
                     )}
+
+                    <Link
+                      className="blog-user-follow"
+                      to={`/UserInfo/${data?.username}`}
+                    >
+                      View Profile
+                    </Link>
                   </div>
                 )}
               </div>
