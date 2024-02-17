@@ -5,7 +5,7 @@
  * a div with a "Login First" message. Otherwise, it returns a div containing the Helmet component,
  * NewNavi component, and UserProfile component.
  */
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import UserProfile from "./UserProfile";
 import NewNavi from "./NewwNav";
@@ -13,6 +13,7 @@ import { GlobalContext } from "./GlobalContent";
 const User = () => {
   const data = useContext(GlobalContext);
   const username = data.user.username;
+
   if (!username) {
     return (
       <div

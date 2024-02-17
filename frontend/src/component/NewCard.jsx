@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./NewCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { faEye, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
+import { GlobalContext } from "./GlobalContent";
+import { MdOutlineDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+import axios from "axios";
+const NewCard = ({ data, editStatus, setHitApi }) => {
+  //user details from global context
+  const userData = useContext(GlobalContext);
+  const username = userData.user.username;
+  const token = sessionStorage.getItem("authToken");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  };
 
-const NewCard = ({ data }) => {
   const handleImageError = (event) => {
     event.target.src = "../../uploads/default.png";
   };
@@ -17,6 +30,29 @@ const NewCard = ({ data }) => {
       return text.substring(0, maxLength) + ".....";
     }
     return text;
+  };
+  //delete blog logic
+  const handleDelete = async (id, image) => {
+    const confirm = window.confirm("Do you want to delete?");
+    if (confirm) {
+      try {
+        await axios.delete(
+          `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
+          config
+        );
+        console.log("Deleted");
+        if (image) {
+          await axios.delete(
+            `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
+          );
+          console.log("Image deleted");
+        }
+        setHitApi((prev) => prev + 1);
+        // handleApiHit(false);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (
@@ -58,8 +94,12 @@ const NewCard = ({ data }) => {
             };
 
             return (
-              <Link className="link-to" key={i} to={`../OpenBlog/${items._id}`}>
-                <div id="card-container" key={i}>
+              <div id="card-container" key={i}>
+                <Link
+                  className="link-to"
+                  key={i}
+                  to={`../OpenBlog/${items._id}`}
+                >
                   <div id="img-container">
                     <img
                       src={`${imagePath}${items.image}`}
@@ -96,18 +136,43 @@ const NewCard = ({ data }) => {
                     </div>
                     <span className="post-tag"> {items.tag}</span>
                   </div>
-                  <h6 id="heading">{truncateText(items.headline, 25)}</h6>
-                  <div id="tags">
-                    <div>
-                      <span> @{items.username}</span>
-                      <span>{formatTimeDifference(timeDifference)}</span>
-                    </div>
-                    {/* <button>
-                      <BsThreeDotsVertical />
-                    </button> */}
+                </Link>
+                <h6 id="heading">{truncateText(items.headline, 25)}</h6>
+                <div id="tags">
+                  <div>
+                    <span> @{items.username}</span>
+                    <span>{formatTimeDifference(timeDifference)}</span>
                   </div>
+
+                  {/* <BsThreeDotsVertical /> */}
+                  {username && editStatus && (
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "20px",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Link
+                        style={{ fontSize: "25px" }}
+                        to={`/EditBlog/${items._id}`}
+                      >
+                        <FaRegEdit />
+                      </Link>
+                      <div
+                        style={{ fontSize: "30px" }}
+                        onClick={(e) =>
+                          handleDelete(`${items._id}`, `${items.image}`)
+                        }
+                        // className="btn btn-sm btn-danger"
+                      >
+                        <MdOutlineDelete />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </Link>
+              </div>
             );
           })}
       </div>

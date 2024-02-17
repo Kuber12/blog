@@ -56,10 +56,10 @@ const MyRouter = () => {
       path: "/cardsDetails/:id",
       element: <CardsDetails />,
     },
-    {
-      path: "/DisplayEditBLog/",
-      element: <DisplayEditBLog />,
-    },
+    // {
+    //   path: "/DisplayEditBLog/",
+    //   element: <DisplayEditBLog />,
+    // },
     {
       path: "/Login",
       element: <Login />,
