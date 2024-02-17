@@ -176,6 +176,7 @@ const editBlog = asyncHandler(async (req, res) => {
     } else {
       const editedBlog = await Blog.findByIdAndUpdate(req.params.id, req.body);
     }
+
     res.status(201).json(blog);
   } catch (error) {
     res
