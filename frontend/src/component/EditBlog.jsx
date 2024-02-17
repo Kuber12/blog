@@ -1,5 +1,5 @@
 /* The above code is a React component called "EditBlog". It is used to edit a blog post. */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import axios from "axios";
@@ -104,9 +104,10 @@ const EditBlog = () => {
       setFilePreview(null);
     }
   };
-
+  const stopPost = useRef();
   const handleSubmit = async (event) => {
     event.preventDefault();
+    stopPost.current.disabled = true;
     try {
       // Check if a file is selected
       let tempFilename;
@@ -279,7 +280,11 @@ const EditBlog = () => {
                     />
                   </div>
                   <div style={{ display: "flex", justifyContent: "right" }}>
-                    <button className="postBlog form-button" type="submit">
+                    <button
+                      className="postBlog form-button"
+                      type="submit"
+                      ref={stopPost}
+                    >
                       Post
                     </button>
                   </div>
