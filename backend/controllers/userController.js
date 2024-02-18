@@ -43,17 +43,45 @@ const registerUser = asyncHandler(async (req, res) => {
     // Hash the password before saving into database
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
-      username: username,
-      name: name,
-      email: email,
-      dob: dob,
-      password: hashedPassword,
-      gender: gender,
-      address: address,
-      userImage: userImage,
+        username: username,
+        name: name,
+        email: email,
+        dob: dob,
+        password: hashedPassword,
+        gender: gender,
+        address: address,
+        userImage: userImage,
+        bio: ""
     });
   }
   res.json({ message: "Register Login" });
+});
+const editUser = asyncHandler(async (req, res) => {
+    const username = req.params.username;
+    const { name, email, dob, gender, address, bio,userImage } = req.body;
+
+    try {
+        const user = await User.findOne({ username: username }).select("-password");
+
+        if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Update user information
+        user.name = name || user.name;
+        user.email = email || user.email;
+        user.dob = dob || user.dob;
+        user.bio = bio || user.bio;
+        user.gender = gender || user.gender;
+        user.address = address || user.address;
+        user.userImage = userImage || user.userImage;
+
+        await user.save();
+
+        res.json({ message: 'User updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
 });
 
 const currentUser = asyncHandler(async (req, res) => {
@@ -74,4 +102,4 @@ const getUserDetails = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "User not found" });
   }
 });
-module.exports = { loginUser, registerUser, currentUser, getUserDetails };
+module.exports = { loginUser, registerUser,editUser, currentUser, getUserDetails };
