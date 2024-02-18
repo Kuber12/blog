@@ -20,7 +20,7 @@
   border-radius: 3rem;
 }
 
-.follow_me {
+.userprofile-button {
   margin: 20px 0px;
   text-align: center;
 }
@@ -71,15 +71,21 @@
   border-radius: 2px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
 }
 .ics {
   font-size: 1.2em;
   padding: 5px;
 }
 .udP {
+  text-align: right;
   font-size: 0.9em;
   padding: 1px;
+}
+input.udP , select.udP{
+  background-color: transparent;
+  border: 1px black solid;
 }
 .btmBlc {
   display: flex;
@@ -88,7 +94,7 @@
   width: 1000px;
 }
 .bio {
-  width: auto;
+  width: 500px;
   height: max-content;
   background-color: white;
   text-align: center;
@@ -97,6 +103,7 @@
   padding: 10px;
 }
 #fname {
+  text-align: center;
   margin-top: 20px;
   font-size: 2em;
 }

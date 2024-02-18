@@ -6,6 +6,9 @@ const userSchema = mongoose.Schema({
         required: [true,"Please enter a username"],
         unique: [true, "Username already used"]
     },
+    bio:{
+        type: String,
+    },
     name: {
         type: String,   
         required: [true,"Please enter your name"]
