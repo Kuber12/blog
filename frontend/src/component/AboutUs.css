@@ -1,0 +1,13 @@
+.about-heading{
+    text-align: center;
+    padding: 20px;
+}
+.about-members{
+    display: flex;
+    margin: 0px 5%;
+}
+.about-member{
+    flex: 1;
+    background-color: var(--white);
+    border-radius: 5px;
+}
