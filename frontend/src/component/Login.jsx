@@ -15,16 +15,17 @@ import Regi_vali from "./Regi_vali";
 import R_vali from "./R_vali";
 
 const Login = () => {
-  const { handleChange,handleSubmit, values, errors } = Vali_value(Lvali);
-  const { handleRChange,handleRSubmit,registrationData, Rerrors } =Regi_vali(R_vali);
+  const { handleChange, handleSubmit, values, errors } = Vali_value(Lvali);
+  const { handleRChange, handleRSubmit, registrationData, Rerrors } =
+    Regi_vali(R_vali);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
-   const [gender, setGender] =useState('');
-  
-   const handleGenderChange=(event)=>{
-   const selectedGender = event.target.value; //overwrite later
-     setGender(selectedGender);
-   } ;
+  const [gender, setGender] = useState("");
+
+  const handleGenderChange = (event) => {
+    const selectedGender = event.target.value; //overwrite later
+    setGender(selectedGender);
+  };
 
   const handleSlideButtonClick = () => {
     setIsOverlayVisible(!isOverlayVisible);
@@ -66,11 +67,14 @@ const Login = () => {
                 value={values.username}
                 onChange={handleChange}
               />
-              <div className="err_m">{errors.username && <span className="tooltiptext">{errors.username}</span>}</div>
+              <div className="err_m">
+                {errors.username && (
+                  <span className="tooltiptext">{errors.username}</span>
+                )}
+              </div>
             </div>
             <div className="password">
               <input
-
                 type="password"
                 name="password"
                 id="password"
@@ -78,7 +82,11 @@ const Login = () => {
                 value={values.password}
                 onChange={handleChange}
               />
-               <div className="err_m">{errors.password && <span className="tooltiptext">{errors.password}</span>}</div>
+              <div className="err_m">
+                {errors.password && (
+                  <span className="tooltiptext">{errors.password}</span>
+                )}
+              </div>
             </div>
             <div className="signindiv">
               <input
@@ -103,9 +111,7 @@ const Login = () => {
           </div>
           <h1 className="form-heading hedvig-font">Register Now</h1>
 
-          <form onSubmit={handleRSubmit} 
-            className="reg-form form-container">
-
+          <form onSubmit={handleRSubmit} className="reg-form form-container">
             <label htmlFor="username">Username:</label>
             <input
               type="text"
@@ -115,8 +121,10 @@ const Login = () => {
               onChange={handleRChange}
             />
             <div className="err_m">
-            {Rerrors.username && (<span className="tooltiptext">{Rerrors.username}</span>)}
-            </div> 
+              {Rerrors.username && (
+                <span className="tooltiptext">{Rerrors.username}</span>
+              )}
+            </div>
 
             <label htmlFor="name">Name:</label>
             <input
@@ -126,8 +134,12 @@ const Login = () => {
               value={registrationData.name}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.name && <span className="tooltiptext">{Rerrors.name}</span>}</div>
-            
+            <div className="err_m">
+              {Rerrors.name && (
+                <span className="tooltiptext">{Rerrors.name}</span>
+              )}
+            </div>
+
             <label htmlFor="password">Password:</label>
             <input
               type="password"
@@ -136,8 +148,12 @@ const Login = () => {
               value={registrationData.password}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.password && <span className="tooltiptext">{Rerrors.password}</span>}</div>
-           
+            <div className="err_m">
+              {Rerrors.password && (
+                <span className="tooltiptext">{Rerrors.password}</span>
+              )}
+            </div>
+
             <label htmlFor="dob">Date of Birth:</label>
             <input
               type="date"
@@ -146,7 +162,11 @@ const Login = () => {
               value={registrationData.dob}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.email && <span className="tooltiptext">{Rerrors.email}</span>}</div>
+            <div className="err_m">
+              {Rerrors.email && (
+                <span className="tooltiptext">{Rerrors.email}</span>
+              )}
+            </div>
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -155,8 +175,12 @@ const Login = () => {
               value={registrationData.email}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.email && <span className="tooltiptext">{Rerrors.email}</span>}</div>
-            
+            <div className="err_m">
+              {Rerrors.email && (
+                <span className="tooltiptext">{Rerrors.email}</span>
+              )}
+            </div>
+
             <label htmlFor="address">Address:</label>
             <input
               type="text"
@@ -165,8 +189,12 @@ const Login = () => {
               value={registrationData.address}
               onChange={handleRChange}
             />
-            <div className="err_m">{Rerrors.address && <span className="tooltiptext">{Rerrors.address}</span>}</div>
-          
+            <div className="err_m">
+              {Rerrors.address && (
+                <span className="tooltiptext">{Rerrors.address}</span>
+              )}
+            </div>
+
             <label>Gender:</label>
             <div className="form-gender">
               <label className="gender-option">
@@ -174,8 +202,8 @@ const Login = () => {
                   type="radio"
                   name="gender"
                   value="male"
-                  checked={gender === "male"}
-                  onChange={handleGenderChange}
+                  checked={registrationData.gender === "male"}
+                  onChange={handleRChange}
                 />
                 Male
               </label>
@@ -185,8 +213,8 @@ const Login = () => {
                   type="radio"
                   value="female"
                   name="gender"
-                  checked={gender === "female"}
-                  onChange={handleGenderChange}
+                  checked={registrationData.gender === "female"}
+                  onChange={handleRChange}
                 />
                 Female
               </label>
@@ -196,13 +224,17 @@ const Login = () => {
                   type="radio"
                   value="other"
                   name="gender"
-                  checked={gender === "other"}
-                  onChange={handleGenderChange}
+                  checked={registrationData.gender === "other"}
+                  onChange={handleRChange}
                 />
                 Other
               </label>
             </div>
-            <div className="err_m">{Rerrors.gender && <span className="tooltiptext"> {Rerrors.gender}</span>}</div>
+            <div className="err_m">
+              {Rerrors.gender && (
+                <span className="tooltiptext"> {Rerrors.gender}</span>
+              )}
+            </div>
             <button className="submit" type="submit">
               SIGN UP
             </button>
