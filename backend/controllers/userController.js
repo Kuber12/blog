@@ -17,7 +17,10 @@ const loginUser = asyncHandler(async (req,res) =>{
                     name: user.name,
                     dob: user.dob,
                     email: user.email,
-                    id: user.id
+                    id: user.id,
+                    gender : gender,
+                    address : address,
+                    userImage : userImage
                 }
             }, 
             process.env.ACCESS_TOKEN,

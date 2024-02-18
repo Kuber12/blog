@@ -25,6 +25,9 @@
 a{
   color:  var(--text-color);
 }
+a:hover{
+  color:  var(--text-color);
+}
 body {
   background-color: var(--secondary-color);
   margin: 0;

@@ -19,12 +19,14 @@ const UserProfile = () => {
   const imagePath = "../../uploads/";
   const { user } = data_;
 
-  const { email, fullname, id, imgUrl, name, username, dob, bio } = user;
+  const { email, id, imgUrl, name, username, dob, bio, address } = user;
   const [hitApi, setHitApi] = useState(1);
 
   const [editStatus, setEditStatus] = useState(true);
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
+
+  const [isEditing, setIsEditing ] = useState(false);
   //fetching the blogs of the current user
   useEffect(() => {
     axios
@@ -50,12 +52,38 @@ const UserProfile = () => {
   const genderText =
     gender === 'female' ? 'Female' : gender === 'male' ? 'Male' : 'Other';
 
- 
+  const [imageSrc, setImageSrc] = useState('../../uploads/Profile.png');
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setImageSrc(URL.createObjectURL(file));
+    }
+  };
+
+  const handleImageClick = () => {
+    document.getElementById('fileInput').click();
+  };
+  const handleSave = () => {
+    setIsEditing(false);
+    // Your save logic here
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    // Your cancel logic here
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+    // Your edit logic here
+  };
   return (
     <>
       <div id="mainBody">
         <div className="btmBlc">
-          <div className="userprofile-top-container">
+          {!isEditing && <div className="userprofile-top-container">
             <div className="profile-follow">
               <div className="Profile">
                 <img
@@ -68,7 +96,7 @@ const UserProfile = () => {
               </div>
               <div className="userprofile-button">
                 {/* <button className="blog-user-follow">Follow Me +</button> */}
-                <button className="blog-user-follow">Edit</button>
+                <button className="blog-user-follow" onClick={handleEdit}>Edit</button>
               </div>
             </div>
             <div className="bio">
@@ -77,10 +105,7 @@ const UserProfile = () => {
               <p id="uname">@{username ? username : ""}</p>
               {/* bio form ma add vako xaina */}
               <p id="bioo">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic
-                nobis ipsum temporibus laboriosam recusandae odio, id eveniet
-                commodi aspernatur, velit tempora distinctio soluta rem, dolorum
-                aliquam ratione illum totam ea?
+                {bio ? bio : ""}
               </p>
             </div>
             <div className="aboutMe">
@@ -100,7 +125,7 @@ const UserProfile = () => {
               {/* address */}
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faHome} className="ics" />
-                <span className="udP">Kentucky, U.S.A</span>
+                <span className="udP">{address}</span>
               </div>
               
               {/* email */}
@@ -109,21 +134,31 @@ const UserProfile = () => {
                 <span className="udP">{email}</span>
               </div>
             </div>
-          </div>
-          <form className="userprofile-top-container">
+          </div>}
+          {isEditing && <form className="userprofile-top-container">
             <div className="profile-follow">
               <div className="Profile">
-                <img
-                  src={"../../uploads/Profile.png"}
-                  onError={handleImageError}
-                  alt="userprofile"
-                  width="100%"
-                  height="100%"
-                />
+              <img
+                className="edit-profile-picture"
+                src={imageSrc}
+                onClick={handleImageClick}
+                alt="userprofile"
+                width="100%"
+                height="100%"
+              />
+
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleImageChange}
+              />
               </div>
               <div className="userprofile-button">
                 {/* <button className="blog-user-follow">Follow Me +</button> */}
-                <button type="submit" className="blog-user-follow">Save</button>
+                <button className="blog-user-follow" id="save" onClick={handleSave}>Save</button>
+                <button className="blog-user-follow" id="cancel" onClick={handleCancel}>Cancel</button>
               </div>
             </div>
             <div className="bio">
@@ -158,7 +193,7 @@ const UserProfile = () => {
               {/* address */}
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faHome} className="ics" />
-                <input className="udP" value={"address"}/>
+                <input className="udP" value={address}/>
               </div>
               
               {/* email */}
@@ -167,7 +202,7 @@ const UserProfile = () => {
                 <input className="udP" value={email}/>
               </div>
             </div>
-          </form>
+          </form>}
           <div className="myPost">
             <p className="Ht hedvig">My Post</p>
             <div className="Blog_disp">
