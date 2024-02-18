@@ -89,7 +89,7 @@ const UserFromBlog = () => {
         toast.error(`Something went wrong`);
       });
   };
-  console.log(followed);
+
   return (
     <>
       <ToastContainer

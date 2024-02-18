@@ -24,7 +24,13 @@
   max-width: 100%;
   max-height: 100%;
 }
-
+.profile-follow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 #fileInput {
   display: none;
 }
@@ -91,7 +97,8 @@
   font-size: 0.9em;
   padding: 1px;
 }
-input.udP , select.udP{
+input.udP,
+select.udP {
   background-color: transparent;
   border: 1px black solid;
   width: 75%;
