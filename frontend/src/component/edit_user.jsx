@@ -72,7 +72,7 @@ const EditUser=()=>{
 
           
 
-                    <input type="submit" name="submit" value="Done"/>
+                    <input type="submit" name="submit" value="Done" id="submitBtn"/>
                 </form>
             </div>
         </div>

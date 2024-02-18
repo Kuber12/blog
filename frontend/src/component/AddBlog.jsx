@@ -10,11 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GlobalContext } from "./GlobalContent";
 import ReactConfetti from "react-confetti";
+import { storage } from "./firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 const AddBlog = () => {
   const userData = useContext(GlobalContext);
   const { user } = userData;
   const { username } = user;
-
+  const imageListRef = ref(storage, "images/");
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
@@ -22,7 +25,7 @@ const AddBlog = () => {
   const [values, setValues] = useState({
     headline: "",
     content: "",
-    image: "",
+    image: null,
     tag: "",
     username: username,
   });
@@ -84,6 +87,7 @@ const AddBlog = () => {
     };
   }, [windowDimen]);
   const stopClick = useRef();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     stopClick.current.disabled = true;
@@ -101,52 +105,63 @@ const AddBlog = () => {
       } else {
         let tempFilename;
         if (file) {
-          const formData = new FormData();
-          formData.append("fileInput", file);
-          formData.append("username", username);
+          toast.success("Please wait");
+          const imageRef = ref(storage, `images/${file.name + v4()}`);
+          uploadBytes(imageRef, file)
+            .then((snapshot) => {
+              getDownloadURL(snapshot.ref).then((url) => {
+                // alert("Uploaded");
 
-          const imgResponse = await axios.post(
-            "https://blog-backend-3dcg.onrender.com/api/file/upload",
-            formData,
+                tempFilename = url;
+                setValues((values) => ({
+                  ...values,
+                  image: url,
+                }));
+
+                return axios.post(
+                  "https://blog-backend-3dcg.onrender.com/api/blog",
+                  {
+                    ...values,
+                    // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+                    image: tempFilename ? tempFilename : "",
+                  },
+                  config
+                );
+              });
+            })
+            .then((res) => {
+              setBtn(true);
+              setTimeout(() => {
+                setBtn(false);
+              }, 3000);
+              toast.success("Added Blog");
+              // console.log("Submitted");
+            });
+        } else {
+          const blogResponse = await axios.post(
+            "https://blog-backend-3dcg.onrender.com/api/blog",
             {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
+              ...values,
+              // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+              image: tempFilename ? tempFilename : "",
             },
             config
           );
+          setBtn(true);
+          setTimeout(() => {
+            setBtn(false);
+          }, 3000);
+          toast.success("Added Blog");
+          console.log("Submitted", blogResponse.data);
 
-          tempFilename = imgResponse.data.url;
-          console.log("Image Submitted", tempFilename);
-
-          setValues((values) => ({
-            ...values,
-            image: tempFilename,
-          }));
+          // setTimeout(() => {
+          //   navigation("/");
+          // }, 3000);
         }
-
-        const blogResponse = await axios.post(
-          "https://blog-backend-3dcg.onrender.com/api/blog",
-          {
-            ...values,
-            // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
-            image: tempFilename ? tempFilename : "",
-          },
-          config
-        );
-        setBtn(true);
-        setTimeout(() => {
-          setBtn(false);
-        }, 3000);
-        toast.success("Added Blog");
-        console.log("Submitted", blogResponse.data);
-
-        setTimeout(() => {
-          navigation("/");
-        }, 3000);
       }
     } catch (error) {
       console.error("Error", error);
+      toast.error("Please try again later or re-login");
     }
   };
 

@@ -9,6 +9,10 @@ import ReactConfetti from "react-confetti";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalContext } from "./GlobalContent";
+import { storage } from "./firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+
 const EditBlog = () => {
   const { id } = useParams();
   const userData = useContext(GlobalContext);
@@ -105,68 +109,68 @@ const EditBlog = () => {
     }
   };
   const stopPost = useRef();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     stopPost.current.disabled = true;
+
     try {
       // Check if a file is selected
       let tempFilename;
       if (file) {
-        const formData = new FormData();
-        formData.append("fileInput", file);
-        formData.append("username", username);
-
-        const imgResponse = await axios.post(
-          "https://blog-backend-3dcg.onrender.com/api/file/upload",
-          formData,
+        toast.success("Please wait");
+        const imageRef = ref(storage, `images/${file.name + v4()}`);
+        uploadBytes(imageRef, file)
+          .then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+              tempFilename = url;
+              setValues((values) => ({
+                ...values,
+                image: url,
+              }));
+              return axios.put(
+                `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
+                {
+                  ...values,
+                  // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+                  image: url ? url : values.image,
+                },
+                config
+              );
+            });
+          })
+          .then((res) => {
+            setBtn(true);
+            setTimeout(() => {
+              setBtn(false);
+            }, 3000);
+            toast.success("Added Blog");
+            // console.log("Submitted");
+          });
+      } else {
+        const blogResponse = await axios.put(
+          `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
           {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+            ...values,
+            // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+            image: tempFilename ? tempFilename : values.image,
           },
           config
         );
-        axios
-          .delete(
-            `https://blog-backend-3dcg.onrender.com/api/file/${values.image}/delete`
-          )
-          .then((res) => {
-            console.log("Image deleted");
-          })
-          .catch((ex) => {
-            console.log("errror" + ex);
-          });
 
-        tempFilename = imgResponse.data.url;
-        console.log("Image Submitted", tempFilename);
-
-        setValues((values) => ({
-          ...values,
-          image: tempFilename,
-        }));
+        toast.success("Added Blog");
+        console.log("Submitted", blogResponse.data);
+        setBtn(true);
+        setTimeout(() => {
+          setBtn(false);
+        }, 3000);
+        // setTimeout(() => {
+        //   navigation("/");
+        // }, 3000);
       }
-
-      const blogResponse = await axios.put(
-        `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
-        {
-          ...values,
-          // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
-          image: tempFilename ? tempFilename : values.image,
-        },
-        config
-      );
-
-      toast.success("Added Blog");
-      console.log("Submitted", blogResponse.data);
-      setBtn(true);
-      setTimeout(() => {
-        setBtn(false);
-      }, 3000);
-      setTimeout(() => {
-        navigation("/");
-      }, 3000);
     } catch (error) {
       console.error("Error", error);
+      toast.error("Something went wrong please re-try.");
     }
   };
 
