@@ -112,7 +112,9 @@ const UserFromBlog = () => {
                 <img src={user?.imgUrl} alt="userprofile" />
               </div>
               <div className="follow_me">
-                {globalUsername ? (
+                {globalUsername === user.name ? (
+                  ""
+                ) : globalUsername !== user.name ? (
                   <button
                     className="blog-user-follow"
                     onClick={(e) => handleFollows(e)}
