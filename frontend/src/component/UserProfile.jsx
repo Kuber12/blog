@@ -4,6 +4,9 @@ import "./userProfile.css";
 import abm from "../images/abm.png";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { storage } from "./firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 import {
   faCakeCandles,
   faVenus,
@@ -18,16 +21,33 @@ const UserProfile = () => {
   const data_ = useContext(GlobalContext);
   const imagePath = "../../uploads/";
   const { user } = data_ || {};
-  console.log(user);
 
   const { email, id, imgUrl, name, username, dob, bio, address, gender } = user;
   const [hitApi, setHitApi] = useState(1);
 
   const [editStatus, setEditStatus] = useState(true);
+  const [userData, setUserData] = useState({
+    address: "",
+    dob: "",
+    email: "",
+    gender: "",
+    name: "",
+    username: "",
+  });
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
 
   const [isEditing, setIsEditing] = useState(false);
+  //fetching user data
+  useEffect(() => {
+    axios
+      .get(`https://blog-backend-3dcg.onrender.com/api/user/${username}/user`)
+      .then((res) => {
+        setUserData(res.data.message);
+        console.log(res);
+      });
+  }, []);
+
   //fetching the blogs of the current user
   useEffect(() => {
     axios
@@ -44,13 +64,21 @@ const UserProfile = () => {
   };
 
   //Change this data with the backend gender data
-
   const icon =
-    gender === "female" ? faVenus : gender === "male" ? faMars : faNeuter;
+    userData?.gender === "female"
+      ? faVenus
+      : userData?.gender === "male"
+      ? faMars
+      : faNeuter;
 
   const genderText =
-    gender === "female" ? "Female" : gender === "male" ? "Male" : "Other";
-
+    userData?.gender === "female"
+      ? "Female"
+      : userData?.gender === "male"
+      ? "Male"
+      : "Other";
+  // Default
+  // const [imageSrc, setImageSrc] = useState("../../uploads/Profile.png");
   const [imageSrc, setImageSrc] = useState("../../uploads/Profile.png");
 
   const handleImageChange = (e) => {
@@ -65,7 +93,7 @@ const UserProfile = () => {
     document.getElementById("fileInput").click();
   };
   const handleSave = () => {
-    setIsEditing(false);
+    // setIsEditing(false);
     // Your save logic here
   };
 
@@ -78,6 +106,12 @@ const UserProfile = () => {
     setIsEditing(true);
     // Your edit logic here
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Clicked");
+  };
+
   return (
     <>
       <div id="mainBody">
@@ -87,7 +121,8 @@ const UserProfile = () => {
               <div className="profile-follow">
                 <div className="Profile">
                   <img
-                    src={"../../uploads/Profile.png"}
+                    // src={"../../uploads/Profile.png}
+
                     onError={handleImageError}
                     alt="userprofile"
                     width="100%"
@@ -103,41 +138,48 @@ const UserProfile = () => {
               </div>
               <div className="bio">
                 {Error != "" && <h6>{Error}</h6>}
-                <p id="fname"> {name ? name : ""} </p>
-                <p id="uname">@{username ? username : ""}</p>
+                <p id="fname"> {userData?.name ? userData?.name : ""} </p>
+                <p id="uname">
+                  @{userData?.username ? userData?.username : ""}
+                </p>
                 {/* bio form ma add vako xaina */}
-                <p id="bioo">{bio ? bio : ""}</p>
+                <p id="bioo">{userData?.bio ? userData?.bio : ""}</p>
               </div>
               <div className="aboutMe">
                 <img src={abm} id="im" />
                 {/* birthday */}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-                  <span className="udP">{dob}</span>
+                  <span className="udP">{userData?.dob?.slice(0, 10)}</span>
                 </div>
 
                 {/* gender */}
                 <div className="User_Dtl">
                   {icon && <FontAwesomeIcon icon={icon} className="ics" />}
-                  <span className="udP">{genderText}</span>
+                  <span className="udP">{userData?.gender}</span>
                 </div>
 
                 {/* address */}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faHome} className="ics" />
-                  <span className="udP">{address}</span>
+                  <span className="udP">{userData?.address}</span>
                 </div>
 
                 {/* email */}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faEnvelope} className="ics" />
-                  <span className="udP">{email}</span>
+                  <span className="udP">{userData?.email}</span>
                 </div>
               </div>
             </div>
           )}
+
+          {/* editing form  */}
           {isEditing && (
-            <form className="userprofile-top-container">
+            <form
+              className="userprofile-top-container"
+              onSubmit={(e) => handleSubmit}
+            >
               <div className="profile-follow">
                 <div className="Profile">
                   <img
@@ -162,7 +204,7 @@ const UserProfile = () => {
                   <button
                     className="blog-user-follow"
                     id="save"
-                    onClick={handleSave}
+                    // onClick={handleSave}
                   >
                     Save
                   </button>
@@ -177,9 +219,18 @@ const UserProfile = () => {
               </div>
               <div className="bio">
                 {Error != "" && <h6>{Error}</h6>}
-                <input name="name" type="text" id="fname" value={name} />
-                <p id="uname">@{username ? username : ""}</p>
+                {/* name edit */}
+                <input
+                  name="name"
+                  type="text"
+                  id="fname"
+                  value={userData?.name}
+                />
+                <p id="uname">
+                  @{userData?.username ? userData?.username : ""}
+                </p>
                 {/* bio form ma add vako xaina */}
+                {/* bio edit */}
                 <textarea name="bio" rows={5} cols={50} id="bioo" value={bio} />
               </div>
               <div className="aboutMe">
@@ -187,12 +238,19 @@ const UserProfile = () => {
                 {/* birthday */}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-                  <input name="dob" type="date" className="udP" value={dob} />
+                  {/* dob  edit*/}
+                  <input
+                    name="dob"
+                    type="date"
+                    className="udP"
+                    value={userData?.dob}
+                  />
                 </div>
 
                 {/* gender */}
                 <div className="User_Dtl">
                   {icon && <FontAwesomeIcon icon={icon} className="ics" />}
+                  {/* gender edit  */}
                   <select
                     id="gender"
                     className="udP"
@@ -204,16 +262,16 @@ const UserProfile = () => {
                   </select>
                 </div>
 
-                {/* address */}
+                {/* address edit */}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faHome} className="ics" />
-                  <input className="udP" value={address} />
+                  <input className="udP" value={userData?.address} />
                 </div>
 
-                {/* email */}
+                {/* email edit*/}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faEnvelope} className="ics" />
-                  <input className="udP" value={email} />
+                  <input className="udP" value={userData?.email} />
                 </div>
               </div>
             </form>
