@@ -51,6 +51,11 @@ const NewNavi = () => {
             Blog
           </Link>
         </li>
+        <li>
+          <Link to="/AboutUs" className="active" onClick={handleMenuItemClick}>
+            About Us
+          </Link>
+        </li>
         {data.user.username ? (
           <li>
             <Link to="/AddBlog">Create</Link>
