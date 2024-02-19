@@ -103,14 +103,6 @@ const NewCard = ({ data, editStatus, setHitApi }) => {
                 >
                   <div id="img-container">
                     <img
-                      // width: 100%;
-                      // object-fit: contain;
-                      // height: 100%;
-                      style={{
-                        width: "100%",
-                        objectFit: "contain",
-                        height: "100%",
-                      }}
                       src={`${items.image}`}
                       alt={`${items.image}`}
                       onError={handleImageError}
