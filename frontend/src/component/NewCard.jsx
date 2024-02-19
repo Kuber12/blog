@@ -40,14 +40,15 @@ const NewCard = ({ data, editStatus, setHitApi }) => {
           `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
           config
         );
-        console.log("Deleted");
-        if (image) {
-          await axios.delete(
-            `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
-          );
-          console.log("Image deleted");
-        }
+        // console.log("Deleted");
+        // if (image) {
+        //   await axios.delete(
+        //     `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
+        //   );
+        //   console.log("Image deleted");
+        // }
         setHitApi((prev) => prev + 1);
+        // window.location.reload();
         // handleApiHit(false);
       } catch (err) {
         console.log(err);

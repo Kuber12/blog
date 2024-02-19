@@ -339,7 +339,7 @@ const UserProfile = () => {
                 <div className="User_Dtl">
                   {icon && <FontAwesomeIcon icon={icon} className="ics" />}
                   {/* gender edit  */}
-                  <select
+                  {/* <select
                     id="gender"
                     className="udP"
                     onChange={handleChange}
@@ -349,7 +349,28 @@ const UserProfile = () => {
                   >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                  </select>
+                  </select> */}
+                  Male:{" "}
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    onChange={handleChange}
+                  />
+                  Female:{" "}
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    onChange={handleChange}
+                  />
+                  Other:{" "}
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="other"
+                    onChange={handleChange}
+                  />
                 </div>
 
                 {/* address edit */}
