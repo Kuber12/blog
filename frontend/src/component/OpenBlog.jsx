@@ -43,10 +43,11 @@ const OpenBlog = () => {
   };
   const [comment, setComment] = useState("");
   const [data, setData] = useState({});
+
   const [viewcomment, setViewComment] = useState([]);
   const [followers, setFollowers] = useState(0);
   const [followed, setFollowed] = useState();
-
+  const [imageUser, setImageUser] = useState(null);
   const [countComment, setCountComment] = useState({
     countComment: 0,
   });
@@ -176,23 +177,31 @@ const OpenBlog = () => {
       });
   };
   // Single blog fetching
+  let ApiUsername;
   useEffect(() => {
     axios
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
         setData(res.data?.message);
-
+        ApiUsername = res.data?.message?.username;
         //fetched followers
         return axios.get(
-          `https://blog-backend-3dcg.onrender.com/api/user/${res.data?.message?.username}/follow`
+          `https://blog-backend-3dcg.onrender.com/api/user/${ApiUsername}/follow`
         );
 
         // console.log(res.data.message);
       })
       .then((res) => {
         setFollowers(res.data?.totalFollowers);
-
-        // console.log(res.data?.totalFollowers);
+        //fetching user data
+        return axios.get(
+          // `https://blog-backend-3dcg.onrender.com/api/user/${data.username}/user`
+          `https://blog-backend-3dcg.onrender.com/api/user/${ApiUsername}/user`
+        );
+      })
+      .then((res) => {
+        //only setting user image
+        setImageUser(res.data?.message?.userImage);
       })
       .catch((ex) => toast.error(ex));
   }, []);
@@ -266,8 +275,10 @@ const OpenBlog = () => {
               />
             )}
             <div className="blog-content-text">
-              <div style={{display: "flex"}} >
-                <h4 className="heading" style={{flex: 1}}>{data?.headline}</h4>
+              <div style={{ display: "flex" }}>
+                <h4 className="heading" style={{ flex: 1 }}>
+                  {data?.headline}
+                </h4>
                 <span className="tags">{data?.tag}</span>
               </div>
               <p>{data?.content}</p>
@@ -296,7 +307,7 @@ const OpenBlog = () => {
                     <span>{viewLike.totalLikes}</span>
                   </div>
                 ) : (
-                  <div key={22} className="blog-tooltip-div">
+                  <div key={23} className="blog-tooltip-div">
                     <FontAwesomeIcon
                       icon={faHeart}
                       style={{ fontSize: "20px", paddingRight: "5px" }}
@@ -359,7 +370,18 @@ const OpenBlog = () => {
             <div className="blog-user">
               <div className="blog-user-details">
                 <div className="blog-user-head">
-                  <div className="blog-user-pic"></div>
+                  <div className="blog-user-pic">
+                    <img
+                      src={imageUser}
+                      alt=""
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                      }}
+                    />
+                  </div>
                   <div>
                     <div>
                       <Link to={`/UserInfo/${data?.username}`}>
@@ -390,16 +412,16 @@ const OpenBlog = () => {
                 <FontAwesomeIcon icon={faTag} style={{ fontSize: "25px" }} />
                 <div className="tags-container">
                   {Array.isArray(tags) &&
-                  tags.length > 0 &&
-                  tags.map((tag, index) => (
-                    <Link
-                      className="tags"
-                      key={index}
-                      to={`/BlogPageTag/${tag.tagname}`}
-                    >
-                      {tag.tagname}
-                    </Link>
-                  ))}
+                    tags.length > 0 &&
+                    tags.map((tag, index) => (
+                      <Link
+                        className="tags"
+                        key={index}
+                        to={`/BlogPageTag/${tag.tagname}`}
+                      >
+                        {tag.tagname}
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>

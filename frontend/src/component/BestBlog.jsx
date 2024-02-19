@@ -59,7 +59,7 @@ const BestBlogSlider = () => {
     event.target.src = "../../uploads/default.png";
   };
   return (
-    <div className="wrapper">
+    <div className="B_wrapper">
       <div className="top_">
         <img className="best-blog-icon" src={Bg} />
         <h1 className="hedvig">Best Blogs</h1>
@@ -81,15 +81,16 @@ const BestBlogSlider = () => {
                       // src={`${data?.image}`}
                       onError={handleImageError}
                       alt="userprofile"
+                      style={{ height: "250px", objectFit: "cover" }}
                     />
                   </div>
                   <div className="BestCards_icon">
                     <div key={1} className="blog-action-tooltip">
                       <div className="blog-tooltip-div">
-                        <FontAwesomeIcon
+                        {/* <FontAwesomeIcon
                           icon={faEye}
                           style={{ fontSize: "20px", marginLeft: "50px" }}
-                        />
+                        /> */}
                       </div>
                     </div>
                     <div key={2} className="blog-action-tooltip">
@@ -98,12 +99,16 @@ const BestBlogSlider = () => {
                           icon={faHeart}
                           style={{ fontSize: "20px", paddingRight: "5px" }}
                         /> */}
-                        {item.views}
+                        {/* {item.views} */}
                       </div>
                     </div>
                   </div>
                   <div className="BestCards_title">
-                    <h3>{item.headline.slice(0, 8)}...</h3>
+                    <h3>
+                      {item.headline.length > 20
+                        ? ` ${item.headline.slice(0, 20)}..`
+                        : item.headline}
+                    </h3>
                   </div>
                   <div className="BestCards_User">
                     <h5>{item.username}</h5>

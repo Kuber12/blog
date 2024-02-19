@@ -10,6 +10,7 @@ import Layout from "./Layout";
 import Cards from "./Cards";
 import CardsHome from "./CardsHome";
 import CardsDetails from "./CardsDetails";
+import AboutUs from "./AboutUs"
 import DisplayEditBLog from "./DisplayEditBLog";
 import Login from "./Login";
 import OpenBlog from "./OpenBlog";
@@ -35,6 +36,10 @@ const MyRouter = () => {
     {
       path: "AddBlog",
       element: <AddBlog />,
+    },
+    {
+      path: "AboutUs",
+      element: <AboutUs />,
     },
     {
       path: "EditBlog/:id",

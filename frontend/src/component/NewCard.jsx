@@ -40,14 +40,15 @@ const NewCard = ({ data, editStatus, setHitApi }) => {
           `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
           config
         );
-        console.log("Deleted");
-        if (image) {
-          await axios.delete(
-            `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
-          );
-          console.log("Image deleted");
-        }
+        // console.log("Deleted");
+        // if (image) {
+        //   await axios.delete(
+        //     `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
+        //   );
+        //   console.log("Image deleted");
+        // }
         setHitApi((prev) => prev + 1);
+        // window.location.reload();
         // handleApiHit(false);
       } catch (err) {
         console.log(err);
@@ -102,6 +103,14 @@ const NewCard = ({ data, editStatus, setHitApi }) => {
                 >
                   <div id="img-container">
                     <img
+                      // width: 100%;
+                      // object-fit: contain;
+                      // height: 100%;
+                      style={{
+                        width: "100%",
+                        objectFit: "contain",
+                        height: "100%",
+                      }}
                       src={`${items.image}`}
                       alt={`${items.image}`}
                       onError={handleImageError}

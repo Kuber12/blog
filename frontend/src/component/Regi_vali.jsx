@@ -18,6 +18,7 @@ const Regi_vali = (R_vali) => {
     password: "",
     dob: "",
     email: "",
+    gender: "male",
   });
 
   const [Rerrors, setRerrors] = useState({});

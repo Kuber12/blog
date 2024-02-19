@@ -33,7 +33,7 @@ const UserFromBlog = () => {
     email: "",
     name: "",
     username: "",
-    imgUrl: "",
+    userImage: "",
   });
 
   const [Data, setData] = useState([]);
@@ -44,6 +44,12 @@ const UserFromBlog = () => {
     const data = await FromBlogUser(`/api/user/${UserName}/user`);
     setUser(data);
   };
+
+  //handle instead of no image
+  const handleImageError = (event) => {
+    event.target.src = "../../uploads/default.png";
+  };
+
   //fetching user data
   useEffect(() => {
     fetchUser();
@@ -64,8 +70,8 @@ const UserFromBlog = () => {
         `https://blog-backend-3dcg.onrender.com/api/user/${UserName}/follow/${globalUsername}`
       )
       .then((res) => {
-        console.log(globalUsername);
-        console.log(res.data?.message);
+        // console.log(globalUsername);
+        // console.log(res.data?.message);
         setFollowed(res.data?.message);
       })
       .catch((ex) => {
@@ -81,7 +87,7 @@ const UserFromBlog = () => {
       )
       .then((response) => {
         let result = response.data?.message;
-        console.log(result);
+        // console.log(result);
         toast.success(result);
         setHitApi((hitApi) => !hitApi);
       })
@@ -89,7 +95,7 @@ const UserFromBlog = () => {
         toast.error(`Something went wrong`);
       });
   };
-  console.log(followed);
+
   return (
     <>
       <ToastContainer
@@ -109,10 +115,26 @@ const UserFromBlog = () => {
           <div className="userprofile-top-container">
             <div className="profile-follow">
               <div className="Profile">
-                <img src={user?.imgUrl} alt="userprofile" />
+                <img
+                  src={
+                    user?.userImage
+                      ? user.userImage
+                      : "../../uploads/Profile.png"
+                  }
+                  alt="userprofile"
+                  onError={handleImageError}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    borderRadius: "20px",
+                  }}
+                />
               </div>
               <div className="follow_me">
-                {globalUsername ? (
+                {globalUsername === user.name ? (
+                  ""
+                ) : globalUsername !== user.name ? (
                   <button
                     className="blog-user-follow"
                     onClick={(e) => handleFollows(e)}
