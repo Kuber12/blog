@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Vali_value from "./Vali_value";
 import Lvali from "./Login_vali";
 import Regi_vali from "./Regi_vali";
@@ -29,6 +29,11 @@ const Login = () => {
 
   const handleSlideButtonClick = () => {
     setIsOverlayVisible(!isOverlayVisible);
+  };
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -75,13 +80,17 @@ const Login = () => {
             </div>
             <div className="password">
               <input
-                type="password"
-                name="password"
+                type={showPassword ? 'text' : 'password'}
                 id="password"
+                name="password"
                 placeholder="*********"
                 value={values.password}
                 onChange={handleChange}
               />
+              <span type="button" className="password-show-hide" onClick={togglePasswordVisibility}>
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </span>
+              
               <div className="err_m">
                 {errors.password && (
                   <span className="tooltiptext">{errors.password}</span>
@@ -142,13 +151,16 @@ const Login = () => {
 
             <label htmlFor="password">Password:</label>
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               name="password"
               value={registrationData.password}
               onChange={handleRChange}
             />
             <div className="err_m">
+              <span type="button" className="password-show-hide register-show-hide" onClick={togglePasswordVisibility}>
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </span>
               {Rerrors.password && (
                 <span className="tooltiptext">{Rerrors.password}</span>
               )}
