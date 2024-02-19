@@ -17,6 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
 import NewCard from "./NewCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const UserProfile = () => {
   const data_ = useContext(GlobalContext);
   const imagePath = "../../uploads/";
@@ -33,9 +35,11 @@ const UserProfile = () => {
     gender: "",
     name: "",
     username: "",
+    userImage: "",
   });
   const [Data, setData] = useState([]);
   const [Error, setError] = useState("");
+  const [imageUpload, setImageUpload] = useState(null);
 
   const [isEditing, setIsEditing] = useState(false);
   //fetching user data
@@ -44,9 +48,9 @@ const UserProfile = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/user/${username}/user`)
       .then((res) => {
         setUserData(res.data.message);
-        console.log(res);
+        // console.log(res);
       });
-  }, []);
+  }, [hitApi]);
 
   //fetching the blogs of the current user
   useEffect(() => {
@@ -78,14 +82,15 @@ const UserProfile = () => {
       ? "Male"
       : "Other";
   // Default
-  // const [imageSrc, setImageSrc] = useState("../../uploads/Profile.png");
   const [imageSrc, setImageSrc] = useState("../../uploads/Profile.png");
+  // const [imageSrc, setImageSrc] = useState(userData.userImage);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
       setImageSrc(URL.createObjectURL(file));
+      setImageUpload(e.target.files[0]);
     }
   };
 
@@ -107,13 +112,76 @@ const UserProfile = () => {
     // Your edit logic here
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Clicked");
-  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
+    setUserData({ ...userData, [name]: value });
+  };
+  const token = sessionStorage.getItem("authToken");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  };
+  let tempFileName;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (imageUpload) {
+      toast.success("Please wait");
+      const imageRef = ref(storage, `user/${imageUpload + v4()}`);
+      uploadBytes(imageRef, imageUpload)
+        .then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            tempFileName = url;
+            toast.success("Updaded");
+            console.log(url);
+            return axios
+              .put(
+                `http://localhost:5000/api/user/${username}/edit`,
+                { ...userData, userImage: url ? url : "" },
+                config
+              )
+              .then((res) => {
+                console.log(res.data.message);
+                toast.success(res.data.message);
+              });
+          });
+        })
+        .then((res) => {
+          toast.success("Success");
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        })
+        .catch((ex) => console.log(ex));
+    } else {
+      axios
+        .put(
+          `http://localhost:5000/api/user/${username}/edit`,
+          userData,
+          config
+        )
+        .then((res) => {
+          console.log(res.data.message);
+          toast.success(res.data.message);
+        });
+    }
+  };
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div id="mainBody">
         <div className="btmBlc">
           {!isEditing && (
@@ -122,7 +190,7 @@ const UserProfile = () => {
                 <div className="Profile">
                   <img
                     // src={"../../uploads/Profile.png}
-
+                    src={userData.userImage}
                     onError={handleImageError}
                     alt="userprofile"
                     width="100%"
@@ -176,14 +244,12 @@ const UserProfile = () => {
 
           {/* editing form  */}
           {isEditing && (
-            <form
-              className="userprofile-top-container"
-              onSubmit={(e) => handleSubmit}
-            >
+            <form className="userprofile-top-container" onSubmit={handleSubmit}>
               <div className="profile-follow">
                 <div className="Profile">
                   <img
                     className="edit-profile-picture"
+                    // src={userData.userImage}
                     src={imageSrc}
                     onClick={handleImageClick}
                     alt="userprofile"
@@ -224,14 +290,31 @@ const UserProfile = () => {
                   name="name"
                   type="text"
                   id="fname"
+                  onChange={handleChange}
                   value={userData?.name}
                 />
+                {/* username edit  */}
+                {/* <input
+                  name="username"
+                  type="email"
+                  id="fname"
+                  style={{ marginBottom: "10px" }}
+                  onChange={handleChange}
+                  value={`${userData?.username}`}
+                /> */}
                 <p id="uname">
                   @{userData?.username ? userData?.username : ""}
                 </p>
                 {/* bio form ma add vako xaina */}
                 {/* bio edit */}
-                <textarea name="bio" rows={5} cols={50} id="bioo" value={bio} />
+                <textarea
+                  name="bio"
+                  onChange={handleChange}
+                  rows={5}
+                  cols={50}
+                  id="bioo"
+                  value={bio}
+                />
               </div>
               <div className="aboutMe">
                 <img src={abm} id="im" />
@@ -244,6 +327,7 @@ const UserProfile = () => {
                     type="date"
                     className="udP"
                     value={userData?.dob}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -254,6 +338,8 @@ const UserProfile = () => {
                   <select
                     id="gender"
                     className="udP"
+                    onChange={handleChange}
+                    name="gender"
                     // value={editedGender}
                     // onChange={(e) => setEditedGender(e.target.value)}
                   >
@@ -265,13 +351,23 @@ const UserProfile = () => {
                 {/* address edit */}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faHome} className="ics" />
-                  <input className="udP" value={userData?.address} />
+                  <input
+                    className="udP"
+                    value={userData?.address}
+                    name="address"
+                    onChange={handleChange}
+                  />
                 </div>
 
                 {/* email edit*/}
                 <div className="User_Dtl">
                   <FontAwesomeIcon icon={faEnvelope} className="ics" />
-                  <input className="udP" value={userData?.email} />
+                  <input
+                    className="udP"
+                    name="email"
+                    value={userData?.email}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
             </form>
