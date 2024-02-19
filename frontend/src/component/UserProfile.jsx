@@ -138,7 +138,7 @@ const UserProfile = () => {
             console.log(url);
             return axios
               .put(
-                `http://localhost:5000/api/user/${username}/edit`,
+                `https://blog-backend-3dcg.onrender.com/api/user/${username}/edit`,
                 { ...userData, userImage: url ? url : "" },
                 config
               )
@@ -158,7 +158,7 @@ const UserProfile = () => {
     } else {
       axios
         .put(
-          `http://localhost:5000/api/user/${username}/edit`,
+          `https://blog-backend-3dcg.onrender.com/api/user/${username}/edit`,
           userData,
           config
         )
