@@ -24,6 +24,7 @@ const TopContributor = () => {
     username: "",
     blogCount: 0,
   });
+  const [imageUser, setImageUser] = useState(null);
   const BlogCounter = ({ n }) => {
     const { number } = useSpring({
       from: { number: 0 },
@@ -40,7 +41,14 @@ const TopContributor = () => {
     const response = await axios.get(
       "https://blog-backend-3dcg.onrender.com/api/blog/topcontributor"
     );
+    const data = await response.data;
 
+    const userData = await axios.get(
+      `https://blog-backend-3dcg.onrender.com/api/user/${data.username}/user`
+    );
+    const responseUser = await userData.data.message;
+
+    setImageUser(responseUser.userImage);
     setUser(response.data);
   };
   useEffect(() => {
@@ -57,14 +65,35 @@ const TopContributor = () => {
         <div className="left_box">
           <div className="MainBox">
             <div className="Pp">
-              <h1 className="h">
-                {" "}
-                <BlogCounter n={user.blogCount} />
-              </h1>
-              <h2 className="h">Blogs</h2>
+              <img
+                src={imageUser}
+                alt="Image of top contributor"
+                width="100%"
+                style={{ objectFit: "cover", height: "100%" }}
+              />
             </div>
             <div className="uDetail">
-              <p>{user?.username ? user.username : "Be our top contributer"}</p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  textAlign: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>
+                  {user?.username
+                    ? user.username.charAt(0).toUpperCase() +
+                      user.username.slice(1)
+                    : "Be our top contributor"}
+                </p>
+                with{" "}
+                <span style={{ color: "red", fontWeight: "600px" }}>
+                  {" "}
+                  <BlogCounter n={user.blogCount} />{" "}
+                </span>{" "}
+                blogs
+              </div>
               <p>
                 @{user?.username ? user.username : "Be our top contributer"}
               </p>

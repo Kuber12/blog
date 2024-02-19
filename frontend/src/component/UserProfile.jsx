@@ -24,7 +24,7 @@ const UserProfile = () => {
   const imagePath = "../../uploads/";
   const { user } = data_ || {};
 
-  const { email, id, imgUrl, name, username, dob, bio, address, gender } = user;
+  const { username, bio } = user;
   const [hitApi, setHitApi] = useState(1);
 
   const [editStatus, setEditStatus] = useState(true);
@@ -42,6 +42,7 @@ const UserProfile = () => {
   const [imageUpload, setImageUpload] = useState(null);
 
   const [isEditing, setIsEditing] = useState(false);
+
   //fetching user data
   useEffect(() => {
     axios
@@ -189,8 +190,11 @@ const UserProfile = () => {
               <div className="profile-follow">
                 <div className="Profile">
                   <img
-                    // src={"../../uploads/Profile.png}
-                    src={userData.userImage}
+                    src={
+                      userData.userImage !== ""
+                        ? userData.userImage
+                        : "../../uploads/Profile.png"
+                    }
                     onError={handleImageError}
                     alt="userprofile"
                     width="100%"
