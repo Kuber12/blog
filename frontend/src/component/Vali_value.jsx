@@ -31,6 +31,7 @@ const Vali_value = (vali) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    toast.info("Please wait...");
     setErrors(vali(values));
     if (Object.keys(errors).length === 0) {
       const loginData = {
