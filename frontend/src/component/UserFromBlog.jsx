@@ -95,7 +95,10 @@ const UserFromBlog = () => {
         toast.error(`Something went wrong`);
       });
   };
-
+  console.log(globalUsername);
+  const string1 = globalUsername;
+  const string2 = user.username;
+  console.log(string2);
   return (
     <>
       <ToastContainer
@@ -132,9 +135,9 @@ const UserFromBlog = () => {
                 />
               </div>
               <div className="follow_me">
-                {globalUsername === user.name ? (
+                {globalUsername?.trim() === user.username?.trim() ? ( //haha  === haha -> ""
                   ""
-                ) : globalUsername !== user.name ? (
+                ) : globalUsername !== undefined ? ( //haha !== "undefined"
                   <button
                     className="blog-user-follow"
                     onClick={(e) => handleFollows(e)}
@@ -142,6 +145,7 @@ const UserFromBlog = () => {
                     {followed}
                   </button>
                 ) : (
+                  //haha === undefined
                   <Link to="/Login">
                     {" "}
                     <button className="blog-user-follow">Follow me +</button>
