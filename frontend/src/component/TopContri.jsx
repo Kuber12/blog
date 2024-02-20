@@ -85,7 +85,7 @@ const TopContributor = () => {
                   {user?.username
                     ? user.username.charAt(0).toUpperCase() +
                       user.username.slice(1)
-                    : "Be our top contributor"}
+                    : "our top contributor"}
                 </p>
                 with{" "}
                 <span style={{ color: "red", fontWeight: "600px" }}>

@@ -1,6 +1,6 @@
 import "./AboutUs.css";
 import NewNavi from "./NewwNav";
-import Footer from "./Footer"
+import Footer from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -87,7 +87,12 @@ const AboutUs = () => {
               <div>
                 <h4 className="about-member-role">Full Stack Developer</h4>
                 <h3 className="about-member-name">Kuber Bajra Shakya</h3>
-                <p>I am proficient in web development, specializing in creating and designing efficient systems. My skills extend to project management and web designing ensuring successful oversight and completion of tasks.</p>
+                <p>
+                  I am proficient in web development, specializing in creating
+                  and designing efficient systems. My skills extend to project
+                  management and web designing ensuring successful oversight and
+                  completion of tasks.
+                </p>
                 <div className="about-icon-box">
                   <a
                     href="https://www.facebook.com/profile.php?id=100004524277925"
@@ -146,8 +151,11 @@ const AboutUs = () => {
               <div>
                 <h4 className="about-member-role">Frontend Developer</h4>
                 <h3 className="about-member-name">Sarina Maharjan</h3>
-                <p>I am a proactive person with a genuine eagerness to learn and expand my knowledge. 
-                Currently a student, my specific interest lies in Frontend Development and UI/UX Designing.</p>
+                <p>
+                  I am a proactive person with a genuine eagerness to learn and
+                  expand my knowledge. Currently a student, my specific interest
+                  lies in Frontend Development and UI/UX Designing.
+                </p>
                 <div className="about-icon-box">
                   <a
                     href="https://www.facebook.com/sareena.maharjan.1447?mibextid=YMEMSu"
@@ -182,11 +190,7 @@ const AboutUs = () => {
                       style={{ fontSize: "30px" }}
                     />
                   </a>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="#" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon
                       className="about-icon"
                       icon={faGlobe}
@@ -199,7 +203,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

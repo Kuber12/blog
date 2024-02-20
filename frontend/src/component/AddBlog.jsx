@@ -111,7 +111,6 @@ const AddBlog = () => {
             .then((snapshot) => {
               getDownloadURL(snapshot.ref).then((url) => {
                 // alert("Uploaded");
-
                 tempFilename = url;
                 setValues((values) => ({
                   ...values,
@@ -135,6 +134,9 @@ const AddBlog = () => {
                 setBtn(false);
               }, 3000);
               toast.success("Added Blog");
+              setTimeout(() => {
+                navigation("/Blogs");
+              }, 3000);
               // console.log("Submitted");
             });
         } else {
@@ -153,10 +155,9 @@ const AddBlog = () => {
           }, 3000);
           toast.success("Added Blog");
           console.log("Submitted", blogResponse.data);
-
-          // setTimeout(() => {
-          //   navigation("/");
-          // }, 3000);
+          setTimeout(() => {
+            navigation("/Blogs");
+          }, 3000);
         }
       }
     } catch (error) {

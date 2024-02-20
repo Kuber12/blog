@@ -38,15 +38,20 @@ const Slider = () => {
     <>
       <div className="wrapper">
         {Slider === 1 && (
-          <div className={`slider ${Slider === 1 ? "active" : ""}`}  id="content1">
+          <div
+            className={`slider ${Slider === 1 ? "active" : ""}`}
+            id="content1"
+          >
             <div className="content">
               <h1 className="slider-heading hedvig">Make Your</h1>
               <h2 className="slider-heading2 hedvig">
                 <span>First Post {username ? `"${username} "` : null}</span>
               </h2>
               <h4 className="slider-heading3">
-              🌟 Hey there, Ever had that thought or idea swirling in your mind, itching to burst into the digital world? Well, guess what? Now's the perfect time to let it out!
-              Ready to make your mark? We're excited to welcome your first post. 💫
+                🌟 Hey there, Ever had that thought or idea swirling in your
+                mind, itching to burst into the digital world? Well, guess what?
+                Now's the perfect time to let it out! Ready to make your mark?
+                We're excited to welcome your first post. 💫
               </h4>
               {username ? (
                 <Link className="btns" to="/AddBlog">
@@ -65,17 +70,22 @@ const Slider = () => {
           </div>
         )}
         {Slider === 2 && (
-          <div className={`slider ${Slider === 2 ? "active" : ""}` } id="content2">
+          <div
+            className={`slider ${Slider === 2 ? "active" : ""}`}
+            id="content2"
+          >
             <div className="content">
-            <h1 className="slider-heading">Search</h1>
-            <h2 className="slider-heading2">
-              <span>Contents </span>
-            </h2>
-            <h4 className="slider-heading3">
-            🎉 Embrace the magic of curiosity, Dive into the sea of knowledge, and let the waves of inspiration carry you to new shores. 
-            Discover the endless possibilities that unfold when you seek to learn and explore. Happy searching! 💕
-            </h4>
-              <Link className="btns">
+              <h1 className="slider-heading">Search</h1>
+              <h2 className="slider-heading2">
+                <span>Contents </span>
+              </h2>
+              <h4 className="slider-heading3">
+                🎉 Embrace the magic of curiosity, Dive into the sea of
+                knowledge, and let the waves of inspiration carry you to new
+                shores. Discover the endless possibilities that unfold when you
+                seek to learn and explore. Happy searching! 💕
+              </h4>
+              <Link to="/Blogs" className="btns">
                 Search <FontAwesomeIcon icon={faMagnifyingGlass} />
               </Link>
             </div>
@@ -85,15 +95,20 @@ const Slider = () => {
           </div>
         )}
         {Slider === 3 && (
-          <div className={`slider ${Slider === 3 ? "active" : ""}`}  id="content3">
+          <div
+            className={`slider ${Slider === 3 ? "active" : ""}`}
+            id="content3"
+          >
             <div className="content">
               <h1 className="slider-heading">Find new</h1>
               <h2 className="slider-heading2">
                 <span>Connections</span>
               </h2>
               <h4 className="slider-heading3">
-              🌻 Step into the your realm, where every click unveils opportunities to forge new connections and create meaningful bonds.
-              Discover the joy of connecting with like-minded souls, like a sweet melody in the symphony of your digital journey.🤗
+                🌻 Step into the your realm, where every click unveils
+                opportunities to forge new connections and create meaningful
+                bonds. Discover the joy of connecting with like-minded souls,
+                like a sweet melody in the symphony of your digital journey.🤗
               </h4>
               <Link className="btns">
                 Find People <FontAwesomeIcon icon={faUserPlus} />

@@ -144,7 +144,10 @@ const EditBlog = () => {
             setTimeout(() => {
               setBtn(false);
             }, 3000);
-            toast.success("Added Blog");
+            setTimeout(() => {
+              navigation("/Blogs");
+            }, 4000);
+            toast.success("Blog Edited");
             // console.log("Submitted");
           });
       } else {
@@ -164,9 +167,9 @@ const EditBlog = () => {
         setTimeout(() => {
           setBtn(false);
         }, 3000);
-        // setTimeout(() => {
-        //   navigation("/");
-        // }, 3000);
+        setTimeout(() => {
+          navigation("/Blogs");
+        }, 3000);
       }
     } catch (error) {
       console.error("Error", error);

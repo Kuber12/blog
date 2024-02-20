@@ -49,7 +49,7 @@ const UserProfile = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/user/${username}/user`)
       .then((res) => {
         setUserData(res.data.message);
-        // console.log(res);
+        console.log(res.data.message);
       });
   }, [hitApi]);
 
@@ -190,11 +190,17 @@ const UserProfile = () => {
               <div className="profile-follow">
                 <div className="Profile">
                   <img
-                    src={imageSrc}
+                    src={userData.userImage ? userData.userImage : imageSrc}
                     onError={handleImageError}
                     alt="userprofile"
                     width="100%"
                     height="100%"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "20px",
+                    }}
                   />
                 </div>
                 <div className="userprofile-button">
