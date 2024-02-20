@@ -54,19 +54,16 @@ const Footer = () => {
         {/* contact  */}
         <div className="contact">
           <a href="#">
-            <FontAwesomeIcon className="icc" icon={faAddressBook} /> Contact ID
-            here
+            <FontAwesomeIcon className="icc" icon={faAddressBook} /> -
           </a>
           <a href="#">
-            <FontAwesomeIcon className="icc" icon={faPhone} /> Phone Number Here
+            <FontAwesomeIcon className="icc" icon={faPhone} /> -
           </a>
           <a href="#">
-            <FontAwesomeIcon className="icc" icon={faEnvelope} /> Email Address
-            Here
+            <FontAwesomeIcon className="icc" icon={faEnvelope} /> blog8859@gmail.com
           </a>
           <a href="#">
-            <FontAwesomeIcon className="icc" icon={faLocationDot} /> Location
-            Here
+            <FontAwesomeIcon className="icc" icon={faLocationDot} /> Kathmandu
           </a>
         </div>
 
