@@ -173,15 +173,15 @@ const UserFromBlog = () => {
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faVenus} className="ics" />
-                <p className="udP">{user.gender}</p>
+                <p className="udP">{user?.gender}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faHome} className="ics" />
-                <p className="udP">{user.address}</p>
+                <p className="udP">{user?.address}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faEnvelope} className="ics" />
-                <p className="udP">{user.email}</p>
+                <p className="udP">{user?.email}</p>
               </div>
             </div>
           </div>
