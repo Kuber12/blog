@@ -169,19 +169,19 @@ const UserFromBlog = () => {
               <img src={abm} id="im" />
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faCakeCandles} className="ics" />
-                <p className="udP">{userData?.dob?.slice(0, 10)}</p>
+                <p className="udP">{user?.dob?.slice(0, 10)}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faVenus} className="ics" />
-                <p className="udP">{userData?.gender}</p>
+                <p className="udP">{user.gender}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faHome} className="ics" />
-                <p className="udP">{userData?.address}</p>
+                <p className="udP">{user.address}</p>
               </div>
               <div className="User_Dtl">
                 <FontAwesomeIcon icon={faEnvelope} className="ics" />
-                <p className="udP">{userData?.email}</p>
+                <p className="udP">{user.email}</p>
               </div>
             </div>
           </div>
