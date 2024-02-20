@@ -1,114 +1,157 @@
-.wrapper{
-    max-width: 100%;
-    height: 100vh;
-    background-color: #BDE3FF;
+.B_wrapper {
+  max-width: 100%;
+  /* height: 100vh; */
+  background-color: #bde3ff;
 }
 .top_ {
-    display: flex;
-    justify-content: center;
-    padding:10px;
-    padding:20px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  padding: 20px;
 }
-
+.BestCards_div {
+  width: 90%;
+  padding: 50px;
+  margin: 0 auto;
+  text-align: center;
+}
+.BestCards_cont {
+  height: 500px;
+  background-color: #bde3ff;
+  transition: 0.5s;
+  padding: 20px;
+}
+.BestCards_cont h1 {
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+.BestCards_cont .BestCards_img img {
+  width: 100%;
+  object-fit: contain;
+  height: 200px;
+  padding: 5px;
+  background-color: rgba(124, 179, 228, 0.726);
+  border-radius: 2rem;
+}
+.BestCards_User h5 {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 .best-blog-icon {
   position: absolute;
   max-width: 20%;
   height: 120px;
   left: 25px;
 }
-#frog{
+#frog {
   max-width: 20%;
   height: 120px;
   position: absolute;
-  bottom:15px;
-  right:5%;
+  bottom: 15px;
+  right: 5%;
 }
 .horizontal-line {
-    width: 100%;
-    height: 5px;
-    background-color: #fff;
-    bottom: 0px;
-    position: absolute;
+  width: 100%;
+  height: 5px;
+  background-color: #fff;
+  bottom: 0px;
+  position: absolute;
+}
+.BestCards_icon {
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.slick-prev {
+  font-size: 50px;
+  color: #000;
+}
+.slick-next {
+  font-size: 50px;
 }
 
-.move{
-    position: absolute;
-    top: 50%;
-    font-size: 50px;
-    cursor: pointer;
-background: none;
-    border: none;
-    color:black;
-    overflow: hidden;
-    transition: all .5s ease;
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .top_ img {
+    max-width: 20%;
+    height: 100px;
   }
-  .move:hover{
-    color:white;
-    font-size: 51px;
+  .top_ h1 {
+    font-size: 3.5rem;
   }
-  .move.left-btn{
-    left: 15px;
+  #froggy {
+    width: 10%;
   }
-  
-  .move.right-btn {
-    right: 15px;
+  /* .move{
+      display: block;
+      position: absolute;
+      top: 50%;
+      font-size: 50px;
+      cursor: pointer;
+  background: none;
+      border: none;
+      color:black;
+      overflow: hidden;
+      transition: all .5s ease;
+    }
+    .move:hover{
+      color:white;
+      font-size: 51px;
+    }
+    .move.left-btn{
+      left: 15px;
+    }
+    
+    .move.right-btn {
+      right: 15px;
+    } */
+  .BestCards_cont {
+    width: 80%;
   }
+}
 
-@media screen and (min-width: 768px) and (max-width: 1024px){
-    .top_ img {
-        max-width: 20%;
-        height: 100px;
-    }
-    .top_ h1 {
-        font-size: 3.5rem;
-    }
-    #froggy{
-        width: 10%;
-    }
-    .move{
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .top_ img {
+    max-width: 21%;
+    height: 80px;
+  }
+  .top_ h1 {
+    font-size: 2.4rem;
+  }
+  #frog {
+    max-width: 20%;
+    height: 110px;
+  }
+  /* .move{
         font-size: 40px;
       }
       .move:hover{
         font-size: 41px;
-      }
-}
-
-
-  @media screen and (min-width: 480px) and (max-width: 768px) {
-    .top_ img {
-        max-width: 21%;
-        height: 80px;
-    }
-    .top_ h1 {
-        font-size: 2.4rem;
-    }
-    #frog{
-        max-width: 20%;
-        height: 110px;
-    }
-      .move{
-        font-size: 40px;
-      }
-      .move:hover{
-        font-size: 41px;
-      }
+      } */
+  .BestCards_cont {
+    width: 70%;
+  }
 }
 @media (max-width: 480px) {
-        .top_ img {
-            max-width: 20%;
-            height: 70px;
-        }
-        .top_ h1 {
-            font-size: 2rem;
-        }
-        #frog{
-            max-width: 20%;
-            height: 90px;
-        }
-        .move{
+  .top_ img {
+    max-width: 20%;
+    height: 70px;
+  }
+  .top_ h1 {
+    font-size: 2rem;
+  }
+  #frog {
+    max-width: 20%;
+    height: 90px;
+  }
+  /* .move{
             font-size: 40px;
           }
           .move:hover{
             font-size: 41px;
-          }
+          } */
+  .BestCards_cont {
+    width: 60%;
+  }
 }

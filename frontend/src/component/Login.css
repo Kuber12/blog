@@ -69,6 +69,16 @@
 input[type="radio"]{
   accent-color: black;
 }
+.password-show-hide {
+  width: 0;
+  position: relative;
+  transform: translateX(-40px);
+}
+.register-show-hide{
+  right: 0;
+  position: absolute;
+  transform: translate(-30px,-40px);
+}
 .reg-form > input {
   grid-column: 2;
   width: 100%;
@@ -156,6 +166,7 @@ input[type="radio"]{
   background-color: var(--tertiary-color);
 }
 .slide-button{
+  cursor: pointer;
   font-weight: 600;
 }
 @media screen and (max-width: 3200px) {
@@ -191,6 +202,9 @@ input[type="radio"]{
   }
   .overlay.slide-left ~ .left {
     display: none;
+  }
+  .submit{
+    padding: 0;
   }
 }
 @media screen and (max-width: 1024px) {

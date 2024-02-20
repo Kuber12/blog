@@ -31,6 +31,7 @@ const searchBlogs = asyncHandler(async (req, res) => {
   const tag = req.query.tag || '';
   const sortby = req.query.sortby || 'date_published';
   const order = req.query.order || 'desc';
+  const limit = req.query.limit || false;
   try {
     const matchConditions = {
       $and: [
@@ -50,11 +51,14 @@ const searchBlogs = asyncHandler(async (req, res) => {
           blogs: [
             { $sort: { 
               [sortby]: order=="desc"?-1:1 } 
-            },],
+            },
+          ],
         },
       },
     ];
-
+    if (limit) {
+      aggregatePipeline[1].$facet.blogs.push({ $limit: parseInt(limit, 10) }); // Conditionally add $limit using push
+    }
     const [result] = await Blog.aggregate(aggregatePipeline);
 
 
@@ -73,6 +77,34 @@ const getBlogsByUsername = asyncHandler(async (req, res) => {
   const username = req.params.username;
   const blog = await Blog.find(({ username: username }));
   res.status(200).json({ message: blog });
+});
+const getTopContributer = asyncHandler(async (req, res) => {
+  try {
+    const topContributor = await Blog.aggregate([
+      {
+        $group: {
+          _id: "$username",
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { count: -1 }
+      },
+      {
+        $limit: 1
+      }
+    ]);
+
+    if (topContributor.length > 0) {
+      const { _id: username, count: blogCount } = topContributor[0];
+      res.status(200).json({ username, blogCount });
+    } else {
+      res.status(404).json({ message: "No blogs found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 const getBlogsByTagname = asyncHandler(async (req, res) => {
@@ -183,4 +215,4 @@ const countBlogLikes = asyncHandler(async (req,res) =>{
   }
 })
 
-module.exports = { getBlog, getBlogs, getBlogsByUsername,getBlogsByTagname,searchBlogs, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes };
+module.exports = { getBlog, getBlogs, getBlogsByUsername,getBlogsByTagname,searchBlogs, createBlog, deleteBlog, editBlog, likeBlog, countBlogLikes,getTopContributer };

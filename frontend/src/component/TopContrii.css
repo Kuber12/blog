@@ -19,11 +19,12 @@
 }
 .mainC {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 30px;
+  padding: 20px;
 }
 .MainBox {
-  padding: 50px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -44,6 +45,10 @@
   width: 300px;
   height: 300px;
   background-color: rgb(212, 212, 212);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 .Fw {
   background-color: #0d6efd;
@@ -110,10 +115,10 @@
   height: 60px;
   border-radius: 20px;
   background-color: #bde3ff;
+  position: absolute;
   bottom: 0;
   font-size: 1.3em;
   font-weight: 600;
-  letter-spacing: 1px;
   transition: all 200ms ease;
   margin-right: 20px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -136,6 +141,10 @@
     width: 250px;
     height: 250px;
     background-color: rgb(212, 212, 212);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
   }
 
   .H {
@@ -182,12 +191,15 @@
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+  .mainC {
+    padding: 0;
+  }
   .right_Box {
     right: 0;
-    padding: 10px;
+    padding: 0px;
   }
   .startnow {
-    padding: 20px;
+    padding: 0px;
     top: 70px;
     display: flex;
     position: relative;
@@ -195,12 +207,19 @@
   }
   .MainBox {
     padding: 20px;
-    margin: 5px;
+    margin: 10px;
+    width: 300px;
+    height: 600px;
   }
   .Pp {
+    font-size: 8px;
     width: 200px;
     height: 200px;
     background-color: rgb(212, 212, 212);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
   }
   .H {
     font-weight: 600;
@@ -209,10 +228,9 @@
   .NoN {
     font-weight: 600;
   }
-  .Para {
-  }
   #strokes {
-    display: none;
+    max-width: 150px;
+    height: 100px;
   }
   .btm_box {
     position: relative;
@@ -238,13 +256,33 @@
 }
 
 @media screen and (min-width: 480px) and (max-width: 768px) {
-  
   .mainC {
+    margin: 5px;
+    flex-direction: column;
+  }
+  .left_box {
+    position: relative;
+    left: 0;
+  }
+  .MainBox {
+    padding: 20px;
+    margin: 5px;
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+    height: 500px;
+  }
+  .uDetail {
+    text-align: center;
+    padding: 2px;
+  }
+  /* .mainC {
     flex-direction: column;
     margin-top: 10px;
     justify-content: center;
   }
   .MainBox {
+    width:100%;
     padding: 10px;
     margin: 5px;
     height: 250px;
@@ -252,12 +290,11 @@
   }
   .uDetail {
     text-align: center;
-  }
+  } */
   .Fw {
     height: 40px;
   }
   .Pp {
-    height: 150px;
     background-color: rgb(212, 212, 212);
   }
   .H {
@@ -307,26 +344,24 @@
     height: 20px;
   }
   .mainC {
+    margin: 5px;
     flex-direction: column;
-    margin-top: 1px;
-    justify-content: center;
   }
   .left_box {
     position: relative;
-    left: 5px;
+    left: 0;
   }
   .MainBox {
-    padding: 5px;
+    padding: 20px;
     margin: 5px;
-    width: 100%;
     flex-direction: column;
+    justify-content: center;
+    width: auto;
+    height: 500px;
   }
   .uDetail {
     text-align: center;
-    width: 90px;
-  }
-  #Des {
-    text-align: left;
+    padding: 2px;
   }
   .Fw {
     margin-top: 10px;
@@ -334,6 +369,8 @@
   }
   .Pp {
     background-color: rgb(212, 212, 212);
+    width: 245px;
+    height: 245px;
   }
   .H {
     font-weight: 600;
@@ -374,9 +411,13 @@
     position: relative;
     margin-left: 160px;
     padding: 5px;
+    height: 150px;
+    width: 150px;
   }
   #contri_btn {
     position: absolute;
-    font-weight: 400;
+    font-weight: 200;
+    font-size: 1rem;
+    width: 250px;
   }
 }

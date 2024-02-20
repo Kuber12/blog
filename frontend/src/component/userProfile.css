@@ -1,10 +1,3 @@
-/* :root{
-    --blue:#bde3ff;
-    --yellow:#ffcd29;
-    --dark:#0D6EFD;
-    --white:#FFFFFF;
-} */
-
 #mainBody {
   display: flex;
   justify-content: space-evenly;
@@ -23,19 +16,34 @@
 .Profile {
   width: 200px;
   height: 200px;
-  background-color: rgb(212, 212, 212);
-  top: 50px;
-  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
 }
-
-.follow_me {
-  top: 40px;
-  position: relative;
-  padding: 30px;
+.edit-profile-picture {
+  cursor: pointer;
+  max-width: 100%;
+  max-height: 100%;
+}
+.profile-follow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#fileInput {
+  display: none;
+}
+.userprofile-button {
+  margin: 20px 0px;
+  text-align: center;
 }
 .Fbtn {
-  background-color: #0d6efd;
-  color: white;
+  background-color: var(--tertiary-color);
+  border: 2px black solid;
+
+  color: black;
+  font-weight: 600;
   border-radius: 20px;
   font-size: 1.2em;
   width: 200px;
@@ -49,56 +57,69 @@
 }
 .aboutMe {
   background-color: #ffcd29;
-  width: 250px;
-  height: 450px;
-  border-radius: 5px;
+  width: auto;
+  min-width: 250px;
+  border-radius: 20px;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  position: relative;
-  top: 30px;
   color: black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  gap: 5px;
+}
+.userprofile-top-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 #im {
   padding: 1px;
   background-color: #ffcd29;
+  width: 100%;
 }
 .User_Dtl {
-  height: 60px;
   background-color: rgb(251, 251, 251, 0.5);
   width: 100%;
   border-radius: 2px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
 }
 .ics {
   font-size: 1.2em;
   padding: 5px;
 }
 .udP {
+  text-align: right;
   font-size: 0.9em;
   padding: 1px;
+}
+input.udP,
+select.udP {
+  background-color: transparent;
+  border: 1px black solid;
+  width: 75%;
 }
 .btmBlc {
   display: flex;
   flex-direction: column;
-  position: relative;
-  width: 1000px;
   padding: 15px;
+  width: 1000px;
 }
 .bio {
-  width: auto;
-  height: 200px;
-  background-color: rgb(251, 251, 251, 0.5);
-  position: relative;
-  top: 50px;
+  width: 500px;
+  height: max-content;
+  background-color: white;
   text-align: center;
-  margin: 0px 0 70px 0;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px;
 }
 #fname {
+  text-align: center;
   margin-top: 20px;
   font-size: 2em;
 }
@@ -118,8 +139,6 @@
 .myPost {
   width: auto;
   /* height: 500px; */
-  background-color: rgb(251, 251, 251, 0.5);
-  position: relative;
   /* top: 100px; */
 }
 .Blog_disp {
@@ -131,7 +150,7 @@
   /* left: 50px; */
   /* top:20px; */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 50px 80px;
   flex-wrap: wrap;
   /* background-color:rgb(251, 251, 251,.5); */
@@ -166,7 +185,6 @@
     font-size: 1.1em;
   }
   .aboutMe {
-    width: 200px;
     padding: 5px;
   }
   #im {
@@ -190,7 +208,13 @@
   }
 }
 
-@media screen and (min-width: 480px) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .bio {
+    flex: 1;
+  }
+  .userprofile-top-container {
+    flex-wrap: wrap;
+  }
   .btwnBlc {
     padding: 5px;
   }
@@ -200,26 +224,29 @@
   }
   .Fbtn {
     width: 130px;
-    height: 40px;
     font-size: 0.8em;
   }
   .Fbtn:hover {
     font-size: 0.9em;
   }
   .aboutMe {
-    width: 180px;
-    padding: 5px;
+    padding: 10px;
+    flex: 1 0 100%;
+    flex-direction: row;
   }
   #im {
-    padding: 0;
+    display: none;
   }
   .ics,
   .udP {
     font-size: 0.8em;
   }
+  .udP {
+    height: fit-content;
+  }
   .User_Dtl {
     width: 100%;
-    height: 50px;
+    height: 100%;
     flex-direction: column;
   }
   #fname {
@@ -230,13 +257,15 @@
     font-size: 0.9em;
   }
   #bioo {
-    padding: 5px;
     font-size: 0.8em;
   }
 }
 @media (max-width: 480px) {
+  .bio {
+    flex: 1 0 100%;
+  }
   #mainBody {
-    flex-direction: column;
+    flex-direction: row;
   }
   .btmBlc {
     width: 100%;
@@ -255,5 +284,11 @@
   }
   .Ht {
     font-size: 1.5em;
+  }
+  .aboutMe {
+    flex-direction: column;
+  }
+  .udP {
+    margin: 0;
   }
 }

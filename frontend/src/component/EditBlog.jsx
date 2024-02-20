@@ -1,13 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+/* The above code is a React component called "EditBlog". It is used to edit a blog post. */
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import NewNavi from "./NewwNav";
 import axios from "axios";
 import "./AddBlog.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+import ReactConfetti from "react-confetti";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalContext } from "./GlobalContent";
+import { storage } from "./firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+
 const EditBlog = () => {
   const { id } = useParams();
   const userData = useContext(GlobalContext);
@@ -17,7 +22,7 @@ const EditBlog = () => {
   const navigation = useNavigate();
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
-  const [tags,setTags] = useState();
+  const [tags, setTags] = useState();
   const [values, setValues] = useState({
     headline: "",
     content: "",
@@ -26,29 +31,48 @@ const EditBlog = () => {
     username: username,
   });
   const token = sessionStorage.getItem("authToken");
-
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
     },
   };
+  const detectSize = () => {
+    setWindowDimension({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+  const [windowDimen, setWindowDimension] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  const [btn, setBtn] = useState(false);
+  useEffect(() => {
+    window.addEventListener("resize", detectSize);
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [windowDimen]);
+
+  //fetching tags
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tag")
-      .then((res) => 
-      {
-
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
+      .then((res) => {
         setTags(res.data.message);
-         console.log(res.data.message);
       })
       .catch((err) => console.log(err));
   }, []);
+  //blog fetch
   useEffect(() => {
     const fetchPrevious = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/blog/${id}`, {
-          method: "GET",
-        });
+        const res = await fetch(
+          `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
+          {
+            method: "GET",
+          }
+        );
         const datas = await res.json();
 
         const { headline, image, tag, content } = datas.message;
@@ -84,68 +108,81 @@ const EditBlog = () => {
       setFilePreview(null);
     }
   };
+  const stopPost = useRef();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    stopPost.current.disabled = true;
+
     try {
       // Check if a file is selected
       let tempFilename;
       if (file) {
-        const formData = new FormData();
-        formData.append("fileInput", file);
-        formData.append("username", username);
-
-        const imgResponse = await axios.post(
-          "http://localhost:5000/api/file/upload",
-          formData,
+        toast.success("Please wait");
+        const imageRef = ref(storage, `images/${file.name + v4()}`);
+        uploadBytes(imageRef, file)
+          .then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+              tempFilename = url;
+              setValues((values) => ({
+                ...values,
+                image: url,
+              }));
+              return axios.put(
+                `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
+                {
+                  ...values,
+                  // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+                  image: url ? url : values.image,
+                },
+                config
+              );
+            });
+          })
+          .then((res) => {
+            setBtn(true);
+            setTimeout(() => {
+              setBtn(false);
+            }, 3000);
+            toast.success("Added Blog");
+            // console.log("Submitted");
+          });
+      } else {
+        const blogResponse = await axios.put(
+          `https://blog-backend-3dcg.onrender.com/api/blog/${id}`,
           {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+            ...values,
+            // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
+            image: tempFilename ? tempFilename : values.image,
           },
           config
         );
-        axios
-          .delete(`http://localhost:5000/api/file/${values.image}/delete`)
-          .then((res) => {
-            console.log("Image deleted");
-          })
-          .catch((ex) => {
-            console.log("errror" + ex);
-          });
 
-        tempFilename = imgResponse.data.fileName;
-        console.log("Image Submitted", tempFilename);
-
-        setValues((values) => ({
-          ...values,
-          image: tempFilename,
-        }));
+        toast.success("Added Blog");
+        console.log("Submitted", blogResponse.data);
+        setBtn(true);
+        setTimeout(() => {
+          setBtn(false);
+        }, 3000);
+        // setTimeout(() => {
+        //   navigation("/");
+        // }, 3000);
       }
-
-      const blogResponse = await axios.put(
-        `http://localhost:5000/api/blog/${id}`,
-        {
-          ...values,
-          // Check if a file is uploaded and use the filename, otherwise set it to an empty string or handle it as needed
-          image: tempFilename ? tempFilename : values.image,
-        },
-        config
-      );
-
-      toast.success("Added Blog");
-      console.log("Submitted", blogResponse.data);
-
-      // setTimeout(() => {
-      //   navigation("/");
-      // }, 3000);
     } catch (error) {
       console.error("Error", error);
+      toast.error("Something went wrong please re-try.");
     }
   };
 
   return (
     <>
+      {btn && (
+        <ReactConfetti
+          width={windowDimen.width}
+          height={windowDimen.height}
+          tweenDuration={1000}
+        />
+      )}
       <NewNavi />
       <div className="container-head">
         <Helmet>
@@ -186,7 +223,7 @@ const EditBlog = () => {
               <input
                 type="text"
                 className="title-input"
-                placeholder={`${values.headline}`}
+                value={`${values.headline}`}
                 onChange={(e) =>
                   setValues({ ...values, headline: e.target.value })
                 }
@@ -196,7 +233,7 @@ const EditBlog = () => {
                   // onChange={handleTextArea}
 
                   className="content-input"
-                  placeholder={`${values.content}`}
+                  value={`${values.content}`}
                   id="floatingTextarea"
                   style={{ width: "100%", height: "124px" }}
                   onChange={(e) =>
@@ -222,16 +259,17 @@ const EditBlog = () => {
                       <option disabled selected value="">
                         Choose Your Tag
                       </option>
-                      {
-                        tags && tags.map((items)=>(
+                      {tags &&
+                        tags.map((items) => (
                           <>
-                            <option value={items.tagname}>{items.tagname}</option>    
+                            <option value={items.tagname}>
+                              {items.tagname}
+                            </option>
                           </>
-                        ))
-                      }
+                        ))}
                     </select>
                   </div>
-                  <div style={{display: "flex",justifyContent:"center"}}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <label
                       htmlFor="fileInput"
                       className="custom-file-input form-button"
@@ -245,8 +283,12 @@ const EditBlog = () => {
                       style={{ display: "none" }}
                     />
                   </div>
-                  <div style={{display: "flex",justifyContent:"right"}}>
-                    <button className="postBlog form-button" type="submit">
+                  <div style={{ display: "flex", justifyContent: "right" }}>
+                    <button
+                      className="postBlog form-button"
+                      type="submit"
+                      ref={stopPost}
+                    >
                       Post
                     </button>
                   </div>

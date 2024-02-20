@@ -1,4 +1,8 @@
-import React, { useContext } from "react";
+/* The code you provided is a React component called `NewNavi`. It is a navigation bar component that
+displays a list of links for navigating between different pages in a web application. */
+/* The code you provided is a React component called `NewNav`. It is a navigation bar component that
+displays a list of links for navigating between different pages in a web application. */
+import React, { useContext , useState } from "react";
 import { Link } from "react-router-dom";
 import "./navi.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,12 +14,20 @@ const NewNavi = () => {
 
   const { user } = data;
   const { setUser } = data;
+
+  const [MenuChecked,setMenuChecked]=useState(false);
+
   // console.log(user);
   // console.log(data.user.username);
   const handleLogOut = () => {
     const sessionDestroy = sessionStorage.removeItem("authToken");
     setUser("");
   };
+
+  const handleMenuItemClick = () => {
+    setMenuChecked(false);
+
+};
   return (
     <div className="navbar hedvig-font">
       <Link to="/" className="logo">
@@ -24,25 +36,36 @@ const NewNavi = () => {
           <span className="logo-text">Blog Tale</span>
         </div>
       </Link>
-      <input type="checkbox" id="menuBt" />
+      <input type="checkbox" id="menuBt" checked={MenuChecked} onChange={()=>setMenuChecked(!MenuChecked)}/>
       <label htmlFor="menuBt" className="icon">
         <FontAwesomeIcon icon={faBars} />
       </label>
       <ul className="nav-links">
         <li>
-          <Link to="/" className="active">
+          <Link to="/" className="active" onClick={handleMenuItemClick}>
             Home
           </Link>
         </li>
         <li>
-          <Link to="/Blogs" className="active">
+          <Link to="/Blogs" className="active" onClick={handleMenuItemClick}>
             Blog
           </Link>
         </li>
-        <li>{data.user.username ? <Link to="/AddBlog">Create</Link> : ""}</li>
         <li>
-          {data.user.username ? <Link to="/DisplayEditBLog">Edit</Link> : ""}
+          <Link to="/AboutUs" className="active" onClick={handleMenuItemClick}>
+            About Us
+          </Link>
         </li>
+        {data.user.username ? (
+          <li>
+            <Link to="/AddBlog">Create</Link>
+          </li>
+        ) : (
+          ""
+        )}
+        {/* {data.user.username ? <li>
+         <Link to="/DisplayEditBLog">Edit</Link>
+        </li> : ""} */}
         {data.user.username ? (
           <li id="userImage">
             <Link to="/User">
@@ -72,6 +95,15 @@ const NewNavi = () => {
               <FontAwesomeIcon icon={faUser} />
             </Link>
           </li>
+        )}
+        {data.user.username ? (
+          <li className="phone-logout">
+            <Link to="/" onClick={handleLogOut}>
+              Logout
+            </Link>
+          </li>
+        ) : (
+          ""
         )}
       </ul>
     </div>

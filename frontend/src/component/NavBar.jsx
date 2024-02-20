@@ -1,3 +1,4 @@
+/* The code is defining a functional component called `NavBar` in JavaScript React. */
 import React, { useState } from "react";
 import "./NavBar.css";
 import "./NabBar.js";
@@ -7,6 +8,10 @@ const NavBar = ({ sentDataToParent }) => {
   const toggleElementVisibility = () => {
     console.log("Toggling element visibility");
     setElementVisible(!isElementVisible);
+  };
+  const hideHamburger = () => {
+    alert("sad");
+    setElementVisible(false);
   };
 
   //logic to send data from child to parent
@@ -39,7 +44,7 @@ const NavBar = ({ sentDataToParent }) => {
         </ul>
         {isElementVisible && (
           <ul className="hamburger-ul">
-            <li className="home">
+            <li className="home" onClick={hideHamburger}>
               {" "}
               <Link to="/" onClick={handleClickVisible}>
                 Home
@@ -48,9 +53,9 @@ const NavBar = ({ sentDataToParent }) => {
             <li>
               <Link to="/AddBlog">Add</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/EditBlog">Edit</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/User">User</Link>
             </li>
@@ -68,9 +73,9 @@ const NavBar = ({ sentDataToParent }) => {
               Add
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/EditBlog">Edit</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/User" onClick={handleClickVisible}>
               User

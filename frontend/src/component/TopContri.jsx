@@ -1,4 +1,9 @@
-import React, { useContext } from "react";
+/* The code is a React component called "TopContributor". It imports various dependencies and images,
+and then renders a JSX structure. The component displays a section for the top contributor of the
+month, along with their details and a follow button. It also includes a section for starting a blog,
+with some text and an image. Finally, it includes a button to create a blog, which is conditionally
+rendered based on whether the user is logged in or not. */
+import React, { useContext, useEffect, useState } from "react";
 import "./TopContrii.css";
 import Crown from "../images/crown.png";
 import Stroke from "../images/stroke.png";
@@ -11,8 +16,44 @@ import {
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "./GlobalContent";
+import axios from "axios";
+import { useSpring, animated } from "react-spring";
+
 const TopContributor = () => {
+  const [user, setUser] = useState({
+    username: "",
+    blogCount: 0,
+  });
+  const [imageUser, setImageUser] = useState(null);
+  const BlogCounter = ({ n }) => {
+    const { number } = useSpring({
+      from: { number: 0 },
+      number: n,
+      delay: 2000,
+      config: { mass: 1, tension: 20, friction: 100 },
+    });
+    return <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>;
+  };
+  // blogCounter();
+
   const data = useContext(GlobalContext);
+  const fetchTopContributors = async () => {
+    const response = await axios.get(
+      "https://blog-backend-3dcg.onrender.com/api/blog/topcontributor"
+    );
+    const data = await response.data;
+
+    const userData = await axios.get(
+      `https://blog-backend-3dcg.onrender.com/api/user/${data.username}/user`
+    );
+    const responseUser = await userData.data.message;
+
+    setImageUser(responseUser.userImage);
+    setUser(response.data);
+  };
+  useEffect(() => {
+    fetchTopContributors();
+  }, []);
   const username = data.user.username;
   return (
     <div className="bodyy">
@@ -23,16 +64,47 @@ const TopContributor = () => {
       <div className="mainC">
         <div className="left_box">
           <div className="MainBox">
-            <div className="Pp"></div>
+            <div className="Pp">
+              <img
+                src={imageUser}
+                alt="Image of top contributor"
+                width="100%"
+                style={{ objectFit: "cover", height: "100%" }}
+              />
+            </div>
             <div className="uDetail">
-              <p>Anna Williams</p>
-              <p>@anna_Whooliams</p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  textAlign: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <p>
+                  {user?.username
+                    ? user.username.charAt(0).toUpperCase() +
+                      user.username.slice(1)
+                    : "Be our top contributor"}
+                </p>
+                with{" "}
+                <span style={{ color: "red", fontWeight: "600px" }}>
+                  {" "}
+                  <BlogCounter n={user.blogCount} />{" "}
+                </span>{" "}
+                blogs
+              </div>
+              <p>
+                @{user?.username ? user.username : "Be our top contributer"}
+              </p>
               <p id="Des">
                 Top Contributer of the month. Start posting your blog now and
                 contribute to the society.
               </p>
             </div>
-            <button className="Fw">Follow +</button>
+            <button className="blog-user-follow">
+              <Link to={`/UserInfo/${user?.username}`}>View Profile</Link>
+            </button>
           </div>
         </div>
         <div className="right_Box">

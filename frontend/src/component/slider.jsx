@@ -1,7 +1,11 @@
+/* This code is a React component called `Slider`. It is a slideshow component that displays different
+images and content based on the current slide number. The component uses the `useState` and
+`useContext` hooks from React to manage the state of the current slide and access data from a global
+context. */
 import React, { useState, useContext } from "react";
-import Hill from "../images/hill.jpeg";
-import Mountain from "../images/mountain.png";
-import Sunset from "../images/sunset.jpeg";
+// import Post_img from "../images/ele1.png";
+// import Seach_Con from "../images/elee2.png";
+// import Find_ppl from "../images/ele3.png";
 import "./slider_x.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,19 +38,15 @@ const Slider = () => {
     <>
       <div className="wrapper">
         {Slider === 1 && (
-          <div className={`slider ${Slider === 1 ? "active" : ""}`}>
-            <img id="slide1" src={Hill} />
-            <div className="content" id="content1">
+          <div className={`slider ${Slider === 1 ? "active" : ""}`}  id="content1">
+            <div className="content">
               <h1 className="slider-heading hedvig">Make Your</h1>
               <h2 className="slider-heading2 hedvig">
                 <span>First Post {username ? `"${username} "` : null}</span>
               </h2>
               <h4 className="slider-heading3">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Aspernatur fuga explicabo consequuntur id tempora molestiae
-                laudantium similique consectetur sunt repellat provident
-                repellendus, a quasi tenetur quae nesciunt temporibus aut
-                placeat?
+              🌟 Hey there, Ever had that thought or idea swirling in your mind, itching to burst into the digital world? Well, guess what? Now's the perfect time to let it out!
+              Ready to make your mark? We're excited to welcome your first post. 💫
               </h4>
               {username ? (
                 <Link className="btns" to="/AddBlog">
@@ -58,48 +58,50 @@ const Slider = () => {
                 </Link>
               )}
             </div>
+            {/* <div className="Slider_img_div">
+              <img className="Slider_img" src={Post_img}/>
+              <img className="Slider_img" src={Flw}/>
+            </div> */}
           </div>
         )}
         {Slider === 2 && (
-          <div className={`slider ${Slider === 2 ? "active" : ""}`}>
-            <img id="slide2" src={Mountain} />
-            <div className="content" id="content2">
+          <div className={`slider ${Slider === 2 ? "active" : ""}` } id="content2">
+            <div className="content">
             <h1 className="slider-heading">Search</h1>
             <h2 className="slider-heading2">
               <span>Contents </span>
             </h2>
             <h4 className="slider-heading3">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Aspernatur fuga explicabo consequuntur id tempora molestiae
-              laudantium similique consectetur sunt repellat provident
-              repellendus, a quasi tenetur quae nesciunt temporibus aut
-              placeat?
+            🎉 Embrace the magic of curiosity, Dive into the sea of knowledge, and let the waves of inspiration carry you to new shores. 
+            Discover the endless possibilities that unfold when you seek to learn and explore. Happy searching! 💕
             </h4>
               <Link className="btns">
                 Search <FontAwesomeIcon icon={faMagnifyingGlass} />
               </Link>
             </div>
+            {/* <div className="Slider_img_div">
+              <img className="Slider_img" src={Seach_Con}/>
+            </div> */}
           </div>
         )}
         {Slider === 3 && (
-          <div className={`slider ${Slider === 3 ? "active" : ""}`}>
-            <img id="slide3" src={Sunset} />
-            <div className="content" id="content3">
+          <div className={`slider ${Slider === 3 ? "active" : ""}`}  id="content3">
+            <div className="content">
               <h1 className="slider-heading">Find new</h1>
               <h2 className="slider-heading2">
                 <span>Connections</span>
               </h2>
               <h4 className="slider-heading3">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Aspernatur fuga explicabo consequuntur id tempora molestiae
-                laudantium similique consectetur sunt repellat provident
-                repellendus, a quasi tenetur quae nesciunt temporibus aut
-                placeat?
+              🌻 Step into the your realm, where every click unveils opportunities to forge new connections and create meaningful bonds.
+              Discover the joy of connecting with like-minded souls, like a sweet melody in the symphony of your digital journey.🤗
               </h4>
               <Link className="btns">
                 Find People <FontAwesomeIcon icon={faUserPlus} />
               </Link>
             </div>
+            {/* <div className="Slider_img_div">
+              <img className="Slider_img" src={Find_ppl}/>
+            </div> */}
           </div>
         )}
         <button className="chevron-btn leftx" onClick={handlePrevSlide}>

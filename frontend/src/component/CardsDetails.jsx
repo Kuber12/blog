@@ -1,3 +1,8 @@
+/**
+ * The `CardsDetails` component is a React component that displays the details of a blog post,
+ * including the headline, content, image, author information, and comments.
+ * @returns The component `CardsDetails` is being returned.
+ */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
@@ -10,7 +15,7 @@ const CardsDetails = () => {
   const [data, setData] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/${id}`)
+      .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
         setData(res.data.message);
         // console.log(res.data.message);

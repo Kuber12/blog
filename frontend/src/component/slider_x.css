@@ -1,35 +1,45 @@
+#content1{
+  background-image: url("../images/ele1.png");
+}
+#content2{
+  background-image: url("../images/ele2.png");
+}
+#content3{
+  background-image: url("../images/ele3.png");
+}
+#content1,#content2,#content3{
+  background-repeat: no-repeat;
+  background-position: center right 50px;
+}
+
 .wrapper {
   position: relative;
   max-width: 100%;
   height: 100vh;
   margin: 0 auto;
-  overflow-x: hidden;
 }
 .slider {
   display: flex;
+  justify-content: space-around;
   max-width: 100%;
   height: 100%;
-  scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
-  border-radius: 0.5rem;
-  z-index: 0;
   transition: transform 0.5s ease-in-out;
+  background-color: white;
+  font-family: Hedvig;
+  flex-direction: row;
 }
-.slider img {
-  flex: 1 0 100%;
+/* .slider img {
   scroll-snap-align: start;
   object-fit: cover;
-  max-width: 100%;
-  height: 100%;
-}
+} */
 .content {
-  top:5%;
+  top: 5%;
   position: absolute;
-  width: 70%;
   margin: 30px;
   left: 50px;
   padding: 10px;
+  width:450px;
 }
 .slider-heading {
   font-weight: 600;
@@ -43,8 +53,11 @@
   color: rgb(68, 66, 66);
 }
 .slider-heading3{
-  color: #fff;
+  color: black;
   margin-bottom: 60px;
+  text-align: left;
+  font-weight:600;
+  letter-spacing: 1px;
 }
 .slider_nav {
   display: flex;
@@ -55,7 +68,23 @@
   transform: translateX(-50%);
   z-index: 1;
 }
-
+.Slider_img{
+  width:400px;
+  height: 400px;
+  position: relative;
+  padding: 10px;
+  left: 10px;
+  bottom:10px;
+}
+.Slider_img_div{
+  position: relative;
+  left: 150px;
+  height: 300px;
+  top: 400px;
+  /* width: 300px; */
+  padding: 20px;
+  margin-bottom: 5px;
+}
 .slider_nav a {
   width: 0.5rem;
   height: 0.5rem;
@@ -74,7 +103,7 @@
 }
 .btns{
   border: 2px solid var(--text-color);
-  background-color: #fff;
+  background-color:#ffcd29;
   font-size:var(--font-size-lg);
   width: max-content;
   display: block;
@@ -83,6 +112,7 @@
   padding:5px 15px;
   letter-spacing: 1px;
   transition: all 200ms ease;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .btns:hover{
   letter-spacing: 1px;
@@ -98,7 +128,7 @@
   cursor: pointer;
   background: none;
   border: none;
-  color:#fff;
+  color:black;
   outline: none;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
@@ -115,11 +145,16 @@
 .chevron-btn.rightx {
   right: 20px;
 }
-
-@media screen and (min-width: 768px) and (max-width: 1024px){
-  .content{
-    left:7%;
+@media screen and (min-width: 1100px) {
+  #content1,#content2,#content3{
+    background-position: right 200px top 100px;
+    background-size: 30%;
   }
+  .content{
+    width:800px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1100px){
   .content button {
     border-radius: 50px;
     font-size: 15px;
@@ -139,12 +174,39 @@
   .btns{
     width: 200px;
     height: 50px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+  }
+  .Slider_img{
+    width:250px;
+    height: 250px;
+    padding: 10px;
+
+  }
+  .Slider_img_div{
+    left: 150px;
+    height: 300px;
+    /* top: 400px; */
+    /* width: 300px; */
+    padding: 20px;
+    margin-bottom: 5px;
+    bottom: 500px;
   }
 }
 @media screen and (min-width: 480px) and (max-width: 768px) {
+  #content1,#content2,#content3{
+    background-image: none;
+  }
+  .Slider_img_div{
+    display: none;
+  }  
   .content{
     left:9%;
+    width: unset;
+  }
+  .slider-heading3{
+    letter-spacing:unset;
+    width: unset;
+    font-weight: unset;
   }
   .h {
     font-size: 3em;
@@ -161,17 +223,33 @@
   .btns{
     width: 180px;
     height: 45px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
   .btns:hover{
     font-size: 1.4em;
     letter-spacing: 1.1px;
   }
 }
- @media (max-width: 480px) {     
-    .content {
-      left:10%;
-    }
+ @media (max-width: 480px) {   
+  #content1,#content2,#content3{
+    background-image: none;
+  }
+  .content{
+    left:9%;
+    width: unset;
+  }
+  .Slider_img_div{
+    display: none;
+  }  
+  .content{
+    left:9%;
+  }
+  .slider-heading3{
+    letter-spacing:unset;
+    font-size: 1.2em;
+    font-weight: unset;
+    width: unset;
+  }
     .h {
       font-size: 2em;
       font-weight: 600;
@@ -185,9 +263,9 @@
       padding-top: 10px;
     }
     .btns{
-      width: 150px;
-      height: 35px;
-      font-size: 1rem;
+      width: 200px;
+      height: 50px;
+      font-size: 1.3rem;
     }
     .btns:hover{
       font-size: 1.1em;

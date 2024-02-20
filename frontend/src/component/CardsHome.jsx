@@ -1,3 +1,5 @@
+/* This code is a React component called `CardsHome`. It is responsible for rendering a search bar, a
+list of cards, and implementing infinite scrolling functionality. */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./SearchBar.css";
@@ -7,9 +9,11 @@ import NewCard from "./NewCard";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
 import { Link } from "react-router-dom";
+import useFetch from "../Utils/BlogAPi";
 // import useSearch from "../SearchContext/search";
 
 const CardsHome = () => {
+  const { fetchApiData, searchApiData } = useFetch();
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,16 +22,21 @@ const CardsHome = () => {
   const [hasMore, setHasMore] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [tags, setTags] = useState([]);
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tag", { timeout: 5000 })
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => setTags(res.data.message))
       .catch((err) => console.log(err));
   }, []);
-
-  const handleInputFocus = () => {
-    setIsInputFocused(true);
-  };
+  //focus or not in input field
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      return setIsInputFocused(true);
+    } else {
+      return setIsInputFocused(false);
+    }
+  }, [searchTerm]);
 
   const handleInputBlur = () => {
     setIsInputFocused(false);
@@ -35,11 +44,8 @@ const CardsHome = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/blog/${page}/${limit}`
-      );
-      console.log(response);
-      return response.data.message;
+      const data = await fetchApiData(`/api/blog/${page}/${limit}`);
+      return data;
     } catch (ex) {
       console.log("error fetching");
       return [];
@@ -47,8 +53,9 @@ const CardsHome = () => {
   };
 
   const fetchMoreData = async () => {
+    setPage((prev) => prev + 1);
+
     try {
-      setPage((prev) => prev + 1);
       const newData = await fetchData();
       if (newData.length > 0) {
         setData((prev) => [...prev, ...newData]);
@@ -61,129 +68,99 @@ const CardsHome = () => {
     }
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     const searched = e.target.value;
-    console.log(searched);
-    setSearchTerm(searched);
 
-    axios
-      .get(`http://localhost:5000/api/blog/search/?query=${searched}`)
-      .then((res) => {
-        console.log(res.data);
-        setFilteredData(res.data.message);
-        console.log(res.data.totalPages);
-      });
+    setSearchTerm(searched);
+    const data = await searchApiData(`/api/blog/search/?query=${searched}`);
+
+    setFilteredData(data);
   };
 
   useEffect(() => {
     const loadInitialData = async () => {
       const initialData = await fetchData();
       setData(initialData);
-      console.log(initialData);
-      // setFilteredData(initialData);
+      setPage((prev) => prev + 1);
     };
     loadInitialData();
   }, []);
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:5000/api/blog/${tagFilter}/tag`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setTagData(res.data);
-  //     })
-  //     .catch((ex) => {
-  //       console.log("Error while using tags" + ex);
-  //     });
-  // }, [tagFilter]);
 
   return (
-    <>
-      <div
+    <div
+      style={{
+        backgroundColor: "#BDE3FF",
+        margin: "0 auto",
+        width: "100%",
+        height: "auto",
+        minHeight: "100vh",
+      }}
+    >
+      <InfiniteScroll
         style={{
-          backgroundColor: "#BDE3FF",
-          margin: "0 auto",
           width: "100%",
-          height: "auto",
-          minHeight: "100vh",
+          overflow: "hidden",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
         }}
+        dataLength={data?.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={<RotatingLines />}
       >
-        <InfiniteScroll
+        {/* <SearchBar /> */}
+        <div
           style={{
             width: "100%",
-            overflow: "hidden",
+            backgroundColor: "transparent",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
+            padding: "20px",
+            gap: "10px 20px",
+            flexWrap: "wrap",
           }}
-          dataLength={data.length}
-          next={fetchMoreData}
-          hasMore={hasMore}
-          loader={<RotatingLines />}
         >
-          {/* <SearchBar /> */}
           <div
             style={{
-              width: "100%",
-              backgroundColor: "transparent",
+              width: "60%",
+              textAlign: "center",
               display: "flex",
-              justifyContent: "center",
-              padding: "20px",
-              gap: "10px 20px",
-              flexWrap: "wrap",
+              position: "relative",
+              alignContent: "center",
             }}
           >
-            <div
-              style={{
-                width: "60%",
-                textAlign: "center",
-                display: "flex",
-                position: "relative",
-                alignContent: "center",
-              }}
-            >
-              <img className="searchIcon" src={search} alt="" />
-              <input
-                className="searchInput"
-                type="text"
-                placeholder="Search"
-                onChange={handleSearch}
-                // onKeyDown={handleInputFocus}
-                onBlur={handleInputBlur}
-                onFocus={handleInputFocus}
-              />
-            </div>
+            <img className="searchIcon" src={search} alt="" />
+            <input
+              className="searchInput"
+              type="text"
+              placeholder="Search"
+              onChange={handleSearch}
+              // onKeyDown={handleInputFocus}
+              // onBlur={handleInputBlur}
+              // onFocus={handleInputFocus}
+              // onClick={handleInputFocus}
+            />
           </div>
-          <>
-            <div className="tags-container">
-              {/* {tags &&
+        </div>
+
+        <div className="tags-container">
+          <Link className="tags" to={`/Blogs`}>
+            All
+          </Link>
+          {Array.isArray(tags) &&
+            tags.length > 0 &&
             tags.map((tag, index) => (
-              <button
-                className="search-tags"
-                onClick={() => handleByTags(tag.tagname)}
-              >
+              <Link className="tags" to={`/BlogPageTag/${tag.tagname}`}>
                 {tag.tagname}
-              </button>
-            ))} */}
-              <Link className="tags" to={`/Blogs`}>
-                All
               </Link>
-              {tags &&
-                tags.map((tag, index) => (
-                  <Link
-                    className="tags"
-                    to={`/BlogPageTag/${tag.tagname}`}
-                  >
-                    {tag.tagname}
-                  </Link>
-                ))}
-            </div>
-          </>
-          <NewCard data={isInputFocused ? filteredData : data} />
-          {/* <NewCard data={data} /> */}
-        </InfiniteScroll>
-      </div>
-    </>
+            ))}
+        </div>
+
+        <NewCard data={isInputFocused ? filteredData : data} />
+      </InfiniteScroll>
+    </div>
   );
 };
 

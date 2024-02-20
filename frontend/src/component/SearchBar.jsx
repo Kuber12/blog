@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
+/* The code is defining a functional component called `SearchBar` in JavaScript React. */
+import React, { useContext, useEffect, useState } from "react";
 import "./SearchBar.css";
 import search from "../Icons/search.png";
 import axios from "axios";
-import useSearch from "../SearchContext/search";
+import SearchContext from "../pages/SearchContext";
 import { Link } from "react-router-dom";
+
 const SearchBar = () => {
+  const { searchTxt, SetSearchTxt } = useContext(SearchContext);
   const [tags, setTags] = useState([]);
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/tag", { timeout: 5000 })
+      .get("https://blog-backend-3dcg.onrender.com/api/tag")
       .then((res) => setTags(res.data.message))
       .catch((err) => console.log(err));
-  });
+  }, []);
   const handleByTags = (tagValue) => {
     // axios
     //   .get(`http://localhost:5000/api/blog/${tagValue}/tag`)
@@ -46,7 +50,12 @@ const SearchBar = () => {
           }}
         >
           <img className="searchIcon" src={search} alt="" />
-          <input className="searchInput" type="text" placeholder="Search" />
+          <input
+            className="searchInput"
+            onChange={(e) => SetSearchTxt(e.target.value)}
+            type="text"
+            placeholder="Search"
+          />
         </div>
       </div>
       <div>
@@ -54,9 +63,14 @@ const SearchBar = () => {
           <Link className="tags" to={`/Blogs`}>
             All
           </Link>
-          {tags &&
+          {Array.isArray(tags) &&
+            tags.length > 0 &&
             tags.map((tag, index) => (
-              <Link className="tags" to={`/BlogPageTag/${tag.tagname}`}>
+              <Link
+                className="tags"
+                key={index}
+                to={`/BlogPageTag/${tag.tagname}`}
+              >
                 {tag.tagname}
               </Link>
             ))}

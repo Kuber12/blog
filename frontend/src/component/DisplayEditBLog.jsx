@@ -1,3 +1,5 @@
+/* This code is a React component called `DisplayEditBLog`. It is responsible for displaying a list of
+blogs and providing options to edit or delete each blog. */
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +12,7 @@ const DisplayEditBLog = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const token = sessionStorage.getItem("authToken");
+  const [hitApi, setHitApi] = useState(true);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
@@ -20,16 +23,19 @@ const DisplayEditBLog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blog/${username}/user`, config)
+      .get(
+        `https://blog-backend-3dcg.onrender.com/api/blog/${username}/user`,
+        config
+      )
       .then((res) => setData(res.data.message))
       .catch((err) => console.log(err));
-  }, [data]);
+  }, [hitApi]);
 
   const handleDelete = (id, image) => {
     const confirm = window.confirm("Do you want to delete?");
     if (confirm) {
       axios
-        .delete(`http://localhost:5000/api/blog/${id}`, config)
+        .delete(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`, config)
         .then((res) => {
           console.log("Deleted");
           // window.location.reload();
@@ -37,13 +43,16 @@ const DisplayEditBLog = () => {
         .catch((err) => console.log(err));
 
       axios
-        .delete(`http://localhost:5000/api/file/${image}/delete`)
+        .delete(
+          `https://blog-backend-3dcg.onrender.com/api/file/${image}/delete`
+        )
         .then((res) => {
           console.log("Image deleted");
         })
         .catch((ex) => {
           console.log("errror" + ex);
         });
+      setHitApi((prev) => !prev);
     }
   };
 

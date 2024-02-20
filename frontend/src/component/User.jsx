@@ -1,4 +1,11 @@
-import React, { useContext } from "react";
+/**
+ * The User component is a React component that displays the user's profile if they are logged in,
+ * otherwise it displays a message to login first.
+ * @returns The User component is returning a JSX element. If the username is not available, it returns
+ * a div with a "Login First" message. Otherwise, it returns a div containing the Helmet component,
+ * NewNavi component, and UserProfile component.
+ */
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import UserProfile from "./UserProfile";
 import NewNavi from "./NewwNav";
@@ -6,6 +13,7 @@ import { GlobalContext } from "./GlobalContent";
 const User = () => {
   const data = useContext(GlobalContext);
   const username = data.user.username;
+
   if (!username) {
     return (
       <div
