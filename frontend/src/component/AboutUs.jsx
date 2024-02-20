@@ -7,7 +7,6 @@ import {
   faLinkedin,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
-import Sarina from "../images/1.jpg"
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 const AboutUs = () => {
   return (
@@ -140,7 +139,7 @@ const AboutUs = () => {
 
             <div className="about-member">
               <img
-                src={Sarina}
+                src="https://firebasestorage.googleapis.com/v0/b/uploadingfile-fdbcf.appspot.com/o/sariinaa.jpg?alt=media&token=0c370aad-443f-4973-897b-03d7b70e87f8"
                 alt="team member"
                 className="team-member-img"
               />
