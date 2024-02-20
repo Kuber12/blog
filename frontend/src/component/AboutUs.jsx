@@ -80,7 +80,7 @@ const AboutUs = () => {
             </div>
             <div className="about-member">
               <img
-                src="../../uploads/Profile.png"
+                src="https://firebasestorage.googleapis.com/v0/b/uploadingfile-fdbcf.appspot.com/o/kuber.jpg?alt=media&token=5bb414ab-6dba-4798-9256-369e2a315981"
                 alt="team member"
                 className="team-member-img"
               />
