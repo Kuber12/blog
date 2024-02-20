@@ -7,6 +7,7 @@ import {
   faLinkedin,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import Sarina from "../images/1.jpg"
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 const AboutUs = () => {
   return (
@@ -139,17 +140,18 @@ const AboutUs = () => {
 
             <div className="about-member">
               <img
-                src="../../uploads/Profile.png"
+                src={Sarina}
                 alt="team member"
                 className="team-member-img"
               />
               <div>
-                <h4 className="about-member-role">Manager</h4>
-                <h3 className="about-member-name">Hedvig Svedberg</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                <h4 className="about-member-role">Frontend Developer</h4>
+                <h3 className="about-member-name">Sarina Maharjan</h3>
+                <p>I am a proactive person with a genuine eagerness to learn and expand my knowledge. 
+                Currently a student, my specific interest lies in Frontend Development and UI/UX Designing.</p>
                 <div className="about-icon-box">
                   <a
-                    href="https://www.facebook.com/"
+                    href="https://www.facebook.com/sareena.maharjan.1447?mibextid=YMEMSu"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -160,7 +162,7 @@ const AboutUs = () => {
                     />
                   </a>
                   <a
-                    href="https://www.linkedin.com/"
+                    href="https://www.linkedin.com/in/sarina-maharjan-b29609244/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -171,7 +173,7 @@ const AboutUs = () => {
                     />
                   </a>
                   <a
-                    href="https://github.com/"
+                    href="https://github.com/666Deadsoul"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -182,7 +184,7 @@ const AboutUs = () => {
                     />
                   </a>
                   <a
-                    href="https://www.your-website.com/"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
