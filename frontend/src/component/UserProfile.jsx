@@ -190,11 +190,7 @@ const UserProfile = () => {
               <div className="profile-follow">
                 <div className="Profile">
                   <img
-                    src={
-                      userData.userImage !== ""
-                        ? userData.userImage
-                        : "../../uploads/Profile.png"
-                    }
+                    src={imageSrc}
                     onError={handleImageError}
                     alt="userprofile"
                     width="100%"

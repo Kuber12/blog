@@ -1,5 +1,6 @@
 import "./AboutUs.css";
 import NewNavi from "./NewwNav";
+import Footer from "./Footer"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -84,12 +85,12 @@ const AboutUs = () => {
                 className="team-member-img"
               />
               <div>
-                <h4 className="about-member-role">Manager</h4>
-                <h3 className="about-member-name">Hedvig Svedberg</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                <h4 className="about-member-role">Full Stack Developer</h4>
+                <h3 className="about-member-name">Kuber Bajra Shakya</h3>
+                <p>I am proficient in web development, specializing in creating and designing efficient systems. My skills extend to project management and web designing ensuring successful oversight and completion of tasks.</p>
                 <div className="about-icon-box">
                   <a
-                    href="https://www.facebook.com/"
+                    href="https://www.facebook.com/profile.php?id=100004524277925"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -100,7 +101,7 @@ const AboutUs = () => {
                     />
                   </a>
                   <a
-                    href="https://www.linkedin.com/"
+                    href="https://www.linkedin.com/in/kuber-shakya/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -111,7 +112,7 @@ const AboutUs = () => {
                     />
                   </a>
                   <a
-                    href="https://github.com/"
+                    href="https://github.com/Kuber12"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -122,7 +123,7 @@ const AboutUs = () => {
                     />
                   </a>
                   <a
-                    href="https://www.your-website.com/"
+                    href="https://kuberbajrashakya.com.np"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -197,6 +198,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

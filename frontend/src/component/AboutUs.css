@@ -6,6 +6,7 @@
   display: flex;
   margin: 0px 5%;
   gap: 20px;
+  padding-bottom: 2%;
 }
 .about-member {
   padding: 20px;
@@ -27,6 +28,11 @@
 }
 .about-icon {
   color: var(--accent-color);
+  transition: ease-in;
+  transition-duration: 200ms;
+}
+.about-icon:hover{
+  transform: translateY(-6px);
 }
 .team-member-img {
   background-color: var(--secondary-color);
