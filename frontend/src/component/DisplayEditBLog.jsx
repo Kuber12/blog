@@ -37,7 +37,7 @@ const DisplayEditBLog = () => {
       axios
         .delete(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`, config)
         .then((res) => {
-          console.log("Deleted");
+          // console.log("Deleted");
           // window.location.reload();
         })
         .catch((err) => console.log(err));

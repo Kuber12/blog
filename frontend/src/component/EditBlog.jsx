@@ -162,7 +162,7 @@ const EditBlog = () => {
         );
 
         toast.success("Added Blog");
-        console.log("Submitted", blogResponse.data);
+        // console.log("Submitted", blogResponse.data);
         setBtn(true);
         setTimeout(() => {
           setBtn(false);

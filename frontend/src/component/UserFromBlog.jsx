@@ -95,10 +95,10 @@ const UserFromBlog = () => {
         toast.error(`Something went wrong`);
       });
   };
-  console.log(globalUsername);
+  // console.log(globalUsername);
   const string1 = globalUsername;
   const string2 = user.username;
-  console.log(string2);
+  // console.log(string2);
   return (
     <>
       <ToastContainer

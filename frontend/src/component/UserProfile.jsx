@@ -49,7 +49,7 @@ const UserProfile = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/user/${username}/user`)
       .then((res) => {
         setUserData(res.data.message);
-        console.log(res.data.message);
+        // console.log(res.data.message);
       });
   }, [hitApi]);
 
@@ -136,7 +136,7 @@ const UserProfile = () => {
           getDownloadURL(snapshot.ref).then((url) => {
             tempFileName = url;
             toast.success("Updaded");
-            console.log(url);
+            // console.log(url);
             return axios
               .put(
                 `https://blog-backend-3dcg.onrender.com/api/user/${username}/edit`,
@@ -144,7 +144,7 @@ const UserProfile = () => {
                 config
               )
               .then((res) => {
-                console.log(res.data.message);
+                // console.log(res.data.message);
                 toast.success(res.data.message);
               });
           });
@@ -164,7 +164,7 @@ const UserProfile = () => {
           config
         )
         .then((res) => {
-          console.log(res.data.message);
+          // console.log(res.data.message);
           toast.success(res.data.message);
         });
     }

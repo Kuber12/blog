@@ -11,7 +11,7 @@ const FileUploadSingle = () => {
   });
 
   const handleFileChange = (event) => {
-    console.log(event.target.files[0]);
+    // console.log(event.target.files[0]);
     setSelectedFile((prv) => ({ ...prv, fileInput: event.target.files[0] }));
   };
 
@@ -19,7 +19,7 @@ const FileUploadSingle = () => {
     if (selectedFile.fileInput) {
       const formData = new FormData();
       formData.append("fileInput", selectedFile.fileInput);
-      console.log("formdata" + formData);
+      // console.log("formdata" + formData);
       axios
         .post(
           "https://blog-backend-3dcg.onrender.com/api/file/upload",
@@ -32,7 +32,7 @@ const FileUploadSingle = () => {
         )
         .then((response) => {
           alert("Submited");
-          console.log("File uploaded successfully:", response.data.fileName);
+          // console.log("File uploaded successfully:", response.data.fileName);
         })
         .catch((error) => {
           console.error("Error uploading file:", error);

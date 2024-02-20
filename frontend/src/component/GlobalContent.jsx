@@ -41,7 +41,7 @@ const GlobalContentProvider = ({ children }) => {
         );
 
         const { username, name, email, id, dob, gender } = res.data;
-        console.log(res.data);
+        // console.log(res.data);
         const timestamp = dob || null;
         const dateObject = new Date(timestamp);
         const extractedDate = dateObject.toISOString().slice(0, 10);

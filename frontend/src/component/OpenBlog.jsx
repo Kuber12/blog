@@ -32,6 +32,7 @@ const OpenBlog = () => {
   const userData = useContext(GlobalContext);
   const { user } = userData;
   const { username } = user;
+
   const { id } = useParams();
 
   const token = sessionStorage.getItem("authToken");
@@ -183,6 +184,7 @@ const OpenBlog = () => {
       .get(`https://blog-backend-3dcg.onrender.com/api/blog/${id}`)
       .then((res) => {
         setData(res.data?.message);
+
         ApiUsername = res.data?.message?.username;
         //fetched followers
         return axios.get(

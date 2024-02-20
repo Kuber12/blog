@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const NavBar = ({ sentDataToParent }) => {
   const [isElementVisible, setElementVisible] = useState(false);
   const toggleElementVisibility = () => {
-    console.log("Toggling element visibility");
+    // console.log("Toggling element visibility");
     setElementVisible(!isElementVisible);
   };
   const hideHamburger = () => {

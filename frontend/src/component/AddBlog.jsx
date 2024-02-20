@@ -154,7 +154,7 @@ const AddBlog = () => {
             setBtn(false);
           }, 3000);
           toast.success("Added Blog");
-          console.log("Submitted", blogResponse.data);
+          // console.log("Submitted", blogResponse.data);
           setTimeout(() => {
             navigation("/Blogs");
           }, 3000);

@@ -38,7 +38,7 @@ const BlogPageTag = () => {
       )
       .then((res) => {
         setFilteredData(res.data.message.reverse());
-        console.log(res.data.message.reverse());
+        // console.log(res.data.message.reverse());
       });
   }, [searchTxt]);
   return (
